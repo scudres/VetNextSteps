@@ -9,6 +9,7 @@ const VeterinaryCareerHub = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Mock data for demonstration
   const programs = [
@@ -178,12 +179,12 @@ const VeterinaryCareerHub = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">V</span>
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-lg md:text-xl">V</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">VetCareerHub</h1>
-                <p className="text-sm text-gray-600">Your Veterinary Career Compass</p>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetCareerHub</h1>
+                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
@@ -228,7 +229,44 @@ const VeterinaryCareerHub = () => {
                 Programs
               </button>
             </nav>
+            <button
+              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
           </div>
+          {mobileMenuOpen && (
+            <nav className="md:hidden border-t border-gray-100 py-2">
+              {[
+                { id: "overview", label: "Overview" },
+                { id: "countries", label: "Countries" },
+                { id: "visa", label: "Visa & Licensing" },
+                { id: "programs", label: "Programs" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
+                  className={`w-full text-left px-4 py-3 font-medium transition-colors ${
+                    activeTab === item.id
+                      ? "bg-blue-50 text-blue-700"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          )}
         </div>
       </header>
 
@@ -236,18 +274,18 @@ const VeterinaryCareerHub = () => {
       <section className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white">
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div
-          className="relative bg-cover bg-center py-24 px-4 sm:px-6 lg:px-8"
+          className="relative bg-cover bg-center py-12 md:py-24 px-4 sm:px-6 lg:px-8"
           style={{
             backgroundImage: `url(https://images.pexels.com/photos/8532850/pexels-photo-8532850.jpeg)`,
             backgroundBlendMode: 'overlay'
           }}
         >
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Your Veterinary Career
               <span className="block text-blue-300">Starts Here</span>
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
               Comprehensive guidance for veterinary graduates with less than 5 years experience.
               Discover training programs, licensing information, and career opportunities across the UK, USA, and Canada.
             </p>
@@ -270,11 +308,11 @@ const VeterinaryCareerHub = () => {
                   className="w-full pl-10 pr-4 py-4 text-gray-900 placeholder-gray-500 rounded-xl border-0 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-2xl text-lg"
                 />
               </div>
-              <div className="flex justify-center mt-4 space-x-4">
+              <div className="flex flex-col sm:flex-row justify-center mt-4 gap-3">
                 <select
                   value={selectedCountry}
                   onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="px-4 py-2 bg-white bg-opacity-20 text-white rounded-lg border border-white border-opacity-30 focus:ring-2 focus:ring-blue-300 focus:outline-none backdrop-blur-sm"
+                  className="w-full sm:w-auto px-4 py-3 bg-white bg-opacity-20 text-white rounded-lg border border-white border-opacity-30 focus:ring-2 focus:ring-blue-300 focus:outline-none backdrop-blur-sm"
                 >
                   <option value="">All Countries</option>
                   <option value="UK">United Kingdom</option>
@@ -284,7 +322,7 @@ const VeterinaryCareerHub = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 py-2 bg-white bg-opacity-20 text-white rounded-lg border border-white border-opacity-30 focus:ring-2 focus:ring-blue-300 focus:outline-none backdrop-blur-sm"
+                  className="w-full sm:w-auto px-4 py-3 bg-white bg-opacity-20 text-white rounded-lg border border-white border-opacity-30 focus:ring-2 focus:ring-blue-300 focus:outline-none backdrop-blur-sm"
                 >
                   <option value="">All Categories</option>
                   <option value="visa">Visa & Immigration</option>
@@ -338,7 +376,7 @@ const VeterinaryCareerHub = () => {
       )}
 
       {/* Main Content */}
-      <main className="py-16">
+      <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Overview Tab */}
@@ -347,7 +385,7 @@ const VeterinaryCareerHub = () => {
 
               {/* Categories Section */}
               <section>
-                <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+                <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                   Explore Career Opportunities
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -405,7 +443,7 @@ const VeterinaryCareerHub = () => {
 
               {/* Key Resources */}
               <section>
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                   Essential Resources
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -447,7 +485,7 @@ const VeterinaryCareerHub = () => {
           {/* Countries Tab */}
           {activeTab === "countries" && (
             <div className="space-y-12">
-              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                 Choose Your Destination
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -659,7 +697,7 @@ const VeterinaryCareerHub = () => {
           {/* Visa & Licensing Tab */}
           {activeTab === "visa" && (
             <div className="space-y-12">
-              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                 Visa & Licensing Requirements
               </h2>
 
@@ -923,7 +961,7 @@ const VeterinaryCareerHub = () => {
           {/* Programs Tab */}
           {activeTab === "programs" && (
             <div className="space-y-12">
-              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                 All Programs & Opportunities
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
