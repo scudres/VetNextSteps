@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PostgraduateCertificates = () => {
   const programs = [
@@ -56,6 +57,15 @@ const PostgraduateCertificates = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <Helmet>
+        <title>Postgraduate Certificates for Vets | VetNextStep</title>
+        <meta name="description" content="Explore RCVS CertAVP programmes and other postgraduate certificates for veterinary surgeons, including providers from RVC, Edinburgh, Liverpool, Nottingham, and Surrey." />
+        <link rel="canonical" href="https://www.vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:title" content="Postgraduate Certificates for Vets | VetNextStep" />
+        <meta property="og:description" content="Advance your veterinary career with RCVS-accredited postgraduate certificates including CertAVP from leading UK universities." />
+        <meta property="og:url" content="https://www.vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

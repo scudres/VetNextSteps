@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const VeterinaryCareerHub = () => {
   const navigate = useNavigate();
@@ -163,6 +164,15 @@ const VeterinaryCareerHub = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <Helmet>
+        <title>VetNextStep | New Graduate Veterinary Career Hub</title>
+        <meta name="description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates. Your career compass after vet school." />
+        <link rel="canonical" href="https://www.vetnextstep.com/" />
+        <meta property="og:title" content="VetNextStep | New Graduate Veterinary Career Hub" />
+        <meta property="og:description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates." />
+        <meta property="og:url" content="https://www.vetnextstep.com/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
