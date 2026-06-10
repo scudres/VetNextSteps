@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const TrainingPrograms = () => {
   const programs = [
@@ -49,6 +50,15 @@ const TrainingPrograms = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <Helmet>
+        <title>Post-graduate Training Programs | VetNextStep</title>
+        <meta name="description" content="Find structured post-graduate training programmes for new veterinary graduates in the UK, including CVS, IVC Evidensia, Linnaeus, Medivet, Vets4Pets, and VetPartners." />
+        <link rel="canonical" href="https://www.vetnextstep.com/training-programs" />
+        <meta property="og:title" content="Post-graduate Training Programs | VetNextStep" />
+        <meta property="og:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates." />
+        <meta property="og:url" content="https://www.vetnextstep.com/training-programs" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const InternshipsResidencies = () => {
   const programs = [
@@ -347,6 +348,15 @@ const InternshipsResidencies = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <Helmet>
+        <title>Veterinary Internships & Residencies | VetNextStep</title>
+        <meta name="description" content="Browse veterinary internships and residencies in the UK, Europe, and North America. Find rotating internships, specialist residencies, and VIRMP programs for new vet graduates." />
+        <link rel="canonical" href="https://www.vetnextstep.com/internships-residencies" />
+        <meta property="og:title" content="Veterinary Internships & Residencies | VetNextStep" />
+        <meta property="og:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
+        <meta property="og:url" content="https://www.vetnextstep.com/internships-residencies" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
