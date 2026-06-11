@@ -49,7 +49,7 @@ const USAPage = () => {
               <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
+                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
               </div>
             </Link>
             <Link
@@ -109,11 +109,12 @@ const USAPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="bg-green-50 p-5 rounded-lg border border-green-200">
                   <h4 className="font-semibold text-green-900 mb-2">ECFVG Certification</h4>
-                  <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA</p>
+                  <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA. Four steps:</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• English language proficiency test</li>
-                    <li>• Basic and clinical sciences examination</li>
-                    <li>• Clinical proficiency examination (CPE)</li>
+                    <li>• <strong>Step 1:</strong> Registration & credential verification</li>
+                    <li>• <strong>Step 2:</strong> English language competency (TOEFL iBT or IELTS)</li>
+                    <li>• <strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE)</li>
+                    <li>• <strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — 3-day hands-on exam</li>
                   </ul>
                   <a href="https://www.avma.org/education/ecfvg" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-green-700 hover:text-green-900 font-medium">Learn more →</a>
                 </div>
@@ -137,10 +138,11 @@ const USAPage = () => {
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-3">Step 1 — NAVLE Exam</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Required in all 50 states</li>
-                      <li>• 360 multiple-choice questions</li>
+                      <li>• Required in all 50 states and Canada</li>
+                      <li>• 360 multiple-choice questions (60 unscored pre-test items)</li>
+                      <li>• Format from Oct 2026: 12 blocks of 30 questions</li>
                       <li>• Covers all veterinary medicine disciplines</li>
-                      <li>• Offered during specific testing windows</li>
+                      <li>• Offered during specific testing windows at Prometric centres</li>
                       <li>• Administered by ICVA</li>
                     </ul>
                     <a
