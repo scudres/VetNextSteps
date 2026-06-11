@@ -40,10 +40,10 @@ const UKPage = () => {
       <Helmet>
         <title>Working as a Vet in the UK | VetNextStep</title>
         <meta name="description" content="Everything new vet graduates need to know about working in the UK — RCVS registration, Skilled Worker Visa, graduate programmes, internships, and CertAVP certificates." />
-        <link rel="canonical" href="https://www.vetnextstep.com/uk" />
+        <link rel="canonical" href="https://vetnextstep.com/uk" />
         <meta property="og:title" content="Working as a Vet in the UK | VetNextStep" />
         <meta property="og:description" content="RCVS registration, visa requirements, graduate programmes, internships, and CertAVP certificates for vets in the UK." />
-        <meta property="og:url" content="https://www.vetnextstep.com/uk" />
+        <meta property="og:url" content="https://vetnextstep.com/uk" />
         <meta property="og:type" content="website" />
       </Helmet>
 

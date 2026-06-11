@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vetnextstep.com/sitemap.xml
+Sitemap: https://vetnextstep.com/sitemap.xml

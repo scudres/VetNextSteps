@@ -35,10 +35,10 @@ const CanadaPage = () => {
       <Helmet>
         <title>Working as a Vet in Canada | VetNextStep</title>
         <meta name="description" content="Everything new vet graduates need to know about working in Canada — ECA, NEB exams, NAVLE, provincial licensing, immigration pathways, and VIRMP opportunities." />
-        <link rel="canonical" href="https://www.vetnextstep.com/canada" />
+        <link rel="canonical" href="https://vetnextstep.com/canada" />
         <meta property="og:title" content="Working as a Vet in Canada | VetNextStep" />
         <meta property="og:description" content="ECA, NEB exams, NAVLE, provincial licensing, Federal Skilled Worker visa, and VIRMP opportunities for vets in Canada." />
-        <meta property="og:url" content="https://www.vetnextstep.com/canada" />
+        <meta property="og:url" content="https://vetnextstep.com/canada" />
         <meta property="og:type" content="website" />
       </Helmet>
 

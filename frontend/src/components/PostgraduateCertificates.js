@@ -60,10 +60,10 @@ const PostgraduateCertificates = () => {
       <Helmet>
         <title>Postgraduate Certificates for Vets | VetNextStep</title>
         <meta name="description" content="Explore RCVS CertAVP programmes and other postgraduate certificates for veterinary surgeons, including providers from RVC, Edinburgh, Liverpool, Nottingham, and Surrey." />
-        <link rel="canonical" href="https://www.vetnextstep.com/postgraduate-certificates" />
+        <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
         <meta property="og:title" content="Postgraduate Certificates for Vets | VetNextStep" />
         <meta property="og:description" content="Advance your veterinary career with RCVS-accredited postgraduate certificates including CertAVP from leading UK universities." />
-        <meta property="og:url" content="https://www.vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Header */}

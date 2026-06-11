@@ -34,10 +34,10 @@ const USAPage = () => {
       <Helmet>
         <title>Working as a Vet in the USA | VetNextStep</title>
         <meta name="description" content="Everything new vet graduates need to know about working in the USA — NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program." />
-        <link rel="canonical" href="https://www.vetnextstep.com/usa" />
+        <link rel="canonical" href="https://vetnextstep.com/usa" />
         <meta property="og:title" content="Working as a Vet in the USA | VetNextStep" />
         <meta property="og:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program for vets in the USA." />
-        <meta property="og:url" content="https://www.vetnextstep.com/usa" />
+        <meta property="og:url" content="https://vetnextstep.com/usa" />
         <meta property="og:type" content="website" />
       </Helmet>
 
