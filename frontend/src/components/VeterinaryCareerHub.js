@@ -179,9 +179,7 @@ const VeterinaryCareerHub = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg md:text-xl">V</span>
-              </div>
+              <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
                 <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
@@ -1003,9 +1001,7 @@ const VeterinaryCareerHub = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">V</span>
-                </div>
+                <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10" />
                 <h3 className="text-xl font-bold">VetNextStep</h3>
               </div>
               <p className="text-gray-400">
