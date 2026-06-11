@@ -18,7 +18,7 @@ const VeterinaryCareerHub = () => {
       country: "USA",
       category: "licensing",
       description: "Comprehensive preparation for the North American Veterinary Licensing Examination",
-      url: "https://www.aavsb.org/navle/"
+      url: "https://www.icva.net/navle/"
     },
     {
       title: "MATCH Internship Program",
@@ -448,7 +448,7 @@ const VeterinaryCareerHub = () => {
                   <div className="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">🇺🇸 United States</h3>
                     <ul className="space-y-3">
-                      <li><a href="https://www.aavsb.org/navle/" className="text-blue-600 hover:text-blue-800">NAVLE Examination</a></li>
+                      <li><a href="https://www.icva.net/navle/" className="text-blue-600 hover:text-blue-800">NAVLE Examination</a></li>
                       <li><a href="https://www.virmp.org/" className="text-blue-600 hover:text-blue-800">MATCH Program</a></li>
                       <li><a href="https://www.avma.org/education/ecfvg" className="text-blue-600 hover:text-blue-800">ECFVG Certification</a></li>
                       <li><a href="https://www.avma.org/education/foreign/information-foreign-veterinary-graduates-working-veterinarian-us" className="text-blue-600 hover:text-blue-800">Foreign Graduate Guide</a></li>
@@ -513,6 +513,15 @@ const VeterinaryCareerHub = () => {
                         </ul>
 
                         <div className="border-t pt-4">
+                          <Link
+                            to={`/${country.code.toLowerCase()}`}
+                            className="inline-flex items-center w-full justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm mb-4"
+                          >
+                            Full guide for {country.name}
+                            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
                           <h5 className="font-semibold text-gray-900 mb-3">Visa & Licensing Info</h5>
                           <div className="space-y-2 text-sm text-gray-600">
                             {country.code === "UK" && (
@@ -1020,15 +1029,15 @@ const VeterinaryCareerHub = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Countries</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">United Kingdom</button></li>
-                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">United States</button></li>
-                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">Canada</button></li>
+                <li><Link to="/uk" className="hover:text-white">United Kingdom</Link></li>
+                <li><Link to="/usa" className="hover:text-white">United States</Link></li>
+                <li><Link to="/canada" className="hover:text-white">Canada</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="https://www.aavsb.org/navle/" className="hover:text-white">NAVLE</a></li>
+                <li><a href="https://www.icva.net/navle/" className="hover:text-white">NAVLE</a></li>
                 <li><a href="https://www.virmp.org/" className="hover:text-white">MATCH</a></li>
                 <li><a href="https://www.rcvs.org.uk/" className="hover:text-white">RCVS</a></li>
                 <li><a href="https://www.rcvs.org.uk/lifelong-learning/pdp/" className="hover:text-white">RCVS PDP</a></li>

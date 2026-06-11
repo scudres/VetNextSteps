@@ -6,6 +6,9 @@ import VeterinaryCareerHub from "./components/VeterinaryCareerHub";
 import TrainingPrograms from "./components/TrainingPrograms";
 import InternshipsResidencies from "./components/InternshipsResidencies";
 import PostgraduateCertificates from "./components/PostgraduateCertificates";
+import UKPage from "./components/UKPage";
+import USAPage from "./components/USAPage";
+import CanadaPage from "./components/CanadaPage";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
             <Route path="/training-programs" element={<TrainingPrograms />} />
             <Route path="/internships-residencies" element={<InternshipsResidencies />} />
             <Route path="/postgraduate-certificates" element={<PostgraduateCertificates />} />
+            <Route path="/uk" element={<UKPage />} />
+            <Route path="/usa" element={<USAPage />} />
+            <Route path="/canada" element={<CanadaPage />} />
           </Routes>
         </BrowserRouter>
       </div>
