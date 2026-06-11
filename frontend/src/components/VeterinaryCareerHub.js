@@ -166,11 +166,11 @@ const VeterinaryCareerHub = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       <Helmet>
-        <title>VetNextStep | New Graduate Veterinary Career Hub</title>
-        <meta name="description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates. Your career compass after vet school." />
+        <title>VetNextStep | Veterinary Career Progression Hub</title>
+        <meta name="description" content="Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, and Canada." />
         <link rel="canonical" href="https://vetnextstep.com/" />
-        <meta property="og:title" content="VetNextStep | New Graduate Veterinary Career Hub" />
-        <meta property="og:description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates." />
+        <meta property="og:title" content="VetNextStep | Veterinary Career Progression Hub" />
+        <meta property="og:description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates to advance your veterinary career. Licensing guides for the UK, USA, and Canada." />
         <meta property="og:url" content="https://vetnextstep.com/" />
         <meta property="og:type" content="website" />
       </Helmet>
@@ -182,7 +182,7 @@ const VeterinaryCareerHub = () => {
               <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
+                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
@@ -280,12 +280,11 @@ const VeterinaryCareerHub = () => {
         >
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Your Veterinary Career
-              <span className="block text-blue-300">Starts Here</span>
+              Advance Your
+              <span className="block text-blue-300">Veterinary Career</span>
             </h2>
             <p className="text-base sm:text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-              Comprehensive guidance for veterinary graduates with less than 5 years experience.
-              Discover training programs, licensing information, and career opportunities across the UK, USA, and Canada.
+              Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, and Canada.
             </p>
 
             {/* Search Bar */}
