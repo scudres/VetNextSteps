@@ -75,7 +75,7 @@ const PostgraduateCertificates = () => {
                 <span className="text-white font-bold text-lg md:text-xl">V</span>
               </div>
               <div>
-                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetCareerHub</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
                 <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
               </div>
             </Link>
