@@ -7,7 +7,7 @@ const CanadaPage = () => {
     { name: "CVMA — Canadian Veterinary Medical Association", url: "https://www.canadianveterinarians.net/" },
     { name: "CVMA — Educational Credential Assessment (ECA)", url: "https://www.canadianveterinarians.net/education-and-resources/accreditation/eca/" },
     { name: "ICVA — NAVLE Examination", url: "https://www.icva.net/navle/" },
-    { name: "AAVSB — NEB Examinations", url: "https://www.aavsb.org/" },
+    { name: "AAVSB — NEB Examinations & PAVE Program", url: "https://www.aavsb.org/" },
     { name: "Ontario Veterinary College (OVC)", url: "https://www.ovc.uoguelph.ca/" },
     { name: "BCVMA — British Columbia Veterinary Medical Association", url: "https://www.bcvma.org/" },
     { name: "IRCC — Federal Skilled Worker Program", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/federal-skilled-workers.html" },
@@ -50,7 +50,7 @@ const CanadaPage = () => {
               <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
+                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
               </div>
             </Link>
             <Link
@@ -115,20 +115,21 @@ const CanadaPage = () => {
               <h3 className="text-xl font-bold text-blue-700 mb-5">Education & Licensing Requirements</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Educational Assessment</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">Educational Assessment (NEB/CVMA)</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>ECA:</strong> Educational Credential Assessment through CVMA — assesses degree equivalency</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Required for foreign-trained veterinary graduates</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Process administered by the CVMA</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Submit documents to the CVMA National Examining Board (NEB) for credential evaluation</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Required for graduates of non-CVMA/AVMA accredited schools</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>Language:</strong> Degree must have been taught entirely in English or French</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>Alternative:</strong> PAVE (AAVSB) is now accepted in all Canadian provinces as an equivalent pathway</span></li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">National Licensing Exams (NEB)</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>BCSE:</strong> Basic and Clinical Sciences Examination</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>NAVLE:</strong> North American Veterinary Licensing Examination</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>BCSE:</strong> Basic and Clinical Sciences Examination — must pass before NAVLE</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>NAVLE:</strong> North American Veterinary Licensing Examination (shared with USA)</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Both administered through AAVSB/ICVA</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Provincial licensing required after NEB exams</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Provincial licensing required after passing NEB exams</span></li>
                   </ul>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 const UKPage = () => {
   const organisations = [
     { name: "RCVS — Register as a Vet Surgeon", url: "https://www.rcvs.org.uk/registration/" },
-    { name: "RCVS Professional Development Programme (PDP)", url: "https://www.rcvs.org.uk/lifelong-learning/pdp/" },
+    { name: "RCVS Veterinary Graduate Development Programme (VetGDP)", url: "https://www.rcvs.org.uk/lifelong-learning/veterinary-graduate-development-programme-vetgdp/" },
     { name: "RCVS CertAVP — Advanced Veterinary Practice", url: "https://www.rcvs.org.uk/lifelong-learning/postgraduate-qualifications/certificate-in-advanced-veterinary-practice-certavp/" },
     { name: "BVA — British Veterinary Association", url: "https://www.bva.co.uk/" },
     { name: "BSAVA — British Small Animal Veterinary Association", url: "https://www.bsava.com/" },
@@ -55,7 +55,7 @@ const UKPage = () => {
               <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
+                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
               </div>
             </Link>
             <Link
@@ -96,10 +96,10 @@ const UKPage = () => {
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                   <h4 className="font-semibold text-blue-900 mb-2">EU Citizens</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Skilled Worker Visa required</li>
+                    <li>• Skilled Worker Visa required (post-Brexit)</li>
                     <li>• Job offer from a UK-licensed sponsor needed</li>
                     <li>• Employer must hold a valid sponsor licence</li>
-                    <li>• No longer automatic right to work post-Brexit</li>
+                    <li>• No longer automatic right to work in UK</li>
                   </ul>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
@@ -107,12 +107,17 @@ const UKPage = () => {
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• Skilled Worker Visa required</li>
                     <li>• Job offer from licensed UK sponsor</li>
-                    <li>• May need additional language assessments</li>
+                    <li>• English language assessment may be required</li>
                     <li>• Immigration skills charge applies to employer</li>
                   </ul>
                 </div>
               </div>
-              <div className="mt-5 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                <p className="text-sm text-yellow-800">
+                  <strong>💷 Salary threshold (2026):</strong> Veterinary surgeons must be paid at least <strong>£48,100/year</strong> to qualify for Skilled Worker visa sponsorship. A reduced <strong>new entrant rate of £33,390</strong> may apply for those within 3 years of graduating or under 26.
+                </p>
+              </div>
+              <div className="mt-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-sm text-blue-800">
                   <strong>✅ Process:</strong> Secure job offer → Employer applies for visa sponsorship → You apply for Skilled Worker Visa → Complete RCVS registration → Undergo health checks if required
                 </p>
@@ -129,17 +134,20 @@ const UKPage = () => {
                   <h4 className="font-semibold text-gray-900 mb-3">Requirements</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Registration with RCVS is mandatory to practise</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>EU/EEA qualifications may be recognised depending on country</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Non-EU degrees require full assessment by RCVS</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>English language proficiency may be required</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>EAEVE-accredited EU degrees currently recognised — <strong>deadline January 2029</strong>, after which only RCVS-accredited degrees accepted</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Non-RCVS/non-EAEVE degrees require statutory membership exam</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>English language proficiency required unless degree was taught entirely in English</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character declarations required</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Letter of good standing from current licensing authority</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Continuing Development</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">Graduate Development (VetGDP)</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>RCVS Professional Development Programme (PDP) required for new graduates</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Annual CPD requirements to maintain registration</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><strong>VetGDP mandatory</strong> for all new UK graduates — replaces the former PDP</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Completed over 12–18 months in your first role, earning 52.5 hours CPD</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Structured around Entrustable Professional Activities (EPAs) with a VetGDP Adviser</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Annual CPD requirements to maintain registration thereafter</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>CertAVP available after gaining clinical experience</li>
                   </ul>
                 </div>
