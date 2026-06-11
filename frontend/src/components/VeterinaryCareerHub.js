@@ -126,7 +126,7 @@ const VeterinaryCareerHub = () => {
     {
       name: "Canada",
       code: "Canada",
-      image: "https://images.unsplash.com/photo-1629280301895-a098bd9c4a67",
+      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
       highlights: ["Provincial Licensing", "CVMA Resources", "Rural Opportunities"],
       visaInfo: {
         foreignGrads: "Work visa through Federal Skilled Worker Program or Provincial Nominee Program",
@@ -455,7 +455,7 @@ const VeterinaryCareerHub = () => {
                 <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                   Essential Resources
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
                   <div className="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">🇺🇸 United States</h3>
                     <ul className="space-y-3">
@@ -507,7 +507,7 @@ const VeterinaryCareerHub = () => {
               <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
                 Choose Your Destination
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
                 {countries.map((country, index) => (
                   <div key={index} className="group">
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
