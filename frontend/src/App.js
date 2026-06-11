@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 import VeterinaryCareerHub from "./components/VeterinaryCareerHub";
 import TrainingPrograms from "./components/TrainingPrograms";
 import InternshipsResidencies from "./components/InternshipsResidencies";
@@ -16,6 +24,7 @@ function App() {
     <HelmetProvider>
       <div className="App">
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<VeterinaryCareerHub />} />
             <Route path="/training-programs" element={<TrainingPrograms />} />
