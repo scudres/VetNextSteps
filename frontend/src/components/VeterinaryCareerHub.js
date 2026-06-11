@@ -104,7 +104,7 @@ const VeterinaryCareerHub = () => {
     {
       name: "United Kingdom",
       code: "UK",
-      image: "https://images.unsplash.com/photo-1659019479789-4dd5dbdc2cb1",
+      image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg",
       highlights: ["RCVS Registration", "CertAVP Programs", "Thriving referral services"],
       visaInfo: {
         euCitizens: "Post-Brexit: EU citizens need Skilled Worker Visa with job offer from UK sponsor",
@@ -115,7 +115,7 @@ const VeterinaryCareerHub = () => {
     {
       name: "United States",
       code: "USA",
-      image: "https://images.pexels.com/photos/6075005/pexels-photo-6075005.jpeg",
+      image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg",
       highlights: ["NAVLE Examination", "MATCH Program", "State Licensing"],
       visaInfo: {
         foreignGrads: "Work visa required (contact U.S. Department of State)",
@@ -126,7 +126,7 @@ const VeterinaryCareerHub = () => {
     {
       name: "Canada",
       code: "Canada",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+      image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg",
       highlights: ["Provincial Licensing", "CVMA Resources", "Rural Opportunities"],
       visaInfo: {
         foreignGrads: "Work visa through Federal Skilled Worker Program or Provincial Nominee Program",
