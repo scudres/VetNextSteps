@@ -26,7 +26,8 @@
       "/postgraduate-certificates",
       "/uk",
       "/usa",
-      "/canada"
+      "/canada",
+      "/australia"
     ],
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
     "skipThirdPartyRequests": true

@@ -9,6 +9,7 @@ import PostgraduateCertificates from "./components/PostgraduateCertificates";
 import UKPage from "./components/UKPage";
 import USAPage from "./components/USAPage";
 import CanadaPage from "./components/CanadaPage";
+import AustraliaPage from "./components/AustraliaPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/uk" element={<UKPage />} />
             <Route path="/usa" element={<USAPage />} />
             <Route path="/canada" element={<CanadaPage />} />
+            <Route path="/australia" element={<AustraliaPage />} />
           </Routes>
         </BrowserRouter>
       </div>

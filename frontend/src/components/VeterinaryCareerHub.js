@@ -133,6 +133,17 @@ const VeterinaryCareerHub = () => {
         educationReqs: "Educational Credential Assessment (ECA) + NEB exams (BCSE + NAVLE)",
         additionalReqs: "Provincial licensing + English/French proficiency"
       }
+    },
+    {
+      name: "Australia",
+      code: "Australia",
+      image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be",
+      highlights: ["AVBC Registration", "482 Visa Sponsorship", "PR Pathways (189/190/491)"],
+      visaInfo: {
+        foreignGrads: "Skills in Demand visa (482) with employer sponsorship or points-based skilled migration",
+        educationReqs: "AVBC recognised qualification or Australasian Veterinary Examination (AVE)",
+        additionalReqs: "State/territory board registration + English proficiency required"
+      }
     }
   ];
 
@@ -167,7 +178,7 @@ const VeterinaryCareerHub = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       <Helmet>
         <title>VetNextStep | Veterinary Career Progression Hub</title>
-        <meta name="description" content="Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, and Canada." />
+        <meta name="description" content="Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, Canada, and Australia." />
         <link rel="canonical" href="https://vetnextstep.com/" />
         <meta property="og:title" content="VetNextStep | Veterinary Career Progression Hub" />
         <meta property="og:description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates to advance your veterinary career. Licensing guides for the UK, USA, and Canada." />
@@ -284,7 +295,7 @@ const VeterinaryCareerHub = () => {
               <span className="block text-blue-300">Veterinary Career</span>
             </h2>
             <p className="text-base sm:text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-              Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, and Canada.
+              Comprehensive guidance for veterinarians looking to develop their career — training programmes, licensing, and opportunities across the UK, USA, Canada, and Australia.
             </p>
 
             {/* Search Bar */}
@@ -315,6 +326,7 @@ const VeterinaryCareerHub = () => {
                   <option value="UK">United Kingdom</option>
                   <option value="USA">United States</option>
                   <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
                 </select>
                 <select
                   value={selectedCategory}
@@ -424,7 +436,7 @@ const VeterinaryCareerHub = () => {
                     <div className="text-blue-200">Training Programs</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-2">3</div>
+                    <div className="text-3xl font-bold mb-2">4</div>
                     <div className="text-blue-200">Countries Covered</div>
                   </div>
                   <div>
@@ -472,6 +484,16 @@ const VeterinaryCareerHub = () => {
                       <li><a href="https://www.cvbc.ca/" className="text-blue-600 hover:text-blue-800">BC Veterinary College</a></li>
                       <li><a href="https://www.ovc.uoguelph.ca/" className="text-blue-600 hover:text-blue-800">Ontario Veterinary College</a></li>
                       <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit.html" className="text-blue-600 hover:text-blue-800">Work Permit Info</a></li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-8 rounded-2xl shadow-lg">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">🇦🇺 Australia</h3>
+                    <ul className="space-y-3">
+                      <li><a href="https://avbc.asn.au/" className="text-blue-600 hover:text-blue-800">AVBC Registration</a></li>
+                      <li><a href="https://avbc.asn.au/for-veterinarians/australasian-veterinary-examination/" className="text-blue-600 hover:text-blue-800">AVE Exam Information</a></li>
+                      <li><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skills-in-demand-visa-subclass-482" className="text-blue-600 hover:text-blue-800">Skills in Demand Visa (482)</a></li>
+                      <li><a href="https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list" className="text-blue-600 hover:text-blue-800">Skilled Occupation List</a></li>
+                      <li><a href="https://www.ava.com.au/" className="text-blue-600 hover:text-blue-800">AVA Resources</a></li>
                     </ul>
                   </div>
                 </div>
@@ -538,6 +560,13 @@ const VeterinaryCareerHub = () => {
                               </>
                             )}
                             {country.code === "Canada" && (
+                              <>
+                                <p><strong>Foreign Graduates:</strong> {country.visaInfo.foreignGrads}</p>
+                                <p><strong>Education:</strong> {country.visaInfo.educationReqs}</p>
+                                <p><strong>Additional:</strong> {country.visaInfo.additionalReqs}</p>
+                              </>
+                            )}
+                            {country.code === "Australia" && (
                               <>
                                 <p><strong>Foreign Graduates:</strong> {country.visaInfo.foreignGrads}</p>
                                 <p><strong>Education:</strong> {country.visaInfo.educationReqs}</p>
@@ -1013,7 +1042,7 @@ const VeterinaryCareerHub = () => {
                 <h3 className="text-xl font-bold">VetNextStep</h3>
               </div>
               <p className="text-gray-400">
-                Your comprehensive guide to veterinary career opportunities across the UK, USA, and Canada.
+                Your comprehensive guide to veterinary career opportunities across the UK, USA, Canada, and Australia.
               </p>
             </div>
             <div>
@@ -1031,6 +1060,7 @@ const VeterinaryCareerHub = () => {
                 <li><Link to="/uk" className="hover:text-white">United Kingdom</Link></li>
                 <li><Link to="/usa" className="hover:text-white">United States</Link></li>
                 <li><Link to="/canada" className="hover:text-white">Canada</Link></li>
+                <li><Link to="/australia" className="hover:text-white">Australia</Link></li>
               </ul>
             </div>
             <div>
@@ -1039,7 +1069,7 @@ const VeterinaryCareerHub = () => {
                 <li><a href="https://www.icva.net/navle/" className="hover:text-white">NAVLE</a></li>
                 <li><a href="https://www.virmp.org/" className="hover:text-white">MATCH</a></li>
                 <li><a href="https://www.rcvs.org.uk/" className="hover:text-white">RCVS</a></li>
-                <li><a href="https://www.rcvs.org.uk/lifelong-learning/pdp/" className="hover:text-white">RCVS PDP</a></li>
+                <li><a href="https://www.rcvs.org.uk/lifelong-learning/veterinary-graduate-development-programme-vetgdp/" className="hover:text-white">RCVS VetGDP</a></li>
                 <li><a href="https://www.avma.org/education/foreign/information-foreign-veterinary-graduates-working-veterinarian-us" className="hover:text-white">AVMA Foreign Guide</a></li>
               </ul>
             </div>
