@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const VeterinaryCareerHub = () => {
@@ -183,7 +183,7 @@ const VeterinaryCareerHub = () => {
                 <span className="text-white font-bold text-lg md:text-xl">V</span>
               </div>
               <div>
-                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetCareerHub</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
                 <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Compass</p>
               </div>
             </div>
@@ -1006,7 +1006,7 @@ const VeterinaryCareerHub = () => {
                 <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold">V</span>
                 </div>
-                <h3 className="text-xl font-bold">VetCareerHub</h3>
+                <h3 className="text-xl font-bold">VetNextStep</h3>
               </div>
               <p className="text-gray-400">
                 Your comprehensive guide to veterinary career opportunities across the UK, USA, and Canada.
@@ -1015,18 +1015,18 @@ const VeterinaryCareerHub = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Training Programs</a></li>
-                <li><a href="#" className="hover:text-white">Licensing Info</a></li>
-                <li><a href="#" className="hover:text-white">Internships</a></li>
-                <li><a href="#" className="hover:text-white">Certificates</a></li>
+                <li><Link to="/training-programs" className="hover:text-white">Training Programs</Link></li>
+                <li><button onClick={() => { setActiveTab("visa"); window.scrollTo(0, 0); }} className="hover:text-white">Licensing Info</button></li>
+                <li><Link to="/internships-residencies" className="hover:text-white">Internships</Link></li>
+                <li><Link to="/postgraduate-certificates" className="hover:text-white">Certificates</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Countries</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">United Kingdom</a></li>
-                <li><a href="#" className="hover:text-white">United States</a></li>
-                <li><a href="#" className="hover:text-white">Canada</a></li>
+                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">United Kingdom</button></li>
+                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">United States</button></li>
+                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">Canada</button></li>
               </ul>
             </div>
             <div>
@@ -1041,7 +1041,7 @@ const VeterinaryCareerHub = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 VetCareerHub. Empowering veterinary careers worldwide.</p>
+            <p>&copy; 2026 VetNextStep. Empowering veterinary careers worldwide.</p>
           </div>
         </div>
       </footer>
