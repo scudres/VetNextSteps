@@ -53,10 +53,10 @@ const TrainingPrograms = () => {
       <Helmet>
         <title>Post-graduate Training Programs | VetNextStep</title>
         <meta name="description" content="Find structured post-graduate training programmes for new veterinary graduates in the UK, including CVS, IVC Evidensia, Linnaeus, Medivet, Vets4Pets, and VetPartners." />
-        <link rel="canonical" href="https://www.vetnextstep.com/training-programs" />
+        <link rel="canonical" href="https://vetnextstep.com/training-programs" />
         <meta property="og:title" content="Post-graduate Training Programs | VetNextStep" />
         <meta property="og:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates." />
-        <meta property="og:url" content="https://www.vetnextstep.com/training-programs" />
+        <meta property="og:url" content="https://vetnextstep.com/training-programs" />
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Header */}

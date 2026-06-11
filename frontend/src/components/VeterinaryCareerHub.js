@@ -168,10 +168,10 @@ const VeterinaryCareerHub = () => {
       <Helmet>
         <title>VetNextStep | New Graduate Veterinary Career Hub</title>
         <meta name="description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates. Your career compass after vet school." />
-        <link rel="canonical" href="https://www.vetnextstep.com/" />
+        <link rel="canonical" href="https://vetnextstep.com/" />
         <meta property="og:title" content="VetNextStep | New Graduate Veterinary Career Hub" />
         <meta property="og:description" content="Explore graduate programmes, internships, residencies, and postgraduate certificates for new veterinary graduates." />
-        <meta property="og:url" content="https://www.vetnextstep.com/" />
+        <meta property="og:url" content="https://vetnextstep.com/" />
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Header */}

@@ -351,10 +351,10 @@ const InternshipsResidencies = () => {
       <Helmet>
         <title>Veterinary Internships & Residencies | VetNextStep</title>
         <meta name="description" content="Browse veterinary internships and residencies in the UK, Europe, and North America. Find rotating internships, specialist residencies, and VIRMP programs for new vet graduates." />
-        <link rel="canonical" href="https://www.vetnextstep.com/internships-residencies" />
+        <link rel="canonical" href="https://vetnextstep.com/internships-residencies" />
         <meta property="og:title" content="Veterinary Internships & Residencies | VetNextStep" />
         <meta property="og:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
-        <meta property="og:url" content="https://www.vetnextstep.com/internships-residencies" />
+        <meta property="og:url" content="https://vetnextstep.com/internships-residencies" />
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Header */}
