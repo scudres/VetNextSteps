@@ -186,58 +186,17 @@ const VeterinaryCareerHub = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        {/* Top row — logo + hamburger */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center py-3">
             <div className="flex items-center space-x-3">
-              <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
+              <img src="/favicon.svg" alt="VetNextStep logo" className="w-9 h-9 flex-shrink-0" />
               <div>
-                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
+                <h1 className="text-xl font-bold text-gray-900">VetNextStep</h1>
+                <p className="hidden sm:block text-xs text-gray-500">Your Veterinary Career Progression</p>
               </div>
             </div>
-            <nav className="hidden md:flex space-x-8">
-              <button
-                onClick={() => setActiveTab("overview")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === "overview"
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
-              >
-                Overview
-              </button>
-              <button
-                onClick={() => setActiveTab("countries")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === "countries"
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
-              >
-                Countries
-              </button>
-              <button
-                onClick={() => setActiveTab("visa")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === "visa"
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
-              >
-                Visa & Licensing
-              </button>
-              <button
-                onClick={() => setActiveTab("programs")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === "programs"
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
-              >
-                Programs
-              </button>
-            </nav>
             <button
               className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -254,29 +213,80 @@ const VeterinaryCareerHub = () => {
               )}
             </button>
           </div>
-          {mobileMenuOpen && (
-            <nav className="md:hidden border-t border-gray-100 py-2">
+        </div>
+
+        {/* Bottom row — nav tabs */}
+        <div className="border-t border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="hidden md:flex">
               {[
-                { id: "overview", label: "Overview" },
-                { id: "countries", label: "Countries" },
-                { id: "visa", label: "Visa & Licensing" },
-                { id: "programs", label: "Programs" },
+                { id: "overview", label: "Overview", type: "tab" },
+                { id: "countries", label: "Countries", type: "tab" },
+                { id: "visa", label: "Visa & Licensing", type: "tab" },
+                { id: "cpd", label: "CPD & Conferences", type: "tab" },
               ].map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
-                  className={`w-full text-left px-4 py-3 font-medium transition-colors ${
+                  onClick={() => setActiveTab(item.id)}
+                  className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                     activeTab === item.id
-                      ? "bg-blue-50 text-blue-700"
-                      : "text-gray-700 hover:bg-gray-50"
+                      ? "border-blue-700 text-blue-700"
+                      : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
+              <div className="w-px bg-gray-200 my-2 mx-2" />
+              <Link
+                to="/training-programs"
+                className="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300 transition-colors whitespace-nowrap"
+              >
+                Training Programmes
+              </Link>
+              <Link
+                to="/internships-residencies"
+                className="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300 transition-colors whitespace-nowrap"
+              >
+                Internships & Residencies
+              </Link>
+              <Link
+                to="/postgraduate-certificates"
+                className="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300 transition-colors whitespace-nowrap"
+              >
+                Postgraduate Certificates
+              </Link>
             </nav>
-          )}
+          </div>
         </div>
+
+        {/* Mobile dropdown */}
+        {mobileMenuOpen && (
+          <nav className="md:hidden border-t border-gray-100 py-1">
+            {[
+              { id: "overview", label: "Overview", type: "tab" },
+              { id: "countries", label: "Countries", type: "tab" },
+              { id: "visa", label: "Visa & Licensing", type: "tab" },
+              { id: "cpd", label: "CPD & Conferences", type: "tab" },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
+                className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors border-l-2 ${
+                  activeTab === item.id
+                    ? "border-blue-700 text-blue-700 bg-blue-50"
+                    : "border-transparent text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+            <div className="border-t border-gray-100 my-1" />
+            <Link to="/training-programs" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 border-l-2 border-transparent">Training Programmes</Link>
+            <Link to="/internships-residencies" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 border-l-2 border-transparent">Internships & Residencies</Link>
+            <Link to="/postgraduate-certificates" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 border-l-2 border-transparent">Postgraduate Certificates</Link>
+          </nav>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -994,6 +1004,18 @@ const VeterinaryCareerHub = () => {
           )}
 
           {/* Programs Tab */}
+          {activeTab === "cpd" && (
+            <div className="space-y-12">
+              <div className="text-center py-20">
+                <div className="text-6xl mb-6">🎓</div>
+                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h2>
+                <p className="text-gray-500 text-lg max-w-xl mx-auto">
+                  Continuing professional development events, conferences, and learning resources — coming soon.
+                </p>
+              </div>
+            </div>
+          )}
+
           {activeTab === "programs" && (
             <div className="space-y-12">
               <h2 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-8 md:mb-12">
