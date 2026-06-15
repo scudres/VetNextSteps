@@ -178,25 +178,6 @@ const VeterinaryCareerHub = () => {
             </div>
           </section>
 
-          {/* Stats bar */}
-          <div className="bg-blue-600 text-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-2 sm:grid-cols-4">
-                {[
-                  { value: "70+", label: "Conferences 2026–28" },
-                  { value: "49",  label: "CPD providers indexed" },
-                  { value: "33",  label: "Internship & residency programmes" },
-                  { value: "4",   label: "Countries with full licensing guides" },
-                ].map((stat) => (
-                  <div key={stat.label} className="px-4 py-5 text-center border-r border-blue-500 last:border-r-0">
-                    <p className="text-2xl md:text-3xl font-bold tabular-nums">{stat.value}</p>
-                    <p className="text-blue-200 text-xs mt-1 leading-snug">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Three career paths */}
           <div className="border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
