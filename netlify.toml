@@ -1,9 +1,49 @@
 [build]
-  base    = "frontend"
-  command = "npm run build"
-  publish = "build"
+  base      = "frontend"
+  command   = "npm run build"
+  publish   = "build"
+  functions = "../functions"
 
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
   status = 200
+
+# Security headers applied to every response
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking — page cannot be embedded in an iframe
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME sniffing — browser must honour declared content-type
+    X-Content-Type-Options = "nosniff"
+
+    # Legacy XSS filter (belt-and-braces for older browsers)
+    X-XSS-Protection = "1; mode=block"
+
+    # Only send the origin (no path/query) in the Referer header to third parties
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Disable unused browser features
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+    # Content Security Policy
+    # Allows: self, inline styles (Tailwind), Google Analytics
+    # Blocks: everything else including injected scripts from unknown origins
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.pexels.com https://images.unsplash.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
+
+    # Tell AI crawlers and scrapers not to index or use this content
+    X-Robots-Tag = "noai, noimageai"
+
+# Long-lived cache for versioned static assets (JS/CSS bundles have content hashes)
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# No caching for HTML (ensure fresh content on update)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
