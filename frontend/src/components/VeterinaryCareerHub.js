@@ -147,19 +147,19 @@ const VeterinaryCareerHub = () => {
           <section className="bg-white border-b border-gray-100 py-10 md:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-2xl">
-                <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">For veterinary graduates</p>
+                <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">Veterinary career progression</p>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
                   Know your next step.
                 </h2>
                 <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
-                  Pick your destination country, check what registration and visa you need, and find training or CPD that matches where you are in your career.
+                  Newly qualified or ten years in — there's always a next move. Find licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => setActiveTab("countries")}
                     className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
                   >
-                    Countries & Licensing
+                    Working internationally
                   </button>
                   <button
                     onClick={() => setActiveTab("cpd")}
@@ -167,6 +167,12 @@ const VeterinaryCareerHub = () => {
                   >
                     CPD & Conferences
                   </button>
+                  <Link
+                    to="/internships-residencies"
+                    className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    Internships & Residencies
+                  </Link>
                 </div>
               </div>
             </div>
@@ -191,46 +197,98 @@ const VeterinaryCareerHub = () => {
             </div>
           </div>
 
-          {/* Country finder */}
+          {/* Three career paths */}
           <div className="border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
-              <p className="text-sm font-semibold text-gray-800 mb-3">Where do you want to work?</p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { code: "uk",        name: "United Kingdom", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-                  { code: "usa",       name: "United States",  flag: "\uD83C\uDDFA\uD83C\uDDF8" },
-                  { code: "canada",    name: "Canada",         flag: "\uD83C\uDDE8\uD83C\uDDE6" },
-                  { code: "australia", name: "Australia",      flag: "\uD83C\uDDE6\uD83C\uDDFA" },
-                ].map((c) => (
-                  <button
-                    key={c.code}
-                    onClick={() => {
-                      setActiveTab("countries");
-                      setTimeout(() => {
-                        document.getElementById(`country-${c.code}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }, 150);
-                    }}
-                    className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-700 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-colors"
-                  >
-                    <span>{c.flag}</span>
-                    {c.name}
-                  </button>
-                ))}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-6">What are you looking for?</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Path 1 — Working abroad */}
+                <button
+                  onClick={() => setActiveTab("countries")}
+                  className="group text-left bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">Working internationally</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-3">Visa routes, registration steps, and licensing exams for the UK, USA, Canada, and Australia. Includes a side-by-side country comparison.</p>
+                  <span className="text-xs font-medium text-blue-600 inline-flex items-center">
+                    View licensing guides
+                    <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </button>
+
+                {/* Path 2 — CPD & Conferences */}
+                <button
+                  onClick={() => setActiveTab("cpd")}
+                  className="group text-left bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center mb-4">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">CPD & Conferences</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-3">70+ conferences across all specialties, 2026–2028, sortable by region. Plus 49 CPD providers — university units, commercial platforms, and industry education.</p>
+                  <span className="text-xs font-medium text-blue-600 inline-flex items-center">
+                    Browse CPD & events
+                    <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </button>
+
+                {/* Path 3 — Advanced training */}
+                <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
+                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">Postgraduate training</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-3">Graduate development programmes, rotating internships, specialist residencies, and RCVS-accredited postgraduate certificates. Wherever you are, there's a route forward.</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Link to="/training-programs" className="text-xs font-medium text-blue-600 inline-flex items-center hover:underline">
+                      Grad programmes
+                      <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <span className="text-gray-300">·</span>
+                    <Link to="/internships-residencies" className="text-xs font-medium text-blue-600 inline-flex items-center hover:underline">
+                      Internships & residencies
+                      <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <span className="text-gray-300">·</span>
+                    <Link to="/postgraduate-certificates" className="text-xs font-medium text-blue-600 inline-flex items-center hover:underline">
+                      Certificates
+                      <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Section index */}
+          {/* Full section index */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-6">Browse by section</p>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-6">All sections</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { label: "Training Programmes",       desc: "Graduate development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and others.",                 meta: "UK · USA · Canada · Australia",         path: "/training-programs" },
-                { label: "Internships & Residencies", desc: "Rotating internships and specialist residency programmes at university hospitals and private referral centres.",      meta: "UK · Europe · North America",           path: "/internships-residencies" },
-                { label: "Postgraduate Certificates", desc: "RCVS CertAVP and other postgraduate certificate pathways from UK veterinary universities.",                          meta: "UK · USA · Canada · Australia",         path: "/postgraduate-certificates" },
-                { label: "Countries & Licensing",     desc: "Visa options, registration steps, and key exams for working in the UK, USA, Canada, and Australia.",                meta: "Visa · Registration · Licensing",       tab: "countries" },
-                { label: "Conferences & Congresses",  desc: "70+ veterinary conferences in date order, 2026–2028. Filter by specialty or jump to your region.",                  meta: "UK · USA · Europe · Australia · Global", tab: "cpd" },
-                { label: "CPD Providers & Courses",   desc: "University CPD units, commercial providers, and industry education for vets and vet nurses.",                        meta: "49 providers listed",                   tab: "cpd" },
+                { label: "Training Programmes",       desc: "Structured graduate and early-career development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more.",  meta: "UK · USA · Canada · Australia",          path: "/training-programs" },
+                { label: "Internships & Residencies", desc: "Rotating internships and specialist residency posts at university teaching hospitals and private referral centres.",             meta: "UK · Europe · North America",            path: "/internships-residencies" },
+                { label: "Postgraduate Certificates", desc: "RCVS CertAVP and university postgraduate certificates — flexible routes to build a clinical interest at any career stage.",    meta: "RCVS-accredited · Level 7",              path: "/postgraduate-certificates" },
+                { label: "Countries & Licensing",     desc: "Registration bodies, key exams, visa routes, and typical timelines for working in the UK, USA, Canada, and Australia.",       meta: "Visa · Registration · Licensing",        tab: "countries" },
+                { label: "Conferences & Congresses",  desc: "70+ conferences in date order, 2026–2028 — filter by specialty or jump to your region. General practice to subspecialties.",  meta: "UK · USA · Europe · Australia · Global", tab: "cpd" },
+                { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: "49 providers · 4 categories",            tab: "cpd" },
               ].map((item, i) =>
                 item.path ? (
                   <Link key={i} to={item.path} className="group block border border-gray-200 rounded-lg p-5 hover:border-blue-300 hover:bg-blue-50 transition-colors">
@@ -581,7 +639,7 @@ const VeterinaryCareerHub = () => {
                 <h3 className="text-xl font-bold">VetNextStep</h3>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
-                A resource for veterinary graduates navigating career progression across the UK, USA, Canada, and Australia.
+                Career progression tools for vets at every stage — licensing guides, CPD, conferences, internships, residencies, and postgraduate certificates.
               </p>
             </div>
             <div>
