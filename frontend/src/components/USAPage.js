@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import SharedHeader from "./SharedHeader";
 
 const USAPage = () => {
   const organisations = [
@@ -41,30 +42,7 @@ const USAPage = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center space-x-3">
-              <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-              <div>
-                <h1 className="text-xl md:text-2xl font-bold text-gray-900">VetNextStep</h1>
-                <p className="hidden sm:block text-sm text-gray-600">Your Veterinary Career Progression</p>
-              </div>
-            </Link>
-            <Link
-              to="/"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-6 rounded-lg transition-colors duration-200 flex items-center text-sm md:text-base"
-            >
-              <svg className="w-4 h-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              <span className="hidden sm:inline">Back to Home</span>
-              <span className="sm:hidden">Home</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SharedHeader />
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">
