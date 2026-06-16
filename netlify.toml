@@ -4,6 +4,10 @@
   publish   = "build"
   functions = "../functions"
 
+[dev]
+  command = "npm start"
+  port    = 3000
+
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
