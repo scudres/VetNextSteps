@@ -454,7 +454,7 @@ const PostgraduateCertificates = () => {
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8">
               <h3 className="text-base font-semibold text-blue-900 mb-1">About the RCVS CertAVP</h3>
               <p className="text-sm text-blue-800 mb-3">
-                The Certificate in Advanced Veterinary Practice (CertAVP) is an RCVS-accredited qualification allowing veterinarians to demonstrate advanced knowledge and skills in a chosen subject area. It is offered by multiple UK universities and is a recognised pathway to fellowship.
+                The Certificate in Advanced Veterinary Practice (CertAVP) is an RCVS-accredited qualification allowing veterinarians to demonstrate advanced knowledge and skills in a chosen subject area. It is offered by multiple UK universities and is a recognised pathway to fellowship. RCVS registration is a prerequisite — <Link to="/uk" className="text-blue-700 hover:underline font-medium">see the UK licensing guide</Link> if you're working towards registration.
               </p>
               <a
                 href="https://www.rcvs.org.uk/lifelong-learning/postgraduate-qualifications/certificate-in-advanced-veterinary-practice-certavp/"
@@ -496,20 +496,13 @@ const PostgraduateCertificates = () => {
           {/* ——— USA ——— */}
           <section id="usa" className="mb-20 scroll-mt-28">
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">\uD83C\uDDFA\uD83C\uDDF8</span>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h2>
             </div>
 
-            {/* Context callout */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-10">
-              <h3 className="text-base font-semibold text-amber-900 mb-2">How North American certificates differ from the UK system</h3>
-              <p className="text-sm text-amber-800 leading-relaxed mb-3">
-                In the UK, the CertAVP/GPCert is a regulator-defined middle tier between GP and specialist. In North America that tier doesn't exist in the same structured way — board certification (Diplomate) is the specialist level, and the gap is filled by a patchwork of credentials from independent academies and universities.
-              </p>
-              <p className="text-sm text-amber-800 leading-relaxed">
-                The credentials below fall into three types: <strong>ISVPS/Improve</strong> (the same GPCert and PgC now running in the US — closest to the UK system), <strong>named discipline certifications</strong> (rehabilitation, acupuncture, pain, chiropractic), and <strong>university graduate certificates</strong> (Florida, Tennessee). All listed require a formal syllabus and an exam — attendance-only certificates are excluded.
-              </p>
-            </div>
+            <p className="text-sm text-gray-500 mb-8">
+              Most programmes below require you to hold a valid US (or provincial Canadian) veterinary licence before enrolling.{" "}
+              <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">See the USA licensing guide →</Link>
+            </p>
 
             {usaCertCategories.map((category) => (
               <div key={category.id} className="mb-12">

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 
@@ -203,6 +204,32 @@ const TrainingPrograms = () => {
                 <span className="text-3xl">{country.flag}</span>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{country.name}</h2>
               </div>
+
+              {/* Licensing cross-reference */}
+              {country.id === "uk" && (
+                <p className="text-sm text-gray-500 mb-6">
+                  Coming from overseas? You'll also need RCVS registration and a Skilled Worker Visa.{" "}
+                  <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
+                </p>
+              )}
+              {country.id === "usa" && (
+                <p className="text-sm text-gray-500 mb-6">
+                  Practising in the USA requires NAVLE and state licensing before joining any programme.{" "}
+                  <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">See the USA licensing guide →</Link>
+                </p>
+              )}
+              {country.id === "canada" && (
+                <p className="text-sm text-gray-500 mb-6">
+                  Canadian licensing is managed province by province and requires the NAVLE.{" "}
+                  <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">See the Canada licensing guide →</Link>
+                </p>
+              )}
+              {country.id === "australia" && (
+                <p className="text-sm text-gray-500 mb-6">
+                  Working in Australia requires AVA registration and state-level board approval.{" "}
+                  <Link to="/australia" className="text-blue-600 hover:text-blue-800 font-medium">See the Australia licensing guide →</Link>
+                </p>
+              )}
 
               {/* Programme cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
