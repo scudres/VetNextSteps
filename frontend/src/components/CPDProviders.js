@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { cpdProviderCategoryConfig, cpdTypeOptions } from "../data/cpdProvidersData";
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const CPDProviders = () => {
+  const location = useLocation();
   const [selectedType, setSelectedType] = useState("All Types");
   const [providers, setProviders]       = useState([]);
   const [loading, setLoading]           = useState(true);
   const [error, setError]               = useState(null);
+
+  // Scroll to anchor after providers finish loading
+  useEffect(() => {
+    if (loading || !location.hash) return;
+    const el = document.querySelector(location.hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [loading, location.hash]);
 
   useEffect(() => {
     fetch("/.netlify/functions/providers")
@@ -139,7 +149,7 @@ const CPDProviders = () => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {catProviders.map((p, idx) => (
-                      <div key={idx} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+                      <div key={idx} id={slugify(p.provider)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
                         {/* Type badges */}
                         <div className="flex flex-wrap gap-1.5 mb-3">
                           {p.types.map((t) => (

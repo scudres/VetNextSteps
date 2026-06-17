@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { specialtyOptions, regionConfig, parseSortDate } from "../data/conferencesData";
 import CPDProviders from "./CPDProviders";
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const CPDConferences = () => {
-  const [activeSection, setActiveSection]       = useState("conferences");
+  const location = useLocation();
+  const urlSection = new URLSearchParams(location.search).get("section");
+  const [activeSection, setActiveSection] = useState(urlSection === "providers" ? "providers" : "conferences");
   const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties");
   const [allConferences, setAllConferences]     = useState([]);
   const [loading, setLoading]                   = useState(true);
@@ -24,6 +28,19 @@ const CPDConferences = () => {
         setLoading(false);
       });
   }, []);
+
+  // Keep activeSection in sync if URL changes while component is mounted
+  useEffect(() => {
+    const s = new URLSearchParams(location.search).get("section");
+    if (s === "providers" || s === "conferences") setActiveSection(s);
+  }, [location.search]);
+
+  // Scroll to anchor after conferences finish loading
+  useEffect(() => {
+    if (loading || !location.hash) return;
+    const el = document.querySelector(location.hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [loading, location.hash]);
 
   const getConferencesForRegion = (regionId) =>
     allConferences
@@ -165,7 +182,7 @@ const CPDConferences = () => {
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {regionConferences.map((conf, index) => (
-                          <div key={index} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+                          <div key={index} id={slugify(conf.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
                             {/* Specialty tags */}
                             <div className="flex flex-wrap gap-1.5 mb-3">
                               {conf.specialties.map((s) => (

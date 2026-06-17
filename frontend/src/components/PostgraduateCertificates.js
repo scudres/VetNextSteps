@@ -1,4 +1,5 @@
 import React from "react";
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -360,8 +361,8 @@ const usaCertCategories = [
 // Flat count for nav card
 const usaTotalCount = usaCertCategories.reduce((acc, cat) => acc + cat.programs.length, 0);
 
-const ProgramCard = ({ credential, title, organisation, country, format, notes, url }) => (
-  <div className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+const ProgramCard = ({ id, credential, title, organisation, country, format, notes, url }) => (
+  <div id={id} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
     <div className="mb-3">
       <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold tracking-wide">
         {credential}
@@ -471,7 +472,7 @@ const PostgraduateCertificates = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {ukPrograms.map((program, index) => (
-                <div key={index} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+                <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
                   <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
                   <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
@@ -512,7 +513,7 @@ const PostgraduateCertificates = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {category.programs.map((program, idx) => (
-                    <ProgramCard key={idx} {...program} />
+                    <ProgramCard key={idx} id={slugify(program.title)} {...program} />
                   ))}
                 </div>
               </div>

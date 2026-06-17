@@ -20,6 +20,10 @@ function corsHeaders(origin) {
   };
 }
 
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 // ——— Static index items ———
 
 const trainingItems = [
@@ -39,7 +43,7 @@ const trainingItems = [
   { title: "Greencross Vets Graduate Vet Program", subtitle: "Greencross Vets", description: "Structured graduate programme with dedicated mentorship, ongoing clinical education, and professional development across Australia.", section: "Training Programmes", navPath: "/training-programs", tags: ["Greencross", "graduate", "Australia", "mentor"] },
   { title: "Apiam Animal Health Graduate Program", subtitle: "Apiam Animal Health", description: "Graduate development programme focused on rural, regional, and production animal practice across regional Australia.", section: "Training Programmes", navPath: "/training-programs", tags: ["Apiam", "graduate", "Australia", "rural", "farm animal", "production"] },
   { title: "AVA Mentoring Program", subtitle: "Australian Veterinary Association", description: "The AVA connects new graduate veterinarians with experienced mentors for professional guidance and career development.", section: "Training Programmes", navPath: "/training-programs", tags: ["AVA", "mentoring", "Australia", "graduate"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const internshipItems = [
   { title: "VIRMP \u2014 Veterinary Internship and Residency Matching Program", subtitle: "VIRMP", description: "Central matching service for veterinary internships and residencies in North America.", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["VIRMP", "internship", "residency", "North America", "matching", "USA", "Canada"] },
@@ -75,7 +79,7 @@ const internshipItems = [
   { title: "ECVECC Residency Programmes", subtitle: "European College of Veterinary Emergency and Critical Care", description: "Residency training in emergency and critical care at institutes across Europe and New Zealand.", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVECC", "emergency", "critical care", "ECC", "residency", "Europe"] },
   { title: "ECVN Residency Programmes", subtitle: "European College of Veterinary Neurology", description: "Residency training in veterinary neurology at European institutes.", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVN", "neurology", "residency", "Europe", "brain"] },
   { title: "ECVO Internship & Residency Programmes", subtitle: "European College of Veterinary Ophthalmologists", description: "Internship and residency training in veterinary ophthalmology at European institutes.", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVO", "ophthalmology", "eyes", "internship", "residency", "Europe"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const certItems = [
   { title: "Improve International Postgraduate Programmes", subtitle: "Improve International", description: "Range of postgraduate veterinary courses and certificates including GPCert.", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Improve", "GPCert", "postgraduate", "certificate", "UK"] },
@@ -85,7 +89,7 @@ const certItems = [
   { title: "University of Liverpool CertAVP", subtitle: "University of Liverpool", description: "Certificate in Advanced Veterinary Practice with online and face-to-face learning.", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Liverpool", "CertAVP", "RCVS", "certificate", "UK"] },
   { title: "University of Nottingham CertAVP", subtitle: "University of Nottingham", description: "RCVS Certificate in Advanced Veterinary Practice with modular structure.", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Nottingham", "CertAVP", "RCVS", "certificate", "UK"] },
   { title: "University of Surrey Veterinary General Practice PGCert", subtitle: "University of Surrey", description: "Modular PGCert delivered through online learning followed by a 2-week placement at the University.", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Surrey", "PGCert", "certificate", "UK", "general practice"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 // Build search index at cold-start (cached across warm invocations)
 const conferenceItems = conferences.map((c) => ({
@@ -93,7 +97,7 @@ const conferenceItems = conferences.map((c) => ({
   subtitle: c.organiser,
   description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
   section: "Conferences",
-  navPath: "/?tab=cpd",
+  navPath: "/?tab=cpd#" + slugify(c.title),
   tags: [...c.specialties, ...c.regions, c.category || ""],
 }));
 
@@ -102,7 +106,7 @@ const cpdItems = cpdProviders.map((p) => ({
   subtitle: p.programme,
   description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
   section: "CPD Providers",
-  navPath: "/?tab=cpd",
+  navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
   tags: p.types,
 }));
 

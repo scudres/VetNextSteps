@@ -1,4 +1,5 @@
 import React from "react";
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -234,7 +235,7 @@ const TrainingPrograms = () => {
               {/* Programme cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {programs[country.id].map((program, index) => (
-                  <div key={index} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors">
+                  <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
                     <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
                     <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
