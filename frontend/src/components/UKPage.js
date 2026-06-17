@@ -126,7 +126,7 @@ const UKPage = () => {
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Completed over 12–18 months in your first role, earning 52.5 hours CPD</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Structured around Entrustable Professional Activities (EPAs) with a VetGDP Adviser</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Annual CPD requirements to maintain registration thereafter</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>CertAVP available after gaining clinical experience</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>CertAVP available after gaining clinical experience — <Link to="/postgraduate-certificates" className="text-blue-700 hover:underline font-medium">browse certificate programmes</Link></li>
                   </ul>
                 </div>
               </div>

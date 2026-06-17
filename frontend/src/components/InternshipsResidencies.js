@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 
@@ -399,6 +400,22 @@ const InternshipsResidencies = () => {
                   <span className="text-3xl">{region.flag}</span>
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{region.name}</h2>
                 </div>
+
+                {/* Licensing cross-reference */}
+                {region.id === "uk" && (
+                  <p className="text-sm text-gray-500 mb-6">
+                    UK internships and residencies require RCVS registration. Overseas vets will also need a Skilled Worker Visa.{" "}
+                    <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
+                  </p>
+                )}
+                {region.id === "north-america" && (
+                  <p className="text-sm text-gray-500 mb-6">
+                    VIRMP positions require NAVLE and state or provincial licensure. See country guides for registration steps:{" "}
+                    <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">USA</Link>
+                    {" · "}
+                    <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">Canada →</Link>
+                  </p>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {regionPrograms.map((program, index) => (
