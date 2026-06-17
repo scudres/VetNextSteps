@@ -23,6 +23,7 @@ import USAPage from "./components/USAPage";
 import CanadaPage from "./components/CanadaPage";
 import AustraliaPage from "./components/AustraliaPage";
 import LegalPage from "./components/LegalPage";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/canada" element={<CanadaPage />} />
             <Route path="/australia" element={<AustraliaPage />} />
             <Route path="/legal" element={<LegalPage />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </BrowserRouter>
       </div>
