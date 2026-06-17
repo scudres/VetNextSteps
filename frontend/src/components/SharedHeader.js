@@ -186,32 +186,36 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
       <div className="border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="hidden md:flex">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => handleTabClick(tab.id)}
-                className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                  isActiveTab(tab.id)
-                    ? "border-blue-700 text-blue-700"
-                    : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
-                }`}
-              >
-                {tab.label}
-              </button>
+            {tabs.map((tab, i) => (
+              <React.Fragment key={tab.id}>
+                {i > 0 && <div className="w-px bg-gray-200 my-2" />}
+                <button
+                  onClick={() => handleTabClick(tab.id)}
+                  className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    isActiveTab(tab.id)
+                      ? "border-blue-700 text-blue-700"
+                      : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              </React.Fragment>
             ))}
-            <div className="w-px bg-gray-200 my-2 mx-2" />
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                  isActiveLink(link.path)
-                    ? "border-blue-700 text-blue-700"
-                    : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
-                }`}
-              >
-                {link.label}
-              </Link>
+            <div className="w-px bg-gray-200 my-2" />
+            {navLinks.map((link, i) => (
+              <React.Fragment key={link.path}>
+                {i > 0 && <div className="w-px bg-gray-200 my-2" />}
+                <Link
+                  to={link.path}
+                  className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    isActiveLink(link.path)
+                      ? "border-blue-700 text-blue-700"
+                      : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </React.Fragment>
             ))}
           </nav>
         </div>
