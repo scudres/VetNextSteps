@@ -24,7 +24,18 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
   const debounceRef = useRef(null);
   const searchRef   = useRef(null);
   const navigate    = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+
+  // Scroll to hash anchor after navigation (handles static pages immediately,
+  // dynamic pages handle their own scroll after data loads)
+  useEffect(() => {
+    if (!hash) return;
+    const timer = setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [pathname, hash]);
 
   // Close dropdown on outside click
   useEffect(() => {

@@ -26,6 +26,10 @@ function expandMultiYearConferences(arr) {
   return expanded;
 }
 
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 // ——— search index (mirrors functions/search.js) ———
 
 const trainingItems = [
@@ -45,7 +49,7 @@ const trainingItems = [
   { title: "Greencross Vets Graduate Vet Program", subtitle: "Greencross Vets", section: "Training Programmes", navPath: "/training-programs", tags: ["Greencross", "graduate", "Australia"] },
   { title: "Apiam Animal Health Graduate Program", subtitle: "Apiam Animal Health", section: "Training Programmes", navPath: "/training-programs", tags: ["Apiam", "graduate", "Australia", "rural"] },
   { title: "AVA Mentoring Program", subtitle: "Australian Veterinary Association", section: "Training Programmes", navPath: "/training-programs", tags: ["AVA", "mentoring", "Australia"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const internshipItems = [
   { title: "VIRMP \u2014 Veterinary Internship and Residency Matching Program", subtitle: "VIRMP", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["VIRMP", "internship", "residency", "USA", "Canada"] },
@@ -63,7 +67,7 @@ const internshipItems = [
   { title: "ECVD Residency Programmes", subtitle: "European College of Veterinary Dermatology", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVD", "dermatology", "residency", "Europe"] },
   { title: "ECVECC Residency Programmes", subtitle: "European College of Veterinary Emergency and Critical Care", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVECC", "emergency", "residency", "Europe"] },
   { title: "BEVA Recognised Equine Internship", subtitle: "British Equine Veterinary Association", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["BEVA", "equine", "internship", "UK"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const certItems = [
   { title: "Improve International Postgraduate Programmes", subtitle: "Improve International", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Improve", "GPCert", "UK"] },
@@ -73,19 +77,19 @@ const certItems = [
   { title: "University of Liverpool CertAVP", subtitle: "University of Liverpool", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Liverpool", "CertAVP", "RCVS", "UK"] },
   { title: "University of Nottingham CertAVP", subtitle: "University of Nottingham", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Nottingham", "CertAVP", "RCVS", "UK"] },
   { title: "University of Surrey Veterinary General Practice PGCert", subtitle: "University of Surrey", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Surrey", "PGCert", "UK"] },
-];
+].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
 
 function buildIndex() {
   const confItems = conferences.map((c) => ({
     title: c.title, subtitle: c.organiser,
     description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
-    section: "Conferences", navPath: "/?tab=cpd",
+    section: "Conferences", navPath: "/?tab=cpd#" + slugify(c.title),
     tags: [...c.specialties, ...c.regions, c.category || ""],
   }));
   const cpdItems = cpdProviders.map((p) => ({
     title: p.provider, subtitle: p.programme,
     description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
-    section: "CPD Providers", navPath: "/?tab=cpd",
+    section: "CPD Providers", navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
     tags: p.types,
   }));
   return [...trainingItems, ...internshipItems, ...certItems, ...confItems, ...cpdItems];

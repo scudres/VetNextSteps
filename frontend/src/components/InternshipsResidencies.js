@@ -1,4 +1,5 @@
 import React from "react";
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -419,7 +420,7 @@ const InternshipsResidencies = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {regionPrograms.map((program, index) => (
-                    <div key={index} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors">
+                    <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
                       <div className="flex flex-wrap gap-2 mb-3">
                         <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">{program.type}</span>
                         <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs capitalize">{program.species}</span>
