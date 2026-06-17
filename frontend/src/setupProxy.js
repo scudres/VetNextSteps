@@ -26,6 +26,47 @@ function expandMultiYearConferences(arr) {
   return expanded;
 }
 
+const urlMap = {
+  "CVS Veterinary Group Graduate Programme": "https://careers.cvsvets.com/Graduates",
+  "IVC Evidensia Graduate Academy": "https://ivcevidensia.co.uk/graduate-academy",
+  "Linnaeus Veterinary Graduate Development Programme": "https://www.linnaeusgroup.co.uk/careers/graduates-students-and-apprenticeships/veterinary-graduate-development-programme-at-linnaeus",
+  "Medivet Early Careers Programme": "https://careers.medivet.co.uk/early-careers",
+  "Vets4Pets Graduate Programme": "https://www.vets4petscareers.com/our-graduate-programme/",
+  "VetPartners Graduate Programme": "https://www.vetpartners.co.uk/your-career/graduates/",
+  "VIRMP Rotating Internship": "https://www.virmp.org/",
+  "Banfield New Graduate Program": "https://www.banfield.com/en/careers/veterinarians",
+  "VCA New Graduate Support": "https://vcacareers.com/veterinarians",
+  "National Veterinary Associates New Graduate Programme": "https://www.nva.com/careers/",
+  "VIRMP Rotating Internship (Canada)": "https://www.virmp.org/",
+  "Banfield Canada New Graduate Program": "https://www.banfield.com/en/careers/veterinarians",
+  "VCA Canada New Graduate Support": "https://vcacareers.com/veterinarians",
+  "Greencross Vets Graduate Vet Program": "https://www.greencrossvets.com.au/careers/",
+  "Apiam Animal Health Graduate Program": "https://www.apiam.com.au/careers/",
+  "AVA Mentoring Program": "https://www.ava.com.au/membership/member-benefits/mentoring/",
+  "VIRMP \u2014 Veterinary Internship and Residency Matching Program": "https://www.virmp.org/",
+  "Royal Veterinary College Rotating Internship Programme": "https://www.rvc.ac.uk/study/postgraduate/internships/small-animal",
+  "Royal Veterinary College Small Animal Residency Programmes": "https://www.rvc.ac.uk/study/postgraduate/residencies/small-animal",
+  "University of Liverpool Rotating Internship Programme": "https://www.liverpool.ac.uk/sath/teaching/postgraduates/internships/",
+  "University of Edinburgh Rotating Internship Programme": "https://vet.ed.ac.uk/clinical/vacancies/rotating-interns",
+  "University of Glasgow Small Animal Internship Programme": "https://www.gla.ac.uk/explore/jobs/appointments/sahvacancies/",
+  "IVC Evidensia Rotating and Discipline-Specific Internships": "https://ivcevidensia.co.uk/careers?roles=8",
+  "Linnaeus Small Animal Rotating Internships": "https://www.linnaeusgroup.co.uk/careers/internships",
+  "CVS Small Animal Internship Programmes": "https://cvs-referrals.com/careers/internship/",
+  "ECVS Residency Training": "https://www.ecvs.org/ecvs-for/residents.php",
+  "ECVIM-CA Residency Programmes": "https://ecvim-ca.college/residency-vacancies/",
+  "ECVN Residency Programmes": "https://www.ecvn.org/general-information/open-residency-position",
+  "ECVD Residency Programmes": "https://www.ecvd.org/programmes/start-your-residency/",
+  "ECVECC Residency Programmes": "https://www.ecvecc.org/resident-training-facilities",
+  "BEVA Recognised Equine Internship": "https://www.beva.org.uk/New-Vet-Grads/Recognised-Internships",
+  "Improve International Postgraduate Programmes": "https://improveinternational.com/uk/postgraduate-programmes/",
+  "BSAVA Postgraduate Certificates": "https://www.bsava.com/education/postgraduate-certificates/",
+  "Royal Veterinary College CertAVP": "https://www.rvc.ac.uk/study/postgraduate/certavp",
+  "University of Edinburgh CertAVP": "https://vet.ed.ac.uk/education/postgraduate/taught/rcvs-certavp",
+  "University of Liverpool CertAVP": "https://www.liverpool.ac.uk/vets/cpd/certavp/",
+  "University of Nottingham CertAVP": "https://www.nottingham.ac.uk/vet/study-with-us/cpd/rcvs-certificate-in-advanced-veterinary-practice-certavp.aspx",
+  "University of Surrey Veterinary General Practice PGCert": "https://www.surrey.ac.uk/postgraduate/veterinary-general-practice-pgcert",
+};
+
 function slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -49,7 +90,7 @@ const trainingItems = [
   { title: "Greencross Vets Graduate Vet Program", subtitle: "Greencross Vets", section: "Training Programmes", navPath: "/training-programs", tags: ["Greencross", "graduate", "Australia"] },
   { title: "Apiam Animal Health Graduate Program", subtitle: "Apiam Animal Health", section: "Training Programmes", navPath: "/training-programs", tags: ["Apiam", "graduate", "Australia", "rural"] },
   { title: "AVA Mentoring Program", subtitle: "Australian Veterinary Association", section: "Training Programmes", navPath: "/training-programs", tags: ["AVA", "mentoring", "Australia"] },
-].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
+].map((i) => ({ ...i, url: urlMap[i.title] || null, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const internshipItems = [
   { title: "VIRMP \u2014 Veterinary Internship and Residency Matching Program", subtitle: "VIRMP", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["VIRMP", "internship", "residency", "USA", "Canada"] },
@@ -67,7 +108,7 @@ const internshipItems = [
   { title: "ECVD Residency Programmes", subtitle: "European College of Veterinary Dermatology", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVD", "dermatology", "residency", "Europe"] },
   { title: "ECVECC Residency Programmes", subtitle: "European College of Veterinary Emergency and Critical Care", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["ECVECC", "emergency", "residency", "Europe"] },
   { title: "BEVA Recognised Equine Internship", subtitle: "British Equine Veterinary Association", section: "Internships & Residencies", navPath: "/internships-residencies", tags: ["BEVA", "equine", "internship", "UK"] },
-].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
+].map((i) => ({ ...i, url: urlMap[i.title] || null, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const certItems = [
   { title: "Improve International Postgraduate Programmes", subtitle: "Improve International", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Improve", "GPCert", "UK"] },
@@ -77,19 +118,19 @@ const certItems = [
   { title: "University of Liverpool CertAVP", subtitle: "University of Liverpool", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Liverpool", "CertAVP", "RCVS", "UK"] },
   { title: "University of Nottingham CertAVP", subtitle: "University of Nottingham", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Nottingham", "CertAVP", "RCVS", "UK"] },
   { title: "University of Surrey Veterinary General Practice PGCert", subtitle: "University of Surrey", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates", tags: ["Surrey", "PGCert", "UK"] },
-].map((i) => ({ ...i, navPath: i.navPath + "#" + slugify(i.title) }));
+].map((i) => ({ ...i, url: urlMap[i.title] || null, navPath: i.navPath + "#" + slugify(i.title) }));
 
 function buildIndex() {
   const confItems = conferences.map((c) => ({
     title: c.title, subtitle: c.organiser,
     description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
-    section: "Conferences", navPath: "/?tab=cpd#" + slugify(c.title),
+    section: "Conferences", url: c.website || null, navPath: "/?tab=cpd#" + slugify(c.title),
     tags: [...c.specialties, ...c.regions, c.category || ""],
   }));
   const cpdItems = cpdProviders.map((p) => ({
     title: p.provider, subtitle: p.programme,
     description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
-    section: "CPD Providers", navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
+    section: "CPD Providers", url: p.website || null, navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
     tags: p.types,
   }));
   return [...trainingItems, ...internshipItems, ...certItems, ...confItems, ...cpdItems];

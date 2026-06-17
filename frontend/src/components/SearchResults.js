@@ -67,41 +67,53 @@ const SearchResults = () => {
           {!loading && results.length > 0 && (
             <div className="space-y-3">
               {results.map((result, i) => (
-                <Link
-                  key={i}
-                  to={result.navPath}
-                  className="flex items-start gap-4 bg-white rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:shadow-sm transition-colors group"
-                >
-                  {/* Section icon */}
-                  <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${
-                    sectionColor[result.section]?.replace("text-", "bg-").replace("bg-", "bg-").split(" ")[0] || "bg-gray-100"
-                  }`}>
-                    <svg className={`w-5 h-5 ${sectionColor[result.section]?.split(" ")[1] || "text-gray-500"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={sectionIcon[result.section] || "M9 5l7 7-7 7"} />
-                    </svg>
-                  </div>
+                <div key={i} className="bg-white rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:shadow-sm transition-colors">
+                  <div className="flex items-start gap-4">
+                    {/* Section icon */}
+                    <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${
+                      sectionColor[result.section]?.split(" ")[0] || "bg-gray-100"
+                    }`}>
+                      <svg className={`w-5 h-5 ${sectionColor[result.section]?.split(" ")[1] || "text-gray-500"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={sectionIcon[result.section] || "M9 5l7 7-7 7"} />
+                      </svg>
+                    </div>
 
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${sectionColor[result.section] || "bg-gray-100 text-gray-600"}`}>
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium mb-1 ${sectionColor[result.section] || "bg-gray-100 text-gray-600"}`}>
                         {result.section}
                       </span>
-                    </div>
-                    <h2 className="text-base font-semibold text-gray-900 leading-snug mb-0.5 group-hover:text-blue-700 transition-colors">
-                      {result.title}
-                    </h2>
-                    <p className="text-sm text-blue-600 font-medium mb-1">{result.subtitle}</p>
-                    {result.description && (
-                      <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{result.description}</p>
-                    )}
-                  </div>
+                      <h2 className="text-base font-semibold text-gray-900 leading-snug mb-0.5">{result.title}</h2>
+                      <p className="text-sm text-blue-600 font-medium mb-1">{result.subtitle}</p>
+                      {result.description && (
+                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 mb-3">{result.description}</p>
+                      )}
 
-                  {/* Arrow */}
-                  <svg className="flex-shrink-0 w-5 h-5 text-gray-300 group-hover:text-blue-500 transition-colors mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+                      {/* Action links */}
+                      <div className="flex flex-wrap items-center gap-3">
+                        {result.url && (
+                          <a
+                            href={result.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                          >
+                            Visit website
+                            <svg className="ml-1.5 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        )}
+                        <Link
+                          to={result.navPath}
+                          className="text-xs text-gray-400 hover:text-blue-600 transition-colors"
+                        >
+                          View on VetNextStep →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           )}
