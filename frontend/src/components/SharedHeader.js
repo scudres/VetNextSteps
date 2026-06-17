@@ -86,11 +86,17 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
     }
   };
 
-  const handleResultClick = (result) => {
+  const goToSearchPage = (q) => {
     setShowResults(false);
     setSearchTerm("");
     setResults([]);
-    navigate(result.navPath);
+    navigate(`/search?q=${encodeURIComponent(q.trim())}`);
+  };
+
+  const handleResultClick = () => goToSearchPage(searchTerm);
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === "Enter" && searchTerm.trim().length >= 2) goToSearchPage(searchTerm);
   };
 
   const isActiveTab  = (id)   => !!onTabChange && activeTab === id;
@@ -124,6 +130,7 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
                 placeholder="Search programmes, providers, conferences…"
                 value={searchTerm}
                 onChange={handleSearchChange}
+                onKeyDown={handleSearchKeyDown}
                 onFocus={() => searchTerm.trim().length >= 2 && setShowResults(true)}
                 className="w-full pl-9 pr-3 py-2 text-sm text-gray-900 placeholder-gray-400 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none transition-colors"
               />
