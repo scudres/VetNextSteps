@@ -1,17 +1,20 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
+// Disable browser scroll restoration so we control it entirely
+if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useLayoutEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    // If there's a hash anchor, let SharedHeader handle the scroll
+    if (hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 import VeterinaryCareerHub from "./components/VeterinaryCareerHub";
