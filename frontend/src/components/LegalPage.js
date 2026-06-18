@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import SharedFooter from "./SharedFooter";
 
 const Section = ({ id, title, children }) => (
   <section id={id} className="mb-12 scroll-mt-28">
@@ -91,7 +92,38 @@ const LegalPage = () => {
                 </p>
               </Section>
 
-              <Section id="terms-disclaimer" title="3. Disclaimer of Accuracy">
+              <Section id="terms-immigration" title="3. Immigration Information — Important Notice">
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <p className="font-semibold text-amber-900 mb-2">This Site does not provide regulated immigration advice.</p>
+                  <p className="text-amber-800">
+                    In the United Kingdom, providing immigration advice is a regulated activity under the{" "}
+                    <strong>Immigration and Asylum Act 1999</strong>. Only persons registered with the{" "}
+                    <strong>Office of the Immigration Services Commissioner (OISC)</strong> or who are
+                    solicitors, barristers, or regulated legal professionals may lawfully provide immigration
+                    advice. VetNextStep is not registered with the OISC and does not provide immigration advice.
+                  </p>
+                </div>
+                <p>
+                  The information on this Site regarding visa routes, work permits, and immigration pathways
+                  is provided for general awareness and educational purposes only. It describes publicly
+                  available processes based on information from official government and regulatory websites.
+                  It does not constitute:
+                </p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>immigration advice within the meaning of the Immigration and Asylum Act 1999;</li>
+                  <li>legal advice from a solicitor or barrister;</li>
+                  <li>advice from a regulated immigration consultant in any jurisdiction;</li>
+                  <li>a representation that any particular visa or immigration route is available to you personally.</li>
+                </ul>
+                <p>
+                  If you need personal immigration advice, you must consult an OISC-registered adviser,
+                  a qualified solicitor, or the equivalent regulated professional in your jurisdiction
+                  (e.g. a Registered Migration Agent in Australia, a Regulated Canadian Immigration
+                  Consultant in Canada, or a licensed immigration attorney in the USA).
+                </p>
+              </Section>
+
+              <Section id="terms-disclaimer" title="4. Disclaimer of Accuracy">
                 <p>
                   While every effort is made to ensure the information on this Site is accurate and current,
                   veterinary licensing requirements, visa regulations, examination processes, and programme
@@ -113,7 +145,7 @@ const LegalPage = () => {
                 </p>
               </Section>
 
-              <Section id="terms-liability" title="4. Limitation of Liability">
+              <Section id="terms-liability" title="5. Limitation of Liability">
                 <p>
                   To the fullest extent permitted by applicable law — including the Unfair Contract Terms
                   Act 1977 and the Consumer Rights Act 2015 — the Site operator excludes all liability for:
@@ -130,7 +162,7 @@ const LegalPage = () => {
                 </p>
               </Section>
 
-              <Section id="terms-links" title="5. External Links">
+              <Section id="terms-links" title="6. External Links">
                 <p>
                   The Site contains links to third-party websites including veterinary associations, universities,
                   regulatory bodies, and commercial organisations. These links are provided for convenience only.
@@ -143,7 +175,7 @@ const LegalPage = () => {
                 </p>
               </Section>
 
-              <Section id="terms-use" title="6. Acceptable Use">
+              <Section id="terms-use" title="7. Acceptable Use">
                 <p>You agree not to:</p>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>use the Site in any way that is unlawful or that causes damage or disruption;</li>
@@ -156,7 +188,7 @@ const LegalPage = () => {
                 </ul>
               </Section>
 
-              <Section id="terms-changes" title="7. Changes to These Terms">
+              <Section id="terms-changes" title="8. Changes to These Terms">
                 <p>
                   The Site operator reserves the right to update these Terms of Use at any time. Changes will
                   take effect when published on this page. Continued use of the Site after a change constitutes
@@ -164,7 +196,7 @@ const LegalPage = () => {
                 </p>
               </Section>
 
-              <Section id="terms-contact" title="8. Contact">
+              <Section id="terms-contact" title="9. Contact">
                 <p>
                   For any queries about these terms, please contact:{" "}
                   <a href="mailto:hello@vetnextstep.com" className="text-blue-600 hover:underline">
@@ -581,6 +613,7 @@ const LegalPage = () => {
 
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };

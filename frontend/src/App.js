@@ -27,6 +27,9 @@ import CanadaPage from "./components/CanadaPage";
 import AustraliaPage from "./components/AustraliaPage";
 import LegalPage from "./components/LegalPage";
 import SearchResults from "./components/SearchResults";
+import CPDPage from "./components/CPDPage";
+import JobsPage from "./components/JobsPage";
+import ContactPage from "./components/ContactPage";
 
 function App() {
   return (
@@ -48,6 +51,10 @@ function App() {
             <Route path="/australia" element={<AustraliaPage />} />
             <Route path="/legal" element={<LegalPage />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/cpd" element={<CPDPage />} />
+            <Route path="/cpd/:region" element={<CPDPage />} />
+            <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </BrowserRouter>
       </div>

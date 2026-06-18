@@ -176,13 +176,13 @@ function buildIndex() {
   const confItems = conferences.map((c) => ({
     title: c.title, subtitle: c.organiser,
     description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
-    section: "Conferences", url: c.website || null, navPath: "/?tab=cpd#" + slugify(c.title),
+    section: "Conferences", url: c.website || null, navPath: "/cpd#" + slugify(c.title),
     tags: [...c.specialties, ...c.regions, c.category || ""],
   }));
   const cpdItems = cpdProviders.map((p) => ({
     title: p.provider, subtitle: p.programme,
     description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
-    section: "CPD Providers", url: p.website || null, navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
+    section: "CPD Providers", url: p.website || null, navPath: "/cpd?section=providers#" + slugify(p.provider),
     tags: p.types,
   }));
   return [...trainingItems, ...internshipItems, ...certItems, ...confItems, ...cpdItems];
@@ -219,5 +219,11 @@ module.exports = function (app) {
 
   app.get("/.netlify/functions/search", (req, res) => {
     res.json(searchItems(req.query.q || ""));
+  });
+
+  // Contact form — dev stub (no email sent locally; returns success so the form can be tested)
+  app.post("/.netlify/functions/contact", (req, res) => {
+    console.log("[dev] Contact form submission:", req.body);
+    res.json({ success: true });
   });
 };

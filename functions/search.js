@@ -213,7 +213,7 @@ const conferenceItems = conferences.map((c) => ({
   description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
   section: "Conferences",
   url: c.website || null,
-  navPath: "/?tab=cpd#" + slugify(c.title),
+  navPath: "/cpd#" + slugify(c.title),
   tags: [...c.specialties, ...c.regions, c.category || ""],
 }));
 
@@ -223,7 +223,7 @@ const cpdItems = cpdProviders.map((p) => ({
   description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
   section: "CPD Providers",
   url: p.website || null,
-  navPath: "/?tab=cpd&section=providers#" + slugify(p.provider),
+  navPath: "/cpd?section=providers#" + slugify(p.provider),
   tags: p.types,
 }));
 

@@ -3,6 +3,7 @@ const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import SharedFooter from "./SharedFooter";
 
 const countryConfig = [
   {
@@ -440,6 +441,7 @@ const TrainingPrograms = () => {
 
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };

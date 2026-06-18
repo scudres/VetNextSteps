@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import DisclaimerBanner from "./DisclaimerBanner";
+import SharedFooter from "./SharedFooter";
 
 const USAPage = () => {
   const organisations = [
@@ -57,6 +59,10 @@ const USAPage = () => {
 
       <main className="py-8 md:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+          <DisclaimerBanner
+            officialBody={{ name: "AVMA, AAVSB, and the U.S. Department of State", url: "https://www.avma.org/education/foreign/information-foreign-veterinary-graduates-working-veterinarian-us" }}
+          />
 
           {/* Visa & Licensing */}
           <section>
@@ -200,6 +206,7 @@ const USAPage = () => {
 
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };
