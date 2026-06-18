@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import DisclaimerBanner from "./DisclaimerBanner";
+import SharedFooter from "./SharedFooter";
 
 const AustraliaPage = () => {
   const organisations = [
@@ -59,6 +61,10 @@ const AustraliaPage = () => {
 
       <main className="py-8 md:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+          <DisclaimerBanner
+            officialBody={{ name: "AVBC and the Australian Department of Home Affairs", url: "https://avbc.asn.au/for-veterinarians/" }}
+          />
 
           {/* Registration */}
           <section>
@@ -348,6 +354,7 @@ const AustraliaPage = () => {
 
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };

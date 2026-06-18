@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
-import CPDConferences from "./CPDConferences";
 import AcronymTooltip from "./AcronymTooltip";
+import DisclaimerBanner from "./DisclaimerBanner";
+import SharedFooter from "./SharedFooter";
 
 const comparisonData = {
   UK: {
@@ -79,11 +80,17 @@ const VeterinaryCareerHub = () => {
   const [searchParams] = useSearchParams();
   const [compareA, setCompareA] = useState("UK");
   const [compareB, setCompareB] = useState("Australia");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const tab = searchParams.get("tab");
-    if (tab) setActiveTab(tab);
-  }, [searchParams]);
+    if (tab === "cpd") {
+      // CPD is now a standalone page — redirect old homepage tab URL
+      navigate("/cpd", { replace: true });
+    } else if (tab) {
+      setActiveTab(tab);
+    }
+  }, [searchParams, navigate]);
 
   const countries = [
     {
@@ -161,12 +168,12 @@ const VeterinaryCareerHub = () => {
                   >
                     Working internationally
                   </button>
-                  <button
-                    onClick={() => setActiveTab("cpd")}
+                  <Link
+                    to="/cpd"
                     className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
                   >
                     CPD & Conferences
-                  </button>
+                  </Link>
                   <Link
                     to="/internships-residencies"
                     className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
@@ -204,8 +211,8 @@ const VeterinaryCareerHub = () => {
                 </button>
 
                 {/* Path 2 — CPD & Conferences */}
-                <button
-                  onClick={() => setActiveTab("cpd")}
+                <Link
+                  to="/cpd"
                   className="group text-left bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center mb-4">
@@ -221,7 +228,7 @@ const VeterinaryCareerHub = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
-                </button>
+                </Link>
 
                 {/* Path 3 — Advanced training */}
                 <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors">
@@ -268,8 +275,8 @@ const VeterinaryCareerHub = () => {
                 { label: "Internships & Residencies", desc: "Rotating internships and specialist residency posts at university teaching hospitals and private referral centres.",             meta: "UK · Europe · North America",            path: "/internships-residencies" },
                 { label: "Postgraduate Certificates", desc: "RCVS CertAVP and university postgraduate certificates — flexible routes to build a clinical interest at any career stage.",    meta: "RCVS-accredited · Level 7",              path: "/postgraduate-certificates" },
                 { label: "Countries & Licensing",     desc: "Registration bodies, key exams, visa routes, and typical timelines for working in the UK, USA, Canada, and Australia.",       meta: "Visa · Registration · Licensing",        tab: "countries" },
-                { label: "Conferences & Congresses",  desc: "70+ conferences in date order, 2026–2028 — filter by specialty or jump to your region. General practice to subspecialties.",  meta: "UK · USA · Europe · Australia · Global", tab: "cpd" },
-                { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: "49 providers · 4 categories",            tab: "cpd" },
+                { label: "Conferences & Congresses",  desc: "70+ conferences in date order, 2026–2028 — filter by specialty or jump to your region. General practice to subspecialties.",  meta: "UK · USA · Europe · Australia · Global", path: "/cpd" },
+                { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: "49 providers · 4 categories",            path: "/cpd" },
               ].map((item, i) =>
                 item.path ? (
                   <Link key={i} to={item.path} className="group block border border-gray-200 rounded-lg p-5 hover:border-blue-300 hover:bg-blue-50 transition-colors">
@@ -302,6 +309,10 @@ const VeterinaryCareerHub = () => {
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                     Pick your destination. Below you'll find the registration steps, visa routes, and key exams for each country.
                   </p>
+                </div>
+
+                <div className="mb-10">
+                  <DisclaimerBanner officialBody={null} />
                 </div>
 
                 {/* Country nav cards */}
@@ -603,69 +614,11 @@ const VeterinaryCareerHub = () => {
               </div>
             )}
 
-            {/* CPD Tab */}
-            {activeTab === "cpd" && <CPDConferences />}
-
           </div>
         </main>
       )}
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <img src="/favicon.svg" alt="VetNextStep logo" className="w-10 h-10" />
-                <h3 className="text-xl font-bold">VetNextStep</h3>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Career progression tools for vets at every stage — licensing guides, CPD, conferences, internships, residencies, and postgraduate certificates.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link to="/training-programs" className="hover:text-white">Training Programs</Link></li>
-                <li><button onClick={() => { setActiveTab("countries"); window.scrollTo(0, 0); }} className="hover:text-white">Licensing Info</button></li>
-                <li><Link to="/internships-residencies" className="hover:text-white">Internships</Link></li>
-                <li><Link to="/postgraduate-certificates" className="hover:text-white">Certificates</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Countries</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link to="/uk" className="hover:text-white">United Kingdom</Link></li>
-                <li><Link to="/usa" className="hover:text-white">United States</Link></li>
-                <li><Link to="/canada" className="hover:text-white">Canada</Link></li>
-                <li><Link to="/australia" className="hover:text-white">Australia</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="https://www.icva.net/navle/" className="hover:text-white">NAVLE</a></li>
-                <li><a href="https://www.virmp.org/" className="hover:text-white">MATCH</a></li>
-                <li><a href="https://www.rcvs.org.uk/" className="hover:text-white">RCVS</a></li>
-                <li><a href="https://www.rcvs.org.uk/lifelong-learning/veterinary-graduate-development-programme-vetgdp/" className="hover:text-white">RCVS VetGDP</a></li>
-                <li><a href="https://www.avma.org/education/foreign/information-foreign-veterinary-graduates-working-veterinarian-us" className="hover:text-white">AVMA Foreign Guide</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p className="mb-2">&copy; 2026 VetNextStep. Content is for guidance only — always verify requirements with the relevant professional body.</p>
-            <p className="text-xs space-x-3">
-              <Link to="/legal?tab=terms"   className="hover:text-white underline">Terms of Use</Link>
-              <span>&middot;</span>
-              <Link to="/legal?tab=privacy" className="hover:text-white underline">Privacy Policy</Link>
-              <span>&middot;</span>
-              <Link to="/legal?tab=cookies" className="hover:text-white underline">Cookies</Link>
-              <span>&middot;</span>
-              <Link to="/legal?tab=ip"      className="hover:text-white underline">Copyright</Link>
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 };

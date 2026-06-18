@@ -5,13 +5,14 @@ import { sectionColor } from "../data/searchIndex";
 const tabs = [
   { id: "overview",  label: "Overview" },
   { id: "countries", label: "Countries & Licensing" },
-  { id: "cpd",       label: "CPD & Conferences" },
 ];
 
 const navLinks = [
   { path: "/training-programs",         label: "Graduate Development Programmes" },
   { path: "/internships-residencies",   label: "Internships & Residencies" },
   { path: "/postgraduate-certificates", label: "Postgraduate Certificates" },
+  { path: "/cpd",                       label: "CPD & Conferences" },
+  { path: "/jobs",                      label: "Job Opportunities" },
 ];
 
 // activeTab / onTabChange are only passed in from VeterinaryCareerHub.
@@ -100,7 +101,7 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
   };
 
   const isActiveTab  = (id)   => !!onTabChange && activeTab === id;
-  const isActiveLink = (path) => pathname === path;
+  const isActiveLink = (path) => pathname === path || (path !== "/" && pathname.startsWith(path));
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
