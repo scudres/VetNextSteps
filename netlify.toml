@@ -4,6 +4,9 @@
   publish   = "build"
   functions = "../functions"
 
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 [dev]
   command = "npm start"
   port    = 3000
