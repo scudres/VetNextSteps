@@ -1,6 +1,6 @@
 import React from "react";
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 
@@ -331,7 +331,110 @@ const programs = [
   },
 ];
 
+const licensingNote = {
+  uk: (
+    <p className="text-sm text-gray-500 mb-6">
+      UK internships and residencies require RCVS registration. Overseas vets will also need a Skilled Worker Visa.{" "}
+      <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
+    </p>
+  ),
+  "north-america": (
+    <p className="text-sm text-gray-500 mb-6">
+      VIRMP positions require NAVLE and state or provincial licensure. See country guides for registration steps:{" "}
+      <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">USA</Link>
+      {" · "}
+      <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">Canada →</Link>
+    </p>
+  ),
+};
+
+const ProgramCard = ({ program }) => (
+  <div id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
+    <div className="flex flex-wrap gap-2 mb-3">
+      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">{program.type}</span>
+      <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs capitalize">{program.species}</span>
+    </div>
+    <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
+    <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
+    <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
+    <a
+      href={program.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+    >
+      Visit Programme
+      <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    </a>
+  </div>
+);
+
 const InternshipsResidencies = () => {
+  const { region } = useParams();
+
+  // ——— Sub-page: single region ———
+  if (region) {
+    const cfg = regionConfig.find(r => r.id === region);
+    const regionPrograms = programs.filter(p => p.region === region);
+
+    if (!cfg) {
+      return (
+        <div className="min-h-screen bg-white">
+          <SharedHeader />
+          <main className="py-16 text-center">
+            <p className="text-gray-500 mb-4">Region not found.</p>
+            <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
+          </main>
+        </div>
+      );
+    }
+
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>{cfg.name} Internships & Residencies | VetNextStep</title>
+          <meta name="description" content={`Veterinary internships and residencies in ${cfg.name}.`} />
+          <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}`} />
+        </Helmet>
+        <SharedHeader />
+
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {/* Breadcrumb */}
+            <div className="mb-8">
+              <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                All Internships & Residencies
+              </Link>
+            </div>
+
+            {/* Section header */}
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+              <span className="text-3xl">{cfg.flag}</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
+              <span className="ml-auto text-sm text-gray-400">{regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}</span>
+            </div>
+
+            {licensingNote[region]}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {regionPrograms.map((program, index) => (
+                <ProgramCard key={index} program={program} />
+              ))}
+            </div>
+
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ——— Hub page ———
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
@@ -348,103 +451,41 @@ const InternshipsResidencies = () => {
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Page title */}
           <div className="text-center mb-12">
             <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Internships & Residencies</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Rotating internships and specialist residency positions. Jump to your target region below — each listing shows type, species focus, and a direct link to apply or find out more.
+              Rotating internships and specialist residency positions across the UK, North America, Europe, and worldwide. Select a region to browse programmes.
             </p>
           </div>
 
-          {/* Region nav cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
-            {regionConfig.map((region) => {
-              const count = programs.filter(p => p.region === region.id).length;
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            {regionConfig.map((r) => {
+              const count = programs.filter(p => p.region === r.id).length;
               return (
-                <a key={region.id} href={`#${region.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-colors">
-                    <div className="h-40 relative overflow-hidden">
-                      <img
-                        src={region.image}
-                        alt={region.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                      {region.flagOverlay && (
-                        <div className="absolute top-3 right-3 text-3xl drop-shadow-lg">{region.flagOverlay}</div>
-                      )}
+                <Link key={r.id} to={`/internships-residencies/${r.id}`} className="group block">
+                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                    <div className="h-48 relative overflow-hidden">
+                      <img src={r.image} alt={r.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
                       <div className="absolute bottom-3 left-4 text-white">
-                        <h2 className="text-lg font-bold">{region.name}</h2>
+                        <div className="text-2xl mb-1">{r.flag}</div>
+                        <h2 className="text-lg font-bold leading-tight">{r.name}</h2>
                       </div>
                     </div>
-                    <div className="px-4 py-3 flex items-center justify-between">
+                    <div className="px-4 py-3 flex items-center justify-between bg-white">
                       <span className="text-sm text-gray-500">{count} programme{count !== 1 ? "s" : ""}</span>
                       <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View
+                        View all
                         <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </span>
                     </div>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>
-
-          {/* Programme sections by region */}
-          {regionConfig.map((region) => {
-            const regionPrograms = programs.filter(p => p.region === region.id);
-            return (
-              <section key={region.id} id={region.id} className="mb-16 scroll-mt-28">
-                <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-200">
-                  <span className="text-3xl">{region.flag}</span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{region.name}</h2>
-                </div>
-
-                {/* Licensing cross-reference */}
-                {region.id === "uk" && (
-                  <p className="text-sm text-gray-500 mb-6">
-                    UK internships and residencies require RCVS registration. Overseas vets will also need a Skilled Worker Visa.{" "}
-                    <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
-                  </p>
-                )}
-                {region.id === "north-america" && (
-                  <p className="text-sm text-gray-500 mb-6">
-                    VIRMP positions require NAVLE and state or provincial licensure. See country guides for registration steps:{" "}
-                    <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">USA</Link>
-                    {" · "}
-                    <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">Canada →</Link>
-                  </p>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {regionPrograms.map((program, index) => (
-                    <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">{program.type}</span>
-                        <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs capitalize">{program.species}</span>
-                      </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
-                      <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
-                      <a
-                        href={program.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                      >
-                        Visit Programme
-                        <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
 
         </div>
       </main>

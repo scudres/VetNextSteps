@@ -1,6 +1,6 @@
 import React from "react";
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 
@@ -282,14 +282,120 @@ const programs = {
   ]
 };
 
+const licensingNote = {
+  uk: (
+    <p className="text-sm text-gray-500 mb-6">
+      Coming from overseas? You'll also need RCVS registration and a Skilled Worker Visa.{" "}
+      <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
+    </p>
+  ),
+  usa: (
+    <p className="text-sm text-gray-500 mb-6">
+      Practising in the USA requires NAVLE and state licensing before joining any programme.{" "}
+      <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">See the USA licensing guide →</Link>
+    </p>
+  ),
+  canada: (
+    <p className="text-sm text-gray-500 mb-6">
+      Canadian licensing is managed province by province and requires the NAVLE.{" "}
+      <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">See the Canada licensing guide →</Link>
+    </p>
+  ),
+  australia: (
+    <p className="text-sm text-gray-500 mb-6">
+      Working in Australia requires AVA registration and state-level board approval.{" "}
+      <Link to="/australia" className="text-blue-600 hover:text-blue-800 font-medium">See the Australia licensing guide →</Link>
+    </p>
+  ),
+};
+
 const TrainingPrograms = () => {
+  const { country } = useParams();
+
+  // ——— Sub-page: single country ———
+  if (country) {
+    const cfg = countryConfig.find(c => c.id === country);
+    const countryPrograms = programs[country] || [];
+
+    if (!cfg) {
+      return (
+        <div className="min-h-screen bg-white">
+          <SharedHeader />
+          <main className="py-16 text-center">
+            <p className="text-gray-500 mb-4">Country not found.</p>
+            <Link to="/training-programs" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
+          </main>
+        </div>
+      );
+    }
+
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>{cfg.name} Graduate Development Programmes | VetNextStep</title>
+          <meta name="description" content={`Graduate development programmes for new veterinary graduates in ${cfg.name}.`} />
+          <link rel="canonical" href={`https://vetnextstep.com/training-programs/${country}`} />
+        </Helmet>
+        <SharedHeader />
+
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {/* Breadcrumb */}
+            <div className="mb-8">
+              <Link to="/training-programs" className="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                All Graduate Development Programmes
+              </Link>
+            </div>
+
+            {/* Section header */}
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+              <span className="text-3xl">{cfg.flag}</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
+              <span className="ml-auto text-sm text-gray-400">{countryPrograms.length} programme{countryPrograms.length !== 1 ? "s" : ""}</span>
+            </div>
+
+            {licensingNote[country]}
+
+            {/* Programme cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {countryPrograms.map((program, index) => (
+                <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
+                  <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
+                  <a
+                    href={program.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                  >
+                    Visit Programme
+                    <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ——— Hub page ———
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Post-graduate Graduate Development Programmes | VetNextStep</title>
-        <meta name="description" content="Find structured post-graduate training programmes for new veterinary graduates in the UK, USA, Canada, and Australia — including CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more." />
+        <title>Graduate Development Programmes | VetNextStep</title>
+        <meta name="description" content="Find structured graduate development programmes for new veterinary graduates in the UK, USA, Canada, and Australia — including CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more." />
         <link rel="canonical" href="https://vetnextstep.com/training-programs" />
-        <meta property="og:title" content="Post-graduate Graduate Development Programmes | VetNextStep" />
+        <meta property="og:title" content="Graduate Development Programmes | VetNextStep" />
         <meta property="og:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates across the UK, USA, Canada, and Australia." />
         <meta property="og:url" content="https://vetnextstep.com/training-programs" />
         <meta property="og:type" content="website" />
@@ -299,7 +405,6 @@ const TrainingPrograms = () => {
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Page title */}
           <div className="text-center mb-12">
             <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Graduate Development Programmes</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -307,98 +412,31 @@ const TrainingPrograms = () => {
             </p>
           </div>
 
-          {/* Country nav cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
-            {countryConfig.map((country) => (
-              <a
-                key={country.id}
-                href={`#${country.id}`}
-                className="group block"
-              >
-                <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-colors">
-                  <div className="h-40 relative overflow-hidden">
-                    <img
-                      src={country.image}
-                      alt={country.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            {countryConfig.map((c) => (
+              <Link key={c.id} to={`/training-programs/${c.id}`} className="group block">
+                <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="h-48 relative overflow-hidden">
+                    <img src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
                     <div className="absolute bottom-3 left-4 text-white">
-                      <h2 className="text-lg font-bold">{country.name}</h2>
+                      <div className="text-2xl mb-1">{c.flag}</div>
+                      <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
                     </div>
                   </div>
-                  <div className="px-4 py-3 flex items-center justify-between">
-                    <span className="text-sm text-gray-500">{programs[country.id].length} programme{programs[country.id].length !== 1 ? "s" : ""}</span>
+                  <div className="px-4 py-3 flex items-center justify-between bg-white">
+                    <span className="text-sm text-gray-500">{programs[c.id].length} programme{programs[c.id].length !== 1 ? "s" : ""}</span>
                     <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                      View
+                      View all
                       <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
-
-          {/* Programme sections by country */}
-          {countryConfig.map((country) => (
-            <section key={country.id} id={country.id} className="mb-16 scroll-mt-28">
-              {/* Section header */}
-              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-200">
-                <span className="text-3xl">{country.flag}</span>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{country.name}</h2>
-              </div>
-
-              {/* Licensing cross-reference */}
-              {country.id === "uk" && (
-                <p className="text-sm text-gray-500 mb-6">
-                  Coming from overseas? You'll also need RCVS registration and a Skilled Worker Visa.{" "}
-                  <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
-                </p>
-              )}
-              {country.id === "usa" && (
-                <p className="text-sm text-gray-500 mb-6">
-                  Practising in the USA requires NAVLE and state licensing before joining any programme.{" "}
-                  <Link to="/usa" className="text-blue-600 hover:text-blue-800 font-medium">See the USA licensing guide →</Link>
-                </p>
-              )}
-              {country.id === "canada" && (
-                <p className="text-sm text-gray-500 mb-6">
-                  Canadian licensing is managed province by province and requires the NAVLE.{" "}
-                  <Link to="/canada" className="text-blue-600 hover:text-blue-800 font-medium">See the Canada licensing guide →</Link>
-                </p>
-              )}
-              {country.id === "australia" && (
-                <p className="text-sm text-gray-500 mb-6">
-                  Working in Australia requires AVA registration and state-level board approval.{" "}
-                  <Link to="/australia" className="text-blue-600 hover:text-blue-800 font-medium">See the Australia licensing guide →</Link>
-                </p>
-              )}
-
-              {/* Programme cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {programs[country.id].map((program, index) => (
-                  <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
-                    <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
-                    <a
-                      href={program.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      Visit Programme
-                      <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))}
 
         </div>
       </main>
