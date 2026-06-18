@@ -72,48 +72,192 @@ const programs = {
   ],
   usa: [
     {
-      title: "VIRMP Rotating Internship",
-      organisation: "Veterinary Internship & Residency Matching Program",
-      description: "One-year rotating internships at AVMA-accredited teaching hospitals and private practices across the USA, providing broad clinical experience before specialist training.",
-      url: "https://www.virmp.org/"
+      title: "VCA Academy Mentorship Program",
+      organisation: "VCA Animal Hospitals (Mars Veterinary Health)",
+      description: "6-month structured GP mentorship with tailored tracks for surgery, dentistry, and medical appointments. Includes one-on-one local mentorship, weekly progress tracking, a dedicated ER track with hands-on skills workshop, $3,000 CE stipend, and no negative accrual ProSal. Available USA & Canada.",
+      url: "https://www.vcacareers.com/global/en/new-grads"
     },
     {
-      title: "Banfield New Graduate Program",
-      organisation: "Banfield Pet Hospital",
-      description: "Structured onboarding and mentorship programme for new veterinary graduates, with dedicated mentor support, continuing education credits, and clinical development resources.",
-      url: "https://www.banfield.com/en/careers/veterinarians"
+      title: "Banfield Veterinary Emerging Leader Program",
+      organisation: "Banfield Pet Hospital (Mars Veterinary Health)",
+      description: "12-month GP programme with a dedicated in-hospital coach, multi-phase onboarding that scales appointments gradually, no-negative-accrual ProSal, and leadership development pathways. First year emphasises learning over production.",
+      url: "https://www.banfield.com/careers"
     },
     {
-      title: "VCA New Graduate Support",
-      organisation: "VCA Animal Hospitals",
-      description: "Comprehensive new graduate support programme with mentorship, structured CE resources, and clinical development pathways across VCA's nationwide hospital network.",
-      url: "https://vcacareers.com/veterinarians"
+      title: "BluePearl EmERge Training Program",
+      organisation: "BluePearl Specialty + Emergency (Mars Veterinary Health)",
+      description: "One-year ECC training programme for new graduates comprising 16 weeks bootcamp (including 4 weeks at Tampa), 20 weeks mentored immersion, and 16 weeks experiential. Salary rises from $30k to $60k to $100k then market rate. Followed by a two-year work commitment.",
+      url: "https://careers.bluepearlvet.com/us/en/emerge-program"
     },
     {
-      title: "National Veterinary Associates New Graduate Programme",
+      title: "VEG NERD Program (New ER Doctor)",
+      organisation: "Veterinary Emergency Group (VEG)",
+      description: "Immersive 6-month ECC programme for new graduates featuring travel-based surgical and procedural wet labs, full-time shifts with senior mentors, weekly didactic rounds, and approximately 160 RACE CE hours. Full salary and benefits from day one. Four cohorts per year.",
+      url: "https://www.veterinaryemergencygroup.com/meet-our-teams/early-career"
+    },
+    {
+      title: "ER Immerse Program",
+      organisation: "Ethos Veterinary Health",
+      description: "6-month ECC mentorship programme with in-hospital support from ER clinicians and ECC specialists, competency-based curriculum via VetBloom, and weekly virtual didactic rounds and Grand Rounds. Open to new graduates and those new to emergency practice.",
+      url: "https://www.ethosvet.com/er-immerse/"
+    },
+    {
+      title: "NVA General Practice Mentorship Program",
       organisation: "National Veterinary Associates (NVA)",
-      description: "Mentored onboarding and ongoing clinical support for new graduates entering NVA practices, with professional development resources and a network of experienced colleagues.",
-      url: "https://www.nva.com/careers/"
+      description: "Up to 12-month GP programme with a designated in-clinic mentor, quarterly regional check-ins, peer case reviews, $5,000 CE budget, surgical skills review, and no negative accrual. Available USA & Canada.",
+      url: "https://gp.nva.com/why-join-nva/growth/mentorship"
+    },
+    {
+      title: "Vetcor New Graduate Support Program",
+      organisation: "Vetcor",
+      description: "12-month GP and mixed programme with one-on-one in-hospital mentorship, twice-monthly virtual roundtables, VetLife collaboration circles, and skill-building days. Mentors complete Vetcor Mentorship Certification. Available USA & Canada.",
+      url: "https://www.vetcor.com/careers/mentorship"
+    },
+    {
+      title: "Harbor GO Career Journey",
+      organisation: "Suveto / Harbor.vet Network",
+      description: "Self-guided 12–24 month non-contract framework covering clinical excellence (surgery and dentistry wet labs), business fluency, financial literacy, and co-ownership pathways. Confirm current programme details on site.",
+      url: "https://harbor.vet/"
+    },
+    {
+      title: "MVP MBark Graduate Mentorship Program",
+      organisation: "Mission Pet Health (formerly Mission Veterinary Partners)",
+      description: "12-month GP programme where mentors complete MBark Clinical Mentor Certification. Includes structured progression phases and custom dentistry labs. Note: MVP merged with SVP to form Mission Pet Health in 2025; programme continues.",
+      url: "https://missionvetpartners.com/"
+    },
+    {
+      title: "SVP Doctor Mentorship Program",
+      organisation: "Mission Pet Health (formerly Southern Veterinary Partners)",
+      description: "12-month GP programme with a paired on-site coach and clinical mentor, Lead DVM Foundations training, and 50+ hours of RACE-approved CE covering dentistry, oncology, and internal medicine across 850+ hospitals. Note: SVP merged with MVP to form Mission Pet Health in 2025.",
+      url: "https://amazingtogether.svp.vet/dvm-benefits-and-programs/"
+    },
+    {
+      title: "RISE DVM / VMD Mentorship Program",
+      organisation: "PetVet Care Centers",
+      description: "12-month immersive programme with dual mentorship (local on-site mentor and national programme guide), tailored caseload ramp-up, national peer cohort, and up to $50,000 in new-grad incentives. Dedicated ECC and mixed animal sub-tracks available by location.",
+      url: "https://www.petvetcarecenters.com/site/new-dvm-graduate-veterinary-careers"
+    },
+    {
+      title: "Thrive Doctor Mentorship Program",
+      organisation: "Thrive Pet Healthcare",
+      description: "12-month GP, urgent care, and specialty programme with structured milestone curriculum for clinical reasoning and client management, wellbeing support via Lyra, Thrive U learning modules, and both a Regional Doctor Mentor and on-site mentor. A separate one-year ER training track is also available.",
+      url: "https://careers.thrivepetcare.com/pages/doctor-mentorship-program"
+    },
+    {
+      title: "Emergency Clinician Mentorship Program (ECMP)",
+      organisation: "MedVet",
+      description: "6–12 month immersive ECC programme with 1:1 mentorship in a high-volume ER, focused on expanding diagnostic and therapeutic capability and advanced communication skills. Designed to transition new graduates to standalone emergency clinicians.",
+      url: "https://www.medvet.com/careers/"
+    },
+    {
+      title: "ACCESS Accelerated Training (AAT)",
+      organisation: "ACCESS Specialty Animal Hospitals (Thrive Network)",
+      description: "One-year ECC training programme with a two-year work commitment, progressing through foundation and specialist didactics, mentored hands-on work with criticalists, and independent case flow. Based in South Florida.",
+      url: "https://accessanimalhospital.com/"
+    },
+    {
+      title: "AmeriVet Doctor Mentorship Program",
+      organisation: "AmeriVet Veterinary Partners",
+      description: "12-month GP and urgent care programme with a paired 1:1 on-site mentor, monthly virtual cohort conversation circles with guest speakers, a clinical Hot Topics series, and wellness resources.",
+      url: "https://www.amerivet.com/"
+    },
+    {
+      title: "Heartland New Graduate Onboarding & Mentorship",
+      organisation: "Heartland Veterinary Partners",
+      description: "12-month GP programme with a tailored caseload ramp-up schedule, structured procedural checklists covering spays, neuters, and dentistry, and a designated in-hospital DVM mentor.",
+      url: "https://www.heartlandvetpartners.com/"
+    },
+    {
+      title: "Rarebreed Early Career Mentorship",
+      organisation: "Rarebreed Veterinary Partners",
+      description: "12-month GP and urgent care programme offering clinical autonomy alongside structured mentor support, access to the Rarebreed Learning Lab platform, and integrated mental-health resources.",
+      url: "https://www.rarebreedvet.com/"
+    },
+    {
+      title: "Alliance Academy Mentors Program",
+      organisation: "Alliance Animal Health",
+      description: "12-month GP and urgent care programme with dual-tier mentoring (tenured local DVM and junior mentor), guidebook tracking, client-communication roleplay, board-certified dentistry and surgery wet labs, and monthly compassion-fatigue sessions.",
+      url: "https://www.allianceanimal.com/"
+    },
+    {
+      title: "Affinity Veterinary Academy Graduate Transition Program",
+      organisation: "CityVet",
+      description: "12-month GP and urgent care programme via the Affinity Veterinary Academy covering clinical, soft-skill, and leadership CE, abdominal ultrasound training, zero negative-accrual ProSal, and equity-partnership pathways.",
+      url: "https://www.cityvet.com/"
+    },
+    {
+      title: "CVP Doctor Mentorship Framework",
+      organisation: "Community Veterinary Partners (CVP)",
+      description: "12-month programme across GP, exotics, and equine practices, scaling from student colleague onboarding into custom medical-autonomy mentorship with structured ProSal and monthly resets.",
+      url: "https://www.communityvetpartners.com/"
+    },
+    {
+      title: "Innovetive University One-Year Mentor Program",
+      organisation: "Innovetive Petcare",
+      description: "12-month programme via Innovetive University combining in-clinic modules with third-party clinical training, Global FAST ultrasound certification, and small-animal dentistry tracks. Covers GP, emergency, exotics, and mixed practice.",
+      url: "https://www.innovetivepetcare.com/"
+    },
+    {
+      title: "Destination Pet New Graduate Mentorship Framework",
+      organisation: "Destination Pet",
+      description: "12-month GP and urgent care programme with a whole-health multi-site framework, local clinical autonomy, $3,000–$5,000 CE allowance, technical skill check-offs, and student-to-doctor career pathways.",
+      url: "https://destinationpet.com/"
+    },
+    {
+      title: "VPP New Graduate Mentorship Framework",
+      organisation: "Veterinary Practice Partners (VPP)",
+      description: "12-month GP programme maintaining local practice identity while providing network CE access, personal mentorship blueprints, and soft-skills development modules.",
+      url: "https://www.vetpartners.com/"
+    },
+    {
+      title: "Ready, Vet, Go Mentorship Integration Program",
+      organisation: "Ready, Vet, Go",
+      description: "6-month structured curriculum with a one-year community membership, embedding graduate training modules into independent and private practices. Includes weekly online training, monthly remote small-group coaching, and a peer community. Available USA & Canada.",
+      url: "https://readyvetgo.co/"
+    },
+    {
+      title: "United Veterinary Care New Graduate Mentorship",
+      organisation: "United Veterinary Care (UVC)",
+      description: "Dedicated GP mentorship programme for new graduates entering clinical practice. Confirm current duration and cohort details directly with UVC.",
+      url: "https://unitedveterinarycare.com/new-graduate-veterinarian-mentorship/"
+    },
+    {
+      title: "Vetco Total Care PACKS Early Career Mentorship",
+      organisation: "Petco / Vetco Total Care",
+      description: "Personalised GP mentor-doctor pairing with a co-created development plan. Mentors complete a 6-month mentor training programme. Includes Merck-sponsored MentorVet Lift membership.",
+      url: "https://careers.petco.com/vtc-packs-early-career"
+    },
+    {
+      title: "Mentoring@AVMA",
+      organisation: "American Veterinary Medical Association",
+      description: "6-month structured virtual mentoring programme pairing early-career vets with trained mentors outside their own workplace, with optional extension. Not employer-hosted — an independent resource available to any US graduate.",
+      url: "https://www.avma.org/education/veterinary-careers/mentoring-early-career-veterinarians"
+    },
+    {
+      title: "MentorVet Leap",
+      organisation: "MentorVet",
+      description: "Evidence-based approximately 6-month transition-to-practice programme with cohort learning, 1:1 coaching, and a wellbeing curriculum. Research shows improved outcomes for stress and burnout. Sometimes employer- or AVMA-sponsored.",
+      url: "https://www.mentorvet.net/"
     }
   ],
   canada: [
+    {
+      title: "VetStrategy New Grad Mentorship Program",
+      organisation: "VetStrategy (IVC Evidensia family)",
+      description: "12-month framework adapted from IVC Evidensia's European Graduate Academy, with regional mentor pairings, procedural progression logs, CE camps, and an optional 8-week structured teaching-hospital placement. Canada's largest veterinary group. Limited spaces; open to relocators.",
+      url: "https://www.vetstrategy.com/careers/dvm-mentorship-program/"
+    },
+    {
+      title: "P3 Veterinary Partners Mentorship Program",
+      organisation: "P3 Veterinary Partners",
+      description: "Goals-based GP mentorship with targeted individual and group CE including virtual learning, 1:1 sessions, wet labs, and courses. Confirm current duration and cohort details with P3.",
+      url: "https://www.p3vetpartners.ca/the-p3-connection/mentorship-program"
+    },
     {
       title: "VIRMP Rotating Internship (Canada)",
       organisation: "Veterinary Internship & Residency Matching Program",
       description: "One-year rotating internships at Canadian veterinary teaching hospitals, including Ontario Veterinary College (OVC) and Western College of Veterinary Medicine (WCVM).",
       url: "https://www.virmp.org/"
-    },
-    {
-      title: "Banfield Canada New Graduate Program",
-      organisation: "Banfield Pet Hospital Canada",
-      description: "Mentored new graduate programme with structured learning pathways, clinical support, and continuing education resources across Banfield's Canadian locations.",
-      url: "https://www.banfield.com/en/careers/veterinarians"
-    },
-    {
-      title: "VCA Canada New Graduate Support",
-      organisation: "VCA Canada Animal Hospitals",
-      description: "New graduate mentorship and structured professional development for veterinarians joining VCA Canada, with access to a broad network of experienced practitioners.",
-      url: "https://vcacareers.com/veterinarians"
     }
   ],
   australia: [
