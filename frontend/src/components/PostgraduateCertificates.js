@@ -1,6 +1,6 @@
 import React from "react";
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 
@@ -8,25 +8,25 @@ const countryConfig = [
   {
     id: "uk",
     name: "United Kingdom",
-    flag: "\uD83C\uDDEC\uD83C\uDDE7",
+    flag: "🇬🇧",
     image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "usa",
     name: "United States",
-    flag: "\uD83C\uDDFA\uD83C\uDDF8",
+    flag: "🇺🇸",
     image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "canada",
     name: "Canada",
-    flag: "\uD83C\uDDE8\uD83C\uDDE6",
+    flag: "🇨🇦",
     image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "australia",
     name: "Australia",
-    flag: "\uD83C\uDDE6\uD83C\uDDFA",
+    flag: "🇦🇺",
     image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80"
   }
 ];
@@ -76,7 +76,6 @@ const ukPrograms = [
   }
 ];
 
-// USA / Canada — grouped by category
 const usaCertCategories = [
   {
     id: "isvps",
@@ -87,7 +86,7 @@ const usaCertCategories = [
         credential: "GPCert",
         title: "Multiple disciplines",
         organisation: "Improve Veterinary Education (USA) / ISVPS",
-        country: "USA \u2014 open to Canada",
+        country: "USA — open to Canada",
         format: "Online modular (~600 nominal hours) + ISVPS exam; minimum 1 year in practice to enrol",
         notes: "Closest direct equivalent to the UK GPCert. Internationally recognised middle-tier qualification awarded by ISVPS. Disciplines include Small Animal Medicine, Surgery, Cardiology, Dermatology, ECC, Exotics, Ophthalmology, Dentistry, and Diagnostic Imaging.",
         url: "https://improveinternational.com/us/"
@@ -96,16 +95,16 @@ const usaCertCategories = [
         credential: "PgC",
         title: "Postgraduate Certificate (university-accredited)",
         organisation: "Harper Adams University (via Improve / ISVPS)",
-        country: "USA \u2014 open to Canada",
+        country: "USA — open to Canada",
         format: "GPCert programme + additional academic assessment; 30 ECTS university credits",
         notes: "University-accredited postgraduate certificate stacked on top of the GPCert. Transferable academic credit at Level 7. Same content as the UK PgC delivered by the same teaching faculty.",
         url: "https://improveinternational.com/us/"
       },
       {
         credential: "GPAdvCert",
-        title: "Advanced level \u2014 post-GPCert",
+        title: "Advanced level — post-GPCert",
         organisation: "Improve Veterinary Education / ISVPS",
-        country: "USA \u2014 open to Canada",
+        country: "USA — open to Canada",
         format: "Advanced modular programme + ISVPS assessment; typically completed after a GPCert",
         notes: "A step up from GPCert but still below Diplomate level. Deepens clinical knowledge in a discipline already studied at certificate level.",
         url: "https://improveinternational.com/us/advanced-programs/"
@@ -121,7 +120,7 @@ const usaCertCategories = [
         credential: "CCRP",
         title: "Canine Rehabilitation",
         organisation: "University of Tennessee (with Veterinary Academy of Higher Learning)",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Blended: online didactic + hands-on labs + clinical practicum + written & practical exam",
         notes: "First and best-known university-based canine rehabilitation credential; RACE-approved. Open to vets, vet techs, and physiotherapists.",
         url: "https://www.utvetrehab.com/canine-rehab-ccrp/"
@@ -130,7 +129,7 @@ const usaCertCategories = [
         credential: "CCRT",
         title: "Canine Rehabilitation",
         organisation: "Canine Rehabilitation Institute (CRI)",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Modular courses + hands-on labs + exam; separate tracks for vets/PTs (CCRT) and technicians (CCRVN)",
         notes: "The other major canine rehabilitation certification alongside the CCRP. Widely held; recognised by employers across North America, the UK, and Australia.",
         url: "https://www.caninerehabinstitute.com/"
@@ -148,7 +147,7 @@ const usaCertCategories = [
         credential: "CERP",
         title: "Equine Rehabilitation",
         organisation: "University of Tennessee",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Blended online + hands-on labs + practicum + exam",
         notes: "Equine counterpart to the CCRP, from the same University of Tennessee programme.",
         url: "https://www.utvetrehab.com/"
@@ -157,7 +156,7 @@ const usaCertCategories = [
         credential: "CERT",
         title: "Equine Rehabilitation",
         organisation: "Canine Rehabilitation Institute (CRI)",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Modular courses + hands-on labs + exam",
         notes: "Equine certification track from CRI, running alongside their canine rehabilitation programme.",
         url: "https://www.caninerehabinstitute.com/"
@@ -173,7 +172,7 @@ const usaCertCategories = [
         credential: "CVA",
         title: "Veterinary Acupuncture",
         organisation: "Chi University",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online modules + on-site hands-on acupoint labs + exams",
         notes: "Certified Veterinary Acupuncturist. One of the most widely held acupuncture credentials; also hosted at partner institutions including UC Davis.",
         url: "https://chiu.edu/"
@@ -182,7 +181,7 @@ const usaCertCategories = [
         credential: "CVA (IVAS)",
         title: "Veterinary Acupuncture",
         organisation: "International Veterinary Acupuncture Society (IVAS)",
-        country: "USA & Canada \u2014 global",
+        country: "USA & Canada — global",
         format: "Structured course (120+ hours) + internship + written & practical exams",
         notes: "Globally recognised acupuncture certification; IVAS is the international umbrella body. Graduates may join AAVA/IVAS as credentialed members.",
         url: "https://www.ivas.org/"
@@ -191,7 +190,7 @@ const usaCertCategories = [
         credential: "EBVA cert",
         title: "Evidence-Based Veterinary Acupuncture",
         organisation: "Evidence-Based Veterinary Acupuncture (EBVA)",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online + in-person workshops (Level 1 & 2) + assessment",
         notes: "Neuroanatomy and evidence-based approach. RACE-, IVAS-, AAVA- and IVAPM-recognised; credits count toward the CVPP pain credential.",
         url: "https://evidencebasedveterinaryacupuncture.com/"
@@ -200,7 +199,7 @@ const usaCertCategories = [
         credential: "CVA (CuraCore)",
         title: "Medical Acupuncture",
         organisation: "CuraCore (Colorado State University-linked faculty)",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online + hands-on labs + case logs + exam",
         notes: "Science-based medical acupuncture programme, formerly the CSU/Narda Robinson course. Distinct from TCVM-oriented providers.",
         url: "https://curacore.org/vet/"
@@ -209,7 +208,7 @@ const usaCertCategories = [
         credential: "CVCH",
         title: "Chinese Herbal Medicine",
         organisation: "Chi University",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Modular online + on-site + exams",
         notes: "Certified Veterinary Chinese Herbalist. TCVM herbal therapy credential from Chi University.",
         url: "https://chiu.edu/"
@@ -218,7 +217,7 @@ const usaCertCategories = [
         credential: "CVTP",
         title: "Tui-na (Veterinary Manual Therapy)",
         organisation: "Chi University",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Modular courses + assessment",
         notes: "Certified in Veterinary Tui-na — the TCVM manual therapy modality.",
         url: "https://chiu.edu/"
@@ -227,7 +226,7 @@ const usaCertCategories = [
         credential: "CVFT",
         title: "Food Therapy",
         organisation: "Chi University",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Modular courses + assessment",
         notes: "Certified Veterinary Food Therapist. TCVM nutritional therapy credential.",
         url: "https://chiu.edu/"
@@ -243,7 +242,7 @@ const usaCertCategories = [
         credential: "CVPP",
         title: "Pain Management",
         organisation: "International Veterinary Academy of Pain Management (IVAPM)",
-        country: "USA & Canada \u2014 global",
+        country: "USA & Canada — global",
         format: "Credential application + evidence of training/CE + skills assessment + exam",
         notes: "Certified Veterinary Pain Practitioner. Available separately to vets and to licensed vet techs. A widely recognised pain-management middle-tier credential.",
         url: "https://www.ivapm.org/"
@@ -252,7 +251,7 @@ const usaCertCategories = [
         credential: "CVSMT",
         title: "Spinal Manipulation",
         organisation: "Healing Oasis Wellness Center / College of Animal Chiropractors",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Intensive modular course + exams",
         notes: "Certified Veterinary Spinal Manipulative Therapist. Animal chiropractic / spinal manipulation credential for vets.",
         url: "https://www.healingoasis.edu/"
@@ -279,7 +278,7 @@ const usaCertCategories = [
         credential: "CHPV",
         title: "Hospice & Palliative Care",
         organisation: "International Association for Animal Hospice & Palliative Care (IAAHPC)",
-        country: "USA & Canada \u2014 global",
+        country: "USA & Canada — global",
         format: "Online programme + assessment",
         notes: "Certified Hospice & Palliative Care Veterinarian. End-of-life care credential with growing recognition.",
         url: "https://www.iaahpc.org/"
@@ -288,7 +287,7 @@ const usaCertCategories = [
         credential: "CVBM",
         title: "Botanical Medicine",
         organisation: "CIVT / veterinary botanical medicine bodies",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online modular programme + assessment",
         notes: "Certified Veterinary Botanical Medicine practitioner. Western botanical / herbal medicine credential.",
         url: "https://civtedu.org/"
@@ -304,7 +303,7 @@ const usaCertCategories = [
         credential: "GPCert Dentistry",
         title: "Veterinary Dentistry",
         organisation: "Improve Veterinary Education / ISVPS",
-        country: "USA \u2014 open to Canada",
+        country: "USA — open to Canada",
         format: "Online modular + ISVPS assessment",
         notes: "Certificate-tier dentistry route. The AVDC Diplomate (specialist tier) is a separate, higher qualification and is not included here.",
         url: "https://improveinternational.com/us/"
@@ -313,7 +312,7 @@ const usaCertCategories = [
         credential: "Certificate",
         title: "Nutrition Case Management",
         organisation: "University of Tennessee",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online structured certificate programme",
         notes: "University CE certificate in clinical nutrition case management. Structured with formal completion rather than a simple attendance record.",
         url: "https://vetce.tennessee.edu/"
@@ -322,7 +321,7 @@ const usaCertCategories = [
         credential: "Certificate",
         title: "Companion Animal Pain Management",
         organisation: "University of Tennessee",
-        country: "USA \u2014 global intake",
+        country: "USA — global intake",
         format: "Online structured certificate programme",
         notes: "University-run pain management certificate track. Complements the CVPP credential pathway.",
         url: "https://vetce.tennessee.edu/"
@@ -330,8 +329,8 @@ const usaCertCategories = [
       {
         credential: "Graduate Certificate",
         title: "Shelter Medicine",
-        organisation: "University of Florida (Maddie\u2019s Shelter Medicine Program)",
-        country: "USA \u2014 online, global",
+        organisation: "University of Florida (Maddie's Shelter Medicine Program)",
+        country: "USA — online, global",
         format: "Online credit-bearing graduate certificate; can ladder to MS degree",
         notes: "University graduate certificate — sits below the ABVP Shelter Medicine Diplomate tier. One of three UF online graduate certificates in specialist niches.",
         url: "https://sheltermedicine.vetmed.ufl.edu/"
@@ -340,7 +339,7 @@ const usaCertCategories = [
         credential: "Graduate Certificate",
         title: "Aquatic Animal Health",
         organisation: "University of Florida",
-        country: "USA \u2014 online, global",
+        country: "USA — online, global",
         format: "Online credit-bearing graduate certificate",
         notes: "University graduate certificate for vets developing an interest in fish and aquatic species medicine.",
         url: "https://aquatic.vetmed.ufl.edu/"
@@ -349,7 +348,7 @@ const usaCertCategories = [
         credential: "Graduate Certificate",
         title: "Veterinary Forensic Sciences",
         organisation: "University of Florida",
-        country: "USA \u2014 online, global",
+        country: "USA — online, global",
         format: "Online credit-bearing graduate certificate",
         notes: "A recognised niche credential in veterinary forensics. Credit-bearing and stackable toward postgraduate study.",
         url: "https://forensics.vetmed.ufl.edu/"
@@ -358,8 +357,13 @@ const usaCertCategories = [
   }
 ];
 
-// Flat count for nav card
 const usaTotalCount = usaCertCategories.reduce((acc, cat) => acc + cat.programs.length, 0);
+
+const countForHub = (id) => {
+  if (id === "uk") return ukPrograms.length;
+  if (id === "usa") return usaTotalCount;
+  return null;
+};
 
 const ProgramCard = ({ id, credential, title, organisation, country, format, notes, url }) => (
   <div id={id} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
@@ -389,67 +393,37 @@ const ProgramCard = ({ id, credential, title, organisation, country, format, not
   </div>
 );
 
+const BackLink = () => (
+  <div className="mb-8">
+    <Link to="/postgraduate-certificates" className="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center gap-1">
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
+      All Postgraduate Certificates
+    </Link>
+  </div>
+);
+
 const PostgraduateCertificates = () => {
-  return (
-    <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Postgraduate Certificates for Vets | VetNextStep</title>
-        <meta name="description" content="RCVS CertAVP programmes in the UK, plus North American middle-tier credentials — ISVPS GPCert, rehabilitation (CCRP/CCRT), acupuncture (CVA), pain management (CVPP), and university graduate certificates." />
-        <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
-        <meta property="og:title" content="Postgraduate Certificates for Vets | VetNextStep" />
-        <meta property="og:description" content="Postgraduate certificate pathways for vets in the UK and North America — from RCVS CertAVP to rehabilitation, acupuncture, and university graduate certificates." />
-        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-      <SharedHeader />
+  const { country } = useParams();
 
-      <main className="py-8 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Page title */}
-          <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate Certificates</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist Diplomate level, above standard CPD. UK and North America covered.
-            </p>
-          </div>
-
-          {/* Country nav cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
-            {countryConfig.map((country) => {
-              const count = country.id === "uk" ? ukPrograms.length : country.id === "usa" ? usaTotalCount : 0;
-              return (
-                <a key={country.id} href={`#${country.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-colors">
-                    <div className="h-40 relative overflow-hidden">
-                      <img src={country.image} alt={country.name} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                      <div className="absolute bottom-3 left-4 text-white">
-                        <h2 className="text-lg font-bold">{country.name}</h2>
-                      </div>
-                    </div>
-                    <div className="px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        {count > 0 ? `${count} programme${count !== 1 ? "s" : ""}` : "Coming soon"}
-                      </span>
-                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View
-                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-
-          {/* ——— UK ——— */}
-          <section id="uk" className="mb-20 scroll-mt-28">
+  // ——— UK sub-page ———
+  if (country === "uk") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>UK Postgraduate Certificates for Vets | VetNextStep</title>
+          <meta name="description" content="RCVS CertAVP programmes in the UK from RVC, Edinburgh, Liverpool, Nottingham, Surrey, and BSAVA." />
+          <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/uk" />
+        </Helmet>
+        <SharedHeader />
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BackLink />
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">\uD83C\uDDEC\uD83C\uDDE7</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">United Kingdom</h2>
+              <span className="text-3xl">🇬🇧</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United Kingdom</h1>
+              <span className="ml-auto text-sm text-gray-400">{ukPrograms.length} programmes</span>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8">
@@ -477,12 +451,8 @@ const PostgraduateCertificates = () => {
                   <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
                   <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
                   <div className="mt-auto">
-                    <a
-                      href={program.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
+                    <a href={program.url} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                       Visit Programme
                       <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -492,12 +462,29 @@ const PostgraduateCertificates = () => {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
-          {/* ——— USA ——— */}
-          <section id="usa" className="mb-20 scroll-mt-28">
+  // ——— USA sub-page ———
+  if (country === "usa") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>USA Postgraduate Certificates for Vets | VetNextStep</title>
+          <meta name="description" content="North American middle-tier veterinary credentials — ISVPS GPCert, rehabilitation (CCRP/CCRT), acupuncture (CVA), pain management (CVPP), and university graduate certificates." />
+          <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/usa" />
+        </Helmet>
+        <SharedHeader />
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BackLink />
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h2>
+              <span className="text-3xl">🇺🇸</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h1>
+              <span className="ml-auto text-sm text-gray-400">{usaTotalCount} programmes</span>
             </div>
 
             <p className="text-sm text-gray-500 mb-8">
@@ -508,7 +495,7 @@ const PostgraduateCertificates = () => {
             {usaCertCategories.map((category) => (
               <div key={category.id} className="mb-12">
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{category.name}</h3>
+                  <h2 className="text-xl font-bold text-gray-900 mb-1">{category.name}</h2>
                   <p className="text-sm text-gray-500 leading-relaxed">{category.description}</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -518,41 +505,71 @@ const PostgraduateCertificates = () => {
                 </div>
               </div>
             ))}
-          </section>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
-          {/* ——— Canada ——— */}
-          <section id="canada" className="mb-20 scroll-mt-28">
+  // ——— Canada sub-page ———
+  if (country === "canada") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>Canada Postgraduate Certificates for Vets | VetNextStep</title>
+          <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/canada" />
+        </Helmet>
+        <SharedHeader />
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BackLink />
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">\uD83C\uDDE8\uD83C\uDDE6</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Canada</h2>
+              <span className="text-3xl">🇨🇦</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Canada</h1>
             </div>
-
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8">
               <h3 className="text-base font-semibold text-blue-900 mb-2">Most USA credentials are open to Canadian vets</h3>
               <p className="text-sm text-blue-800 leading-relaxed mb-3">
-                The majority of the North American middle-tier credentials listed above — including ISVPS GPCert/PgC, CCRP, CCRT, CVPP (IVAPM), and IVAS CVA — are available to Canadian veterinarians. The "Country" field on each card above indicates availability.
+                The majority of the North American middle-tier credentials — including ISVPS GPCert/PgC, CCRP, CCRT, CVPP (IVAPM), and IVAS CVA — are available to Canadian veterinarians. See the USA page for the full list; the "Country" field on each card indicates availability.
               </p>
               <p className="text-sm text-blue-800 leading-relaxed">
                 Canada-specific postgraduate certificate programmes (through provincial veterinary colleges and CVMA) will be added to this section when confirmed.
               </p>
             </div>
-
-            <div className="bg-white rounded-xl border border-gray-100 p-8 text-center">
-              <p className="text-gray-500 mb-4">Canada-specific programmes coming soon. In the meantime, see the USA section above.</p>
-              <Link to="/canada" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
-                View full Canada career guide
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/postgraduate-certificates/usa"
+                className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                View USA programmes
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
+              <Link to="/canada"
+                className="inline-flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-50 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                View Canada career guide →
+              </Link>
             </div>
-          </section>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
-          {/* ——— Australia ——— */}
-          <section id="australia" className="mb-16 scroll-mt-28">
+  // ——— Australia sub-page ———
+  if (country === "australia") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Helmet>
+          <title>Australia Postgraduate Certificates for Vets | VetNextStep</title>
+          <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/australia" />
+        </Helmet>
+        <SharedHeader />
+        <main className="py-8 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BackLink />
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">\uD83C\uDDE6\uD83C\uDDFA</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Australia</h2>
+              <span className="text-3xl">🇦🇺</span>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Australia</h1>
             </div>
             <div className="bg-white rounded-xl border border-gray-100 p-8 text-center">
               <p className="text-gray-500 mb-4">Postgraduate certificate programmes for Australia will be added here soon.</p>
@@ -563,7 +580,79 @@ const PostgraduateCertificates = () => {
                 </svg>
               </Link>
             </div>
-          </section>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ——— Unknown sub-route ———
+  if (country) {
+    return (
+      <div className="min-h-screen bg-white">
+        <SharedHeader />
+        <main className="py-16 text-center">
+          <p className="text-gray-500 mb-4">Country not found.</p>
+          <Link to="/postgraduate-certificates" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
+        </main>
+      </div>
+    );
+  }
+
+  // ——— Hub page ———
+  return (
+    <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Postgraduate Certificates for Vets | VetNextStep</title>
+        <meta name="description" content="RCVS CertAVP programmes in the UK, plus North American middle-tier credentials — ISVPS GPCert, rehabilitation (CCRP/CCRT), acupuncture (CVA), pain management (CVPP), and university graduate certificates." />
+        <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:title" content="Postgraduate Certificates for Vets | VetNextStep" />
+        <meta property="og:description" content="Postgraduate certificate pathways for vets in the UK and North America — from RCVS CertAVP to rehabilitation, acupuncture, and university graduate certificates." />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <SharedHeader />
+
+      <main className="py-8 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="text-center mb-12">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate Certificates</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist Diplomate level, above standard CPD. UK and North America covered.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            {countryConfig.map((c) => {
+              const count = countForHub(c.id);
+              return (
+                <Link key={c.id} to={`/postgraduate-certificates/${c.id}`} className="group block">
+                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                    <div className="h-48 relative overflow-hidden">
+                      <img src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                      <div className="absolute bottom-3 left-4 text-white">
+                        <div className="text-2xl mb-1">{c.flag}</div>
+                        <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 flex items-center justify-between bg-white">
+                      <span className="text-sm text-gray-500">
+                        {count !== null ? `${count} programme${count !== 1 ? "s" : ""}` : "Coming soon"}
+                      </span>
+                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                        View all
+                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
 
         </div>
       </main>
