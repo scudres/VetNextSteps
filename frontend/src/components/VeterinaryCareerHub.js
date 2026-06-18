@@ -264,7 +264,7 @@ const VeterinaryCareerHub = () => {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-6">All sections</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { label: "Training Programmes",       desc: "Structured graduate and early-career development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more.",  meta: "UK · USA · Canada · Australia",          path: "/training-programs" },
+                { label: "Graduate Development Programmes",       desc: "Structured graduate and early-career development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more.",  meta: "UK · USA · Canada · Australia",          path: "/training-programs" },
                 { label: "Internships & Residencies", desc: "Rotating internships and specialist residency posts at university teaching hospitals and private referral centres.",             meta: "UK · Europe · North America",            path: "/internships-residencies" },
                 { label: "Postgraduate Certificates", desc: "RCVS CertAVP and university postgraduate certificates — flexible routes to build a clinical interest at any career stage.",    meta: "RCVS-accredited · Level 7",              path: "/postgraduate-certificates" },
                 { label: "Countries & Licensing",     desc: "Registration bodies, key exams, visa routes, and typical timelines for working in the UK, USA, Canada, and Australia.",       meta: "Visa · Registration · Licensing",        tab: "countries" },

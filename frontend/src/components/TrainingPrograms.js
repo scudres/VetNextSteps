@@ -142,10 +142,10 @@ const TrainingPrograms = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Post-graduate Training Programmes | VetNextStep</title>
+        <title>Post-graduate Graduate Development Programmes | VetNextStep</title>
         <meta name="description" content="Find structured post-graduate training programmes for new veterinary graduates in the UK, USA, Canada, and Australia — including CVS, IVC Evidensia, Linnaeus, Medivet, Banfield, and more." />
         <link rel="canonical" href="https://vetnextstep.com/training-programs" />
-        <meta property="og:title" content="Post-graduate Training Programmes | VetNextStep" />
+        <meta property="og:title" content="Post-graduate Graduate Development Programmes | VetNextStep" />
         <meta property="og:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates across the UK, USA, Canada, and Australia." />
         <meta property="og:url" content="https://vetnextstep.com/training-programs" />
         <meta property="og:type" content="website" />
@@ -157,7 +157,7 @@ const TrainingPrograms = () => {
 
           {/* Page title */}
           <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Training Programmes</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Graduate Development Programmes</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Graduate development programmes with structured mentorship and clinical support — from the major corporate groups in the UK to hospital-based programmes in North America and Australia.
             </p>
