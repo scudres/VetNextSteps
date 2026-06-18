@@ -9,7 +9,7 @@ const tabs = [
 ];
 
 const navLinks = [
-  { path: "/training-programs",         label: "Training Programmes" },
+  { path: "/training-programs",         label: "Graduate Development Programmes" },
   { path: "/internships-residencies",   label: "Internships & Residencies" },
   { path: "/postgraduate-certificates", label: "Postgraduate Certificates" },
 ];

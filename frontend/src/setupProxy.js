@@ -74,22 +74,22 @@ function slugify(str) {
 // ——— search index (mirrors functions/search.js) ———
 
 const trainingItems = [
-  { title: "CVS Veterinary Group Graduate Programme", subtitle: "CVS Group", section: "Training Programmes", navPath: "/training-programs", tags: ["CVS", "graduate", "UK"] },
-  { title: "IVC Evidensia Graduate Academy", subtitle: "IVC Evidensia", section: "Training Programmes", navPath: "/training-programs", tags: ["IVC", "graduate", "UK", "Europe"] },
-  { title: "Linnaeus Veterinary Graduate Development Programme", subtitle: "Linnaeus Group", section: "Training Programmes", navPath: "/training-programs", tags: ["Linnaeus", "graduate", "UK"] },
-  { title: "Medivet Early Careers Programme", subtitle: "Medivet", section: "Training Programmes", navPath: "/training-programs", tags: ["Medivet", "graduate", "UK"] },
-  { title: "Vets4Pets Graduate Programme", subtitle: "Vets4Pets", section: "Training Programmes", navPath: "/training-programs", tags: ["Vets4Pets", "graduate", "UK"] },
-  { title: "VetPartners Graduate Programme", subtitle: "VetPartners", section: "Training Programmes", navPath: "/training-programs", tags: ["VetPartners", "graduate", "UK"] },
-  { title: "VIRMP Rotating Internship", subtitle: "Veterinary Internship & Residency Matching Program", section: "Training Programmes", navPath: "/training-programs", tags: ["VIRMP", "internship", "USA"] },
-  { title: "Banfield New Graduate Program", subtitle: "Banfield Pet Hospital", section: "Training Programmes", navPath: "/training-programs", tags: ["Banfield", "graduate", "USA"] },
-  { title: "VCA New Graduate Support", subtitle: "VCA Animal Hospitals", section: "Training Programmes", navPath: "/training-programs", tags: ["VCA", "graduate", "USA"] },
-  { title: "National Veterinary Associates New Graduate Programme", subtitle: "NVA", section: "Training Programmes", navPath: "/training-programs", tags: ["NVA", "graduate", "USA"] },
-  { title: "VIRMP Rotating Internship (Canada)", subtitle: "Veterinary Internship & Residency Matching Program", section: "Training Programmes", navPath: "/training-programs", tags: ["VIRMP", "internship", "Canada"] },
-  { title: "Banfield Canada New Graduate Program", subtitle: "Banfield Pet Hospital Canada", section: "Training Programmes", navPath: "/training-programs", tags: ["Banfield", "graduate", "Canada"] },
-  { title: "VCA Canada New Graduate Support", subtitle: "VCA Canada", section: "Training Programmes", navPath: "/training-programs", tags: ["VCA", "graduate", "Canada"] },
-  { title: "Greencross Vets Graduate Vet Program", subtitle: "Greencross Vets", section: "Training Programmes", navPath: "/training-programs", tags: ["Greencross", "graduate", "Australia"] },
-  { title: "Apiam Animal Health Graduate Program", subtitle: "Apiam Animal Health", section: "Training Programmes", navPath: "/training-programs", tags: ["Apiam", "graduate", "Australia", "rural"] },
-  { title: "AVA Mentoring Program", subtitle: "Australian Veterinary Association", section: "Training Programmes", navPath: "/training-programs", tags: ["AVA", "mentoring", "Australia"] },
+  { title: "CVS Veterinary Group Graduate Programme", subtitle: "CVS Group", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["CVS", "graduate", "UK"] },
+  { title: "IVC Evidensia Graduate Academy", subtitle: "IVC Evidensia", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["IVC", "graduate", "UK", "Europe"] },
+  { title: "Linnaeus Veterinary Graduate Development Programme", subtitle: "Linnaeus Group", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Linnaeus", "graduate", "UK"] },
+  { title: "Medivet Early Careers Programme", subtitle: "Medivet", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Medivet", "graduate", "UK"] },
+  { title: "Vets4Pets Graduate Programme", subtitle: "Vets4Pets", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Vets4Pets", "graduate", "UK"] },
+  { title: "VetPartners Graduate Programme", subtitle: "VetPartners", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["VetPartners", "graduate", "UK"] },
+  { title: "VIRMP Rotating Internship", subtitle: "Veterinary Internship & Residency Matching Program", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["VIRMP", "internship", "USA"] },
+  { title: "Banfield New Graduate Program", subtitle: "Banfield Pet Hospital", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Banfield", "graduate", "USA"] },
+  { title: "VCA New Graduate Support", subtitle: "VCA Animal Hospitals", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["VCA", "graduate", "USA"] },
+  { title: "National Veterinary Associates New Graduate Programme", subtitle: "NVA", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["NVA", "graduate", "USA"] },
+  { title: "VIRMP Rotating Internship (Canada)", subtitle: "Veterinary Internship & Residency Matching Program", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["VIRMP", "internship", "Canada"] },
+  { title: "Banfield Canada New Graduate Program", subtitle: "Banfield Pet Hospital Canada", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Banfield", "graduate", "Canada"] },
+  { title: "VCA Canada New Graduate Support", subtitle: "VCA Canada", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["VCA", "graduate", "Canada"] },
+  { title: "Greencross Vets Graduate Vet Program", subtitle: "Greencross Vets", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Greencross", "graduate", "Australia"] },
+  { title: "Apiam Animal Health Graduate Program", subtitle: "Apiam Animal Health", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["Apiam", "graduate", "Australia", "rural"] },
+  { title: "AVA Mentoring Program", subtitle: "Australian Veterinary Association", section: "Graduate Development Programmes", navPath: "/training-programs", tags: ["AVA", "mentoring", "Australia"] },
 ].map((i) => ({ ...i, url: urlMap[i.title] || null, navPath: i.navPath + "#" + slugify(i.title) }));
 
 const internshipItems = [
