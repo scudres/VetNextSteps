@@ -221,7 +221,9 @@ const LegalPage = () => {
               <Section id="privacy-controller" title="1. Data Controller">
                 <p>
                   The data controller for personal data collected through this Site is the operator of
-                  VetNextStep (<strong>vetnextstep.com</strong>). For data protection enquiries, contact:{" "}
+                  VetNextStep (<strong>vetnextstep.com</strong>). Full operator details will be published
+                  here when formal business registration is complete. In the meantime, for all data
+                  protection enquiries please contact:{" "}
                   <a href="mailto:hello@vetnextstep.com" className="text-blue-600 hover:underline">
                     hello@vetnextstep.com
                   </a>
@@ -250,6 +252,8 @@ const LegalPage = () => {
                         ["Referring URL", "Google Analytics", "Understanding traffic sources"],
                         ["Device type and screen resolution", "Google Analytics", "Responsive design optimisation"],
                         ["Country/region (approximate)", "Google Analytics", "Regional content prioritisation"],
+                        ["First name, surname, email address", "Contact form (you provide)", "Responding to your enquiry"],
+                        ["Subject and message content", "Contact form (you provide)", "Responding to your enquiry"],
                       ].map(([d, s, p], i) => (
                         <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                           <td className="px-4 py-2 border-b border-gray-100">{d}</td>
@@ -267,19 +271,26 @@ const LegalPage = () => {
               </Section>
 
               <Section id="privacy-lawful" title="3. Lawful Basis for Processing">
-                <p>
-                  Under Article 6 of the UK GDPR, the lawful basis for processing analytics data is{" "}
-                  <strong>Legitimate Interests</strong> (Article 6(1)(f)). The Site operator has a legitimate
-                  interest in understanding how the Site is used in order to improve it for visitors. A
-                  Legitimate Interests Assessment (LIA) has been conducted and concluded that this interest
-                  is not overridden by your rights, given:
-                </p>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>the data collected is aggregate and anonymised;</li>
-                  <li>no special category data is involved;</li>
-                  <li>you can opt out at any time (see Section 6);</li>
-                  <li>the processing is proportionate to the purpose.</li>
-                </ul>
+                <div className="space-y-3">
+                  <div className="border border-gray-100 rounded-lg p-3">
+                    <p className="font-semibold text-gray-800 text-xs mb-1">Analytics data (Google Analytics)</p>
+                    <p className="text-xs text-gray-600">
+                      Processed under the <strong>statistical purposes exception</strong> in Section 112 of the
+                      Data (Use and Access) Act 2025, in conjunction with PECR Regulation 6. Google Analytics
+                      is configured to collect only aggregated, anonymised data for the sole purpose of
+                      understanding Site usage. See the Cookies tab for full configuration details.
+                    </p>
+                  </div>
+                  <div className="border border-gray-100 rounded-lg p-3">
+                    <p className="font-semibold text-gray-800 text-xs mb-1">Contact form data</p>
+                    <p className="text-xs text-gray-600">
+                      Processed on the basis of <strong>Legitimate Interests</strong> (Article 6(1)(f) UK GDPR)
+                      — specifically, the legitimate interest of the Site operator in being able to respond to
+                      enquiries submitted through the Site. Contact form data is used solely to respond to your
+                      message and is not shared with third parties beyond the email delivery service (IONOS).
+                    </p>
+                  </div>
+                </div>
               </Section>
 
               <Section id="privacy-third-party" title="4. Third-Party Processors">
@@ -314,13 +325,33 @@ const LegalPage = () => {
                   </a>
                   .
                 </p>
+                <p>
+                  Contact form submissions are delivered via <strong>IONOS SE</strong>, acting as an email
+                  delivery processor. Your name, email address, and message are transmitted to the Site
+                  operator's mailbox via IONOS's SMTP service and are not retained by IONOS beyond
+                  transmission. IONOS's privacy policy is available at{" "}
+                  <a
+                    href="https://www.ionos.co.uk/terms-gtc/privacy-policy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    ionos.co.uk/terms-gtc/privacy-policy
+                  </a>
+                  .
+                </p>
               </Section>
 
               <Section id="privacy-retention" title="5. Data Retention">
                 <p>
-                  Google Analytics data is retained for <strong>14 months</strong> (the minimum configurable
+                  Google Analytics data is retained for <strong>2 months</strong> (the minimum configurable
                   period in GA4), after which it is automatically deleted. Netlify server logs are retained
                   in accordance with Netlify's own data retention policies.
+                </p>
+                <p>
+                  Contact form data (your name, email, subject, and message) is received by the Site operator
+                  via email and retained only for as long as necessary to respond to your enquiry. We do not
+                  store contact form submissions in any database.
                 </p>
               </Section>
 
@@ -330,9 +361,9 @@ const LegalPage = () => {
                   {[
                     ["Right of access (Article 15)", "You may request a copy of the personal data held about you."],
                     ["Right to erasure (Article 17)", "You may request deletion of your personal data where there is no compelling reason for its continued processing."],
-                    ["Right to object (Article 21)", "You may object to processing based on legitimate interests. We will stop unless we can demonstrate compelling legitimate grounds that override your interests."],
-                    ["Right to restriction (Article 18)", "You may request that processing is restricted in certain circumstances."],
-                    ["Right to data portability (Article 20)", "Where processing is based on consent or contract, you may request your data in a structured, machine-readable format."],
+                    ["Right to object (Article 21)", "You may object to processing based on legitimate interests (e.g. contact form data). We will stop unless we can demonstrate compelling legitimate grounds that override your interests."],
+                    ["Right to restriction (Article 18)", "You may request that processing is restricted in certain circumstances, for example while an objection is being considered."],
+                    ["Right to opt out of analytics (DUAA 2025)", "You may opt out of analytics data collection at any time — see the Cookies tab for how to do this. No opt-in is required; analytics operates on an opt-out basis under the statistical purposes exception."],
                   ].map(([right, desc], i) => (
                     <div key={i} className="border border-gray-100 rounded-lg p-3">
                       <p className="font-semibold text-gray-800 text-xs mb-1">{right}</p>
@@ -386,8 +417,10 @@ const LegalPage = () => {
                   </p>
                 </div>
                 <p>
-                  We would, however, appreciate the opportunity to address any concern before you approach
-                  the ICO. Please contact us first at{" "}
+                  Under the <strong>Data (Use and Access) Act 2025</strong> (in force from 19 June 2026),
+                  you must submit a data protection complaint to us before escalating to the ICO. We will
+                  acknowledge your complaint within <strong>30 days</strong> and work to resolve it promptly.
+                  Please contact us at:{" "}
                   <a href="mailto:hello@vetnextstep.com" className="text-blue-600 hover:underline">
                     hello@vetnextstep.com
                   </a>
@@ -450,20 +483,35 @@ const LegalPage = () => {
                 </div>
               </Section>
 
-              <Section id="cookies-legal" title="3. Legal Basis Under PECR">
+              <Section id="cookies-legal" title="3. Legal Basis Under PECR and the Data (Use and Access) Act 2025">
                 <p>
-                  The cookies listed above are analytics cookies and are therefore <strong>non-essential</strong>
-                  under PECR. The lawful basis for their use is <strong>Legitimate Interests</strong> under
-                  UK GDPR Article 6(1)(f), in conjunction with our obligations under PECR Regulation 6.
+                  The analytics cookies listed above are operated under the <strong>statistical purposes
+                  exception</strong> in Section 112 of the <strong>Data (Use and Access) Act 2025 (DUAA)</strong>,
+                  which came into force on 5 February 2026. This exception permits the use of analytics
+                  technologies without prior opt-in consent where all of the following conditions are met:
                 </p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>the sole purpose is gathering <strong>aggregated statistical information</strong> about how the Site is used;</li>
+                  <li>the data collected <strong>cannot be used to identify individual visitors</strong>;</li>
+                  <li>the analytics data is <strong>not used for advertising, profiling, or cross-site tracking</strong>;</li>
+                  <li>visitors are provided with a <strong>clear and simple means to opt out</strong> free of charge.</li>
+                </ul>
                 <p>
-                  We have assessed that the processing is necessary for the purpose of understanding Site
-                  usage, that it is proportionate, and that it does not unduly prejudice your privacy given
-                  that IP addresses are anonymised and no special category data is involved.
+                  To ensure these conditions are met, Google Analytics 4 on this Site is configured as follows:
                 </p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>Google Signals</strong> is disabled — no cross-device or advertising data is collected.</li>
+                  <li><strong>All data sharing with Google</strong> (including modelling contributions and technical support) is disabled — data is not used for Google's own purposes.</li>
+                  <li><strong>Data retention</strong> is set to the minimum period of 2 months for both event and user data.</li>
+                  <li><strong>IP anonymisation</strong> is enabled by default in GA4 — full IP addresses are never stored.</li>
+                  <li><strong>Reset on new activity</strong> is disabled — the retention clock is not extended by return visits.</li>
+                </ul>
                 <p>
-                  You may object to this processing at any time (see Section 4 below).
+                  Even under the DUAA exception, you have the right to opt out at any time. See Section 4 below for how to do this.
                 </p>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-900">
+                  <strong>Note:</strong> The DUAA 2025 does not permit analytics cookies to be used for advertising measurement, user profiling, or any purpose beyond understanding aggregate site usage. We do not use analytics data for any of these purposes.
+                </div>
               </Section>
 
               <Section id="cookies-control" title="4. How to Control Cookies">
@@ -537,7 +585,7 @@ const LegalPage = () => {
                   protected by copyright.
                 </p>
                 <p>
-                  &copy; 2025–2026 VetNextStep. All rights reserved.
+                  &copy; 2025–present VetNextStep. All rights reserved.
                 </p>
                 <p>
                   The curated selection, presentation, and original descriptions of veterinary career

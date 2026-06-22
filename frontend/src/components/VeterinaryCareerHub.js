@@ -153,33 +153,40 @@ const VeterinaryCareerHub = () => {
           {/* Hero */}
           <section className="bg-white border-b border-gray-100 py-10 md:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-2xl">
-                <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">Veterinary career progression</p>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
-                  Know your next step.
-                </h2>
-                <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
-                  Newly qualified or ten years in — there's always a next move. Find licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    onClick={() => setActiveTab("countries")}
-                    className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    Working internationally
-                  </button>
-                  <Link
-                    to="/cpd"
-                    className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    CPD & Conferences
-                  </Link>
-                  <Link
-                    to="/internships-residencies"
-                    className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    Internships & Residencies
-                  </Link>
+              <div className="flex items-start gap-8">
+                <img
+                  src="/favicon.svg"
+                  alt="VetNextStep"
+                  className="hidden sm:block flex-shrink-0 h-20 w-20"
+                />
+                <div className="max-w-2xl">
+                  <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">Veterinary career progression</p>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
+                    Know your next step
+                  </h2>
+                  <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
+                    Newly qualified or ten years in — there's always a next move. Find licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={() => setActiveTab("countries")}
+                      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Working internationally
+                    </button>
+                    <Link
+                      to="/cpd"
+                      className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      CPD & Conferences
+                    </Link>
+                    <Link
+                      to="/internships-residencies"
+                      className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Internships & Residencies
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

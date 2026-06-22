@@ -129,6 +129,12 @@ export const regionConfig = [
     image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
   },
   {
+    id: "new-zealand",
+    name: "New Zealand",
+    flag: "\uD83C\uDDF3\uD83C\uDDFF",
+    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&q=80",
+  },
+  {
     id: "global",
     name: "Global / International",
     flag: "\uD83C\uDF0D",

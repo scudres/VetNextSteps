@@ -71,7 +71,7 @@ exports.handler = async (event) => {
   }
 
   // Check env vars are set
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_EMAIL } = process.env;
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
     console.error("SMTP environment variables are not fully configured.");
     return {
@@ -95,7 +95,7 @@ exports.handler = async (event) => {
   try {
     await transporter.sendMail({
       from: `"VetNextStep Contact Form" <${SMTP_USER}>`,
-      to: "hello@vetnextstep.com",
+      to: CONTACT_EMAIL || "hello@vetnextstep.com",
       replyTo: `"${firstName} ${surname}" <${email}>`,
       subject: `[Contact Form] ${subject}`,
       text: [
