@@ -211,8 +211,8 @@ const CPDPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>CPD & Conferences | VetNextStep</title>
-        <meta name="description" content="Veterinary conferences and CPD events by region, plus CPD providers and online courses. Filter by specialty." />
+        <title>Vet Conferences &amp; CPD Events 2026 | By Region</title>
+        <meta name="description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe. Filter by specialty or browse CPD providers and online courses." />
         <link rel="canonical" href="https://vetnextstep.com/cpd" />
       </Helmet>
       <SharedHeader />
@@ -255,6 +255,7 @@ const CPDPage = () => {
               {!loading && !error && (
                 <>
                   {/* Region cards */}
+                  <h2 className="text-lg font-semibold text-gray-700 mb-5">International Vet CE &amp; CPD — Browse by Region</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">
                     {regionConfig.map((r) => {
                       const count = getConferencesForRegion(r.id).length;
@@ -288,6 +289,7 @@ const CPDPage = () => {
                   </div>
 
                   {/* Filters */}
+                  <h2 className="text-lg font-semibold text-gray-700 mb-5">Clinical &amp; Professional Development Conferences</h2>
                   <div className="flex flex-col sm:flex-row gap-4 mb-8 items-start sm:items-center">
                     <div className="flex items-center gap-3">
                       <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Filter by specialty:</label>
