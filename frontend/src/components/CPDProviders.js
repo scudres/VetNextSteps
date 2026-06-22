@@ -51,7 +51,7 @@ const CPDProviders = () => {
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD Providers & Courses</h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          49 providers listed across four categories — university units, commercial platforms, and industry-funded education. Filter by type to find what suits you.
+          58 providers listed across four categories — UK and international vet schools, commercial platforms, and industry-funded education. Includes Australia and New Zealand. Filter by type to find what suits you.
         </p>
       </div>
 
