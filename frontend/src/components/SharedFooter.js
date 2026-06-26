@@ -28,10 +28,10 @@ const SharedFooter = () => (
         <div>
           <h4 className="text-lg font-semibold mb-4">Countries</h4>
           <ul className="space-y-2 text-gray-400">
+            <li><Link to="/australia" className="hover:text-white transition-colors">Australia</Link></li>
+            <li><Link to="/canada" className="hover:text-white transition-colors">Canada</Link></li>
             <li><Link to="/uk" className="hover:text-white transition-colors">United Kingdom</Link></li>
             <li><Link to="/usa" className="hover:text-white transition-colors">United States</Link></li>
-            <li><Link to="/canada" className="hover:text-white transition-colors">Canada</Link></li>
-            <li><Link to="/australia" className="hover:text-white transition-colors">Australia</Link></li>
           </ul>
         </div>
         <div>
@@ -57,7 +57,7 @@ const SharedFooter = () => (
         <p className="mb-1 text-xs text-gray-500 max-w-2xl mx-auto leading-relaxed">
           All content on VetNextStep is for informational purposes only and does not constitute legal, immigration, or professional advice. Always verify licensing, visa, and registration requirements directly with the relevant regulatory body. Information is not real-time — check official sources before making career or financial decisions.
         </p>
-        <p className="mb-3">&copy; 2026 VetNextStep.</p>
+        <p className="mb-3">&copy; 2025–present VetNextStep.</p>
         <p className="text-xs space-x-3">
           <Link to="/legal?tab=terms"   className="hover:text-white underline">Terms of Use</Link>
           <span>&middot;</span>

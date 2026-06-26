@@ -1,19 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
-import CPDProviders from "./CPDProviders";
 import SharedFooter from "./SharedFooter";
+import FilterDropdown from "./FilterDropdown";
 import { specialtyOptions, regionConfig, parseSortDate } from "../data/conferencesData";
+import { slugify } from "../utils";
 
-const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+// ——— Date helpers ———
+const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const MONTH_MAP  = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+const getYear  = (d) => d?.match(/\b(20\d{2})\b/)?.[1] ?? null;
+const getMonth = (d) => {
+  const m = d?.toLowerCase().match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/)?.[1];
+  return m ? MONTH_MAP[m] : null;
+};
 
+const FORMAT_OPTIONS = [
+  { value: "in-person", label: "In Person" },
+  { value: "online",    label: "Online"    },
+  { value: "hybrid",    label: "Hybrid"    },
+];
+
+// ——— Conference card ———
 const ConferenceCard = ({ conf }) => (
-  <div id={slugify(conf.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
+  <div
+    id={slugify(conf.title)}
+    className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
+  >
     <div className="flex flex-wrap gap-1.5 mb-3">
       {conf.specialties.map((s) => (
         <span key={s} className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">{s}</span>
       ))}
+      {conf.format && conf.format !== "in-person" && (
+        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+          conf.format === "online" ? "bg-green-100 text-green-700" : "bg-purple-100 text-purple-700"
+        }`}>
+          {conf.format === "online" ? "Online" : "Hybrid"}
+        </span>
+      )}
     </div>
     <h4 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{conf.title}</h4>
     <p className="text-sm text-blue-600 font-medium mb-3">{conf.organiser}</p>
@@ -51,52 +76,119 @@ const ConferenceCard = ({ conf }) => (
   </div>
 );
 
+// ——— Filter row used in both hub and sub-page views ———
+const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths, showRegions = true }) => {
+  const activeCount = Object.values(filters).reduce((n, arr) => n + arr.length, 0);
+  return (
+    <div className="flex flex-wrap gap-2 mb-6 items-center">
+      <FilterDropdown
+        label="Specialty"
+        options={specialtyOptions.slice(1)}
+        selected={filters.specialties}
+        onToggle={(v) => onToggle("specialties", v)}
+      />
+      {showRegions && (
+        <FilterDropdown
+          label="Region"
+          options={regionConfig.map((r) => ({ value: r.id, label: `${r.flag} ${r.name}` }))}
+          selected={filters.regions}
+          onToggle={(v) => onToggle("regions", v)}
+          valueKey="value"
+          labelKey="label"
+        />
+      )}
+      <FilterDropdown
+        label="Year"
+        options={availableYears}
+        selected={filters.years}
+        onToggle={(v) => onToggle("years", v)}
+      />
+      <FilterDropdown
+        label="Month"
+        options={availableMonths.map((m) => ({ value: m, label: MONTH_ABBR[m - 1] }))}
+        selected={filters.months}
+        onToggle={(v) => onToggle("months", v)}
+        valueKey="value"
+        labelKey="label"
+      />
+      <FilterDropdown
+        label="Format"
+        options={FORMAT_OPTIONS}
+        selected={filters.formats}
+        onToggle={(v) => onToggle("formats", v)}
+        valueKey="value"
+        labelKey="label"
+      />
+      {activeCount > 0 && (
+        <button
+          onClick={onClear}
+          className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2"
+        >
+          Clear all ({activeCount})
+        </button>
+      )}
+    </div>
+  );
+};
+
+const EMPTY_FILTERS = { specialties: [], regions: [], years: [], months: [], formats: [] };
+
+// ——— Main component ———
 const CPDPage = () => {
   const { region } = useParams();
-  const location = useLocation();
-  const urlSection = new URLSearchParams(location.search).get("section");
-  const [activeSection, setActiveSection] = useState(urlSection === "providers" ? "providers" : "conferences");
+  const location   = useLocation();
 
-  // Keep in sync if URL changes while mounted
-  useEffect(() => {
-    const s = new URLSearchParams(location.search).get("section");
-    if (s === "providers" || s === "conferences") setActiveSection(s);
-  }, [location.search]);
-  const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties");
+  const [filters, setFilters]           = useState(EMPTY_FILTERS);
   const [allConferences, setAllConferences] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading]           = useState(true);
+  const [error, setError]               = useState(null);
 
   useEffect(() => {
     fetch("/.netlify/functions/conferences")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load conferences");
-        return res.json();
-      })
-      .then((data) => {
-        setAllConferences(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then((res) => { if (!res.ok) throw new Error("Failed to load conferences"); return res.json(); })
+      .then((data) => { setAllConferences(data); setLoading(false); })
+      .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
 
-  // Scroll to anchor after data loads
   useEffect(() => {
     if (loading || !location.hash) return;
     const el = document.querySelector(location.hash);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [loading, location.hash]);
 
+  const availableYears = useMemo(
+    () => [...new Set(allConferences.map((c) => getYear(c.dates)).filter(Boolean))].sort(),
+    [allConferences]
+  );
+  const availableMonths = useMemo(
+    () => [...new Set(allConferences.map((c) => getMonth(c.dates)).filter(Boolean))].sort((a, b) => a - b),
+    [allConferences]
+  );
+
+  const toggleFilter = (category, value) =>
+    setFilters((prev) => ({
+      ...prev,
+      [category]: prev[category].includes(value)
+        ? prev[category].filter((v) => v !== value)
+        : [...prev[category], value],
+    }));
+
+  const clearFilters = () => setFilters(EMPTY_FILTERS);
+
+  // checkRegions = true on the hub page (user can filter by region dropdown);
+  // false on sub-pages where region is already implicit in the URL.
+  const matchesFilters = (conf, checkRegions = false) => {
+    if (filters.specialties.length > 0 && !conf.specialties.some((s) => filters.specialties.includes(s))) return false;
+    if (checkRegions && filters.regions.length > 0 && !conf.regions.some((r) => filters.regions.includes(r))) return false;
+    if (filters.years.length   > 0 && !filters.years.includes(getYear(conf.dates)))   return false;
+    if (filters.months.length  > 0 && !filters.months.includes(getMonth(conf.dates))) return false;
+    if (filters.formats.length > 0 && !filters.formats.includes(conf.format))         return false;
+    return true;
+  };
+
   const getConferencesForRegion = (regionId) =>
     allConferences
-      .filter(
-        (c) =>
-          c.regions.includes(regionId) &&
-          (selectedSpecialty === "All Specialties" || c.specialties.includes(selectedSpecialty))
-      )
+      .filter((c) => c.regions.includes(regionId) && matchesFilters(c, true))
       .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
 
   // ——— SUB-PAGE VIEW ———
@@ -115,7 +207,12 @@ const CPDPage = () => {
       );
     }
 
-    const regionConferences = getConferencesForRegion(region);
+    const regionConferences = allConferences
+      .filter((c) => c.regions.includes(region) && matchesFilters(c))
+      .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
+
+    const subPageActiveCount = ["specialties","years","months","formats"]
+      .reduce((n, k) => n + filters[k].length, 0);
 
     return (
       <div className="min-h-screen bg-white">
@@ -138,7 +235,7 @@ const CPDPage = () => {
             </div>
 
             {/* Region header */}
-            <div className="mb-10">
+            <div className="mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-4xl">{cfg.flag}</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">{cfg.name}</h2>
@@ -146,50 +243,61 @@ const CPDPage = () => {
               <p className="text-gray-500 text-lg">Upcoming veterinary conferences and congresses</p>
             </div>
 
-            {/* Loading / error */}
             {loading && <div className="text-center py-20 text-gray-400 text-sm">Loading conferences…</div>}
-            {error && <div className="text-center py-20 text-red-500 text-sm">Could not load conference data. Please refresh the page.</div>}
+            {error   && <div className="text-center py-20 text-red-500 text-sm">Could not load conference data. Please refresh the page.</div>}
 
             {!loading && !error && (
               <>
-                {/* Specialty filter */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-8 items-start sm:items-center">
-                  <div className="flex items-center gap-3">
-                    <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Filter by specialty:</label>
-                    <select
-                      value={selectedSpecialty}
-                      onChange={(e) => setSelectedSpecialty(e.target.value)}
-                      className="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-700 bg-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
-                    >
-                      {specialtyOptions.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <span className="text-sm text-gray-500">
-                    {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
-                    {selectedSpecialty !== "All Specialties" && (
-                      <>
-                        {" "}for <span className="font-medium text-blue-700">{selectedSpecialty}</span>
-                        <button
-                          onClick={() => setSelectedSpecialty("All Specialties")}
-                          className="ml-2 text-xs text-gray-400 hover:text-gray-600 underline"
-                        >
-                          Clear
-                        </button>
-                      </>
+                {/* Filters */}
+                <div className="mb-2">
+                  <div className="flex flex-wrap gap-2 mb-3 items-center">
+                    <FilterDropdown
+                      label="Specialty"
+                      options={specialtyOptions.slice(1)}
+                      selected={filters.specialties}
+                      onToggle={(v) => toggleFilter("specialties", v)}
+                    />
+                    <FilterDropdown
+                      label="Year"
+                      options={availableYears}
+                      selected={filters.years}
+                      onToggle={(v) => toggleFilter("years", v)}
+                    />
+                    <FilterDropdown
+                      label="Month"
+                      options={availableMonths.map((m) => ({ value: m, label: MONTH_ABBR[m - 1] }))}
+                      selected={filters.months}
+                      onToggle={(v) => toggleFilter("months", v)}
+                      valueKey="value"
+                      labelKey="label"
+                    />
+                    <FilterDropdown
+                      label="Format"
+                      options={FORMAT_OPTIONS}
+                      selected={filters.formats}
+                      onToggle={(v) => toggleFilter("formats", v)}
+                      valueKey="value"
+                      labelKey="label"
+                    />
+                    {subPageActiveCount > 0 && (
+                      <button onClick={clearFilters} className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2">
+                        Clear all ({subPageActiveCount})
+                      </button>
                     )}
-                  </span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-6">
+                    {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
+                  </p>
                 </div>
 
                 {regionConferences.length === 0 ? (
                   <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
-                    No conferences found{selectedSpecialty !== "All Specialties" ? ` for ${selectedSpecialty}` : ""} in this region.
+                    No conferences match the current filters for this region.
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {regionConferences.map((conf, i) => (
-                      <ConferenceCard key={i} conf={conf} />
+                      <ConferenceCard key={conf.title} conf={conf} />
                     ))}
                   </div>
                 )}
@@ -203,10 +311,7 @@ const CPDPage = () => {
   }
 
   // ——— HUB VIEW ———
-  const totalVisible = regionConfig.reduce(
-    (acc, r) => acc + getConferencesForRegion(r.id).length,
-    0
-  );
+  const totalVisible = regionConfig.reduce((acc, r) => acc + getConferencesForRegion(r.id).length, 0);
 
   return (
     <div className="min-h-screen bg-white">
@@ -222,39 +327,31 @@ const CPDPage = () => {
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Conferences sorted by date — filter by specialty or browse by region. CPD providers and online courses are listed under the second tab.
+              Conferences sorted by date — filter by specialty, region, year, month or format. CPD providers and online courses are listed under the second tab.
             </p>
           </div>
 
           {/* Section tabs */}
           <div className="flex border-b border-gray-200 mb-10 -mt-2">
-            {[
-              { id: "conferences", label: "Conferences & Congresses" },
-              { id: "providers",   label: "CPD Providers & Courses" },
-            ].map((s) => (
-              <button
-                key={s.id}
-                onClick={() => setActiveSection(s.id)}
-                className={`px-5 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${
-                  activeSection === s.id
-                    ? "border-blue-600 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700"
-                }`}
-              >
-                {s.label}
-              </button>
-            ))}
+            <button className="px-5 py-3 text-sm font-medium border-b-2 border-blue-600 text-blue-600 -mb-px transition-colors">
+              Conferences &amp; Congresses
+            </button>
+            <Link
+              to="/cpd/providers"
+              className="px-5 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 -mb-px transition-colors"
+            >
+              CPD Providers &amp; Courses
+            </Link>
           </div>
 
           {/* ——— CONFERENCES SECTION ——— */}
-          {activeSection === "conferences" && (
-            <div>
+          <div>
               {loading && <div className="text-center py-20 text-gray-400 text-sm">Loading conferences…</div>}
-              {error && <div className="text-center py-20 text-red-500 text-sm">Could not load conference data. Please refresh the page.</div>}
+              {error   && <div className="text-center py-20 text-red-500 text-sm">Could not load conference data. Please refresh the page.</div>}
 
               {!loading && !error && (
                 <>
-                  {/* Region cards */}
+                  {/* Region nav cards */}
                   <h2 className="text-lg font-semibold text-gray-700 mb-5">International Vet CE &amp; CPD — Browse by Region</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">
                     {regionConfig.map((r) => {
@@ -263,11 +360,7 @@ const CPDPage = () => {
                         <Link key={r.id} to={`/cpd/${r.id}`} className="group block">
                           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
                             <div className="h-32 relative overflow-hidden">
-                              <img
-                                src={r.image}
-                                alt={r.name}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
+                              <img src={r.image} alt={r.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                               <div className="absolute bottom-3 left-3 text-white">
                                 <h3 className="text-sm font-bold leading-tight">{r.name}</h3>
@@ -288,38 +381,20 @@ const CPDPage = () => {
                     })}
                   </div>
 
-                  {/* Filters */}
+                  {/* Filters + listing */}
                   <h2 className="text-lg font-semibold text-gray-700 mb-5">Clinical &amp; Professional Development Conferences</h2>
-                  <div className="flex flex-col sm:flex-row gap-4 mb-8 items-start sm:items-center">
-                    <div className="flex items-center gap-3">
-                      <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Filter by specialty:</label>
-                      <select
-                        value={selectedSpecialty}
-                        onChange={(e) => setSelectedSpecialty(e.target.value)}
-                        className="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-700 bg-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
-                      >
-                        {specialtyOptions.map((s) => (
-                          <option key={s} value={s}>{s}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <span className="text-sm text-gray-500">
-                      {totalVisible} conference{totalVisible !== 1 ? "s" : ""} shown
-                      {selectedSpecialty !== "All Specialties" && (
-                        <>
-                          {" "}for <span className="font-medium text-blue-700">{selectedSpecialty}</span>
-                          <button
-                            onClick={() => setSelectedSpecialty("All Specialties")}
-                            className="ml-2 text-xs text-gray-400 hover:text-gray-600 underline"
-                          >
-                            Clear
-                          </button>
-                        </>
-                      )}
-                    </span>
-                  </div>
+                  <FilterRow
+                    filters={filters}
+                    onToggle={toggleFilter}
+                    onClear={clearFilters}
+                    availableYears={availableYears}
+                    availableMonths={availableMonths}
+                    showRegions={true}
+                  />
+                  <p className="text-sm text-gray-500 mb-8">
+                    {totalVisible} conference{totalVisible !== 1 ? "s" : ""} shown
+                  </p>
 
-                  {/* All regions listed below */}
                   {regionConfig.map((r) => {
                     const conferences = getConferencesForRegion(r.id);
                     return (
@@ -336,12 +411,12 @@ const CPDPage = () => {
                         </div>
                         {conferences.length === 0 ? (
                           <div className="bg-white rounded-xl border border-gray-100 p-8 text-center text-gray-400 text-sm">
-                            No conferences found for <span className="font-medium">{selectedSpecialty}</span> in this region.
+                            No conferences match the current filters in this region.
                           </div>
                         ) : (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {conferences.map((conf, i) => (
-                              <ConferenceCard key={i} conf={conf} />
+                              <ConferenceCard key={conf.title} conf={conf} />
                             ))}
                           </div>
                         )}
@@ -350,11 +425,7 @@ const CPDPage = () => {
                   })}
                 </>
               )}
-            </div>
-          )}
-
-          {/* ——— CPD PROVIDERS SECTION ——— */}
-          {activeSection === "providers" && <CPDProviders />}
+          </div>
         </div>
       </main>
       <SharedFooter />

@@ -1,11 +1,23 @@
 import React from "react";
-const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import { slugify } from "../utils";
 
 const countryConfig = [
+  {
+    id: "australia",
+    name: "Australia",
+    flag: "🇦🇺",
+    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80"
+  },
+  {
+    id: "canada",
+    name: "Canada",
+    flag: "🇨🇦",
+    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
   {
     id: "uk",
     name: "United Kingdom",
@@ -17,18 +29,6 @@ const countryConfig = [
     name: "United States",
     flag: "🇺🇸",
     image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    id: "canada",
-    name: "Canada",
-    flag: "🇨🇦",
-    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    id: "australia",
-    name: "Australia",
-    flag: "🇦🇺",
-    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80"
   }
 ];
 
@@ -272,7 +272,7 @@ const programs = {
       title: "Apiam Animal Health Graduate Program",
       organisation: "Apiam Animal Health",
       description: "Graduate development programme focused on rural, regional, and production animal practice, offering mentored placements and career support across regional Australia.",
-      url: "https://www.apiam.com.au/careers/"
+      url: "https://www.apiam.com.au/apiam-careers/graduate-opportunities/"
     },
     {
       title: "AVA Mentoring Program",

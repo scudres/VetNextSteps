@@ -192,6 +192,7 @@ const conferences = [
     notes: "Resident-focused neuroscience education course.",
     regions: ["usa", "global"],
     specialties: ["Neurology"],
+    format: "online",
     category: "Specialty Conferences",
   },
 
@@ -205,6 +206,7 @@ const conferences = [
     notes: "2026 includes a dedicated minimally invasive soft tissue stream + surgical nursing CPD day.",
     regions: ["uk", "europe"],
     specialties: ["Surgery"],
+    format: "hybrid",
     category: "Specialty Conferences",
   },
   {
@@ -264,6 +266,7 @@ const conferences = [
     notes: "VECCUS ultrasound symposium 3 Jun 2026. On-demand access available for 2026.",
     regions: ["uk", "europe"],
     specialties: ["Emergency & Critical Care"],
+    format: "hybrid",
     category: "Specialty Conferences",
   },
   {
@@ -854,6 +857,7 @@ const conferences = [
     notes: "Comprehensive online course covering the drivers of sheep production systems in New Zealand.",
     regions: ["new-zealand"],
     specialties: ["Farm Animal"],
+    format: "online",
     category: "Farm Animal",
   },
   {
@@ -876,6 +880,7 @@ const conferences = [
     notes: "Online course: tools to recognise, diagnose, prevent and respond to facial eczema in livestock.",
     regions: ["new-zealand"],
     specialties: ["Farm Animal"],
+    format: "online",
     category: "Farm Animal",
   },
   {
@@ -959,4 +964,6 @@ const conferences = [
   },
 ];
 
-module.exports = { conferences };
+module.exports = {
+  conferences: conferences.map((c) => ({ format: "in-person", ...c })),
+};

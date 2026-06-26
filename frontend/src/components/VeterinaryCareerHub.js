@@ -75,6 +75,49 @@ const StepBar = ({ steps }) => (
   </div>
 );
 
+const countries = [
+  {
+    name: "Australia",
+    code: "Australia",
+    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
+    highlights: [
+      "Your degree needs to be AVBC-recognised — if not, you'll sit the AVE exam",
+      "Skills in Demand visa (482) with employer sponsorship is the most common route",
+      "Vets are on the skilled occupation list — PR pathways (189/190/491) are open",
+    ],
+  },
+  {
+    name: "Canada",
+    code: "Canada",
+    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600",
+    highlights: [
+      "Licence through your province's own regulatory body",
+      "CVMA manages credential assessment for overseas graduates",
+      "Strong demand in rural and northern communities — useful for PR applications",
+    ],
+  },
+  {
+    name: "United Kingdom",
+    code: "UK",
+    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600",
+    highlights: [
+      "Register with RCVS before you start practising",
+      "CertAVP is the main postgrad certificate route — multiple universities offer it",
+      "Strong referral sector with structured graduate programmes at the major corporate groups",
+    ],
+  },
+  {
+    name: "United States",
+    code: "USA",
+    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
+    highlights: [
+      "Sit the NAVLE in your target state — required in all 50",
+      "Apply through VIRMP if you want a rotating internship before specialist training",
+      "Each state board sets its own additional licensing requirements",
+    ],
+  },
+];
+
 const VeterinaryCareerHub = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchParams] = useSearchParams();
@@ -91,49 +134,6 @@ const VeterinaryCareerHub = () => {
       setActiveTab(tab);
     }
   }, [searchParams, navigate]);
-
-  const countries = [
-    {
-      name: "United Kingdom",
-      code: "UK",
-      image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600",
-      highlights: [
-        "Register with RCVS before you start practising",
-        "CertAVP is the main postgrad certificate route — multiple universities offer it",
-        "Strong referral sector with structured graduate programmes at the major corporate groups",
-      ],
-    },
-    {
-      name: "United States",
-      code: "USA",
-      image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
-      highlights: [
-        "Sit the NAVLE in your target state — required in all 50",
-        "Apply through VIRMP if you want a rotating internship before specialist training",
-        "Each state board sets its own additional licensing requirements",
-      ],
-    },
-    {
-      name: "Canada",
-      code: "Canada",
-      image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600",
-      highlights: [
-        "Licence through your province's own regulatory body",
-        "CVMA manages credential assessment for overseas graduates",
-        "Strong demand in rural and northern communities — useful for PR applications",
-      ],
-    },
-    {
-      name: "Australia",
-      code: "Australia",
-      image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
-      highlights: [
-        "Your degree needs to be AVBC-recognised — if not, you'll sit the AVE exam",
-        "Skills in Demand visa (482) with employer sponsorship is the most common route",
-        "Vets are on the skilled occupation list — PR pathways (189/190/491) are open",
-      ],
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-white">

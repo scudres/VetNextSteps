@@ -34,7 +34,6 @@ const AcronymTooltip = ({ term, children }) => {
         onFocus={() => setVisible(true)}
         onBlur={() => setVisible(false)}
         tabIndex={0}
-        role="button"
         aria-describedby={`tooltip-${term}`}
       >
         {children || term}

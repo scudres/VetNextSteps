@@ -162,7 +162,7 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
                     {results.map((result, i) => (
                       <button
                         key={i}
-                        onClick={() => handleResultClick(result)}
+                        onClick={handleResultClick}
                         className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors border-b border-gray-50 last:border-0"
                       >
                         <div className="flex items-start gap-2">
