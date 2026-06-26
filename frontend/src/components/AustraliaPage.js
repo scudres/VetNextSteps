@@ -277,34 +277,6 @@ const AustraliaPage = () => {
             </div>
           </section>
 
-          {/* Pathway Comparison */}
-          <section>
-            <div className="bg-gradient-to-r from-blue-700 to-blue-900 rounded-xl p-6 md:p-8 text-white">
-              <h3 className="text-xl font-bold mb-5">Which Pathway Is Right for You?</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="bg-white bg-opacity-10 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Choose 482 → 186 if you:</h4>
-                  <ul className="text-sm text-blue-100 space-y-1">
-                    <li>• Have a confirmed job offer in Australia</li>
-                    <li>• Want to start working quickly and build PR over time</li>
-                    <li>• Are comfortable relying on employer sponsorship</li>
-                    <li>• Have limited overseas work experience for points</li>
-                  </ul>
-                </div>
-                <div className="bg-white bg-opacity-10 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Choose Points-Based (189/190/491) if you:</h4>
-                  <ul className="text-sm text-blue-100 space-y-1">
-                    <li>• Want flexibility to work for any employer</li>
-                    <li>• Have strong English (IELTS 7+ each band)</li>
-                    <li>• Have substantial overseas work experience</li>
-                    <li>• Are open to living in a regional area (491 — easier to get nominated)</li>
-                  </ul>
-                </div>
-              </div>
-              <p className="text-xs text-blue-200 mt-4">Always seek advice from a registered Australian migration agent (MARA) for your individual circumstances.</p>
-            </div>
-          </section>
-
           {/* Programmes */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Australia Programmes & Opportunities</h2>

@@ -1,16 +1,17 @@
-import React from "react";
-const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import FilterDropdown from "./FilterDropdown";
+import { slugify } from "../utils";
 
 const regionConfig = [
   {
-    id: "uk",
-    name: "United Kingdom",
-    flag: "🇬🇧",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600"
+    id: "europe",
+    name: "Europe",
+    flag: "🇪🇺",
+    image: "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "north-america",
@@ -19,10 +20,10 @@ const regionConfig = [
     image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
-    id: "europe",
-    name: "Europe",
-    flag: "🇪🇺",
-    image: "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600"
+    id: "uk",
+    name: "United Kingdom",
+    flag: "🇬🇧",
+    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "worldwide",
@@ -30,6 +31,25 @@ const regionConfig = [
     flag: "🌍",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80"
   },
+];
+
+// Specialties relevant to internships & residencies
+const SPECIALTY_OPTIONS = [
+  "Anaesthesia",
+  "Cardiology",
+  "Dermatology",
+  "Emergency & Critical Care",
+  "Endocrinology",
+  "Equine",
+  "Imaging",
+  "Internal Medicine",
+  "Microbiology",
+  "Neurology",
+  "Nutrition",
+  "Oncology",
+  "Ophthalmology",
+  "Pathology",
+  "Surgery",
 ];
 
 const programs = [
@@ -40,7 +60,9 @@ const programs = [
     url: "https://www.virmp.org/",
     region: "north-america",
     type: "internship",
-    species: "small animal, equine, farm animal"
+    species: "small animal, equine, farm animal",
+    internshipType: "both",
+    specialties: [],
   },
   {
     title: "Royal Veterinary College Rotating Internship Programme",
@@ -49,7 +71,9 @@ const programs = [
     url: "https://www.rvc.ac.uk/study/postgraduate/internships/small-animal",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "rotating",
+    specialties: [],
   },
   {
     title: "Royal Veterinary College Small Animal Residency Programmes",
@@ -58,7 +82,8 @@ const programs = [
     url: "https://www.rvc.ac.uk/study/postgraduate/residencies/small-animal",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care","Cardiology","Oncology","Anaesthesia","Imaging"],
   },
   {
     title: "University of Liverpool Rotating Internship Programme",
@@ -67,7 +92,9 @@ const programs = [
     url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/internships/",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "rotating",
+    specialties: [],
   },
   {
     title: "University of Liverpool Anaesthesia Internship Programme",
@@ -76,7 +103,9 @@ const programs = [
     url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/internships/",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "discipline-specific",
+    specialties: ["Anaesthesia"],
   },
   {
     title: "University of Liverpool Small Animal Residency Programme",
@@ -85,7 +114,8 @@ const programs = [
     url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/residencies/",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care","Cardiology","Oncology","Anaesthesia","Imaging"],
   },
   {
     title: "University of Cambridge Rotating Internship Programme",
@@ -94,7 +124,9 @@ const programs = [
     url: "https://www.vet.cam.ac.uk/study/cts/jcts1/smallanimal",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "rotating",
+    specialties: [],
   },
   {
     title: "University of Cambridge Senior Clinical Training Scholarship / Residency Programme",
@@ -103,7 +135,8 @@ const programs = [
     url: "https://www.vet.cam.ac.uk/study/cts/jcts1/smallanimal",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Cardiology"],
   },
   {
     title: "University of Edinburgh Rotating Internship Programme",
@@ -112,7 +145,9 @@ const programs = [
     url: "https://vet.ed.ac.uk/clinical/vacancies/rotating-interns",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "rotating",
+    specialties: [],
   },
   {
     title: "University of Edinburgh Residency / Clinical Scholarship Programme",
@@ -121,7 +156,8 @@ const programs = [
     url: "https://vet.ed.ac.uk/clinical/vacancies/clinicalscholarships",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Emergency & Critical Care"],
   },
   {
     title: "University of Glasgow Small Animal Internship Programme",
@@ -130,7 +166,9 @@ const programs = [
     url: "https://www.gla.ac.uk/explore/jobs/appointments/sahvacancies/",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "rotating",
+    specialties: [],
   },
   {
     title: "University of Glasgow Small Animal Residency Programme",
@@ -139,7 +177,8 @@ const programs = [
     url: "https://www.gla.ac.uk/explore/jobs/appointments/sahvacancies/",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care"],
   },
   {
     title: "IVC Evidensia Rotating and Discipline-Specific Internships",
@@ -148,7 +187,9 @@ const programs = [
     url: "https://ivcevidensia.co.uk/careers?roles=8",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "both",
+    specialties: [],
   },
   {
     title: "IVC Evidensia Small Animal Residency Programmes",
@@ -157,7 +198,8 @@ const programs = [
     url: "https://ivcevidensia.co.uk/careers?roles=9",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Emergency & Critical Care"],
   },
   {
     title: "Linnaeus Small Animal Rotating and Discipline-Specific Internships",
@@ -166,7 +208,9 @@ const programs = [
     url: "https://www.linnaeusgroup.co.uk/careers/internships",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "both",
+    specialties: [],
   },
   {
     title: "Linnaeus Small Animal Residency Programmes",
@@ -175,7 +219,8 @@ const programs = [
     url: "https://www.linnaeusgroup.co.uk/careers/vacancies?role=6",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Cardiology"],
   },
   {
     title: "CVS Small Animal Rotating and Discipline-Specific Internship Programmes",
@@ -184,7 +229,9 @@ const programs = [
     url: "https://cvs-referrals.com/careers/internship/",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "both",
+    specialties: [],
   },
   {
     title: "CVS Small Animal Residency Programmes",
@@ -193,7 +240,8 @@ const programs = [
     url: "https://cvs-referrals.com/careers/residencies/",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Emergency & Critical Care"],
   },
   {
     title: "The Ralph Veterinary Internship Programmes",
@@ -202,7 +250,9 @@ const programs = [
     url: "https://theralph.vet/join-team-ralph/",
     region: "uk",
     type: "internship",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "both",
+    specialties: [],
   },
   {
     title: "The Ralph Veterinary Residency Programme",
@@ -211,7 +261,8 @@ const programs = [
     url: "https://theralph.vet/join-team-ralph/",
     region: "uk",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery","Internal Medicine","Neurology","Ophthalmology","Emergency & Critical Care"],
   },
   {
     title: "BEVA Recognised Equine Internship",
@@ -220,7 +271,9 @@ const programs = [
     url: "https://www.beva.org.uk/New-Vet-Grads/Recognised-Internships",
     region: "worldwide",
     type: "internship",
-    species: "equine"
+    species: "equine",
+    internshipType: "discipline-specific",
+    specialties: ["Equine"],
   },
   {
     title: "ECVS Residency Training",
@@ -229,7 +282,8 @@ const programs = [
     url: "https://www.ecvs.org/ecvs-for/residents.php",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Surgery"],
   },
   {
     title: "ECVP Residency Programme",
@@ -238,7 +292,8 @@ const programs = [
     url: "https://www.ecvpath.org/resident-registration",
     region: "europe",
     type: "residency",
-    species: "mixed"
+    species: "mixed",
+    specialties: ["Pathology"],
   },
   {
     title: "ECVIM-CA Residency Programmes",
@@ -247,7 +302,8 @@ const programs = [
     url: "https://ecvim-ca.college/residency-vacancies/",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Internal Medicine","Cardiology","Oncology","Endocrinology"],
   },
   {
     title: "ECVM Residency Programmes",
@@ -256,7 +312,8 @@ const programs = [
     url: "https://ecvmicro.org/training-centers/",
     region: "europe",
     type: "residency",
-    species: "mixed"
+    species: "mixed",
+    specialties: ["Microbiology"],
   },
   {
     title: "ECVAA Residency Programmes",
@@ -265,7 +322,8 @@ const programs = [
     url: "https://www.ecvaa.org/ecvaa/training-centers-list",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Anaesthesia"],
   },
   {
     title: "ECVCN Residency Programmes",
@@ -274,7 +332,8 @@ const programs = [
     url: "https://www.ecvcn.org/why-become-resident-why-become-supervisor",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Nutrition"],
   },
   {
     title: "ECVCP Residency Programmes",
@@ -283,7 +342,8 @@ const programs = [
     url: "https://www.esvcp.org/open-positions.html",
     region: "europe",
     type: "residency",
-    species: "mixed"
+    species: "mixed",
+    specialties: ["Pathology"],
   },
   {
     title: "ECVD Residency Programmes",
@@ -292,7 +352,8 @@ const programs = [
     url: "https://www.ecvd.org/programmes/start-your-residency/",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Dermatology"],
   },
   {
     title: "ECVDI Residency Programmes",
@@ -301,7 +362,8 @@ const programs = [
     url: "https://www.ecvdi.org/training-centers-list",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Imaging"],
   },
   {
     title: "ECVECC Residency Programmes",
@@ -310,7 +372,8 @@ const programs = [
     url: "https://www.ecvecc.org/resident-training-facilities",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Emergency & Critical Care"],
   },
   {
     title: "ECVN Residency Programmes",
@@ -319,7 +382,8 @@ const programs = [
     url: "https://www.ecvn.org/general-information/open-residency-position",
     region: "europe",
     type: "residency",
-    species: "small animal"
+    species: "small animal",
+    specialties: ["Neurology"],
   },
   {
     title: "ECVO Internship & Residency Programmes",
@@ -328,7 +392,9 @@ const programs = [
     url: "https://www.ecvo.eu/residents/training-job-opportunities-for-interns-residents.html",
     region: "europe",
     type: "internship & residency",
-    species: "small animal"
+    species: "small animal",
+    internshipType: "discipline-specific",
+    specialties: ["Ophthalmology"],
   },
 ];
 
@@ -349,11 +415,57 @@ const licensingNote = {
   ),
 };
 
+const PROGRAM_TYPE_OPTIONS = [
+  { value: "rotating",            label: "Rotating Internship"            },
+  { value: "discipline-specific", label: "Discipline-Specific Internship" },
+  { value: "residency",           label: "Residency"                      },
+];
+
+const programMatchesFilters = (p, typeFilters, specialtyFilters) => {
+  // Type filter
+  if (typeFilters.length > 0) {
+    const matchesType = typeFilters.some((ft) => {
+      if (ft === "rotating") {
+        return p.type === "internship" && (p.internshipType === "rotating" || p.internshipType === "both");
+      }
+      if (ft === "discipline-specific") {
+        return (
+          (p.type === "internship" || p.type === "internship & residency") &&
+          (p.internshipType === "discipline-specific" || p.internshipType === "both")
+        );
+      }
+      if (ft === "residency") {
+        return p.type === "residency" || p.type === "internship & residency";
+      }
+      return false;
+    });
+    if (!matchesType) return false;
+  }
+  // Specialty filter — umbrella entries (empty specialties) always pass
+  if (specialtyFilters.length > 0 && p.specialties && p.specialties.length > 0) {
+    if (!p.specialties.some((s) => specialtyFilters.includes(s))) return false;
+  }
+  return true;
+};
+
 const ProgramCard = ({ program }) => (
   <div id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
     <div className="flex flex-wrap gap-2 mb-3">
-      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">{program.type}</span>
+      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">
+        {program.type === "internship" && program.internshipType === "rotating"
+          ? "Rotating Internship"
+          : program.type === "internship" && program.internshipType === "discipline-specific"
+          ? "Discipline-Specific Internship"
+          : program.type === "internship" && program.internshipType === "both"
+          ? "Rotating & Discipline-Specific Internship"
+          : program.type === "internship & residency"
+          ? "Internship & Residency"
+          : program.type}
+      </span>
       <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs capitalize">{program.species}</span>
+      {program.specialties && program.specialties.length > 0 && program.specialties.map((s) => (
+        <span key={s} className="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full text-xs">{s}</span>
+      ))}
     </div>
     <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
     <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
@@ -374,11 +486,19 @@ const ProgramCard = ({ program }) => (
 
 const InternshipsResidencies = () => {
   const { region } = useParams();
+  const [typeFilters,      setTypeFilters]      = useState([]);
+  const [specialtyFilters, setSpecialtyFilters] = useState([]);
+
+  const toggleType      = (v) => setTypeFilters((p)      => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
+  const toggleSpecialty = (v) => setSpecialtyFilters((p) => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
+  const clearFilters    = ()  => { setTypeFilters([]); setSpecialtyFilters([]); };
+  const activeCount     = typeFilters.length + specialtyFilters.length;
 
   // ——— Sub-page: single region ———
   if (region) {
-    const cfg = regionConfig.find(r => r.id === region);
-    const regionPrograms = programs.filter(p => p.region === region);
+    const cfg = regionConfig.find((r) => r.id === region);
+    const regionPrograms = programs
+      .filter((p) => p.region === region && programMatchesFilters(p, typeFilters, specialtyFilters));
 
     if (!cfg) {
       return (
@@ -418,16 +538,52 @@ const InternshipsResidencies = () => {
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
               <span className="text-3xl">{cfg.flag}</span>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
-              <span className="ml-auto text-sm text-gray-400">{regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}</span>
+              <span className="ml-auto text-sm text-gray-400">
+                {regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}
+              </span>
             </div>
 
             {licensingNote[region]}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {regionPrograms.map((program, index) => (
-                <ProgramCard key={index} program={program} />
-              ))}
+            {/* Filters */}
+            <div className="flex flex-wrap gap-2 mb-4 items-center">
+              <FilterDropdown
+                label="Type"
+                options={PROGRAM_TYPE_OPTIONS}
+                selected={typeFilters}
+                onToggle={toggleType}
+                valueKey="value"
+                labelKey="label"
+              />
+              <FilterDropdown
+                label="Specialty"
+                options={SPECIALTY_OPTIONS}
+                selected={specialtyFilters}
+                onToggle={toggleSpecialty}
+              />
+              {activeCount > 0 && (
+                <button onClick={clearFilters} className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2">
+                  Clear all ({activeCount})
+                </button>
+              )}
             </div>
+            {activeCount > 0 && (
+              <p className="text-xs text-gray-400 mb-6">
+                Umbrella programmes covering multiple disciplines appear for all specialty filters.
+              </p>
+            )}
+
+            {regionPrograms.length === 0 ? (
+              <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
+                No programmes match the current filters in this region.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {regionPrograms.map((program, index) => (
+                  <ProgramCard key={index} program={program} />
+                ))}
+              </div>
+            )}
 
           </div>
         </main>
@@ -461,7 +617,7 @@ const InternshipsResidencies = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {regionConfig.map((r) => {
-              const count = programs.filter(p => p.region === r.id).length;
+              const count = programs.filter((p) => p.region === r.id).length;
               return (
                 <Link key={r.id} to={`/internships-residencies/${r.id}`} className="group block">
                   <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
