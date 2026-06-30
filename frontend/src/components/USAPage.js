@@ -11,7 +11,7 @@ const USAPage = () => {
     { name: "AVMA — American Veterinary Medical Association", url: "https://www.avma.org/" },
     { name: "AVMA — Guide for Foreign Veterinary Graduates", url: "https://www.avma.org/education/foreign/information-foreign-veterinary-graduates-working-veterinarian-us" },
     { name: "AVMA — ECFVG Certification", url: "https://www.avma.org/education/ecfvg" },
-    { name: "AAVSB — PAVE Program", url: "https://www.aavsb.org/student-services/preparing-for-licensure" },
+    { name: "AAVSB — PAVE Program", url: "https://www.aavsb.org/licensure/international-pathway-for-veterinarians/" },
     { name: "VIRMP — Veterinary Internship & Residency Matching", url: "https://www.virmp.org/" },
     { name: "AAVSB — State Licensing Boards Directory", url: "https://www.aavsb.org/" },
     { name: "U.S. Department of State — Visas", url: "https://travel.state.gov/content/travel/en/us-visas.html" },
@@ -88,29 +88,32 @@ const USAPage = () => {
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
               <h3 className="text-xl font-bold text-blue-700 mb-5">Educational Equivalency for Foreign Graduates</h3>
               <p className="text-gray-600 mb-5 text-sm">
-                Graduates from non-AVMA accredited schools must obtain equivalency certification before sitting the NAVLE. There are two pathways:
+                Graduates — and final-year students — from non-AVMA-accredited schools must obtain equivalency certification before sitting the NAVLE. You must have graduated from, or be in your final year at, an <strong>AVMA ECFVG-listed school</strong> to be eligible for either pathway.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
                 <div className="bg-green-50 p-5 rounded-lg border border-green-200">
                   <h4 className="font-semibold text-green-900 mb-2">ECFVG Certification</h4>
-                  <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA. Four steps:</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• <strong>Step 1:</strong> Registration & credential verification</li>
-                    <li>• <strong>Step 2:</strong> English language competency (TOEFL iBT or IELTS)</li>
-                    <li>• <strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE)</li>
-                    <li>• <strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — 3-day hands-on exam</li>
+                  <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA. Accepted by <strong>all U.S. state veterinary regulatory boards</strong> and the federal government. Four steps:</p>
+                  <ul className="text-sm text-gray-700 space-y-1.5">
+                    <li>• <strong>Step 1:</strong> Enrollment & credential verification — graduates provide proof of degree; final-year students provide transcripts + a letter from their college confirming graduation within the year</li>
+                    <li>• <strong>Step 2:</strong> English language assessment — TOEFL iBT, IELTS Academic (min. 6.5 overall), or CAEL</li>
+                    <li>• <strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE) — fee $250 from Jan 2026</li>
+                    <li>• <strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — hands-on practical exam at Viticus Group (Las Vegas) or Mississippi State University</li>
                   </ul>
+                  <p className="text-xs text-gray-500 mt-3 italic">Steps 3 & 4 must be completed within 7 years of passing Step 2. ECFVG certification does not equate to state licensure — you must still pass the NAVLE and any state-specific exams.</p>
                   <a href="https://www.avma.org/education/ecfvg" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-green-700 hover:text-green-900 font-medium">Learn more →</a>
                 </div>
                 <div className="bg-yellow-50 p-5 rounded-lg border border-yellow-200">
                   <h4 className="font-semibold text-yellow-900 mb-2">PAVE Program</h4>
-                  <p className="text-sm text-gray-600 mb-3">Program for the Assessment of Veterinary Education Equivalence — administered by AAVSB</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Alternative to ECFVG</li>
-                    <li>• Not accepted in all states — verify first</li>
-                    <li>• Check state board acceptance before applying</li>
+                  <p className="text-sm text-gray-600 mb-3">Program for the Assessment of Veterinary Education Equivalence — administered by AAVSB. Four steps:</p>
+                  <ul className="text-sm text-gray-700 space-y-1.5">
+                    <li>• <strong>Step 1:</strong> Application & English proficiency documentation</li>
+                    <li>• <strong>Step 2:</strong> Qualifying Science Examination (QSE)</li>
+                    <li>• <strong>Step 3:</strong> Evaluated Clinical Experience (ECE) — hands-on placement at an AVMA-accredited school</li>
+                    <li>• <strong>Step 4:</strong> PAVE Certificate issued</li>
                   </ul>
-                  <a href="https://www.aavsb.org/student-services/preparing-for-licensure" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-yellow-700 hover:text-yellow-900 font-medium">Learn more →</a>
+                  <p className="text-xs text-gray-500 mt-3 italic">Not accepted in all states — verify your jurisdiction first. High demand means significant waiting periods for ECE placement; passing the QSE and paying fees does not guarantee a place.</p>
+                  <a href="https://www.aavsb.org/licensure/international-pathway-for-veterinarians/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-yellow-700 hover:text-yellow-900 font-medium">Learn more →</a>
                 </div>
               </div>
             </div>
@@ -124,10 +127,11 @@ const USAPage = () => {
                     <ul className="text-sm text-gray-700 space-y-1">
                       <li>• Required in all 50 states and Canada</li>
                       <li>• 360 multiple-choice questions (60 unscored pre-test items)</li>
-                      <li>• Format from Oct 2026: 12 blocks of 30 questions</li>
+                      <li>• Format from Oct 2026: 12 blocks of 30 questions (previously 6 blocks of 60)</li>
                       <li>• Covers all veterinary medicine disciplines</li>
                       <li>• Offered during specific testing windows at Prometric centres</li>
                       <li>• Administered by ICVA</li>
+                      <li>• From March 2026: all candidates receive 5 attempts; prior attempts before Dec 2025 do not count toward this limit</li>
                     </ul>
                     <a
                       href="https://www.icva.net/navle/"

@@ -43,8 +43,9 @@ function App() {
             <Route path="/"                                        element={<VeterinaryCareerHub />} />
             <Route path="/training-programs"                       element={<TrainingPrograms />} />
             <Route path="/training-programs/:country"              element={<TrainingPrograms />} />
-            <Route path="/internships-residencies"                 element={<InternshipsResidencies />} />
-            <Route path="/internships-residencies/:region"         element={<InternshipsResidencies />} />
+            <Route path="/internships-residencies"                              element={<InternshipsResidencies />} />
+            <Route path="/internships-residencies/:region"                    element={<InternshipsResidencies />} />
+            <Route path="/internships-residencies/:region/:subCategory"       element={<InternshipsResidencies />} />
             <Route path="/postgraduate-certificates"               element={<PostgraduateCertificates />} />
             <Route path="/postgraduate-certificates/:country"      element={<PostgraduateCertificates />} />
             <Route path="/uk"                                      element={<UKPage />} />

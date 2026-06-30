@@ -285,10 +285,40 @@ const programs = {
 
 const licensingNote = {
   uk: (
-    <p className="text-sm text-gray-500 mb-6">
-      Coming from overseas? You'll also need RCVS registration and a Skilled Worker Visa.{" "}
-      <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
-    </p>
+    <>
+      {/* VetGDP banner */}
+      <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-6">
+        <div className="flex items-start gap-3">
+          <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          </svg>
+          <div>
+            <p className="text-sm font-semibold text-green-900 mb-1">Look for a VetGDP-accredited practice</p>
+            <p className="text-sm text-green-800 leading-relaxed mb-2">
+              The <strong>RCVS Veterinary Graduate Development Programme (VetGDP)</strong> is a structured framework that supports new graduates in their first year of practice. Participating practices commit to providing a dedicated VetGDP Adviser, regular review meetings, and a supportive environment for early-career development — making a real difference to how you settle into UK veterinary work.
+            </p>
+            <p className="text-sm text-green-800 leading-relaxed mb-3">
+              When researching practices, look for the <strong>VetGDP logo</strong> or mentions of their VetGDP accreditation on their website and job listings — a strong signal of a practice that genuinely invests in its new graduates.
+            </p>
+            <a
+              href="https://www.rcvs.org.uk/veterinary-professionals/learning-and-development/training-and-development-for-veterinary-surgeons/veterinary-graduate-development-programme-vetgdp/vetgdp-information-for-graduates"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm font-medium text-green-700 hover:text-green-900 underline underline-offset-2"
+            >
+              Learn more about VetGDP on RCVS.org.uk
+              <svg className="ml-1 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p className="text-sm text-gray-500 mb-6">
+        Coming from overseas? You'll also need RCVS registration and a Skilled Worker Visa.{" "}
+        <Link to="/uk" className="text-blue-600 hover:text-blue-800 font-medium">See the UK licensing guide →</Link>
+      </p>
+    </>
   ),
   usa: (
     <p className="text-sm text-gray-500 mb-6">
