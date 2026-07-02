@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -33,6 +33,16 @@ const ContactPage = () => {
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    if (!process.env.REACT_APP_TURNSTILE_SITE_KEY) return;
+    if (document.querySelector('script[src*="turnstile"]')) return;
+    const s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }, []);
+
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const validate = () => {
@@ -63,7 +73,11 @@ const ContactPage = () => {
       const res = await fetch("/.netlify/functions/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          website: "",
+          cfToken: document.querySelector('[name="cf-turnstile-response"]')?.value || "",
+        }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -127,6 +141,9 @@ const ContactPage = () => {
           {/* Form */}
           {status !== "success" && (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
+              {/* Honeypot — filled only by bots */}
+              <input name="website" tabIndex="-1" autoComplete="off" aria-hidden="true"
+                style={{ display: "none" }} value="" readOnly />
 
               {/* Error banner */}
               {status === "error" && (
@@ -194,6 +211,14 @@ const ContactPage = () => {
                   placeholder="Write your message here…"
                 />
               </Field>
+
+              {process.env.REACT_APP_TURNSTILE_SITE_KEY && (
+                <div
+                  className="cf-turnstile"
+                  data-sitekey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                  data-theme="light"
+                />
+              )}
 
               <div className="pt-1">
                 <button

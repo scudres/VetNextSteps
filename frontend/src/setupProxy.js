@@ -5,9 +5,12 @@
  * behaviour exactly matches production. No data or logic is duplicated here.
  */
 
-const conferencesHandler = require("../../functions/conferences").handler;
-const providersHandler   = require("../../functions/providers").handler;
-const searchHandler      = require("../../functions/search").handler;
+const conferencesHandler  = require("../../functions/conferences").handler;
+const providersHandler    = require("../../functions/providers").handler;
+const searchHandler       = require("../../functions/search").handler;
+const trainingHandler     = require("../../functions/training").handler;
+const internshipsHandler  = require("../../functions/internships").handler;
+const certsHandler        = require("../../functions/certificates").handler;
 
 const DEV_ORIGIN = "http://localhost:3000";
 
@@ -47,6 +50,18 @@ module.exports = function (app) {
 
   app.get("/.netlify/functions/search", (req, res) =>
     invoke(searchHandler, getEvent({ q: req.query.q || "" }), res)
+  );
+
+  app.get("/.netlify/functions/training", (req, res) =>
+    invoke(trainingHandler, getEvent(), res)
+  );
+
+  app.get("/.netlify/functions/internships", (req, res) =>
+    invoke(internshipsHandler, getEvent(), res)
+  );
+
+  app.get("/.netlify/functions/certificates", (req, res) =>
+    invoke(certsHandler, getEvent(), res)
   );
 
   // Contact form stub — returns success without sending email in dev.

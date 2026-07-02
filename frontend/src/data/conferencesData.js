@@ -39,42 +39,6 @@ export const parseSortDate = (dateStr) => {
   return year * 10000 + month * 100 + day;
 };
 
-// Expands conferences that have multiple year dates (separated by ";") into
-// one entry per year occurrence, each with its own sort-able date and location.
-export const expandMultiYearConferences = (conferencesArray) => {
-  const expanded = [];
-  for (const conf of conferencesArray) {
-    const segments = conf.dates.split(";").map((s) => s.trim()).filter(Boolean);
-    if (segments.length <= 1) {
-      expanded.push(conf);
-      continue;
-    }
-    // Collect the years present across segments
-    const years = segments.map((s) => {
-      const m = s.match(/\b(20\d{2})\b/);
-      return m ? m[1] : null;
-    });
-    const uniqueYears = [...new Set(years.filter(Boolean))];
-    if (uniqueYears.length <= 1) {
-      // All same year — keep as one entry
-      expanded.push(conf);
-      continue;
-    }
-    // Multiple distinct years — create one entry per segment
-    for (const segment of segments) {
-      // Extract trailing parenthetical as location override e.g. "10–12 Sep 2026 (Berlin)"
-      const locMatch = segment.match(/\(([^)]+)\)\s*$/);
-      const overrideLocation = locMatch ? locMatch[1] : null;
-      expanded.push({
-        ...conf,
-        dates: segment,          // e.g. "10–12 Sep 2026 (Berlin)"
-        location: overrideLocation || conf.location,
-      });
-    }
-  }
-  return expanded;
-};
-
 export const specialtyOptions = [
   "All Specialties",
   "General Practice",

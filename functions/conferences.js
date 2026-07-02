@@ -25,7 +25,7 @@ exports.handler = async (event) => {
     headers: {
       ...corsHeaders(origin),
       "Content-Type": "application/json",
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": "private, max-age=3600",
     },
     body: BODY,
   };

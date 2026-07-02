@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -7,14 +7,8 @@ import FilterDropdown from "./FilterDropdown";
 import { slugify } from "../utils";
 import {
   countryConfig,
-  ukPrograms,
-  usaCertCategories,
-  usaTotalCount,
-  australiaPrograms,
-  newZealandPrograms,
   OCEANIA_TYPE_OPTIONS,
   TYPE_LABELS,
-  countForHub,
 } from "../data/certificatesData";
 
 // ─── Shared UI primitives ─────────────────────────────────────────────────────
@@ -61,6 +55,12 @@ const BackLink = () => (
 const InfoBox = ({ children }) => (
   <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8">
     {children}
+  </div>
+);
+
+const Spinner = () => (
+  <div className="flex justify-center py-16">
+    <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
   </div>
 );
 
@@ -128,7 +128,7 @@ const FilterBar = ({ options, selected, onToggle, onClear }) => (
 
 // ─── Shared layout for Oceania (AU / NZ) pages ───────────────────────────────
 
-const OceaniaPageLayout = ({ programs, helmet, flag, countryName, infoBox, careerGuideLink }) => {
+const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoBox, careerGuideLink }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
 
   const toggle = (val) =>
@@ -151,30 +151,36 @@ const OceaniaPageLayout = ({ programs, helmet, flag, countryName, infoBox, caree
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
             <span className="text-3xl">{flag}</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{countryName}</h1>
-            <span className="ml-auto text-sm text-gray-400">
-              {visible.length === programs.length
-                ? `${programs.length} programmes`
-                : `${visible.length} of ${programs.length} programmes`}
-            </span>
+            {!loading && (
+              <span className="ml-auto text-sm text-gray-400">
+                {visible.length === programs.length
+                  ? `${programs.length} programmes`
+                  : `${visible.length} of ${programs.length} programmes`}
+              </span>
+            )}
           </div>
 
           {infoBox}
 
-          <FilterBar
-            options={OCEANIA_TYPE_OPTIONS}
-            selected={selectedTypes}
-            onToggle={toggle}
-            onClear={() => setSelectedTypes([])}
-          />
+          {loading ? <Spinner /> : (
+            <>
+              <FilterBar
+                options={OCEANIA_TYPE_OPTIONS}
+                selected={selectedTypes}
+                onToggle={toggle}
+                onClear={() => setSelectedTypes([])}
+              />
 
-          {visible.length === 0 ? (
-            <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {visible.map((program) => (
-                <SimpleCard key={program.title} program={program} />
-              ))}
-            </div>
+              {visible.length === 0 ? (
+                <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {visible.map((program) => (
+                    <SimpleCard key={program.title} program={program} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
           <div className="mt-10 pt-6 border-t border-gray-100">
@@ -188,7 +194,7 @@ const OceaniaPageLayout = ({ programs, helmet, flag, countryName, infoBox, caree
 
 // ─── Country sub-pages ────────────────────────────────────────────────────────
 
-const UKSubPage = () => (
+const UKSubPage = ({ programs, loading }) => (
   <div className="min-h-screen bg-white">
     <Helmet>
       <title>UK Postgraduate Certificates for Vets | VetNextStep</title>
@@ -203,7 +209,7 @@ const UKSubPage = () => (
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
           <span className="text-3xl">🇬🇧</span>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United Kingdom</h1>
-          <span className="ml-auto text-sm text-gray-400">{ukPrograms.length} programmes</span>
+          {!loading && <span className="ml-auto text-sm text-gray-400">{programs.length} programmes</span>}
         </div>
 
         <InfoBox>
@@ -226,30 +232,30 @@ const UKSubPage = () => (
           </a>
         </InfoBox>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {ukPrograms.map((program) => (
-            <div
-              key={program.title}
-              id={slugify(program.title)}
-              className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
-              <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
-              <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1">{program.description}</p>
-              <div className="mt-auto">
-                <VisitButton url={program.url} />
+        {loading ? <Spinner /> : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {programs.map((program) => (
+              <div
+                key={program.title}
+                id={slugify(program.title)}
+                className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
+              >
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
+                <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1">{program.description}</p>
+                <div className="mt-auto">
+                  <VisitButton url={program.url} />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   </div>
 );
 
-const USA_TYPE_OPTIONS = usaCertCategories.map((c) => ({ value: c.id, label: c.name }));
-
-const USASubPage = () => {
+const USASubPage = ({ categories, loading }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
 
   const toggle = (val) =>
@@ -257,9 +263,12 @@ const USASubPage = () => {
       prev.includes(val) ? prev.filter((v) => v !== val) : [...prev, val]
     );
 
+  const USA_TYPE_OPTIONS = categories.map((c) => ({ value: c.id, label: c.name }));
+  const usaTotalCount = categories.reduce((acc, c) => acc + c.programs.length, 0);
+
   const visibleCategories = selectedTypes.length === 0
-    ? usaCertCategories
-    : usaCertCategories.filter((c) => selectedTypes.includes(c.id));
+    ? categories
+    : categories.filter((c) => selectedTypes.includes(c.id));
 
   const visibleCount = visibleCategories.reduce((acc, c) => acc + c.programs.length, 0);
 
@@ -278,11 +287,13 @@ const USASubPage = () => {
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
             <span className="text-3xl">🇺🇸</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h1>
-            <span className="ml-auto text-sm text-gray-400">
-              {visibleCount === usaTotalCount
-                ? `${usaTotalCount} programmes`
-                : `${visibleCount} of ${usaTotalCount} programmes`}
-            </span>
+            {!loading && (
+              <span className="ml-auto text-sm text-gray-400">
+                {visibleCount === usaTotalCount
+                  ? `${usaTotalCount} programmes`
+                  : `${visibleCount} of ${usaTotalCount} programmes`}
+              </span>
+            )}
           </div>
 
           <p className="text-sm text-gray-500 mb-6">
@@ -293,33 +304,37 @@ const USASubPage = () => {
             </Link>
           </p>
 
-          <FilterBar
-            options={USA_TYPE_OPTIONS}
-            selected={selectedTypes}
-            onToggle={toggle}
-            onClear={() => setSelectedTypes([])}
-          />
+          {loading ? <Spinner /> : (
+            <>
+              <FilterBar
+                options={USA_TYPE_OPTIONS}
+                selected={selectedTypes}
+                onToggle={toggle}
+                onClear={() => setSelectedTypes([])}
+              />
 
-          {visibleCategories.length === 0 ? (
-            <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
-          ) : (
-            visibleCategories.map((category) => (
-              <div key={category.id} className="mb-12">
-                <div className="mb-4">
-                  <h2 className="text-xl font-bold text-gray-900 mb-1">{category.name}</h2>
-                  <p className="text-sm text-gray-500 leading-relaxed">{category.description}</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {category.programs.map((program, idx) => (
-                    <ProgramCard
-                      key={`${category.id}-${idx}`}
-                      id={slugify(`${program.title}-${idx}`)}
-                      {...program}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))
+              {visibleCategories.length === 0 ? (
+                <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
+              ) : (
+                visibleCategories.map((category) => (
+                  <div key={category.id} className="mb-12">
+                    <div className="mb-4">
+                      <h2 className="text-xl font-bold text-gray-900 mb-1">{category.name}</h2>
+                      <p className="text-sm text-gray-500 leading-relaxed">{category.description}</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {category.programs.map((program, idx) => (
+                        <ProgramCard
+                          key={`${category.id}-${idx}`}
+                          id={slugify(`${program.title}-${idx}`)}
+                          {...program}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))
+              )}
+            </>
           )}
         </div>
       </main>
@@ -377,9 +392,10 @@ const CanadaSubPage = () => (
   </div>
 );
 
-const AustraliaSubPage = () => (
+const AustraliaSubPage = ({ programs, loading }) => (
   <OceaniaPageLayout
-    programs={australiaPrograms}
+    programs={programs}
+    loading={loading}
     flag="🇦🇺"
     countryName="Australia"
     helmet={
@@ -412,9 +428,10 @@ const AustraliaSubPage = () => (
   />
 );
 
-const NewZealandSubPage = () => (
+const NewZealandSubPage = ({ programs, loading }) => (
   <OceaniaPageLayout
-    programs={newZealandPrograms}
+    programs={programs}
+    loading={loading}
     flag="🇳🇿"
     countryName="New Zealand"
     helmet={
@@ -445,76 +462,99 @@ const NewZealandSubPage = () => (
 
 // ─── Hub page ─────────────────────────────────────────────────────────────────
 
-const HubPage = () => (
-  <div className="min-h-screen bg-white">
-    <Helmet>
-      <title>Veterinary Postgraduate Certificates: CertAVP &amp; GPCert</title>
-      <meta name="description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
-      <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
-      <meta property="og:title" content="Veterinary Postgraduate Certificates: CertAVP &amp; GPCert" />
-      <meta property="og:description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
-      <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
-      <meta property="og:type" content="website" />
-    </Helmet>
-    <SharedHeader />
-    <main className="py-8 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate Certificates</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist
-            Diplomate level, above standard CPD. UK, North America, Australia, and New Zealand covered.
-          </p>
-        </div>
+const HubPage = ({ certData, loading }) => {
+  const getCount = (id) => {
+    if (id === "uk")          return certData.uk.length;
+    if (id === "usa")         return certData.usa.reduce((acc, cat) => acc + cat.programs.length, 0);
+    if (id === "australia")   return certData.australia.length;
+    if (id === "new-zealand") return certData.newZealand.length;
+    return null;
+  };
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {countryConfig.map((c) => {
-            const count = countForHub(c.id);
-            return (
-              <Link key={c.id} to={`/postgraduate-certificates/${c.id}`} className="group block">
-                <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
-                  <div className="h-48 relative overflow-hidden">
-                    <img
-                      src={c.image}
-                      alt={c.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                    <div className="absolute bottom-3 left-4 text-white">
-                      <div className="text-2xl mb-1">{c.flag}</div>
-                      <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
+  return (
+    <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Veterinary Postgraduate Certificates: CertAVP &amp; GPCert</title>
+        <meta name="description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
+        <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:title" content="Veterinary Postgraduate Certificates: CertAVP &amp; GPCert" />
+        <meta property="og:description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <SharedHeader />
+      <main className="py-8 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate Certificates</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist
+              Diplomate level, above standard CPD. UK, North America, Australia, and New Zealand covered.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {countryConfig.map((c) => {
+              const count = loading ? null : getCount(c.id);
+              return (
+                <Link key={c.id} to={`/postgraduate-certificates/${c.id}`} className="group block">
+                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                    <div className="h-48 relative overflow-hidden">
+                      <img
+                        src={c.image}
+                        alt={c.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="absolute bottom-3 left-4 text-white">
+                        <div className="text-2xl mb-1">{c.flag}</div>
+                        <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 flex items-center justify-between bg-white">
+                      <span className="text-sm text-gray-500">
+                        {loading
+                          ? "Loading…"
+                          : count !== null
+                          ? `${count} programme${count !== 1 ? "s" : ""}`
+                          : "Coming soon"}
+                      </span>
+                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                        View all
+                        <ChevronRight />
+                      </span>
                     </div>
                   </div>
-                  <div className="px-4 py-3 flex items-center justify-between bg-white">
-                    <span className="text-sm text-gray-500">
-                      {count !== null ? `${count} programme${count !== 1 ? "s" : ""}` : "Coming soon"}
-                    </span>
-                    <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                      View all
-                      <ChevronRight />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </main>
-    <SharedFooter />
-  </div>
-);
+      </main>
+      <SharedFooter />
+    </div>
+  );
+};
 
-// ─── Root component — routes to the correct sub-page ─────────────────────────
+// ─── Root component — fetches data once and routes to the correct sub-page ────
 
 const PostgraduateCertificates = () => {
   const { country } = useParams();
+  const [certData, setCertData] = useState({ uk: [], usa: [], australia: [], newZealand: [] });
+  const [loading, setLoading] = useState(true);
 
-  if (country === "uk")          return <UKSubPage />;
-  if (country === "usa")         return <USASubPage />;
+  useEffect(() => {
+    fetch("/.netlify/functions/certificates")
+      .then((r) => r.json())
+      .then((data) => { setCertData(data); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (country === "uk")          return <UKSubPage programs={certData.uk} loading={loading} />;
+  if (country === "usa")         return <USASubPage categories={certData.usa} loading={loading} />;
   if (country === "canada")      return <CanadaSubPage />;
-  if (country === "australia")   return <AustraliaSubPage />;
-  if (country === "new-zealand") return <NewZealandSubPage />;
+  if (country === "australia")   return <AustraliaSubPage programs={certData.australia} loading={loading} />;
+  if (country === "new-zealand") return <NewZealandSubPage programs={certData.newZealand} loading={loading} />;
 
   if (country) {
     return (
@@ -530,7 +570,7 @@ const PostgraduateCertificates = () => {
     );
   }
 
-  return <HubPage />;
+  return <HubPage certData={certData} loading={loading} />;
 };
 
 export default PostgraduateCertificates;

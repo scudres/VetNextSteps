@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
@@ -157,768 +157,6 @@ const SPECIALTY_OPTIONS = [
   "Zoological Medicine",
 ];
 
-const programs = [
-  {
-    title: "VIRMP - Veterinary Internship and Residency Matching Program",
-    organisation: "Veterinary Internship & Residency Matching Program",
-    description: "Central matching service for veterinary internships and residencies in North America.",
-    url: "https://www.virmp.org/",
-    region: "north-america",
-    type: "internship",
-    species: "small animal, equine, farm animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "Royal Veterinary College Rotating Internship Programme",
-    organisation: "Royal Veterinary College",
-    description: "Designed for highly motivated recent veterinary graduates who wish to expand their clinical knowledge, skills and experience in all aspects of small animal practice, working under supervision in a multidisciplinary referral hospital.",
-    url: "https://www.rvc.ac.uk/study/postgraduate/internships/small-animal",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "Royal Veterinary College Small Animal Residency Programmes",
-    organisation: "Royal Veterinary College",
-    description: "Designed for qualified veterinary graduates who wish to specialise in specific disciplines related to small animal practice. All residents are also registered for a Master's degree in Veterinary Medicine.",
-    url: "https://www.rvc.ac.uk/study/postgraduate/residencies/small-animal",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care","Cardiology","Oncology","Anaesthesia","Imaging"],
-  },
-  {
-    title: "University of Liverpool Rotating Internship Programme",
-    organisation: "University of Liverpool",
-    description: "Rotating internships designed for highly motivated veterinary professionals who wish to develop their skills, experience and knowledge by working under supervision in a multi-disciplinary referral hospital.",
-    url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/internships/",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "University of Liverpool Anaesthesia Internship Programme",
-    organisation: "University of Liverpool",
-    description: "A discipline-specific internship in anaesthesia for highly motivated veterinary professionals who wish to develop their skills, experience and knowledge under supervision in a multi-disciplinary referral hospital.",
-    url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/internships/",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "discipline-specific",
-    specialties: ["Anaesthesia"],
-  },
-  {
-    title: "University of Liverpool Small Animal Residency Programme",
-    organisation: "University of Liverpool",
-    description: "The Small Animal Teaching Hospital (SATH) offers several residency programmes for veterinarians who wish to specialise in specific disciplines, providing first class, world-renowned training for veterinary specialisation.",
-    url: "https://www.liverpool.ac.uk/sath/teaching/postgraduates/residencies/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care","Cardiology","Oncology","Anaesthesia","Imaging"],
-  },
-  {
-    title: "University of Cambridge Rotating Internship Programme",
-    organisation: "University of Cambridge",
-    description: "Provides an opportunity for qualified veterinarians to obtain high-quality postgraduate training across a large range of small animal disciplines, enhancing clinical, diagnostic, problem-solving, communication, and technical skills.",
-    url: "https://www.vet.cam.ac.uk/study/cts/jcts1/smallanimal",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "University of Cambridge Senior Clinical Training Scholarship / Residency Programme",
-    organisation: "University of Cambridge",
-    description: "Advanced clinical training programme for veterinarians preparing to undertake specialist training. Prepares candidates for entry to a residency or specialism.",
-    url: "https://www.vet.cam.ac.uk/study/cts/jcts1/smallanimal",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Cardiology"],
-  },
-  {
-    title: "University of Edinburgh Rotating Internship Programme",
-    organisation: "University of Edinburgh",
-    description: "53-week rotating internship providing an opportunity for new graduates or recently-qualified veterinarians to receive high-quality postgraduate training in small animal disciplines under experienced clinicians.",
-    url: "https://vet.ed.ac.uk/clinical/vacancies/rotating-interns",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "University of Edinburgh Residency / Clinical Scholarship Programme",
-    organisation: "University of Edinburgh",
-    description: "The Professional Doctorate in Veterinary Medicine provides an opportunity for qualified veterinary surgeons to undertake a period of advanced clinical training in a chosen specialty under RCVS and European/American veterinary specialist guidance.",
-    url: "https://vet.ed.ac.uk/clinical/vacancies/clinicalscholarships",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Emergency & Critical Care"],
-  },
-  {
-    title: "University of Glasgow Small Animal Internship Programme",
-    organisation: "University of Glasgow",
-    description: "Internship opportunities within the Small Animal Hospital at the University of Glasgow, providing structured postgraduate clinical training.",
-    url: "https://www.gla.ac.uk/explore/jobs/appointments/sahvacancies/",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "University of Glasgow Small Animal Residency Programme",
-    organisation: "University of Glasgow",
-    description: "Residency opportunities within the Small Animal Hospital at the University of Glasgow, providing structured postgraduate specialist training.",
-    url: "https://www.gla.ac.uk/explore/jobs/appointments/sahvacancies/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Ophthalmology","Emergency & Critical Care"],
-  },
-  {
-    title: "IVC Evidensia Rotating and Discipline-Specific Internships",
-    organisation: "IVC Evidensia, various locations",
-    description: "Internship programmes providing an opportunity for qualified veterinarians to obtain training across a large range of small animal disciplines.",
-    url: "https://ivcevidensia.co.uk/careers?roles=8",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "IVC Evidensia Small Animal Residency Programmes",
-    organisation: "IVC Evidensia, various locations",
-    description: "Residency programmes providing an opportunity for qualified veterinarians to obtain specialised training working towards diplomat status in their chosen discipline.",
-    url: "https://ivcevidensia.co.uk/careers?roles=9",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Emergency & Critical Care"],
-  },
-  {
-    title: "Linnaeus Small Animal Rotating and Discipline-Specific Internships",
-    organisation: "Linnaeus Group, various locations",
-    description: "Rotating and discipline-specific internships providing an opportunity for qualified veterinarians to obtain training in a large range of small animal disciplines.",
-    url: "https://www.linnaeusgroup.co.uk/careers/internships",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "Linnaeus Small Animal Residency Programmes",
-    organisation: "Linnaeus Group, various locations",
-    description: "Residency programmes providing an opportunity for qualified veterinarians to obtain specialised training working towards diplomat status in their chosen discipline.",
-    url: "https://www.linnaeusgroup.co.uk/careers/vacancies?role=6",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Cardiology"],
-  },
-  {
-    title: "CVS Small Animal Rotating and Discipline-Specific Internship Programmes",
-    organisation: "CVS Group, various locations",
-    description: "Give exposure to referral practice and a broad range of specialist disciplines, working alongside world-class nurses, vets and specialists.",
-    url: "https://cvs-referrals.com/careers/internship/",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "CVS Small Animal Residency Programmes",
-    organisation: "CVS Group, various locations",
-    description: "Residency programmes providing an opportunity for qualified veterinarians to obtain specialised training working towards diplomat status in their chosen discipline.",
-    url: "https://cvs-referrals.com/careers/residencies/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Dermatology","Oncology","Emergency & Critical Care"],
-  },
-  {
-    title: "The Ralph Veterinary Internship Programmes",
-    organisation: "The Ralph",
-    description: "Various rotating and discipline-specific internship programmes at The Ralph referral hospital.",
-    url: "https://theralph.vet/join-team-ralph/",
-    region: "uk",
-    type: "internship",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "The Ralph Veterinary Residency Programme",
-    organisation: "The Ralph",
-    description: "Various residency programmes in collaboration with European specialist colleges, at The Ralph referral hospital.",
-    url: "https://theralph.vet/join-team-ralph/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery","Internal Medicine","Neurology","Ophthalmology","Emergency & Critical Care"],
-  },
-
-  // ── UK — EBVS Specialist College Residencies ─────────────────────────────
-  {
-    title: "EBVS Vacancies Board — United Kingdom",
-    organisation: "European Board of Veterinary Specialisation",
-    description: "The EBVS central vacancy feed, filterable to United Kingdom positions. Covers residency and internship posts across all EBVS specialist colleges at UK-based training centres. Updated continuously.",
-    url: "https://www.ebvs.eu/vacancies-ebvs",
-    region: "uk",
-    type: "internship & residency",
-    species: "all species",
-    internshipType: "discipline-specific",
-    specialties: [],
-  },
-  {
-    title: "ECVS Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Surgeons",
-    description: "Surgical residency positions at UK ECVS-approved training centres, including university teaching hospitals and private referral practices. Live vacancies listed on the ECVS website.",
-    url: "https://www.ecvs.org/ecvs-for/residents.php",
-    region: "uk",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: ["Surgery"],
-  },
-  {
-    title: "ECVIM-CA Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Internal Medicine – Companion Animals",
-    description: "Internal medicine, cardiology, and oncology residency positions at UK ECVIM-CA-approved training centres. Live vacancies listed on the ECVIM-CA website.",
-    url: "https://ecvim-ca.college/residency-vacancies/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Internal Medicine", "Cardiology", "Oncology"],
-  },
-  {
-    title: "ECVAA Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Anaesthesia and Analgesia",
-    description: "Anaesthesia and analgesia residency positions at UK ECVAA-approved training centres. Training-centre list on the ECVAA website.",
-    url: "https://www.ecvaa.org/ecvaa/training-centers-list",
-    region: "uk",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: ["Anaesthesia"],
-  },
-  {
-    title: "ECVN Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Neurology",
-    description: "Neurology residency positions at UK ECVN-approved training centres. Open residency positions listed on the ECVN website.",
-    url: "https://www.ecvn.org/general-information/open-residency-position",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Neurology"],
-  },
-  {
-    title: "ECVD Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Dermatology",
-    description: "Dermatology residency positions at UK ECVD-approved training centres. Vacancies listed on the 'Start your residency' page.",
-    url: "https://www.ecvd.org/programmes/start-your-residency/",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Dermatology"],
-  },
-  {
-    title: "ECVDI Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Diagnostic Imaging",
-    description: "Diagnostic imaging residency positions at UK ECVDI-approved training centres.",
-    url: "https://www.ecvdi.org/training-centers-list",
-    region: "uk",
-    type: "residency",
-    species: "all species",
-    specialties: ["Imaging"],
-  },
-  {
-    title: "ECVECC Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Emergency and Critical Care",
-    description: "Emergency and critical care residency positions at UK ECVECC-approved training centres.",
-    url: "https://www.ecvecc.org/resident-training-facilities",
-    region: "uk",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Emergency & Critical Care"],
-  },
-  {
-    title: "ECVO Internship & Residency Programmes — UK Training Centres",
-    organisation: "European College of Veterinary Ophthalmologists",
-    description: "Ophthalmology internship and residency positions at UK ECVO-approved training centres.",
-    url: "https://www.ecvo.eu/residents/training-job-opportunities-for-interns-residents.html",
-    region: "uk",
-    type: "internship & residency",
-    species: "small animal",
-    internshipType: "discipline-specific",
-    specialties: ["Ophthalmology"],
-  },
-
-  {
-    title: "BEVA Recognised Equine Internship",
-    organisation: "British Equine Veterinary Association",
-    description: "All BEVA recognised internships have agreed to a set of core standards that ensure interns receive the right training and are treated fairly.",
-    url: "https://www.beva.org.uk/New-Vet-Grads/Recognised-Internships",
-    region: "worldwide",
-    type: "internship",
-    species: "equine",
-    internshipType: "discipline-specific",
-    specialties: ["Equine"],
-  },
-  {
-    title: "ECVS Residency Training",
-    organisation: "European College of Veterinary Surgeons",
-    description: "Advanced surgical training programmes leading to board certification in veterinary surgery.",
-    url: "https://www.ecvs.org/ecvs-for/residents.php",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Surgery"],
-  },
-  {
-    title: "ECVP Residency Programme",
-    organisation: "European College of Veterinary Pathologists",
-    description: "Specialised training in veterinary pathology leading to board certification.",
-    url: "https://www.ecvpath.org/resident-registration",
-    region: "europe",
-    type: "residency",
-    species: "mixed",
-    specialties: ["Pathology"],
-  },
-  {
-    title: "ECVIM-CA Residency Programmes",
-    organisation: "European College of Veterinary Internal Medicine",
-    description: "Specialised residency training programmes in internal medicine at various veterinary institutes across Europe.",
-    url: "https://ecvim-ca.college/residency-vacancies/",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Internal Medicine","Cardiology","Oncology","Endocrinology"],
-  },
-  {
-    title: "ECVM Residency Programmes",
-    organisation: "European College of Veterinary Microbiology",
-    description: "Specialised residency training programmes in microbiology at various veterinary institutes across Europe.",
-    url: "https://ecvmicro.org/training-centers/",
-    region: "europe",
-    type: "residency",
-    species: "mixed",
-    specialties: ["Microbiology"],
-  },
-  {
-    title: "ECVAA Residency Programmes",
-    organisation: "European College of Veterinary Anaesthesia and Analgesia",
-    description: "Specialised residency training programmes in anaesthesia and analgesia at various veterinary institutes across Europe.",
-    url: "https://www.ecvaa.org/ecvaa/training-centers-list",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Anaesthesia"],
-  },
-  {
-    title: "ECVCN Residency Programmes",
-    organisation: "European College of Veterinary and Comparative Nutrition",
-    description: "Specialised residency training programmes in veterinary nutrition at various institutes across Europe.",
-    url: "https://www.ecvcn.org/why-become-resident-why-become-supervisor",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Nutrition"],
-  },
-  {
-    title: "ECVCP Residency Programmes",
-    organisation: "European College of Veterinary Clinical Pathology",
-    description: "Specialised residency training programmes in clinical pathology at various veterinary institutes across Europe.",
-    url: "https://www.esvcp.org/open-positions.html",
-    region: "europe",
-    type: "residency",
-    species: "mixed",
-    specialties: ["Pathology"],
-  },
-  {
-    title: "ECVD Residency Programmes",
-    organisation: "European College of Veterinary Dermatology",
-    description: "Specialised residency training programmes in veterinary dermatology at various institutes across Europe.",
-    url: "https://www.ecvd.org/programmes/start-your-residency/",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Dermatology"],
-  },
-  {
-    title: "ECVDI Residency Programmes",
-    organisation: "European College of Veterinary Diagnostic Imaging",
-    description: "Specialised residency training programmes in veterinary diagnostic imaging at various institutes across Europe.",
-    url: "https://www.ecvdi.org/training-centers-list",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Imaging"],
-  },
-  {
-    title: "ECVECC Residency Programmes",
-    organisation: "European College of Veterinary Emergency and Critical Care",
-    description: "Specialised residency training programmes in veterinary emergency and critical care at institutes across Europe and New Zealand.",
-    url: "https://www.ecvecc.org/resident-training-facilities",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Emergency & Critical Care"],
-  },
-  {
-    title: "ECVN Residency Programmes",
-    organisation: "European College of Veterinary Neurology",
-    description: "Specialised residency training programmes in veterinary neurology at various institutes across Europe.",
-    url: "https://www.ecvn.org/general-information/open-residency-position",
-    region: "europe",
-    type: "residency",
-    species: "small animal",
-    specialties: ["Neurology"],
-  },
-  {
-    title: "ECVO Internship & Residency Programmes",
-    organisation: "European College of Veterinary Ophthalmologists",
-    description: "Specialised internship and residency training programmes in veterinary ophthalmology at various institutes across Europe.",
-    url: "https://www.ecvo.eu/residents/training-job-opportunities-for-interns-residents.html",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal",
-    internshipType: "discipline-specific",
-    specialties: ["Ophthalmology"],
-  },
-
-  {
-    title: "EBVS Central Vacancies Board",
-    organisation: "European Board of Veterinary Specialisation",
-    description: "The primary live vacancy feed for internships and residencies across all EBVS specialist colleges. Filterable by country, discipline, and species — the single best starting point for European specialist training. Updated continuously.",
-    url: "https://www.ebvs.eu/vacancies-ebvs",
-    region: "europe",
-    type: "internship & residency",
-    species: "all species",
-    internshipType: "discipline-specific",
-    specialties: [],
-  },
-  {
-    title: "ECVIM-CA Internship Vacancies",
-    organisation: "European College of Veterinary Internal Medicine – Companion Animals",
-    description: "A dedicated board listing internship positions at ECVIM-CA-approved institutions — providing clinical experience that feeds into ECVIM-CA internal medicine, cardiology, and oncology residency tracks. Separate from the ECVIM-CA residency vacancy board.",
-    url: "https://ecvim-ca.college/internship-vacancies/",
-    region: "europe",
-    type: "internship",
-    species: "small animal",
-    internshipType: "discipline-specific",
-    specialties: ["Internal Medicine", "Cardiology", "Oncology"],
-  },
-
-  {
-    title: "ECEIM Residency Programmes",
-    organisation: "European College of Equine Internal Medicine",
-    description: "Residency training in equine internal medicine across 51 approved training institutions in Europe. A one-year clinical internship is a prerequisite. Live posts are listed on the ECEIM jobs page.",
-    url: "https://www.eceim.info/jobs",
-    region: "europe",
-    type: "residency",
-    species: "equine",
-    specialties: ["Equine", "Internal Medicine"],
-  },
-  {
-    title: "ECVSMR Residency Programmes",
-    organisation: "European College of Veterinary Sports Medicine and Rehabilitation",
-    description: "Residency training across separate small-animal and equine tracks in veterinary sports medicine and rehabilitation at approved centres across Europe.",
-    url: "https://www.ecvsmr.org/residency-programs",
-    region: "europe",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: ["Sports Medicine & Rehabilitation"],
-  },
-  {
-    title: "EVDC Residency Programmes",
-    organisation: "European Veterinary Dental College",
-    description: "Residency training in veterinary dentistry and oral surgery, with general and equine tracks at approved centres across Europe. A dedicated vacancy page lists current positions.",
-    url: "https://www.evdc.org/residents_and_training/residency_training_vacancies",
-    region: "europe",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: ["Dentistry"],
-  },
-  {
-    title: "ECZM Residency Programmes",
-    organisation: "European College of Zoological Medicine",
-    description: "Residency training across five subspecialties: Avian, Herpetology, Small Mammal, Zoo Health Management, and Wildlife. Live vacancies and approved programme lists are on the ECZM site.",
-    url: "https://www.eczm.eu/vacancies",
-    region: "europe",
-    type: "residency",
-    species: "exotic, zoo, wildlife",
-    specialties: ["Zoological Medicine"],
-  },
-  {
-    title: "ECAR Residency Programmes",
-    organisation: "European College of Animal Reproduction",
-    description: "Residency training in animal reproduction across all species — small animal, equine, ruminant, porcine, and biotechnology tracks. A one-year internship prerequisite is required.",
-    url: "https://www.ecarcollege.org/jobs/",
-    region: "europe",
-    type: "residency",
-    species: "all species",
-    specialties: ["Reproduction"],
-  },
-  {
-    title: "ECAWBM Residency Programmes",
-    organisation: "European College of Animal Welfare and Behavioural Medicine",
-    description: "Residency training across two tracks: Animal Welfare Science, Ethics & Law (AWSEL) and Behavioural Medicine (BM). Positions are advertised via the college site and the EBVS vacancy feed.",
-    url: "https://www.ecawbm.org/",
-    region: "europe",
-    type: "residency",
-    species: "all species",
-    specialties: ["Behaviour & Welfare"],
-  },
-  {
-    title: "ECVPH Residency Programmes",
-    organisation: "European College of Veterinary Public Health",
-    description: "Residency training in veterinary public health — covering population medicine and food science — primarily in academic and government institutions across Europe.",
-    url: "https://ecvph.org/",
-    region: "europe",
-    type: "residency",
-    species: "all species",
-    specialties: ["Public Health"],
-  },
-  {
-    title: "ECLAM Residency Programmes",
-    organisation: "European College of Laboratory Animal Medicine",
-    description: "Residency training in laboratory animal medicine, primarily within research institutions and pharmaceutical organisations. Positions are advertised via the college site and the EBVS feed.",
-    url: "https://eclam.eu/",
-    region: "europe",
-    type: "residency",
-    species: "laboratory animals",
-    specialties: ["Laboratory Animal Medicine"],
-  },
-  {
-    title: "ECVPT Residency Programmes",
-    organisation: "European College of Veterinary Pharmacology and Toxicology",
-    description: "Residency training in veterinary pharmacology and toxicology, predominantly in academic and industry settings. Positions are advertised via the college site and the EBVS vacancy feed.",
-    url: "https://ecvpt.org/",
-    region: "europe",
-    type: "residency",
-    species: "all species",
-    specialties: ["Pharmacology & Toxicology"],
-  },
-  {
-    title: "EVPC Residency Programmes",
-    organisation: "European Veterinary Parasitology College",
-    description: "Residency training in veterinary parasitology, primarily in academic settings across Europe. Positions are advertised via the college site and the EBVS vacancy feed.",
-    url: "https://www.eurovetpar.org/",
-    region: "europe",
-    type: "residency",
-    species: "all species",
-    specialties: ["Parasitology"],
-  },
-  {
-    title: "ECAAH Residency Programmes",
-    organisation: "European College of Aquatic Animal Health",
-    description: "Residency training in aquatic animal health covering fish, crustaceans, and molluscs. A newer college with a small number of approved centres; positions are advertised via the college site and the EBVS feed.",
-    url: "https://ecaah.org/",
-    region: "europe",
-    type: "residency",
-    species: "aquatic",
-    specialties: ["Aquatic Medicine"],
-  },
-  {
-    title: "ECBHM Residency Programmes",
-    organisation: "European College of Bovine Health Management",
-    description: "Residency training in bovine herd-health management at veterinary universities across Europe. Positions are advertised via the college site and the EBVS vacancy feed.",
-    url: "https://www.ecbhm.org/",
-    region: "europe",
-    type: "residency",
-    species: "bovine",
-    specialties: ["Farm Animal"],
-  },
-  {
-    title: "ECPHM Residency Programmes",
-    organisation: "European College of Porcine Health Management",
-    description: "Residency training in porcine health management within production-animal university departments across Europe.",
-    url: "https://www.ecphm.org/",
-    region: "europe",
-    type: "residency",
-    species: "porcine",
-    specialties: ["Farm Animal"],
-  },
-  {
-    title: "ECPVS Residency Programmes",
-    organisation: "European College of Poultry Veterinary Science",
-    description: "Residency training in poultry veterinary science, primarily in production-animal settings. Positions are advertised via the college site and the EBVS vacancy feed.",
-    url: "https://www.ecpvs.org/",
-    region: "europe",
-    type: "residency",
-    species: "poultry",
-    specialties: ["Farm Animal"],
-  },
-  {
-    title: "ECSRHM Residency Programmes",
-    organisation: "European College of Small Ruminant Health Management",
-    description: "Residency training in small ruminant (sheep and goat) health management at veterinary universities across Europe.",
-    url: "https://ecsrhm.org/",
-    region: "europe",
-    type: "residency",
-    species: "sheep, goats",
-    specialties: ["Farm Animal"],
-  },
-
-  // ── Pan-European Corporate Groups ────────────────────────────────────────────
-  {
-    title: "AniCura Internships & Graduate Programme (Europe)",
-    organisation: "AniCura (Mars Veterinary Health)",
-    description: "Pan-European veterinary group with 500+ clinics across ~17 countries. Offers rotating internships, discipline-specific internships, specialist residencies, and a structured 15-month Graduate Programme. Roles are listed on their global careers platform.",
-    url: "https://anicuraglobal.teamtailor.com/departments/veterinary-student-jobs",
-    region: "europe",
-    type: "internship",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "IVC Evidensia Internships & Residencies (Europe)",
-    organisation: "IVC Evidensia",
-    description: "Europe's largest veterinary group with 100+ referral centres across the continent. Offers rotating and discipline-specific internships, specialist residencies, and a Graduate Academy programme. European brands recruit locally and through the group careers hub.",
-    url: "https://ivcevidensia.com/career/",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal",
-    internshipType: "both",
-    specialties: [],
-  },
-
-  // ── Academic Job Board ───────────────────────────────────────────────────────
-  {
-    title: "EURAXESS — Veterinary Research & Clinical Positions",
-    organisation: "European Commission",
-    description: "The European Commission's researcher mobility platform. Lists university-based veterinary internship and residency positions as research or clinical roles across the EU. Search 'veterinary internship' or 'residency'.",
-    url: "https://euraxess.ec.europa.eu/jobs",
-    region: "europe",
-    type: "internship & residency",
-    species: "all species",
-    internshipType: "discipline-specific",
-    specialties: [],
-  },
-
-  // ── Key European Universities ────────────────────────────────────────────────
-  {
-    title: "Utrecht University Residency Programmes",
-    organisation: "Faculty of Veterinary Medicine, Utrecht University, Netherlands",
-    description: "The only veterinary faculty in the Netherlands and a major centre for European college residencies across many disciplines. Live posts are listed on the 'Working at Utrecht University' careers page.",
-    url: "https://www.uu.nl/en/organisation/faculty-of-veterinary-medicine/education/veterinary-programmes/residencies",
-    region: "europe",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: [],
-  },
-  {
-    title: "Vetsuisse – University of Zurich Internship & Residency Programmes",
-    organisation: "Vetsuisse, University of Zurich, Switzerland",
-    description: "Internships and residencies across approximately 24 European college disciplines at the University of Zurich's Vetsuisse faculty. One of Switzerland's two veterinary schools.",
-    url: "https://www.vet.uzh.ch/en/studium/College(s)-Weiterbildungen.html",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "Vetsuisse – University of Bern Residency Programmes",
-    organisation: "Vetsuisse, University of Bern, Switzerland",
-    description: "Residency programmes across approximately 18 specialist disciplines at the University of Bern's Vetsuisse faculty.",
-    url: "https://www.vetsuisse.unibe.ch/continuing_education/specialisation_offers_entwurf/index_eng.html",
-    region: "europe",
-    type: "residency",
-    species: "small animal, equine",
-    specialties: [],
-  },
-  {
-    title: "University of Veterinary Medicine Hannover (TiHo) Internship & Residency Programmes",
-    organisation: "Tierärztliche Hochschule Hannover, Germany",
-    description: "Rotating internship programme and European college residency positions at one of Germany's leading veterinary schools. Positions are posted on the TiHo HR portal.",
-    url: "https://www.tiho-hannover.de/kliniken-institute/kliniken/klinik-fuer-kleintiere/lehre/internship-programm",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "Autonomous University of Barcelona (UAB) Internship & Residency Programmes",
-    organisation: "Hospital Clínic Veterinari, UAB, Spain",
-    description: "18 resident places across 10 specialties and a 12-month rotating internship programme at the Hospital Clínic Veterinari of the Autonomous University of Barcelona.",
-    url: "https://www.uab.cat/en/animal-medicine-surgery/residences-boarding-schools",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "Complutense University of Madrid (UCM) Internship & Residency Programmes",
-    organisation: "Hospital Clínico Veterinario Complutense, Madrid, Spain",
-    description: "Rotating internado and European college residency positions (anaesthesia, surgery, internal medicine, imaging, and emergency & critical care) at Madrid's main veterinary teaching hospital.",
-    url: "https://www.ucm.es/hcv/internados",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "rotating",
-    specialties: ["Surgery", "Internal Medicine", "Anaesthesia", "Imaging", "Emergency & Critical Care"],
-  },
-  {
-    title: "University College Dublin (UCD) Internship & Residency Programmes",
-    organisation: "UCD Veterinary Hospital, Ireland",
-    description: "Rotating and discipline-specific internship and residency programmes at UCD's veterinary teaching hospital. Positions are listed on the UCD jobs site.",
-    url: "https://www.ucd.ie/vthweb/vetprofessionals/internshipsresidencies/",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "both",
-    specialties: [],
-  },
-  {
-    title: "University of Bologna Rotating Internship & Residency Programmes",
-    organisation: "Ospedale Veterinario Universitario 'Giuseppe Gentile', Bologna, Italy",
-    description: "Rotating internship pathways (selections held twice a year) feeding into EBVS residency programmes at the University of Bologna's teaching hospital.",
-    url: "https://site.unibo.it/ospedale-veterinario/it/area-veterinari/percorsi-formativi",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "University of Lisbon (FMV) Internship & Residency Programmes",
-    organisation: "Faculdade de Medicina Veterinária, Universidade de Lisboa, Portugal",
-    description: "Internatos (small animal and equine) and EBVS European college residency programmes at the Lisbon veterinary teaching hospital.",
-    url: "https://www.fmv.ulisboa.pt/en/services/teaching-hospital",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine",
-    internshipType: "rotating",
-    specialties: [],
-  },
-  {
-    title: "ENVA (National Veterinary School of Alfort) Internship & Residency Programmes",
-    organisation: "École Nationale Vétérinaire d'Alfort, France",
-    description: "Internats (access via the national French concours) and résidanats across companion animal, equine, and farm animal disciplines at one of France's four national veterinary schools.",
-    url: "https://www.vet-alfort.fr/formation/formation-initiale-et-specialisee/internat-et-residanat",
-    region: "europe",
-    type: "internship & residency",
-    species: "small animal, equine, farm animal",
-    internshipType: "rotating",
-    specialties: [],
-  },
-];
-
 const licensingNote = {
   uk: (
     <p className="text-sm text-gray-500 mb-6">
@@ -1005,10 +243,25 @@ const ProgramCard = ({ program }) => (
   </div>
 );
 
+const Spinner = () => (
+  <div className="flex justify-center py-16">
+    <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+  </div>
+);
+
 const InternshipsResidencies = () => {
   const { region, subCategory } = useParams();
+  const [programs,        setPrograms]        = useState([]);
+  const [loading,         setLoading]         = useState(true);
   const [typeFilters,      setTypeFilters]      = useState([]);
   const [specialtyFilters, setSpecialtyFilters] = useState([]);
+
+  useEffect(() => {
+    fetch("/.netlify/functions/internships")
+      .then((r) => r.json())
+      .then((data) => { setPrograms(data); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
 
   const toggleType      = (v) => setTypeFilters((p)      => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
   const toggleSpecialty = (v) => setSpecialtyFilters((p) => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
@@ -1076,9 +329,11 @@ const InternshipsResidencies = () => {
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{subCatCfg.name}</h1>
                 <p className="text-sm text-gray-500 mt-0.5">{cfg.flag} {cfg.name}</p>
               </div>
-              <span className="ml-auto text-sm text-gray-400">
-                {regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}
-              </span>
+              {!loading && (
+                <span className="ml-auto text-sm text-gray-400">
+                  {regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}
+                </span>
+              )}
             </div>
 
             {licensingNote[region]}
@@ -1111,7 +366,7 @@ const InternshipsResidencies = () => {
               </p>
             )}
 
-            {regionPrograms.length === 0 ? (
+            {loading ? <Spinner /> : regionPrograms.length === 0 ? (
               <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
                 No programmes match the current filters.
               </div>
@@ -1200,7 +455,9 @@ const InternshipsResidencies = () => {
                       <div className="px-4 py-4 bg-white">
                         <p className="text-sm text-gray-600 leading-relaxed mb-3">{sub.description}</p>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-400">{count} programme{count !== 1 ? "s" : ""}</span>
+                          <span className="text-sm text-gray-400">
+                            {loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`}
+                          </span>
                           <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
                             Browse
                             <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1265,9 +522,11 @@ const InternshipsResidencies = () => {
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
               <span className="text-3xl">{cfg.flag}</span>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
-              <span className="ml-auto text-sm text-gray-400">
-                {regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}
-              </span>
+              {!loading && (
+                <span className="ml-auto text-sm text-gray-400">
+                  {regionPrograms.length} programme{regionPrograms.length !== 1 ? "s" : ""}
+                </span>
+              )}
             </div>
 
             {licensingNote[region]}
@@ -1300,7 +559,7 @@ const InternshipsResidencies = () => {
               </p>
             )}
 
-            {regionPrograms.length === 0 ? (
+            {loading ? <Spinner /> : regionPrograms.length === 0 ? (
               <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
                 No programmes match the current filters in this region.
               </div>
@@ -1357,7 +616,9 @@ const InternshipsResidencies = () => {
                       </div>
                     </div>
                     <div className="px-4 py-3 flex items-center justify-between bg-white">
-                      <span className="text-sm text-gray-500">{count} programme{count !== 1 ? "s" : ""}</span>
+                      <span className="text-sm text-gray-500">
+                        {loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`}
+                      </span>
                       <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
                         View all
                         <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

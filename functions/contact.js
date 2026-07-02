@@ -55,6 +55,25 @@ function getTransporter() {
   return _transporter;
 }
 
+async function verifyTurnstile(token, ip) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true; // Dev mode — no key configured, skip verification
+  if (!token) return false;
+  try {
+    const params = new URLSearchParams({ secret, response: token });
+    if (ip) params.set("remoteip", ip);
+    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+    const data = await r.json();
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 exports.handler = async (event) => {
   const origin  = event.headers.origin || "";
   const headers = corsHeaders(origin, METHODS);
@@ -70,6 +89,17 @@ exports.handler = async (event) => {
     body = JSON.parse(event.body || "{}");
   } catch {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid request body" }) };
+  }
+
+  // Honeypot — bots fill hidden fields; real users don't. Silent 200 so bots don't retry.
+  if (body.website) {
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+  }
+
+  // Turnstile verification (skipped if secret not configured — dev/staging without keys)
+  const turnstileOk = await verifyTurnstile(body.cfToken, event.headers["x-forwarded-for"]);
+  if (!turnstileOk) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Bot check failed. Please reload and try again." }) };
   }
 
   const { firstName, surname, email, subject, message } = body;

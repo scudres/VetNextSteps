@@ -100,6 +100,7 @@ Disallow: /
 
 # Default — allow all other crawlers
 User-agent: *
+Disallow: /.netlify/functions/
 Allow: /
 
 Sitemap: https://vetnextstep.com/sitemap.xml
