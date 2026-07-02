@@ -88,6 +88,15 @@ const HubPage = ({ allProviders, loading, error }) => (
       <title>Veterinary CPD Providers & Online Courses | VetNextStep</title>
       <meta name="description" content="Find CPD providers, online courses, certificates and training across the UK, USA, Australia, New Zealand and more. Filter by specialty or format." />
       <link rel="canonical" href="https://vetnextstep.com/cpd/providers" />
+      <meta property="og:title" content="Veterinary CPD Providers &amp; Online Courses | VetNextStep" />
+      <meta property="og:description" content="Find CPD providers, online courses and training for vets across the UK, USA, Australia, New Zealand, and more — filter by specialty or format." />
+      <meta property="og:url" content="https://vetnextstep.com/cpd/providers" />
+      <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Veterinary CPD Providers &amp; Online Courses | VetNextStep" />
+      <meta name="twitter:description" content="CPD providers, online courses and training for vets — filter by specialty or format." />
+      <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
     </Helmet>
     <SharedHeader />
     <main className="py-8 md:py-16">
@@ -198,6 +207,13 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
         <title>{cfg.name} Veterinary CPD Providers | VetNextStep</title>
         <meta name="description" content={`CPD providers, online courses and education for vets in ${cfg.name}. Filter by specialty or format.`} />
         <link rel="canonical" href={`https://vetnextstep.com/cpd/providers/${country}`} />
+        <meta property="og:title" content={`${cfg.name} Veterinary CPD Providers | VetNextStep`} />
+        <meta property="og:description" content={`CPD providers, online courses and education for vets in ${cfg.name} — filter by specialty or format.`} />
+        <meta property="og:url" content={`https://vetnextstep.com/cpd/providers/${country}`} />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">

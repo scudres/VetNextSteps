@@ -34,12 +34,26 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteTracker() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    if (typeof window.gtag !== "function") return;
+    window.gtag("event", "page_view", {
+      page_path:     pathname + search,
+      page_title:    document.title,
+      page_location: window.location.href,
+    });
+  }, [pathname, search]);
+  return null;
+}
+
 function App() {
   return (
     <HelmetProvider>
       <div className="App">
         <BrowserRouter>
           <ScrollToTop />
+          <RouteTracker />
           <Routes>
             <Route path="/"                                        element={<VeterinaryCareerHub />} />
             <Route path="/training-programs"                       element={<TrainingPrograms />} />

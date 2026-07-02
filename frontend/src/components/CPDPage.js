@@ -220,6 +220,13 @@ const CPDPage = () => {
           <title>{cfg.name} Veterinary Conferences | VetNextStep</title>
           <meta name="description" content={`Veterinary conferences and CPD events in ${cfg.name}. Filter by specialty and find upcoming events.`} />
           <link rel="canonical" href={`https://vetnextstep.com/cpd/${region}`} />
+          <meta property="og:title" content={`${cfg.name} Veterinary Conferences | VetNextStep`} />
+          <meta property="og:description" content={`Upcoming vet conferences and CPD events in ${cfg.name} — filter by specialty, month, or format.`} />
+          <meta property="og:url" content={`https://vetnextstep.com/cpd/${region}`} />
+          <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
         <main className="py-8 md:py-16">
@@ -319,6 +326,23 @@ const CPDPage = () => {
         <title>Vet Conferences &amp; CPD Events 2026 | By Region</title>
         <meta name="description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe. Filter by specialty or browse CPD providers and online courses." />
         <link rel="canonical" href="https://vetnextstep.com/cpd" />
+        <meta property="og:title" content="Vet Conferences &amp; CPD Events 2026 | VetNextStep" />
+        <meta property="og:description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe — filter by specialty, month, or format." />
+        <meta property="og:url" content="https://vetnextstep.com/cpd" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Vet Conferences &amp; CPD Events 2026 | VetNextStep" />
+        <meta name="twitter:description" content="Upcoming veterinary conferences — filter by specialty, month, or format." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "CPD & Conferences", "item": "https://vetnextstep.com/cpd" }
+          ]
+        })}</script>
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">

@@ -43,7 +43,20 @@ const AustraliaPage = () => {
         <meta property="og:title" content="Working as a Vet in Australia | VetNextStep" />
         <meta property="og:description" content="AVBC registration, AVE exam, Skills in Demand visa (482), and permanent residency pathways for vets in Australia." />
         <meta property="og:url" content="https://vetnextstep.com/australia" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Working as a Vet in Australia | VetNextStep" />
+        <meta name="twitter:description" content="AVBC registration, AVE exam, Skills in Demand visa (482), and permanent residency pathways for vets in Australia." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Working as a Vet in Australia", "item": "https://vetnextstep.com/australia" }
+          ]
+        })}</script>
       </Helmet>
 
       <SharedHeader />

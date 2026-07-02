@@ -299,6 +299,13 @@ const InternshipsResidencies = () => {
           <title>{subCatCfg.name} — {cfg.name} Internships & Residencies | VetNextStep</title>
           <meta name="description" content={`Veterinary ${subCatCfg.name.toLowerCase()} internships and residencies in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}/${subCategory}`} />
+          <meta property="og:title" content={`${subCatCfg.name} — ${cfg.name} Internships & Residencies | VetNextStep`} />
+          <meta property="og:description" content={`Veterinary ${subCatCfg.name.toLowerCase()} internships and residencies in ${cfg.name}.`} />
+          <meta property="og:url" content={`https://vetnextstep.com/internships-residencies/${region}/${subCategory}`} />
+          <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
 
@@ -407,6 +414,13 @@ const InternshipsResidencies = () => {
           <title>{cfg.name} Internships & Residencies | VetNextStep</title>
           <meta name="description" content={`Veterinary internships and residencies in ${cfg.name} — browse by programme type.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}`} />
+          <meta property="og:title" content={`${cfg.name} Internships & Residencies | VetNextStep`} />
+          <meta property="og:description" content={`Veterinary internships and residencies in ${cfg.name} — browse by programme type.`} />
+          <meta property="og:url" content={`https://vetnextstep.com/internships-residencies/${region}`} />
+          <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
 
@@ -502,6 +516,13 @@ const InternshipsResidencies = () => {
           <title>{cfg.name} Internships & Residencies | VetNextStep</title>
           <meta name="description" content={`Veterinary internships and residencies in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}`} />
+          <meta property="og:title" content={`${cfg.name} Internships & Residencies | VetNextStep`} />
+          <meta property="og:description" content={`Veterinary internships and residencies in ${cfg.name}.`} />
+          <meta property="og:url" content={`https://vetnextstep.com/internships-residencies/${region}`} />
+          <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
 
@@ -587,7 +608,20 @@ const InternshipsResidencies = () => {
         <meta property="og:title" content="Veterinary Internships & Residencies | VetNextStep" />
         <meta property="og:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
         <meta property="og:url" content="https://vetnextstep.com/internships-residencies" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Veterinary Internships & Residencies | VetNextStep" />
+        <meta name="twitter:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Internships & Residencies", "item": "https://vetnextstep.com/internships-residencies" }
+          ]
+        })}</script>
       </Helmet>
       <SharedHeader />
 

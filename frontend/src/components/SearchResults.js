@@ -24,6 +24,8 @@ const SearchResults = () => {
     <div className="min-h-screen bg-gray-50">
       <Helmet>
         <title>{q ? `"${q}" — Search | VetNextStep` : "Search | VetNextStep"}</title>
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://vetnextstep.com/search" />
       </Helmet>
       <SharedHeader />
 

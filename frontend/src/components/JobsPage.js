@@ -9,6 +9,12 @@ const JobsPage = () => (
       <title>Job Opportunities | VetNextStep</title>
       <meta name="description" content="Veterinary job opportunities — coming soon. Contact us to advertise your vacancy on VetNextStep." />
       <link rel="canonical" href="https://vetnextstep.com/jobs" />
+      <meta name="robots" content="noindex, follow" />
+      <meta property="og:title" content="Job Opportunities | VetNextStep" />
+      <meta property="og:description" content="Veterinary job opportunities — coming soon. Contact us to advertise your vacancy." />
+      <meta property="og:url" content="https://vetnextstep.com/jobs" />
+      <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+      <meta property="og:type" content="website" />
     </Helmet>
     <SharedHeader />
 

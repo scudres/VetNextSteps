@@ -17,6 +17,26 @@ const { corsHeaders, preflight } = require("./lib/cors");
 
 const METHODS = "POST, OPTIONS";
 
+// ─── IP rate limiter ──────────────────────────────────────────────────────────
+// Module-level Map persists across warm invocations of the same instance.
+// Netlify may run multiple instances in parallel; each limits independently,
+// which is fine since Turnstile is the primary spam defence and this is the backstop.
+const _rateMap = new Map(); // ip -> { count, resetAt }
+const RATE_WINDOW_MS = 60 * 1000; // 1 minute window
+const RATE_MAX        = 5;         // max submissions per IP per window
+
+function checkRateLimit(ip) {
+  if (!ip) return false;
+  const now   = Date.now();
+  const entry = _rateMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    _rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false; // not limited
+  }
+  entry.count += 1;
+  return entry.count > RATE_MAX;
+}
+
 // Maximum character counts — guards against large-payload abuse.
 const FIELD_LIMITS = {
   firstName: 100,
@@ -81,6 +101,18 @@ exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return preflight(origin, METHODS);
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
+  }
+
+  // Rate limiting — x-nf-client-connection-ip is Netlify-injected and cannot be spoofed;
+  // fall back to x-forwarded-for only in local dev where the Netlify CDN is not present.
+  const ip = event.headers["x-nf-client-connection-ip"]
+    || (event.headers["x-forwarded-for"] || "").split(",")[0].trim();
+  if (checkRateLimit(ip)) {
+    return {
+      statusCode: 429,
+      headers: { ...headers, "Retry-After": "60" },
+      body: JSON.stringify({ error: "Too many requests. Please wait a minute before trying again." }),
+    };
   }
 
   // Parse body

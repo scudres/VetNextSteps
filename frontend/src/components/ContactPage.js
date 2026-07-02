@@ -99,6 +99,11 @@ const ContactPage = () => {
         <title>Contact Us | VetNextStep</title>
         <meta name="description" content="Get in touch with VetNextStep — questions, feedback, or advertising enquiries." />
         <link rel="canonical" href="https://vetnextstep.com/contact" />
+        <meta property="og:title" content="Contact VetNextStep" />
+        <meta property="og:description" content="Get in touch with VetNextStep — questions, feedback, or advertising enquiries." />
+        <meta property="og:url" content="https://vetnextstep.com/contact" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
       </Helmet>
       <SharedHeader />
 

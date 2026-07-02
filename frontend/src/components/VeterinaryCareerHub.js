@@ -144,7 +144,43 @@ const VeterinaryCareerHub = () => {
         <meta property="og:title" content="VetNextStep | Veterinary Career Progression Hub" />
         <meta property="og:description" content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia." />
         <meta property="og:url" content="https://vetnextstep.com/" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VetNextStep | Veterinary Career Progression Hub" />
+        <meta name="twitter:description" content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://vetnextstep.com/#website",
+              "url": "https://vetnextstep.com/",
+              "name": "VetNextStep",
+              "description": "Veterinary career progression hub for vets in the UK, USA, Canada, and Australia.",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://vetnextstep.com/search?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://vetnextstep.com/#organization",
+              "name": "VetNextStep",
+              "url": "https://vetnextstep.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://vetnextstep.com/og-image.png"
+              },
+              "sameAs": []
+            }
+          ]
+        })}</script>
       </Helmet>
       <SharedHeader activeTab={activeTab} onTabChange={setActiveTab} />
 

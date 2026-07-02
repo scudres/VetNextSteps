@@ -41,7 +41,20 @@ const USAPage = () => {
         <meta property="og:title" content="Working as a Vet in the USA | VetNextStep" />
         <meta property="og:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program for vets in the USA." />
         <meta property="og:url" content="https://vetnextstep.com/usa" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Working as a Vet in the USA | VetNextStep" />
+        <meta name="twitter:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program for vets in the USA." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Working as a Vet in the USA", "item": "https://vetnextstep.com/usa" }
+          ]
+        })}</script>
       </Helmet>
 
       <SharedHeader />

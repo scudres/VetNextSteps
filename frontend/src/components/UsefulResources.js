@@ -131,11 +131,17 @@ const UsefulResources = () => (
   <div className="min-h-screen bg-gray-50">
     <Helmet>
       <title>Useful Resources | VetNextStep</title>
-      <meta
-        name="description"
-        content="Curated veterinary resources by country — regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia."
-      />
+      <meta name="description" content="Curated veterinary resources by country — regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia." />
       <link rel="canonical" href="https://vetnextstep.com/resources" />
+      <meta property="og:title" content="Useful Veterinary Resources | VetNextStep" />
+      <meta property="og:description" content="Regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia." />
+      <meta property="og:url" content="https://vetnextstep.com/resources" />
+      <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Useful Veterinary Resources | VetNextStep" />
+      <meta name="twitter:description" content="Regulatory bodies, licensing authorities, and career tools for vets worldwide." />
+      <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
     </Helmet>
     <SharedHeader />
 

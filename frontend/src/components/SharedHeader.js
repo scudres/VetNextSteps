@@ -114,7 +114,7 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
           <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
             <img src="/favicon.svg" alt="VetNextStep logo" className="w-9 h-9 flex-shrink-0" />
             <div>
-              <h1 className="text-xl font-bold text-gray-900">VetNextStep</h1>
+              <span className="text-xl font-bold text-gray-900">VetNextStep</span>
               <p className="hidden sm:block text-xs text-gray-500">Your Veterinary Career Progression</p>
             </div>
           </Link>

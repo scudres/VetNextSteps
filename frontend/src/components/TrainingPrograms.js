@@ -138,6 +138,22 @@ const TrainingPrograms = () => {
           <title>{cfg.name} Graduate Development Programmes | VetNextStep</title>
           <meta name="description" content={`Graduate development programmes for new veterinary graduates in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/training-programs/${country}`} />
+          <meta property="og:title" content={`${cfg.name} Graduate Development Programmes | VetNextStep`} />
+          <meta property="og:description" content={`Structured graduate development programmes with mentorship and clinical training for new veterinary graduates in ${cfg.name}.`} />
+          <meta property="og:url" content={`https://vetnextstep.com/training-programs/${country}`} />
+          <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Graduate Development Programmes", "item": "https://vetnextstep.com/training-programs" },
+              { "@type": "ListItem", "position": 3, "name": cfg.name, "item": `https://vetnextstep.com/training-programs/${country}` }
+            ]
+          })}</script>
         </Helmet>
         <SharedHeader />
 
@@ -204,7 +220,20 @@ const TrainingPrograms = () => {
         <meta property="og:title" content="Graduate Development Programmes | VetNextStep" />
         <meta property="og:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates across the UK, USA, Canada, and Australia." />
         <meta property="og:url" content="https://vetnextstep.com/training-programs" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Graduate Development Programmes | VetNextStep" />
+        <meta name="twitter:description" content="Structured graduate development programmes with mentorship and clinical training for new veterinary graduates across the UK, USA, Canada, and Australia." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Graduate Development Programmes", "item": "https://vetnextstep.com/training-programs" }
+          ]
+        })}</script>
       </Helmet>
       <SharedHeader />
 

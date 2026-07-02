@@ -200,6 +200,13 @@ const UKSubPage = ({ programs, loading }) => (
       <title>UK Postgraduate Certificates for Vets | VetNextStep</title>
       <meta name="description" content="RCVS CertAVP programmes in the UK from RVC, Edinburgh, Liverpool, Nottingham, Surrey, and BSAVA." />
       <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/uk" />
+      <meta property="og:title" content="UK Postgraduate Certificates for Vets | VetNextStep" />
+      <meta property="og:description" content="RCVS CertAVP programmes in the UK — from RVC, Edinburgh, Liverpool, Nottingham, Surrey, and BSAVA." />
+      <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates/uk" />
+      <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
     </Helmet>
     <SharedHeader />
     <main className="py-8 md:py-16">
@@ -278,6 +285,13 @@ const USASubPage = ({ categories, loading }) => {
         <title>USA Postgraduate Certificates for Vets | VetNextStep</title>
         <meta name="description" content="North American middle-tier veterinary credentials — ISVPS GPCert, rehabilitation (CCRP/CCRT), acupuncture (CVA), pain management (CVPP), and university graduate certificates." />
         <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/usa" />
+        <meta property="og:title" content="USA Postgraduate Certificates for Vets | VetNextStep" />
+        <meta property="og:description" content="ISVPS GPCert, rehabilitation (CCRP/CCRT), acupuncture (CVA), pain management (CVPP), and university graduate certificates for vets in the USA." />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates/usa" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">
@@ -346,7 +360,13 @@ const CanadaSubPage = () => (
   <div className="min-h-screen bg-white">
     <Helmet>
       <title>Canada Postgraduate Certificates for Vets | VetNextStep</title>
+      <meta name="description" content="Postgraduate certificate options for vets in Canada — including ISVPS GPCert, CCRP rehabilitation, CVPP pain management, and IVAS acupuncture credentials open to Canadian graduates." />
       <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/canada" />
+      <meta property="og:title" content="Canada Postgraduate Certificates for Vets | VetNextStep" />
+      <meta property="og:description" content="Postgraduate certificate options for vets in Canada — ISVPS GPCert, CCRP, CVPP, IVAS CVA, and more." />
+      <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates/canada" />
+      <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+      <meta property="og:type" content="website" />
     </Helmet>
     <SharedHeader />
     <main className="py-8 md:py-16">
@@ -403,6 +423,13 @@ const AustraliaSubPage = ({ programs, loading }) => (
         <title>Australia Postgraduate Certificates for Vets | VetNextStep</title>
         <meta name="description" content="ANZCVS Membership, ISVPS GPCert, and university graduate certificates for vets in Australia — including programmes from Melbourne, UQ, CSU, and JCU." />
         <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/australia" />
+        <meta property="og:title" content="Australia Postgraduate Certificates for Vets | VetNextStep" />
+        <meta property="og:description" content="ANZCVS Membership, ISVPS GPCert, and university graduate certificates for vets in Australia — Melbourne, UQ, CSU, and JCU." />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates/australia" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
     }
     infoBox={
@@ -439,6 +466,13 @@ const NewZealandSubPage = ({ programs, loading }) => (
         <title>New Zealand Postgraduate Certificates for Vets | VetNextStep</title>
         <meta name="description" content="ANZCVS Membership, ISVPS GPCert, and Massey University postgraduate qualifications for vets in New Zealand — including the MVM, PGDipVSc, and NZVA-Massey CPD Pathway." />
         <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates/new-zealand" />
+        <meta property="og:title" content="New Zealand Postgraduate Certificates for Vets | VetNextStep" />
+        <meta property="og:description" content="ANZCVS Membership, ISVPS GPCert, and Massey University qualifications for vets in New Zealand — MVM, PGDipVSc, and NZVA-Massey CPD Pathway." />
+        <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates/new-zealand" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
     }
     infoBox={
@@ -474,13 +508,26 @@ const HubPage = ({ certData, loading }) => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Veterinary Postgraduate Certificates: CertAVP &amp; GPCert</title>
+        <title>Veterinary Postgraduate Certificates: CertAVP &amp; GPCert | VetNextStep</title>
         <meta name="description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
         <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
         <meta property="og:title" content="Veterinary Postgraduate Certificates: CertAVP &amp; GPCert" />
         <meta property="og:description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
         <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Veterinary Postgraduate Certificates: CertAVP &amp; GPCert | VetNextStep" />
+        <meta name="twitter:description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Postgraduate Certificates", "item": "https://vetnextstep.com/postgraduate-certificates" }
+          ]
+        })}</script>
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">

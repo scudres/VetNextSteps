@@ -42,7 +42,20 @@ const CanadaPage = () => {
         <meta property="og:title" content="Working as a Vet in Canada | VetNextStep" />
         <meta property="og:description" content="ECA, NEB exams, NAVLE, provincial licensing, Federal Skilled Worker visa, and VIRMP opportunities for vets in Canada." />
         <meta property="og:url" content="https://vetnextstep.com/canada" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Working as a Vet in Canada | VetNextStep" />
+        <meta name="twitter:description" content="ECA, NEB exams, NAVLE, provincial licensing, Federal Skilled Worker visa, and VIRMP opportunities for vets in Canada." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Working as a Vet in Canada", "item": "https://vetnextstep.com/canada" }
+          ]
+        })}</script>
       </Helmet>
 
       <SharedHeader />

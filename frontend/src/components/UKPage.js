@@ -47,7 +47,20 @@ const UKPage = () => {
         <meta property="og:title" content="Working as a Vet in the UK | VetNextStep" />
         <meta property="og:description" content="RCVS registration, visa requirements, graduate programmes, internships, and CertAVP certificates for vets in the UK." />
         <meta property="og:url" content="https://vetnextstep.com/uk" />
+        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Working as a Vet in the UK | VetNextStep" />
+        <meta name="twitter:description" content="RCVS registration, visa requirements, graduate programmes, internships, and CertAVP certificates for vets in the UK." />
+        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Working as a Vet in the UK", "item": "https://vetnextstep.com/uk" }
+          ]
+        })}</script>
       </Helmet>
 
       <SharedHeader />
