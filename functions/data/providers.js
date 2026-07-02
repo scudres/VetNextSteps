@@ -100,7 +100,7 @@ const cpdProviders = [
     types: ["Webinar", "Online / E-learning", "Short Course", "Conference"],
     specialties: ["Internal Medicine", "Surgery", "Emergency & Critical Care", "Cardiology", "Dermatology", "Nursing & Allied"],
     location: "UK (regional) + online",
-    website: "https://www.bsava.com/education/cpd/",
+    website: "https://www.bsava.com/education/cpd/browse-all-courses/",
     notes: "Clinical Rounds every 2nd Monday (monthly). Many webinars and courses free to members. Up to 2 CPD hrs per webinar; online courses ~9 hrs. For vets and nurses.",
   },
   {

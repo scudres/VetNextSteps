@@ -43,6 +43,16 @@
     # Tell AI crawlers and scrapers not to index or use this content
     X-Robots-Tag = "noai, noimageai"
 
+    # Enforce HTTPS at the browser level (2-year duration, include subdomains, preload-eligible)
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+    # Prevent this page being opened in a cross-origin browsing context (protects against
+    # cross-origin script injection via window.opener / postMessage attacks)
+    Cross-Origin-Opener-Policy = "same-origin"
+
+    # Disallow Adobe Flash / Silverlight cross-domain policy files
+    X-Permitted-Cross-Domain-Policies = "none"
+
 # Long-lived cache for versioned static assets (JS/CSS bundles have content hashes)
 [[headers]]
   for = "/static/*"

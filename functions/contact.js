@@ -13,32 +13,53 @@
  */
 
 const nodemailer = require("nodemailer");
+const { corsHeaders, preflight } = require("./lib/cors");
 
-const ALLOWED_ORIGINS = new Set([
-  "https://vetnextstep.com",
-  "https://www.vetnextstep.com",
-  "http://localhost:3000",
-  "http://localhost:3001",
-]);
+const METHODS = "POST, OPTIONS";
 
-function corsHeaders(origin) {
-  const allowed = ALLOWED_ORIGINS.has(origin) ? origin : "https://vetnextstep.com";
-  return {
-    "Access-Control-Allow-Origin": allowed,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
+// Maximum character counts — guards against large-payload abuse.
+const FIELD_LIMITS = {
+  firstName: 100,
+  surname:   100,
+  email:     254,  // RFC 5321 maximum email address length
+  subject:   300,
+  message:   5000,
+};
+
+/** Escapes all five HTML special characters to prevent email-body injection. */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
+/**
+ * Nodemailer transporter — cached across warm Lambda invocations.
+ * Created lazily so that missing env vars are caught at send time, not at cold start.
+ */
+let _transporter = null;
+function getTransporter() {
+  if (_transporter) return _transporter;
+  _transporter = nodemailer.createTransport({
+    host:   process.env.SMTP_HOST,
+    port:   parseInt(process.env.SMTP_PORT, 10),
+    secure: false, // STARTTLS on port 587
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+  return _transporter;
 }
 
 exports.handler = async (event) => {
-  const origin = event.headers.origin || "";
-  const headers = corsHeaders(origin);
+  const origin  = event.headers.origin || "";
+  const headers = corsHeaders(origin, METHODS);
 
-  // Handle CORS preflight
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers, body: "" };
-  }
-
+  if (event.httpMethod === "OPTIONS") return preflight(origin, METHODS);
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
@@ -53,24 +74,29 @@ exports.handler = async (event) => {
 
   const { firstName, surname, email, subject, message } = body;
 
-  // Server-side validation
+  // Presence check
   if (!firstName || !surname || !email || !subject || !message) {
-    return {
-      statusCode: 400,
-      headers,
-      body: JSON.stringify({ error: "All fields are required." }),
-    };
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "All fields are required." }) };
   }
 
+  // Type check — all fields must be strings
+  if ([firstName, surname, email, subject, message].some((v) => typeof v !== "string")) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid field types." }) };
+  }
+
+  // Length limits
+  for (const [field, limit] of Object.entries(FIELD_LIMITS)) {
+    if ((body[field] || "").length > limit) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: `${field} exceeds maximum allowed length.` }) };
+    }
+  }
+
+  // Email format
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return {
-      statusCode: 400,
-      headers,
-      body: JSON.stringify({ error: "Please enter a valid email address." }),
-    };
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Please enter a valid email address." }) };
   }
 
-  // Check env vars are set
+  // SMTP config guard
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_EMAIL } = process.env;
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
     console.error("SMTP environment variables are not fully configured.");
@@ -81,46 +107,48 @@ exports.handler = async (event) => {
     };
   }
 
-  // Create transporter using IONOS SMTP
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: parseInt(SMTP_PORT, 10),
-    secure: false,       // false = STARTTLS on port 587
-    auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS,
-    },
-  });
+  // Trim all inputs then HTML-escape for the email body.
+  const t = {
+    firstName: firstName.trim(),
+    surname:   surname.trim(),
+    email:     email.trim(),
+    subject:   subject.trim(),
+    message:   message.trim(),
+  };
+  const safe = {
+    firstName: escapeHtml(t.firstName),
+    surname:   escapeHtml(t.surname),
+    email:     escapeHtml(t.email),
+    // Strip newlines from subject to prevent email header injection.
+    subject:   escapeHtml(t.subject.replace(/[\r\n]+/g, " ")),
+    message:   escapeHtml(t.message),
+  };
 
   try {
-    await transporter.sendMail({
-      from: `"VetNextStep Contact Form" <${SMTP_USER}>`,
-      to: CONTACT_EMAIL || "hello@vetnextstep.com",
-      replyTo: `"${firstName} ${surname}" <${email}>`,
-      subject: `[Contact Form] ${subject}`,
+    await getTransporter().sendMail({
+      from:    `"VetNextStep Contact Form" <${SMTP_USER}>`,
+      to:      CONTACT_EMAIL || "hello@vetnextstep.com",
+      replyTo: `"${t.firstName} ${t.surname}" <${t.email}>`,
+      subject: `[Contact Form] ${t.subject.replace(/[\r\n]+/g, " ")}`,
       text: [
-        `Name:    ${firstName} ${surname}`,
-        `Email:   ${email}`,
-        `Subject: ${subject}`,
+        `Name:    ${t.firstName} ${t.surname}`,
+        `Email:   ${t.email}`,
+        `Subject: ${t.subject}`,
         "",
         "Message:",
-        message,
+        t.message,
       ].join("\n"),
       html: `
-        <p><strong>Name:</strong> ${firstName} ${surname}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Name:</strong> ${safe.firstName} ${safe.surname}</p>
+        <p><strong>Email:</strong> <a href="mailto:${safe.email}">${safe.email}</a></p>
+        <p><strong>Subject:</strong> ${safe.subject}</p>
         <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0" />
         <p><strong>Message:</strong></p>
-        <p style="white-space:pre-wrap;color:#374151">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+        <p style="white-space:pre-wrap;color:#374151">${safe.message}</p>
       `,
     });
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ success: true }),
-    };
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
   } catch (err) {
     console.error("SMTP send error:", err.message);
     return {

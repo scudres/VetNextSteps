@@ -23,6 +23,7 @@ const SharedFooter = () => (
             <li><Link to="/postgraduate-certificates" className="hover:text-white transition-colors">Certificates</Link></li>
             <li><Link to="/cpd" className="hover:text-white transition-colors">CPD & Conferences</Link></li>
             <li><Link to="/jobs" className="hover:text-white transition-colors">Job Opportunities</Link></li>
+            <li><Link to="/resources" className="hover:text-white transition-colors">Useful Resources</Link></li>
           </ul>
         </div>
         <div>

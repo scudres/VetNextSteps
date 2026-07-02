@@ -17,6 +17,7 @@ import CPDPage from "./components/CPDPage";
 import CPDProviders from "./components/CPDProviders";
 import JobsPage from "./components/JobsPage";
 import ContactPage from "./components/ContactPage";
+import UsefulResources from "./components/UsefulResources";
 
 // Disable browser scroll restoration so we control it entirely
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -60,6 +61,7 @@ function App() {
             <Route path="/cpd/:region"                             element={<CPDPage />} />
             <Route path="/jobs"                                    element={<JobsPage />} />
             <Route path="/contact"                                 element={<ContactPage />} />
+            <Route path="/resources"                               element={<UsefulResources />} />
           </Routes>
         </BrowserRouter>
       </div>

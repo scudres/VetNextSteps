@@ -297,7 +297,7 @@ const CPDPage = () => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {regionConferences.map((conf, i) => (
-                      <ConferenceCard key={conf.title} conf={conf} />
+                      <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
                     ))}
                   </div>
                 )}
@@ -416,7 +416,7 @@ const CPDPage = () => {
                         ) : (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {conferences.map((conf, i) => (
-                              <ConferenceCard key={conf.title} conf={conf} />
+                              <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
                             ))}
                           </div>
                         )}

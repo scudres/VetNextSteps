@@ -2,23 +2,7 @@
 
 const { conferences } = require("./data/conferences");
 const { cpdProviders } = require("./data/providers");
-
-const ALLOWED_ORIGINS = new Set([
-  "https://vetnextstep.com",
-  "https://www.vetnextstep.com",
-  "http://localhost:3000",
-  "http://localhost:3001",
-]);
-
-function corsHeaders(origin) {
-  const allowed = ALLOWED_ORIGINS.has(origin) ? origin : "https://vetnextstep.com";
-  return {
-    "Access-Control-Allow-Origin": allowed,
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Cache-Control": "no-store",
-  };
-}
+const { corsHeaders, preflight } = require("./lib/cors");
 
 function slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -206,64 +190,61 @@ const certItems = [
   { title: "University of Surrey Veterinary General Practice PGCert", subtitle: "University of Surrey", description: "Modular PGCert delivered through online learning followed by a 2-week placement at the University.", section: "Postgraduate Certificates", navPath: "/postgraduate-certificates/uk", tags: ["Surrey", "PGCert", "certificate", "UK", "general practice"] },
 ].map((i) => ({ ...i, url: urlMap[i.title] || null, navPath: i.navPath + "#" + slugify(i.title) }));
 
-// Build search index at cold-start (cached across warm invocations)
-const conferenceItems = conferences.map((c) => ({
-  title: c.title,
-  subtitle: c.organiser,
-  description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
-  section: "Conferences",
-  url: c.website || null,
-  navPath: "/cpd#" + slugify(c.title),
-  tags: [...c.specialties, ...c.regions, c.category || ""],
-}));
-
-const cpdItems = cpdProviders.map((p) => ({
-  title: p.provider,
-  subtitle: p.programme,
-  description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
-  section: "CPD Providers",
-  url: p.website || null,
-  navPath: "/cpd?section=providers#" + slugify(p.provider),
-  tags: p.types,
-}));
-
+// Build search index at cold-start (cached across warm invocations).
+// Each entry carries a precomputed lowercase haystack so searches are O(n) string scans
+// rather than rebuilding the haystack string on every query.
 const searchIndex = [
   ...trainingItems,
   ...internshipItems,
   ...certItems,
-  ...conferenceItems,
-  ...cpdItems,
-];
+  ...conferences.map((c) => ({
+    title:       c.title,
+    subtitle:    c.organiser,
+    description: `${c.dates} \u00b7 ${c.location}${c.notes ? " \u2014 " + c.notes : ""}`,
+    section:     "Conferences",
+    url:         c.website || null,
+    navPath:     "/cpd#" + slugify(c.title),
+    tags:        [...c.specialties, ...c.regions, c.category || ""],
+  })),
+  ...cpdProviders.map((p) => ({
+    title:       p.provider,
+    subtitle:    p.programme,
+    description: `${p.location}${p.notes ? " \u2014 " + p.notes : ""}`,
+    section:     "CPD Providers",
+    url:         p.website || null,
+    navPath:     "/cpd?section=providers#" + slugify(p.provider),
+    tags:        p.types,
+  })),
+].map((item) => ({
+  ...item,
+  // Internal field — stripped before returning results to the client.
+  _h: [item.title, item.subtitle || "", item.description || "", ...(item.tags || [])].join(" ").toLowerCase(),
+}));
 
-function searchItems(query) {
-  if (!query || query.trim().length < 2) return [];
-  const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+const MAX_QUERY_LENGTH = 200;
 
-  const matched = searchIndex.filter((item) => {
-    const haystack = [item.title, item.subtitle, item.description, ...(item.tags || [])]
-      .join(" ")
-      .toLowerCase();
-    return terms.every((t) => haystack.includes(t));
-  });
+function searchItems(rawQuery) {
+  if (!rawQuery || rawQuery.trim().length < 2) return [];
+  const q     = rawQuery.trim().toLowerCase().slice(0, MAX_QUERY_LENGTH);
+  const terms = q.split(/\s+/).filter(Boolean);
+
+  const matched = searchIndex.filter((item) => terms.every((t) => item._h.includes(t)));
 
   matched.sort((a, b) => {
-    const q = query.toLowerCase();
-    const aTop = a.title.toLowerCase().includes(q) || a.subtitle.toLowerCase().includes(q) ? 0 : 1;
-    const bTop = b.title.toLowerCase().includes(q) || b.subtitle.toLowerCase().includes(q) ? 0 : 1;
+    const aTop = a.title.toLowerCase().includes(q) || (a.subtitle || "").toLowerCase().includes(q) ? 0 : 1;
+    const bTop = b.title.toLowerCase().includes(q) || (b.subtitle || "").toLowerCase().includes(q) ? 0 : 1;
     return aTop - bTop;
   });
 
-  return matched.slice(0, 10);
+  // Strip internal haystack field before returning to client.
+  return matched.slice(0, 10).map(({ _h, ...item }) => item);
 }
 
 exports.handler = async (event) => {
-  const origin = event.headers.origin || event.headers.Origin || "";
-  const headers = corsHeaders(origin);
+  const origin  = event.headers.origin || event.headers.Origin || "";
+  const headers = { ...corsHeaders(origin), "Cache-Control": "no-store" };
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers, body: "" };
-  }
-
+  if (event.httpMethod === "OPTIONS") return preflight(origin);
   if (event.httpMethod !== "GET") {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
@@ -279,13 +260,14 @@ exports.handler = async (event) => {
   }
 
   try {
-    const results = searchItems(q.trim());
+    const results = searchItems(q);
     return {
       statusCode: 200,
       headers: { ...headers, "Content-Type": "application/json" },
       body: JSON.stringify(results),
     };
   } catch (err) {
+    console.error("Search error:", err.message);
     return {
       statusCode: 500,
       headers: { ...headers, "Content-Type": "application/json" },
