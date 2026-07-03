@@ -138,16 +138,16 @@ const VeterinaryCareerHub = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>VetNextStep | Veterinary Career Progression Hub</title>
+        <title>Veterinary Career Progression Hub | VetNextStep</title>
         <meta name="description" content="Licensing steps, visa options, and training resources for vets working in or moving to the UK, USA, Canada, or Australia. No fluff — just what you need to know." />
         <link rel="canonical" href="https://vetnextstep.com/" />
-        <meta property="og:title" content="VetNextStep | Veterinary Career Progression Hub" />
+        <meta property="og:title" content="Veterinary Career Progression Hub | VetNextStep" />
         <meta property="og:description" content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia." />
         <meta property="og:url" content="https://vetnextstep.com/" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="VetNextStep | Veterinary Career Progression Hub" />
+        <meta name="twitter:title" content="Veterinary Career Progression Hub | VetNextStep" />
         <meta name="twitter:description" content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia." />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
@@ -197,9 +197,9 @@ const VeterinaryCareerHub = () => {
                 />
                 <div className="max-w-2xl">
                   <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">Veterinary career progression</p>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
                     Know your next step
-                  </h2>
+                  </h1>
                   <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
                     Newly qualified or ten years in — there's always a next move. Find licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
                   </p>
@@ -364,7 +364,16 @@ const VeterinaryCareerHub = () => {
                     <a key={country.code} href={`#country-${country.code.toLowerCase()}`} className="group block">
                       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-colors">
                         <div className="h-40 relative overflow-hidden">
-                          <img src={country.image} alt={country.name} className="w-full h-full object-cover" />
+                          <img
+                            src={country.image}
+                            srcSet={`${country.image.replace('w=600', 'w=400')} 400w, ${country.image} 600w, ${country.image.replace('w=600', 'w=900')} 900w`}
+                            sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                            alt={country.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            width="600"
+                            height="400"
+                          />
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                           <div className="absolute bottom-3 left-4 text-white">
                             <h3 className="text-lg font-bold">{country.name}</h3>

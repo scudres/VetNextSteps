@@ -245,7 +245,7 @@ const CPDPage = () => {
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-4xl">{cfg.flag}</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">{cfg.name}</h2>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{cfg.name}</h1>
               </div>
               <p className="text-gray-500 text-lg">Upcoming veterinary conferences and congresses</p>
             </div>
@@ -323,16 +323,16 @@ const CPDPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Vet Conferences &amp; CPD Events 2026 | By Region</title>
+        <title>Veterinary Conferences &amp; CPD Events | VetNextStep</title>
         <meta name="description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe. Filter by specialty or browse CPD providers and online courses." />
         <link rel="canonical" href="https://vetnextstep.com/cpd" />
-        <meta property="og:title" content="Vet Conferences &amp; CPD Events 2026 | VetNextStep" />
+        <meta property="og:title" content="Veterinary Conferences &amp; CPD Events | VetNextStep" />
         <meta property="og:description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe — filter by specialty, month, or format." />
         <meta property="og:url" content="https://vetnextstep.com/cpd" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Vet Conferences &amp; CPD Events 2026 | VetNextStep" />
+        <meta name="twitter:title" content="Veterinary Conferences &amp; CPD Events | VetNextStep" />
         <meta name="twitter:description" content="Upcoming veterinary conferences — filter by specialty, month, or format." />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
@@ -349,7 +349,7 @@ const CPDPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page title */}
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h2>
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Conferences sorted by date — filter by specialty, region, year, month or format. CPD providers and online courses are listed under the second tab.
             </p>
@@ -384,7 +384,16 @@ const CPDPage = () => {
                         <Link key={r.id} to={`/cpd/${r.id}`} className="group block">
                           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
                             <div className="h-32 relative overflow-hidden">
-                              <img src={r.image} alt={r.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                              <img
+                                src={r.image}
+                                srcSet={`${r.image.replace('w=600', 'w=400')} 400w, ${r.image} 600w, ${r.image.replace('w=600', 'w=900')} 900w`}
+                                sizes="(min-width: 1280px) 16vw, (min-width: 640px) 33vw, 100vw"
+                                alt={r.name}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                loading="lazy"
+                                width="600"
+                                height="400"
+                              />
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                               <div className="absolute bottom-3 left-3 text-white">
                                 <h3 className="text-sm font-bold leading-tight">{r.name}</h3>

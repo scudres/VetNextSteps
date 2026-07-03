@@ -254,7 +254,16 @@ const TrainingPrograms = () => {
                 <Link key={c.id} to={`/training-programs/${c.id}`} className="group block">
                   <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
                     <div className="h-48 relative overflow-hidden">
-                      <img src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img
+                        src={c.image}
+                        srcSet={`${c.image.replace('w=600', 'w=400')} 400w, ${c.image} 600w, ${c.image.replace('w=600', 'w=900')} 900w`}
+                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        alt={c.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        width="600"
+                        height="400"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
                       <div className="absolute bottom-3 left-4 text-white">
                         <div className="text-2xl mb-1">{c.flag}</div>

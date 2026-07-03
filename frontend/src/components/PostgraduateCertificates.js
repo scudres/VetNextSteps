@@ -486,7 +486,7 @@ const NewZealandSubPage = ({ programs, loading }) => (
       </InfoBox>
     }
     careerGuideLink={
-      <Link to="/new-zealand" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
+      <Link to="/postgraduate-certificates/new-zealand" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
         View full New Zealand career guide
         <ChevronRight />
       </Link>
@@ -508,10 +508,10 @@ const HubPage = ({ certData, loading }) => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Veterinary Postgraduate Certificates: CertAVP &amp; GPCert | VetNextStep</title>
+        <title>Postgraduate Certificates for Vets: CertAVP &amp; GPCert | VetNextStep</title>
         <meta name="description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
         <link rel="canonical" href="https://vetnextstep.com/postgraduate-certificates" />
-        <meta property="og:title" content="Veterinary Postgraduate Certificates: CertAVP &amp; GPCert" />
+        <meta property="og:title" content="Postgraduate Certificates for Vets: CertAVP &amp; GPCert | VetNextStep" />
         <meta property="og:description" content="Compare RCVS CertAVP routes in the UK, ISVPS GPCert in North America, and rehabilitation and acupuncture awards. Find which certificate fits your career." />
         <meta property="og:url" content="https://vetnextstep.com/postgraduate-certificates" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
