@@ -3,8 +3,6 @@
 const ALLOWED_ORIGINS = new Set([
   "https://vetnextstep.com",
   "https://www.vetnextstep.com",
-  "http://localhost:3000",
-  "http://localhost:3001",
 ]);
 
 /**

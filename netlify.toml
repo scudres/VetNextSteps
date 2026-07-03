@@ -26,14 +26,16 @@
     # Prevent MIME sniffing — browser must honour declared content-type
     X-Content-Type-Options = "nosniff"
 
-    # Legacy XSS filter (belt-and-braces for older browsers)
-    X-XSS-Protection = "1; mode=block"
+    # Disable the legacy XSS auditor — modern browsers removed it; the filter could
+    # be exploited on old IE so the correct value is 0 (disabled).
+    X-XSS-Protection = "0"
 
     # Only send the origin (no path/query) in the Referer header to third parties
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-    # Disable unused browser features
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    # Disable unused browser features; browsing-topics=() blocks the Topics API
+    # (Privacy Sandbox replacement for the deprecated FLoC / interest-cohort).
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
 
     # Content Security Policy
     # Allows: self, inline styles (Tailwind), Google Analytics
@@ -49,6 +51,9 @@
     # Prevent this page being opened in a cross-origin browsing context (protects against
     # cross-origin script injection via window.opener / postMessage attacks)
     Cross-Origin-Opener-Policy = "same-origin"
+
+    # Prevent other origins from embedding this site's resources (images, scripts, etc.)
+    Cross-Origin-Resource-Policy = "same-origin"
 
     # Disallow Adobe Flash / Silverlight cross-domain policy files
     X-Permitted-Cross-Domain-Policies = "none"

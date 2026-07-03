@@ -77,7 +77,7 @@ function getTransporter() {
 
 async function verifyTurnstile(token, ip) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true; // Dev mode — no key configured, skip verification
+  if (!secret) return false; // Fail closed — missing secret must not allow bypass
   if (!token) return false;
   try {
     const params = new URLSearchParams({ secret, response: token });
@@ -115,6 +115,12 @@ exports.handler = async (event) => {
     };
   }
 
+  // Reject non-JSON content types before attempting to parse
+  const contentType = (event.headers["content-type"] || "").split(";")[0].trim();
+  if (contentType !== "application/json") {
+    return { statusCode: 415, headers, body: JSON.stringify({ error: "Content-Type must be application/json" }) };
+  }
+
   // Parse body
   let body;
   try {
@@ -128,8 +134,10 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
   }
 
-  // Turnstile verification (skipped if secret not configured — dev/staging without keys)
-  const turnstileOk = await verifyTurnstile(body.cfToken, event.headers["x-forwarded-for"]);
+  // Turnstile verification — use the CDN-injected header (unspoofable) for remoteip hint
+  const turnstileIp = event.headers["x-nf-client-connection-ip"]
+    || (event.headers["x-forwarded-for"] || "").split(",")[0].trim();
+  const turnstileOk = await verifyTurnstile(body.cfToken, turnstileIp);
   if (!turnstileOk) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Bot check failed. Please reload and try again." }) };
   }
