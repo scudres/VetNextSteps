@@ -38,9 +38,14 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
 
     # Content Security Policy
-    # Allows: self, inline styles (Tailwind), Google Analytics
+    # Allows: self, inline styles (Tailwind), Google Analytics/GTM, Cloudflare Turnstile
     # Blocks: everything else including injected scripts from unknown origins
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.pexels.com https://images.unsplash.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://challenges.cloudflare.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; upgrade-insecure-requests;"
+    # Violations are reported to /.netlify/functions/csp-report (logged in Netlify Functions tab)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.pexels.com https://images.unsplash.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://challenges.cloudflare.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; upgrade-insecure-requests; report-uri /.netlify/functions/csp-report; report-to csp-endpoint"
+
+    # Reporting API endpoint group — used by report-to in the CSP above (Chrome 96+).
+    # report-uri (above) handles all other browsers.
+    Reporting-Endpoints = "csp-endpoint=\"https://vetnextstep.com/.netlify/functions/csp-report\""
 
     # Tell AI crawlers and scrapers not to index or use this content
     X-Robots-Tag = "noai, noimageai"
