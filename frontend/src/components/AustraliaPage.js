@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
+import visaFacts from "../data/visaFacts.json";
+
+const { facts } = visaFacts;
 
 const AustraliaPage = () => {
   const organisations = [
@@ -167,7 +170,7 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-green-900 mb-3">Key Details</h4>
                   <ul className="text-sm text-gray-700 space-y-2">
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Visa duration: up to <strong>4 years</strong></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Minimum salary: <strong>AUD 76,515/year</strong> (rising to AUD 79,499 from 1 July 2026)</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Minimum salary (Core Skills Income Threshold): <strong>{facts.au_csit.value}/year</strong> since 1 July 2026 — indexed annually each July</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Spouse and dependent children can accompany on same visa</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Pathway to permanent residency after <strong>2 years</strong> via Subclass 186</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Employer must demonstrate they could not fill the role locally</li>

@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import visaFacts from "../data/visaFacts.json";
+
+// Derive the default "last reviewed" label from the visa facts file so it can
+// never silently go stale — the automated verifier bumps lastVerified on each run.
+const defaultReviewed = new Date(visaFacts.lastVerified + "T00:00:00Z")
+  .toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
 
 /**
  * Visible disclaimer banner for pages containing licensing/visa/immigration information.
  *
  * Props:
  *   officialBody  — { name: string, url: string } — the primary regulatory body to verify with
- *   lastReviewed  — string — e.g. "June 2026" (defaults to June 2026)
+ *   lastReviewed  — string — e.g. "July 2026" (defaults to visaFacts.lastVerified)
  */
-const DisclaimerBanner = ({ officialBody, lastReviewed = "June 2026" }) => (
+const DisclaimerBanner = ({ officialBody, lastReviewed = defaultReviewed }) => (
   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
     <div className="flex-shrink-0 mt-0.5">
       <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">

@@ -1,0 +1,17 @@
+{
+  "generated": "2026-07-09",
+  "windowDays": 30,
+  "deadlines": [
+    {
+      "conference": "NAVLE (North American Veterinary Licensing Examination)",
+      "id": "navle-2026-2027",
+      "url": "https://www.icva.net/navle/",
+      "region": "",
+      "type": "registration",
+      "label": "Application deadline — Oct 12–Nov 14 2026 testing window",
+      "note": "Application period 1 Jun–15 Jul. No exceptions or extensions. Canadian candidates apply via the NEB, which may have its own earlier deadline.",
+      "date": "2026-07-15",
+      "daysLeft": 6
+    }
+  ]
+}

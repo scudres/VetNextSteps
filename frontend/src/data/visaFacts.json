@@ -1,0 +1,35 @@
+{
+  "lastVerified": "2026-07-09",
+  "facts": {
+    "uk_going_rate": {
+      "value": "£49,500",
+      "detail": "Standard going rate for veterinarians (SOC 2240), 37.5-hour week, effective 22 July 2025",
+      "source": "https://www.gov.uk/government/publications/skilled-worker-visa-going-rates-for-eligible-occupations/skilled-worker-visa-going-rates-for-eligible-occupation-codes",
+      "verified": "2026-07-09"
+    },
+    "uk_new_entrant_rate": {
+      "value": "£38,000",
+      "detail": "Lower going rate for veterinarians (SOC 2240) — applies to new entrants, effective 22 July 2025",
+      "source": "https://www.gov.uk/government/publications/skilled-worker-visa-going-rates-for-eligible-occupations/skilled-worker-visa-going-rates-for-eligible-occupation-codes",
+      "verified": "2026-07-09"
+    },
+    "uk_eaeve_deadline": {
+      "value": "January 2029",
+      "detail": "RCVS recognition of EAEVE-accredited EU degrees ends no later than this date, subject to annual review",
+      "source": "https://www.rcvs.org.uk/registration/join-the-register-of-veterinary-surgeons/europe/",
+      "verified": "2026-07-09"
+    },
+    "au_csit": {
+      "value": "AUD 79,499",
+      "detail": "Core Skills Income Threshold for Subclass 482/186, effective 1 July 2026, indexed annually to AWOTE",
+      "source": "https://immi.homeaffairs.gov.au/visas/employing-and-sponsoring-someone/sponsoring-workers/nominating-a-position/salary-requirements",
+      "verified": "2026-07-09"
+    },
+    "us_bcse_fee": {
+      "value": "$250",
+      "detail": "ECFVG Basic and Clinical Sciences Examination fee, from January 2026",
+      "source": "https://www.avma.org/education/ecfvg",
+      "verified": "2026-07-09"
+    }
+  }
+}

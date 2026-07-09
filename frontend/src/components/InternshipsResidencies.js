@@ -258,9 +258,9 @@ const InternshipsResidencies = () => {
 
   useEffect(() => {
     fetch("/.netlify/functions/internships")
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
       .then((data) => { setPrograms(data); setLoading(false); })
-      .catch(() => setLoading(false));
+      .catch(() => { setPrograms([]); setLoading(false); });
   }, []);
 
   const toggleType      = (v) => setTypeFilters((p)      => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
@@ -289,6 +289,7 @@ const InternshipsResidencies = () => {
             <p className="text-gray-500 mb-4">Page not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
           </main>
+          <SharedFooter />
         </div>
       );
     }
@@ -387,6 +388,7 @@ const InternshipsResidencies = () => {
 
           </div>
         </main>
+        <SharedFooter />
       </div>
     );
   }
@@ -404,6 +406,7 @@ const InternshipsResidencies = () => {
             <p className="text-gray-500 mb-4">Region not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
           </main>
+          <SharedFooter />
         </div>
       );
     }
@@ -488,6 +491,7 @@ const InternshipsResidencies = () => {
 
           </div>
         </main>
+        <SharedFooter />
       </div>
     );
   }
@@ -506,6 +510,7 @@ const InternshipsResidencies = () => {
             <p className="text-gray-500 mb-4">Region not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
           </main>
+          <SharedFooter />
         </div>
       );
     }
@@ -594,6 +599,7 @@ const InternshipsResidencies = () => {
 
           </div>
         </main>
+        <SharedFooter />
       </div>
     );
   }

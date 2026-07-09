@@ -4,33 +4,10 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import { slugify } from "../utils";
+import { countryConfig as allCountries } from "../data/certificatesData";
 
-const countryConfig = [
-  {
-    id: "australia",
-    name: "Australia",
-    flag: "🇦🇺",
-    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80"
-  },
-  {
-    id: "canada",
-    name: "Canada",
-    flag: "🇨🇦",
-    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    id: "uk",
-    name: "United Kingdom",
-    flag: "🇬🇧",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    id: "usa",
-    name: "United States",
-    flag: "🇺🇸",
-    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600"
-  }
-];
+// Training programmes exist for these four countries (no New Zealand data yet).
+const countryConfig = allCountries.filter((c) => c.id !== "new-zealand");
 
 const licensingNote = {
   uk: (
@@ -83,7 +60,7 @@ const licensingNote = {
   ),
   australia: (
     <p className="text-sm text-gray-500 mb-6">
-      Working in Australia requires AVA registration and state-level board approval.{" "}
+      Working in Australia requires registration with the veterinary board of your state or territory (under the AVBC framework).{" "}
       <Link to="/australia" className="text-blue-600 hover:text-blue-800 font-medium">See the Australia licensing guide →</Link>
     </p>
   ),
@@ -99,10 +76,11 @@ const TrainingPrograms = () => {
   const { country } = useParams();
   const [programs, setPrograms] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("/.netlify/functions/training")
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
       .then((data) => {
         const grouped = {};
         data.forEach((p) => {
@@ -112,7 +90,7 @@ const TrainingPrograms = () => {
         setPrograms(grouped);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
 
   // ——— Sub-page: single country ———
@@ -128,6 +106,7 @@ const TrainingPrograms = () => {
             <p className="text-gray-500 mb-4">Country not found.</p>
             <Link to="/training-programs" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
           </main>
+          <SharedFooter />
         </div>
       );
     }
@@ -181,7 +160,9 @@ const TrainingPrograms = () => {
 
             {licensingNote[country]}
 
-            {loading ? <Spinner /> : (
+            {error && <div className="text-center py-16 text-red-500 text-sm">Could not load programme data. Please refresh the page.</div>}
+
+            {loading ? <Spinner /> : !error && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {countryPrograms.map((program, index) => (
                   <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
@@ -206,6 +187,7 @@ const TrainingPrograms = () => {
 
           </div>
         </main>
+        <SharedFooter />
       </div>
     );
   }

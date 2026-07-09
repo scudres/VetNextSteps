@@ -84,3 +84,6 @@ agenthub/agents/youtube/db
 
 # Mobile development
 android-sdk/ 
+# Playwright
+test-results/
+playwright-report/

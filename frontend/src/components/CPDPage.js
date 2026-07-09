@@ -4,8 +4,41 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
+import DeadlinesWidget from "./DeadlinesWidget";
 import { specialtyOptions, regionConfig, parseSortDate } from "../data/conferencesData";
 import { slugify } from "../utils";
+
+// Build schema.org Event objects for conferences whose dates parse to a real
+// calendar day (TBA and month-only entries are excluded). Used for JSON-LD.
+const buildEventSchema = (confs) => {
+  const events = [];
+  for (const conf of confs) {
+    const key = parseSortDate(conf.dates);
+    if (!isFinite(key)) continue;
+    const y = Math.floor(key / 10000);
+    const m = Math.floor(key / 100) % 100;
+    const d = key % 100;
+    if (m < 1 || m > 12 || d < 1 || d > 31) continue; // month-only sentinel (…1299)
+    const pad = (n) => String(n).padStart(2, "0");
+    events.push({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": conf.title,
+      "startDate": `${y}-${pad(m)}-${pad(d)}`,
+      "eventAttendanceMode": conf.format === "online"
+        ? "https://schema.org/OnlineEventAttendanceMode"
+        : conf.format === "hybrid"
+        ? "https://schema.org/MixedEventAttendanceMode"
+        : "https://schema.org/OfflineEventAttendanceMode",
+      "location": conf.format === "online"
+        ? { "@type": "VirtualLocation", "url": conf.website }
+        : { "@type": "Place", "name": conf.location, "address": conf.location },
+      "organizer": { "@type": "Organization", "name": conf.organiser, "url": conf.website },
+      "url": conf.website,
+    });
+  }
+  return events;
+};
 
 // ——— Date helpers ———
 const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -78,7 +111,10 @@ const ConferenceCard = ({ conf }) => (
 
 // ——— Filter row used in both hub and sub-page views ———
 const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths, showRegions = true }) => {
-  const activeCount = Object.values(filters).reduce((n, arr) => n + arr.length, 0);
+  // Region filters are hidden on sub-pages (region comes from the URL there),
+  // so exclude them from the visible active count when the dropdown is hidden.
+  const activeCount = Object.entries(filters).reduce(
+    (n, [key, arr]) => n + (key === "regions" && !showRegions ? 0 : arr.length), 0);
   return (
     <div className="flex flex-wrap gap-2 mb-6 items-center">
       <FilterDropdown
@@ -211,8 +247,7 @@ const CPDPage = () => {
       .filter((c) => c.regions.includes(region) && matchesFilters(c))
       .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
 
-    const subPageActiveCount = ["specialties","years","months","formats"]
-      .reduce((n, k) => n + filters[k].length, 0);
+    const eventSchema = buildEventSchema(regionConferences);
 
     return (
       <div className="min-h-screen bg-white">
@@ -227,6 +262,9 @@ const CPDPage = () => {
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+          {eventSchema.length > 0 && (
+            <script type="application/ld+json">{JSON.stringify(eventSchema)}</script>
+          )}
         </Helmet>
         <SharedHeader />
         <main className="py-8 md:py-16">
@@ -257,41 +295,14 @@ const CPDPage = () => {
               <>
                 {/* Filters */}
                 <div className="mb-2">
-                  <div className="flex flex-wrap gap-2 mb-3 items-center">
-                    <FilterDropdown
-                      label="Specialty"
-                      options={specialtyOptions.slice(1)}
-                      selected={filters.specialties}
-                      onToggle={(v) => toggleFilter("specialties", v)}
-                    />
-                    <FilterDropdown
-                      label="Year"
-                      options={availableYears}
-                      selected={filters.years}
-                      onToggle={(v) => toggleFilter("years", v)}
-                    />
-                    <FilterDropdown
-                      label="Month"
-                      options={availableMonths.map((m) => ({ value: m, label: MONTH_ABBR[m - 1] }))}
-                      selected={filters.months}
-                      onToggle={(v) => toggleFilter("months", v)}
-                      valueKey="value"
-                      labelKey="label"
-                    />
-                    <FilterDropdown
-                      label="Format"
-                      options={FORMAT_OPTIONS}
-                      selected={filters.formats}
-                      onToggle={(v) => toggleFilter("formats", v)}
-                      valueKey="value"
-                      labelKey="label"
-                    />
-                    {subPageActiveCount > 0 && (
-                      <button onClick={clearFilters} className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2">
-                        Clear all ({subPageActiveCount})
-                      </button>
-                    )}
-                  </div>
+                  <FilterRow
+                    filters={filters}
+                    onToggle={toggleFilter}
+                    onClear={clearFilters}
+                    availableYears={availableYears}
+                    availableMonths={availableMonths}
+                    showRegions={false}
+                  />
                   <p className="text-sm text-gray-500 mb-6">
                     {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
                   </p>
@@ -375,6 +386,11 @@ const CPDPage = () => {
 
               {!loading && !error && (
                 <>
+                  {/* Closing-soon deadlines (from tools/deadline-alerts pipeline) */}
+                  <div className="mb-10">
+                    <DeadlinesWidget />
+                  </div>
+
                   {/* Region nav cards */}
                   <h2 className="text-lg font-semibold text-gray-700 mb-5">International Vet CE &amp; CPD — Browse by Region</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">

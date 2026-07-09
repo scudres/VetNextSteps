@@ -1,0 +1,549 @@
+[
+  {
+    "id": "avma-convention-2026",
+    "name": "AVMA Convention 2026 (Anaheim CA)",
+    "url": "https://www.avma.org/events",
+    "region": "USA",
+    "startDate": "2026-07-10",
+    "deadlines": []
+  },
+  {
+    "id": "ecvs-asm-2026",
+    "name": "ECVS Annual Scientific Meeting 2026 (Liverpool)",
+    "url": "https://www.ecvs.org",
+    "region": "UK/Europe",
+    "startDate": "2026-07-09",
+    "deadlines": []
+  },
+  {
+    "id": "sft-conference-2026",
+    "name": "Society for Theriogenology Conference 2026 (Pittsburgh PA)",
+    "url": "https://www.therio.org/",
+    "region": "USA",
+    "startDate": "2026-07-22",
+    "deadlines": []
+  },
+  {
+    "id": "bain-fallon-lectures-2026",
+    "name": "46th Bain Fallon Memorial Lectures 2026 (Melbourne VIC)",
+    "url": "https://au.eventscloud.com/website/3240/",
+    "region": "Australia",
+    "startDate": "2026-07-19",
+    "deadlines": []
+  },
+  {
+    "id": "anzcvs-vet-science-week-2026",
+    "name": "ANZCVS Veterinary Science Week 2026 (Gold Coast QLD)",
+    "url": "https://vetscienceweek.com.au/",
+    "region": "Aus/NZ",
+    "startDate": "2026-07-24",
+    "deadlines": []
+  },
+  {
+    "id": "brachycephalic-surgery-wetlab-nz-2026",
+    "name": "Brachycephalic Surgery Wet-lab 2026 (Auckland)",
+    "url": "https://www.practicalcpd.co.nz/product/brachycephalic-surgery-wet-lab-nz26/",
+    "region": "New Zealand",
+    "startDate": "2026-07-24",
+    "deadlines": []
+  },
+  {
+    "id": "acvim-brain-camp-2026",
+    "name": "ACVIM Brain Camp 2026 (Virtual)",
+    "url": "https://acvim.swoogo.com/acvimbraincamp",
+    "region": "USA/Global",
+    "startDate": "2026-08-01",
+    "deadlines": []
+  },
+  {
+    "id": "weva-world-congress-2026",
+    "name": "WEVA World Congress 2026 (Panama City)",
+    "url": "https://wevaonline.org/",
+    "region": "Global",
+    "startDate": "2026-08-12",
+    "deadlines": []
+  },
+  {
+    "id": "asav-conference-2026",
+    "name": "51st ASAV Annual Conference 2026 (Sunshine Coast QLD)",
+    "url": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002040",
+    "region": "Australia",
+    "startDate": "2026-08-17",
+    "deadlines": []
+  },
+  {
+    "id": "esvd-ecvd-congress-2026",
+    "name": "ESVD-ECVD Congress 2026 (Lille)",
+    "url": "https://www.esvd-ecvdcongress.com",
+    "region": "Europe",
+    "startDate": "2026-08-27",
+    "deadlines": []
+  },
+  {
+    "id": "aabp-annual-conference-2026",
+    "name": "AABP Annual Conference 2026 (Minneapolis MN)",
+    "url": "https://www.aabp.org/meeting/",
+    "region": "USA",
+    "startDate": "2026-08-27",
+    "deadlines": []
+  },
+  {
+    "id": "guided-tta-wetlab-nz-2026",
+    "name": "Guided TTA and Meniscus Wet-lab 2026 (Auckland)",
+    "url": "https://www.practicalcpd.co.nz/product/guided-tta-and-meniscus-wet-lab-nz26/",
+    "region": "New Zealand",
+    "startDate": "2026-08-27",
+    "deadlines": []
+  },
+  {
+    "id": "exotic365-2026",
+    "name": "Exotic365 2026 (Philadelphia PA)",
+    "url": "https://www.exoticscon.org/",
+    "region": "USA",
+    "startDate": "2026-08-30",
+    "deadlines": []
+  },
+  {
+    "id": "world-buiatrics-congress-2026",
+    "name": "World Buiatrics Congress 2026 (Istanbul)",
+    "url": "https://buiatrics.com/",
+    "region": "Europe/Global",
+    "startDate": "2026-09-06",
+    "deadlines": []
+  },
+  {
+    "id": "sheep-production-online-nz-2026",
+    "name": "Sheep Production Online Course 2026 (NZVA)",
+    "url": "https://www.nzvaevents.org.nz/26shpro",
+    "region": "New Zealand",
+    "startDate": "2026-09-07",
+    "deadlines": []
+  },
+  {
+    "id": "beva-congress-2026",
+    "name": "BEVA Congress 2026 (Birmingham)",
+    "url": "https://www.bevacongress.org/",
+    "region": "UK/Europe",
+    "startDate": "2026-09-09",
+    "deadlines": []
+  },
+  {
+    "id": "the-vet-expo-2026",
+    "name": "The VET Expo 2026 (Sydney NSW)",
+    "url": "https://www.terrapinn.com/exhibition/vet-expo/index.stm",
+    "region": "Australia",
+    "startDate": "2026-09-09",
+    "deadlines": []
+  },
+  {
+    "id": "esve-pre-congress-2026",
+    "name": "ESVE Pre-congress Symposium 2026 (Berlin)",
+    "url": "https://www.esve.org/",
+    "region": "Europe",
+    "startDate": "2026-09-09",
+    "deadlines": []
+  },
+  {
+    "id": "esvnu-pre-congress-2026",
+    "name": "ESVNU Pre-congress Symposium 2026 (Berlin)",
+    "url": "https://www.ecvimcongress.org/programme/esvnu_precongress",
+    "region": "Europe",
+    "startDate": "2026-09-09",
+    "deadlines": []
+  },
+  {
+    "id": "escg-pre-congress-2026",
+    "name": "ESCG Pre-congress Symposium 2026 (Berlin)",
+    "url": "https://www.ecvimcongress.org/",
+    "region": "Europe",
+    "startDate": "2026-09-09",
+    "deadlines": []
+  },
+  {
+    "id": "ecvim-ca-congress-2026",
+    "name": "ECVIM-CA Congress 2026 (Berlin)",
+    "url": "https://www.ecvimcongress.org",
+    "region": "Europe",
+    "startDate": "2026-09-10",
+    "deadlines": []
+  },
+  {
+    "id": "iveccs-2026",
+    "name": "IVECCS 2026 (Savannah GA)",
+    "url": "https://www.veccs.org",
+    "region": "USA",
+    "startDate": "2026-09-14",
+    "deadlines": []
+  },
+  {
+    "id": "beyond-the-scrubs-2026",
+    "name": "Beyond the Scrubs: Veterinary Women's Wellness Conference 2026 (NZ)",
+    "url": "https://beyondthescrubs.co.nz",
+    "region": "New Zealand",
+    "startDate": "2026-09-15",
+    "deadlines": []
+  },
+  {
+    "id": "ecvm-conference-2026",
+    "name": "ECVM International Conference 8th 2026 (Guildford UK)",
+    "url": "https://www.ebvs.eu/events-ebvs",
+    "region": "UK/Europe",
+    "startDate": "2026-09-16",
+    "deadlines": []
+  },
+  {
+    "id": "esvp-joint-congress-2026",
+    "name": "ESVP/ECVP/ESVCP/ECVCP Joint Congress 2026 (Nantes)",
+    "url": "https://www.ebvs.eu/events-ebvs",
+    "region": "Europe",
+    "startDate": "2026-09-16",
+    "deadlines": []
+  },
+  {
+    "id": "esvcn-congress-2026",
+    "name": "ESVCN Congress 2026 (Naples)",
+    "url": "https://esvcn.org/",
+    "region": "Europe",
+    "startDate": "2026-09-16",
+    "deadlines": []
+  },
+  {
+    "id": "esvn-ecvn-symposium-2026",
+    "name": "ESVN-ECVN Annual Symposium 38th 2026 (Berlin)",
+    "url": "https://www.ecvnberlin2026.org",
+    "region": "Europe",
+    "startDate": "2026-09-17",
+    "deadlines": []
+  },
+  {
+    "id": "acvo-annual-conference-2026",
+    "name": "ACVO Annual Conference 2026 (Orlando FL)",
+    "url": "https://www.acvoconference.org/",
+    "region": "USA",
+    "startDate": "2026-09-23",
+    "deadlines": []
+  },
+  {
+    "id": "vcs-annual-conference-2026",
+    "name": "VCS Annual Conference 2026 (Minneapolis MN)",
+    "url": "https://vetcancersociety.org/",
+    "region": "USA",
+    "startDate": "2026-09-24",
+    "deadlines": []
+  },
+  {
+    "id": "ava-autumn-meeting-2026",
+    "name": "AVA Autumn Meeting 2026 (Thessaloniki)",
+    "url": "https://www.ava.eu.com/",
+    "region": "Europe",
+    "startDate": "2026-09-30",
+    "deadlines": []
+  },
+  {
+    "id": "eliminating-facial-eczema-nz-2026",
+    "name": "Eliminating Facial Eczema Impacts Online Course 2026 (NZVA)",
+    "url": "https://www.nzvaevents.org.nz/26shpfe",
+    "region": "New Zealand",
+    "startDate": "2026-10-05",
+    "deadlines": []
+  },
+  {
+    "id": "acvs-surgery-summit-2026",
+    "name": "ACVS Surgery Summit 2026 (Charlotte NC)",
+    "url": "https://www.acvs.org/surgery-summit",
+    "region": "USA",
+    "startDate": "2026-10-07",
+    "deadlines": []
+  },
+  {
+    "id": "ecvsmr-scientific-meeting-2026",
+    "name": "ECVSMR Scientific Meeting 2026 (Netherlands)",
+    "url": "https://www.ebvs.eu/events-ebvs",
+    "region": "Europe",
+    "startDate": "2026-10-08",
+    "deadlines": []
+  },
+  {
+    "id": "wsava-congress-2026",
+    "name": "WSAVA World Congress 2026 (Warsaw)",
+    "url": "https://wsava-congress.org",
+    "region": "Europe/Global",
+    "startDate": "2026-10-13",
+    "deadlines": []
+  },
+  {
+    "id": "acvaa-annual-meeting-2026",
+    "name": "ACVAA Annual Meeting 2026 (San Diego CA)",
+    "url": "https://acvaa.org/",
+    "region": "USA",
+    "startDate": "2026-10-20",
+    "deadlines": []
+  },
+  {
+    "id": "cav-roadshow-nz-2026",
+    "name": "CAV Roadshow 2026 — Normalising the Abnormal (NZ)",
+    "url": "https://www.nzvaevents.org.nz/2026regions/cavroadshow",
+    "region": "New Zealand",
+    "startDate": "2026-10-20",
+    "deadlines": []
+  },
+  {
+    "id": "fasawa-congress-2026",
+    "name": "FASAWA Congress 2026 (Taipei)",
+    "url": "https://fasawa2026.org",
+    "region": "Global",
+    "startDate": "2026-10-31",
+    "deadlines": [
+      { "type": "registration", "date": "2026-09-30", "label": "Group registration deadline", "note": "Individual registration deadline — verify on fasawa2026.org/registration/en" }
+    ]
+  },
+  {
+    "id": "nzva-vet-team-symposium-2026",
+    "name": "NZVA Veterinary Team Symposium 2026 (Christchurch)",
+    "url": "https://nzva.org.nz/",
+    "region": "New Zealand",
+    "startDate": "2026-11-04",
+    "deadlines": []
+  },
+  {
+    "id": "advanced-mastitis-nz-2026",
+    "name": "Advanced Mastitis Course 2026 (NZ)",
+    "url": "https://anexa.co.nz/events/advanced-mastitis-course/",
+    "region": "New Zealand",
+    "startDate": "2026-11-09",
+    "deadlines": []
+  },
+  {
+    "id": "acvp-annual-meeting-2026",
+    "name": "ACVP Annual Meeting 2026 (Indianapolis IN)",
+    "url": "https://acvp.org/",
+    "region": "USA",
+    "startDate": "2026-11-14",
+    "deadlines": [
+      { "type": "early-bird", "date": "2026-09-23", "label": "Early-bird rate ends", "note": "Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/" }
+    ]
+  },
+  {
+    "id": "nzva-business-wellbeing-2026",
+    "name": "NZVA Veterinary Business & Wellbeing Symposium 2026",
+    "url": "https://www.nzvaevents.org.nz/26bws",
+    "region": "New Zealand",
+    "startDate": "2026-11-18",
+    "deadlines": []
+  },
+  {
+    "id": "london-vet-show-2026",
+    "name": "London Vet Show 2026",
+    "url": "https://london.vetshow.com",
+    "region": "UK/Europe",
+    "startDate": "2026-11-19",
+    "deadlines": []
+  },
+  {
+    "id": "upav-conference-2026",
+    "name": "UPAV Conference 2026 (Melbourne VIC)",
+    "url": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002108",
+    "region": "Australia",
+    "startDate": "2026-11-23",
+    "deadlines": []
+  },
+  {
+    "id": "aavac-conference-2026",
+    "name": "AAVAC Annual Conference 2026 (Melbourne VIC)",
+    "url": "https://aav.org/events/EventDetails.aspx?group=&id=2033737",
+    "region": "Australia",
+    "startDate": "2026-11-26",
+    "deadlines": []
+  },
+  {
+    "id": "aaep-annual-convention-2026",
+    "name": "AAEP Annual Convention 2026 (Las Vegas NV)",
+    "url": "https://convention.aaep.org/",
+    "region": "USA",
+    "startDate": "2026-12-07",
+    "deadlines": [
+      { "type": "hotel", "date": "2026-09-17", "label": "Hotel block discount closes", "note": "Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/" }
+    ]
+  },
+  {
+    "id": "vmx-2027",
+    "name": "VMX 2027 (Orlando FL)",
+    "url": "https://navc.com/vmx",
+    "region": "USA",
+    "startDate": "2027-01-16",
+    "deadlines": []
+  },
+  {
+    "id": "aasv-annual-meeting-2027",
+    "name": "AASV Annual Meeting 2027 (Orlando FL)",
+    "url": "https://www.aasv.org/",
+    "region": "USA",
+    "startDate": "2027-02-27",
+    "deadlines": []
+  },
+  {
+    "id": "wvc-annual-conference-2027",
+    "name": "WVC Annual Conference 2027 (Las Vegas NV)",
+    "url": "https://www.viticusgroup.org/wvc-conference",
+    "region": "USA",
+    "startDate": "2027-02-28",
+    "deadlines": []
+  },
+  {
+    "id": "navdf-2027",
+    "name": "NAVDF 2027 (Anaheim CA)",
+    "url": "https://navdf.org/",
+    "region": "USA",
+    "startDate": "2027-03-22",
+    "deadlines": []
+  },
+  {
+    "id": "renal-week-2027",
+    "name": "Renal Week 2027 — IRIS-ACVNU (Washington DC)",
+    "url": "https://acvnu.org/",
+    "region": "USA",
+    "startDate": "2027-04-12",
+    "deadlines": []
+  },
+  {
+    "id": "ava-annual-conference-2027",
+    "name": "AVA Annual Conference 2027 (Melbourne VIC)",
+    "url": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002113",
+    "region": "Australia",
+    "startDate": "2027-05-17",
+    "deadlines": []
+  },
+  {
+    "id": "evecc-congress-2027",
+    "name": "EVECC Congress 2027 (Kraków, Poland)",
+    "url": "https://www.evecc-congress.org",
+    "region": "Europe",
+    "startDate": "2027-06-02",
+    "deadlines": []
+  },
+  {
+    "id": "acvim-forum-2027",
+    "name": "ACVIM Forum 2027 (Montreal)",
+    "url": "https://www.acvim.org",
+    "region": "USA",
+    "startDate": "2027-06-24",
+    "deadlines": []
+  },
+  {
+    "id": "ecvs-asm-2027",
+    "name": "ECVS Annual Scientific Meeting 2027 (Florence)",
+    "url": "https://www.ecvs.org",
+    "region": "Europe",
+    "startDate": "2027-07-08",
+    "deadlines": []
+  },
+  {
+    "id": "avma-convention-2027",
+    "name": "AVMA Convention 2027 (Minneapolis MN)",
+    "url": "https://www.avma.org/events",
+    "region": "USA",
+    "startDate": "2027-07-16",
+    "deadlines": []
+  },
+  {
+    "id": "ecvim-ca-congress-2027",
+    "name": "ECVIM-CA Congress 2027 (Rimini)",
+    "url": "https://www.ecvimcongress.org",
+    "region": "Europe",
+    "startDate": "2027-09-23",
+    "deadlines": []
+  },
+  {
+    "id": "vcs-annual-conference-2027",
+    "name": "VCS Annual Conference 2027 (St Louis MO)",
+    "url": "https://vetcancersociety.org/",
+    "region": "USA",
+    "startDate": "2027-09-23",
+    "deadlines": []
+  },
+  {
+    "id": "wsava-congress-2027",
+    "name": "WSAVA World Congress 2027 (New Delhi)",
+    "url": "https://wsava.org/congress",
+    "region": "Global",
+    "startDate": "2027-11-05",
+    "deadlines": []
+  },
+  {
+    "id": "bsava-alba-2026",
+    "name": "BSAVA Alba 2026 (Glasgow)",
+    "url": "https://www.bsava.com",
+    "region": "UK",
+    "deadlines": []
+  },
+  {
+    "id": "bva-live-2026",
+    "name": "BVA Live 2026 (Birmingham)",
+    "url": "https://bvalive.vetshow.com/",
+    "region": "UK",
+    "deadlines": []
+  },
+  {
+    "id": "spvs-vmg-congress-2027",
+    "name": "SPVS-VMG Congress 2027 (Birmingham)",
+    "url": "https://spvs.org.uk/",
+    "region": "UK",
+    "deadlines": []
+  },
+  {
+    "id": "wvoc-2026",
+    "name": "World Veterinary Orthopaedic Congress 2026 (Rome)",
+    "url": "https://www.wvoc2026.org",
+    "region": "Europe/Global",
+    "deadlines": []
+  },
+  {
+    "id": "saeva-congress-2027",
+    "name": "SAEVA Congress 2027 (Western Cape, South Africa)",
+    "url": "https://www.saeva.co.za",
+    "region": "Global",
+    "deadlines": []
+  },
+  {
+    "id": "esvonc-annual-congress-2027",
+    "name": "ESVONC Annual Congress 2027",
+    "url": "https://www.esvonc.com/",
+    "region": "Europe",
+    "deadlines": []
+  },
+  {
+    "id": "bvba-events-2026",
+    "name": "BVBA Events 2026",
+    "url": "https://www.bvba.org.uk/",
+    "region": "UK",
+    "deadlines": []
+  },
+  {
+    "id": "evdi-conference-2026",
+    "name": "EVDI / EAVDI-ECVDI Annual Conference 2026",
+    "url": "https://www.ecvdi.org/",
+    "region": "Europe",
+    "deadlines": []
+  },
+  {
+    "id": "acvsmr-symposium-2027",
+    "name": "ACVSMR Symposium 2027",
+    "url": "https://www.vsmr.org/",
+    "region": "USA",
+    "deadlines": []
+  },
+  {
+    "id": "anzcvs-vet-science-week-2027",
+    "name": "ANZCVS Vet Science Week 2027",
+    "url": "https://www.anzcvs.org.au/",
+    "region": "Aus/NZ",
+    "deadlines": []
+  },
+  {
+    "id": "nzva-nzvna-conference-2027",
+    "name": "NZVA & NZVNA Conference 2027",
+    "url": "https://nzva.org.nz/edhub/conferences/",
+    "region": "New Zealand",
+    "deadlines": []
+  }
+]

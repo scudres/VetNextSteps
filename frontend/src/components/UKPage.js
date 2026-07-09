@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
+import visaFacts from "../data/visaFacts.json";
+
+const { facts } = visaFacts;
 
 const UKPage = () => {
   const organisations = [
@@ -83,6 +86,23 @@ const UKPage = () => {
             officialBody={{ name: "RCVS and UK Visas & Immigration (UKVI)", url: "https://www.rcvs.org.uk/registration/" }}
           />
 
+          {/* Interactive guide CTA */}
+          <Link
+            to="/uk/first-role"
+            className="block bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-xl p-5 md:p-6 shadow-lg transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl flex-shrink-0">🧭</span>
+              <div className="min-w-0">
+                <p className="font-bold text-base md:text-lg mb-0.5">New: interactive first-role guide</p>
+                <p className="text-sm text-blue-100">Answer three questions and get the registration, visa, and first-job steps that apply to your situation.</p>
+              </div>
+              <svg className="ml-auto w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+
           {/* Visa & Licensing */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Visa & Licensing Requirements</h2>
@@ -111,7 +131,8 @@ const UKPage = () => {
               </div>
               <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
                 <p className="text-sm text-yellow-800">
-                  <strong>💷 Salary threshold (2026):</strong> Veterinary surgeons must be paid at least <strong>£48,100/year</strong> to qualify for Skilled Worker visa sponsorship. A reduced <strong>new entrant rate of £33,390</strong> may apply for those within 3 years of graduating or under 26.
+                  <strong>💷 Salary threshold:</strong> Veterinary surgeons (occupation code 2240) must be paid at least <strong>{facts.uk_going_rate.value}/year</strong> to qualify for Skilled Worker visa sponsorship (rate effective 22 July 2025). A reduced <strong>new entrant rate of {facts.uk_new_entrant_rate.value}</strong> may apply — for example if you are under 26, recently graduated, or working towards professional registration. Check the current{" "}
+                  <a href={facts.uk_going_rate.source} target="_blank" rel="noopener noreferrer" className="underline font-medium">official going-rates table</a> before relying on these figures.
                 </p>
               </div>
               <div className="mt-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
@@ -131,7 +152,7 @@ const UKPage = () => {
                   <h4 className="font-semibold text-gray-900 mb-3">Requirements</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Registration with RCVS is mandatory to practise</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>EAEVE-accredited EU degrees currently recognised — <strong>deadline January 2029</strong>, after which only RCVS-accredited degrees accepted</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>EAEVE-accredited EU degrees currently recognised — <strong>deadline {facts.uk_eaeve_deadline.value}</strong> (subject to annual RCVS review), after which only RCVS-accredited degrees accepted</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Non-RCVS/non-EAEVE degrees require statutory membership exam</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>English language proficiency required unless degree was taught entirely in English</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character declarations required</li>

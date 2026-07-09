@@ -1,0 +1,63 @@
+# Data gaps — entries needing deadline research
+
+Conferences start within the next 9 months but have no future deadline data.
+Exams / certs / programmes have no fixed start date and are always tracked.
+Research these first (closest first). For each, look for: early-bird end date, abstract deadline, registration close.
+
+- [ ] **ECVS Annual Scientific Meeting 2026 (Liverpool)** — starts 2026-07-09 (0 days away) — https://www.ecvs.org
+- [ ] **AVMA Convention 2026 (Anaheim CA)** — starts 2026-07-10 (1 days away) — https://www.avma.org/events
+- [ ] **46th Bain Fallon Memorial Lectures 2026 (Melbourne VIC)** — starts 2026-07-19 (10 days away) — https://au.eventscloud.com/website/3240/
+- [ ] **Society for Theriogenology Conference 2026 (Pittsburgh PA)** — starts 2026-07-22 (13 days away) — https://www.therio.org/
+- [ ] **ANZCVS Veterinary Science Week 2026 (Gold Coast QLD)** — starts 2026-07-24 (15 days away) — https://vetscienceweek.com.au/
+- [ ] **Brachycephalic Surgery Wet-lab 2026 (Auckland)** — starts 2026-07-24 (15 days away) — https://www.practicalcpd.co.nz/product/brachycephalic-surgery-wet-lab-nz26/
+- [ ] **ACVIM Brain Camp 2026 (Virtual)** — starts 2026-08-01 (23 days away) — https://acvim.swoogo.com/acvimbraincamp
+- [ ] **WEVA World Congress 2026 (Panama City)** — starts 2026-08-12 (34 days away) — https://wevaonline.org/
+- [ ] **51st ASAV Annual Conference 2026 (Sunshine Coast QLD)** — starts 2026-08-17 (39 days away) — https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002040
+- [ ] **ESVD-ECVD Congress 2026 (Lille)** — starts 2026-08-27 (49 days away) — https://www.esvd-ecvdcongress.com
+- [ ] **AABP Annual Conference 2026 (Minneapolis MN)** — starts 2026-08-27 (49 days away) — https://www.aabp.org/meeting/
+- [ ] **Guided TTA and Meniscus Wet-lab 2026 (Auckland)** — starts 2026-08-27 (49 days away) — https://www.practicalcpd.co.nz/product/guided-tta-and-meniscus-wet-lab-nz26/
+- [ ] **Exotic365 2026 (Philadelphia PA)** — starts 2026-08-30 (52 days away) — https://www.exoticscon.org/
+- [ ] **World Buiatrics Congress 2026 (Istanbul)** — starts 2026-09-06 (59 days away) — https://buiatrics.com/
+- [ ] **Sheep Production Online Course 2026 (NZVA)** — starts 2026-09-07 (60 days away) — https://www.nzvaevents.org.nz/26shpro
+- [ ] **BEVA Congress 2026 (Birmingham)** — starts 2026-09-09 (62 days away) — https://www.bevacongress.org/
+- [ ] **The VET Expo 2026 (Sydney NSW)** — starts 2026-09-09 (62 days away) — https://www.terrapinn.com/exhibition/vet-expo/index.stm
+- [ ] **ESVE Pre-congress Symposium 2026 (Berlin)** — starts 2026-09-09 (62 days away) — https://www.esve.org/
+- [ ] **ESVNU Pre-congress Symposium 2026 (Berlin)** — starts 2026-09-09 (62 days away) — https://www.ecvimcongress.org/programme/esvnu_precongress
+- [ ] **ESCG Pre-congress Symposium 2026 (Berlin)** — starts 2026-09-09 (62 days away) — https://www.ecvimcongress.org/
+- [ ] **ECVIM-CA Congress 2026 (Berlin)** — starts 2026-09-10 (63 days away) — https://www.ecvimcongress.org
+- [ ] **IVECCS 2026 (Savannah GA)** — starts 2026-09-14 (67 days away) — https://www.veccs.org
+- [ ] **Beyond the Scrubs: Veterinary Women's Wellness Conference 2026 (NZ)** — starts 2026-09-15 (68 days away) — https://beyondthescrubs.co.nz
+- [ ] **ECVM International Conference 8th 2026 (Guildford UK)** — starts 2026-09-16 (69 days away) — https://www.ebvs.eu/events-ebvs
+- [ ] **ESVP/ECVP/ESVCP/ECVCP Joint Congress 2026 (Nantes)** — starts 2026-09-16 (69 days away) — https://www.ebvs.eu/events-ebvs
+- [ ] **ESVCN Congress 2026 (Naples)** — starts 2026-09-16 (69 days away) — https://esvcn.org/
+- [ ] **ESVN-ECVN Annual Symposium 38th 2026 (Berlin)** — starts 2026-09-17 (70 days away) — https://www.ecvnberlin2026.org
+- [ ] **ACVO Annual Conference 2026 (Orlando FL)** — starts 2026-09-23 (76 days away) — https://www.acvoconference.org/
+- [ ] **VCS Annual Conference 2026 (Minneapolis MN)** — starts 2026-09-24 (77 days away) — https://vetcancersociety.org/
+- [ ] **AVA Autumn Meeting 2026 (Thessaloniki)** — starts 2026-09-30 (83 days away) — https://www.ava.eu.com/
+- [ ] **Eliminating Facial Eczema Impacts Online Course 2026 (NZVA)** — starts 2026-10-05 (88 days away) — https://www.nzvaevents.org.nz/26shpfe
+- [ ] **ACVS Surgery Summit 2026 (Charlotte NC)** — starts 2026-10-07 (90 days away) — https://www.acvs.org/surgery-summit
+- [ ] **ECVSMR Scientific Meeting 2026 (Netherlands)** — starts 2026-10-08 (91 days away) — https://www.ebvs.eu/events-ebvs
+- [ ] **WSAVA World Congress 2026 (Warsaw)** — starts 2026-10-13 (96 days away) — https://wsava-congress.org
+- [ ] **ACVAA Annual Meeting 2026 (San Diego CA)** — starts 2026-10-20 (103 days away) — https://acvaa.org/
+- [ ] **CAV Roadshow 2026 — Normalising the Abnormal (NZ)** — starts 2026-10-20 (103 days away) — https://www.nzvaevents.org.nz/2026regions/cavroadshow
+- [ ] **NZVA Veterinary Team Symposium 2026 (Christchurch)** — starts 2026-11-04 (118 days away) — https://nzva.org.nz/
+- [ ] **Advanced Mastitis Course 2026 (NZ)** — starts 2026-11-09 (123 days away) — https://anexa.co.nz/events/advanced-mastitis-course/
+- [ ] **NZVA Veterinary Business & Wellbeing Symposium 2026** — starts 2026-11-18 (132 days away) — https://www.nzvaevents.org.nz/26bws
+- [ ] **London Vet Show 2026** — starts 2026-11-19 (133 days away) — https://london.vetshow.com
+- [ ] **UPAV Conference 2026 (Melbourne VIC)** — starts 2026-11-23 (137 days away) — https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002108
+- [ ] **AAVAC Annual Conference 2026 (Melbourne VIC)** — starts 2026-11-26 (140 days away) — https://aav.org/events/EventDetails.aspx?group=&id=2033737
+- [ ] **VMX 2027 (Orlando FL)** — starts 2027-01-16 (191 days away) — https://navc.com/vmx
+- [ ] **AASV Annual Meeting 2027 (Orlando FL)** — starts 2027-02-27 (233 days away) — https://www.aasv.org/
+- [ ] **WVC Annual Conference 2027 (Las Vegas NV)** — starts 2027-02-28 (234 days away) — https://www.viticusgroup.org/wvc-conference
+- [ ] **NAVDF 2027 (Anaheim CA)** — starts 2027-03-22 (256 days away) — https://navdf.org/
+- [ ] **BSAVA Alba 2026 (Glasgow)** — no fixed date — always tracked — https://www.bsava.com
+- [ ] **BVA Live 2026 (Birmingham)** — no fixed date — always tracked — https://bvalive.vetshow.com/
+- [ ] **SPVS-VMG Congress 2027 (Birmingham)** — no fixed date — always tracked — https://spvs.org.uk/
+- [ ] **World Veterinary Orthopaedic Congress 2026 (Rome)** — no fixed date — always tracked — https://www.wvoc2026.org
+- [ ] **SAEVA Congress 2027 (Western Cape, South Africa)** — no fixed date — always tracked — https://www.saeva.co.za
+- [ ] **ESVONC Annual Congress 2027** — no fixed date — always tracked — https://www.esvonc.com/
+- [ ] **BVBA Events 2026** — no fixed date — always tracked — https://www.bvba.org.uk/
+- [ ] **EVDI / EAVDI-ECVDI Annual Conference 2026** — no fixed date — always tracked — https://www.ecvdi.org/
+- [ ] **ACVSMR Symposium 2027** — no fixed date — always tracked — https://www.vsmr.org/
+- [ ] **ANZCVS Vet Science Week 2027** — no fixed date — always tracked — https://www.anzcvs.org.au/
+- [ ] **NZVA & NZVNA Conference 2027** — no fixed date — always tracked — https://nzva.org.nz/edhub/conferences/

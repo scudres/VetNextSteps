@@ -1,0 +1,101 @@
+name: Refresh deadline data
+
+# Runs on the 1st of every other month, or manually from the Actions tab.
+on:
+  schedule:
+    - cron: '0 6 1 */2 *'   # 06:00 UTC — Jan, Mar, May, Jul, Sep, Nov
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Research step: calls Claude with web search, writes updated JSON files
+      # and a PR body markdown file to $RUNNER_TEMP/pr-body.md.
+      - name: Research and update deadline data
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RUNNER_TEMP: ${{ runner.temp }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node tools/deadline-alerts/research-updates.mjs
+
+      # Re-verify visa/licensing figures shown on the country pages against
+      # their official sources. Appends its results to the same PR body.
+      # continue-on-error keeps the deadline refresh PR flowing even if this
+      # step fails — its failure section still lands in the PR body.
+      - name: Verify visa facts
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RUNNER_TEMP: ${{ runner.temp }}
+        run: npm run visa:verify
+
+      # Regenerate the four output files (md, json, ics, data-gaps) from the
+      # updated source data, and publish closing-soon.json to frontend/public
+      # for the website widget.
+      - name: Regenerate alert outputs
+        run: npm run alerts:wide
+
+      # Capture today's date for the PR title (YYYY-MM-DD in UTC).
+      - name: Get today's date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      # Open (or update) a pull request on the auto/deadline-refresh branch.
+      # scudres is added as both reviewer and assignee so it appears in the
+      # "Review requested" queue and the Assigned tab.
+      - name: Open pull request with changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: auto/deadline-refresh
+          base: main
+          add-paths: |
+            tools/deadline-alerts/conferences.json
+            tools/deadline-alerts/other-deadlines.json
+            tools/deadline-alerts/alerts/
+            frontend/src/data/visaFacts.json
+            frontend/public/closing-soon.json
+          commit-message: 'chore: automated deadline data refresh ${{ steps.date.outputs.today }}'
+          title: '🔍 Deadline research — ${{ steps.date.outputs.today }} — REVIEW NEEDED'
+          body-path: ${{ runner.temp }}/pr-body.md
+          reviewers: scudres
+          assignees: scudres
+          labels: automated,deadlines
+          delete-branch: true
+
+      # If anything above failed, write a clear summary to the Actions UI
+      # and make the step output explicit so the failure email is descriptive.
+      - name: Report failure
+        if: failure()
+        run: |
+          {
+            echo "## ❌ Deadline research workflow FAILED — ${{ steps.date.outputs.today || 'unknown date' }}"
+            echo ""
+            echo "**Workflow run:** [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo ""
+            echo "### Likely causes"
+            echo "- \`ANTHROPIC_API_KEY\` secret is missing, expired, or has no API credits"
+            echo "- Anthropic web-search beta header or tool name has changed — check [Anthropic docs](https://docs.anthropic.com)"
+            echo "- Malformed JSON in \`conferences.json\` or \`other-deadlines.json\`"
+            echo ""
+            echo "### What to do"
+            echo "1. Check the [step logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for the specific error"
+            echo "2. Fix the root cause (re-add the secret, fix the JSON, etc.)"
+            echo "3. Re-run from the **Actions** tab using **Re-run failed jobs**"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::error::Deadline research workflow failed — see the job summary for details and next steps."

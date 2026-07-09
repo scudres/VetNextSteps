@@ -4,7 +4,7 @@ const { conferences }          = require("./data/conferences");
 const { cpdProviders }         = require("./data/providers");
 const { trainingPrograms }     = require("./data/training");
 const { internshipPrograms }   = require("./data/internships");
-const { ukPrograms: ukCerts }  = require("./data/certificates");
+const { ukPrograms: ukCerts, usaCertCategories, australiaPrograms, newZealandPrograms } = require("./data/certificates");
 const { corsHeaders, preflight } = require("./lib/cors");
 const { makeRateLimiter } = require("./lib/rateLimit");
 
@@ -23,30 +23,89 @@ const trainingItems = trainingPrograms.map((p) => ({
   tags:        p.tags,
 }));
 
-const internshipItems = internshipPrograms.map((p) => ({
-  title:       p.title,
-  subtitle:    p.organisation,
-  description: p.description,
-  url:         p.url,
-  section:     "Internships & Residencies",
-  navPath:     `/internships-residencies/${p.region}#${slugify(p.title)}`,
-  tags:        [
-    p.type,
-    p.region,
-    ...(p.specialties || []),
-    ...(p.species ? p.species.split(/,\s*/) : []),
-  ].filter(Boolean),
-}));
+// UK and Europe internship listings live on sub-category pages
+// (/internships-residencies/{region}/{college|university|corporate}), not the
+// region page itself — mirror the frontend's getSubCategory so search results
+// deep-link to the page that actually renders the card.
+function internshipSubCategory(p) {
+  const org = p.organisation || "";
+  if (p.region === "europe") {
+    if (org.startsWith("European College") || org.startsWith("European Board") || org.startsWith("European Veterinary")) return "college";
+    if (
+      org.includes("Universit") || org.includes("Hochschule") || org.includes("École") ||
+      org.includes("Hospital Clín") || org.includes("UCD") || org.includes("Faculdade") || org.includes("Ospedale")
+    ) return "university";
+    return "corporate";
+  }
+  if (p.region === "uk") {
+    if (org.startsWith("European College") || org.startsWith("European Board") || org.startsWith("European Veterinary")) return "college";
+    if (org.includes("University of") || org.startsWith("Royal Veterinary College")) return "university";
+    return "corporate";
+  }
+  return null;
+}
 
-const certItems = ukCerts.map((p) => ({
-  title:       p.title,
-  subtitle:    p.organisation,
-  description: p.description,
-  url:         p.url,
-  section:     "Postgraduate Certificates",
-  navPath:     `/postgraduate-certificates/uk#${slugify(p.title)}`,
-  tags:        ["certificate", "postgraduate", "UK"],
-}));
+const internshipItems = internshipPrograms.map((p) => {
+  const subCat = internshipSubCategory(p);
+  return {
+    title:       p.title,
+    subtitle:    p.organisation,
+    description: p.description,
+    url:         p.url,
+    section:     "Internships & Residencies",
+    navPath:     subCat
+      ? `/internships-residencies/${p.region}/${subCat}#${slugify(p.title)}`
+      : `/internships-residencies/${p.region}#${slugify(p.title)}`,
+    tags:        [
+      p.type,
+      p.region,
+      ...(p.specialties || []),
+      ...(p.species ? p.species.split(/,\s*/) : []),
+    ].filter(Boolean),
+  };
+});
+
+const certItems = [
+  ...ukCerts.map((p) => ({
+    title:       p.title,
+    subtitle:    p.organisation,
+    description: p.description,
+    url:         p.url,
+    section:     "Postgraduate Certificates",
+    navPath:     `/postgraduate-certificates/uk#${slugify(p.title)}`,
+    tags:        ["certificate", "postgraduate", "UK"],
+  })),
+  // USA data is grouped into categories; flatten and carry the credential badge.
+  ...usaCertCategories.flatMap((cat, catIdx) =>
+    cat.programs.map((p, idx) => ({
+      title:       `${p.credential} — ${p.title}`,
+      subtitle:    p.organisation,
+      description: p.notes || p.format || "",
+      url:         p.url,
+      section:     "Postgraduate Certificates",
+      navPath:     `/postgraduate-certificates/usa#${slugify(`${p.title}-${idx}`)}`,
+      tags:        ["certificate", "postgraduate", "USA", p.credential, cat.name].filter(Boolean),
+    }))
+  ),
+  ...australiaPrograms.map((p) => ({
+    title:       p.title,
+    subtitle:    p.organisation,
+    description: p.description,
+    url:         p.url,
+    section:     "Postgraduate Certificates",
+    navPath:     `/postgraduate-certificates/australia`,
+    tags:        ["certificate", "postgraduate", "Australia", p.type].filter(Boolean),
+  })),
+  ...newZealandPrograms.map((p) => ({
+    title:       p.title,
+    subtitle:    p.organisation,
+    description: p.description,
+    url:         p.url,
+    section:     "Postgraduate Certificates",
+    navPath:     `/postgraduate-certificates/new-zealand`,
+    tags:        ["certificate", "postgraduate", "New Zealand", p.type].filter(Boolean),
+  })),
+];
 
 // Build search index at cold-start (cached across warm invocations).
 // Each entry carries a precomputed lowercase haystack so searches are O(n) string scans.

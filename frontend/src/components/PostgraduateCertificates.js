@@ -188,6 +188,7 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
           </div>
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };
@@ -259,6 +260,7 @@ const UKSubPage = ({ programs, loading }) => (
         )}
       </div>
     </main>
+    <SharedFooter />
   </div>
 );
 
@@ -352,6 +354,7 @@ const USASubPage = ({ categories, loading }) => {
           )}
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 };
@@ -409,6 +412,7 @@ const CanadaSubPage = () => (
         </div>
       </div>
     </main>
+    <SharedFooter />
   </div>
 );
 
@@ -486,10 +490,15 @@ const NewZealandSubPage = ({ programs, loading }) => (
       </InfoBox>
     }
     careerGuideLink={
-      <Link to="/postgraduate-certificates/new-zealand" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
-        View full New Zealand career guide
+      <a
+        href="https://www.vetcouncil.org.nz/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+      >
+        Veterinary Council of New Zealand — registration information
         <ChevronRight />
-      </Link>
+      </a>
     }
   />
 );
@@ -592,7 +601,7 @@ const PostgraduateCertificates = () => {
 
   useEffect(() => {
     fetch("/.netlify/functions/certificates")
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error("Failed to load certificates"); return r.json(); })
       .then((data) => { setCertData(data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);
@@ -613,6 +622,7 @@ const PostgraduateCertificates = () => {
             ← Back to all programmes
           </Link>
         </main>
+        <SharedFooter />
       </div>
     );
   }

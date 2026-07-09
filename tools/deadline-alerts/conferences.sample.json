@@ -1,0 +1,51 @@
+[
+  {
+    "id": "bsava-congress-2027",
+    "name": "BSAVA Congress 2027",
+    "url": "https://www.bsavaevents.com",
+    "region": "UK",
+    "specialty": "Small animal",
+    "startDate": "2027-03-25",
+    "endDate": "2027-03-27",
+    "deadlines": [
+      { "type": "abstract",   "date": "2026-10-05", "label": "Abstract submissions close" },
+      { "type": "early-bird", "date": "2026-12-18", "label": "Early-bird rate ends", "note": "Standard rate applies after this date" },
+      { "type": "registration", "date": "2027-03-19", "label": "Advance online registration closes" }
+    ]
+  },
+  {
+    "id": "london-vet-show-2026",
+    "name": "London Vet Show 2026",
+    "url": "https://london.vetshow.com",
+    "region": "UK",
+    "specialty": "General",
+    "startDate": "2026-11-19",
+    "endDate": "2026-11-20",
+    "deadlines": [
+      { "type": "early-bird", "date": "2026-09-12", "label": "Early-bird rate ends" }
+    ]
+  },
+  {
+    "id": "vmx-2027",
+    "name": "VMX 2027 (Orlando)",
+    "url": "https://navc.com/vmx",
+    "region": "USA",
+    "specialty": "General",
+    "startDate": "2027-01-16",
+    "endDate": "2027-01-20",
+    "deadlines": [
+      { "type": "early-bird", "date": "2026-09-30", "label": "Early-bird registration ends" },
+      { "type": "hotel", "date": "2026-12-15", "label": "Discounted hotel block closes" }
+    ]
+  },
+  {
+    "id": "ava-conference-2027",
+    "name": "AVA Annual Conference 2027",
+    "url": "https://www.ava.com.au",
+    "region": "Australia",
+    "specialty": "General",
+    "startDate": "2027-06-01",
+    "endDate": "2027-06-04",
+    "deadlines": []
+  }
+]

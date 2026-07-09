@@ -1,0 +1,148 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//VetNextStep//DeadlineAlerts//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:navle-2026-2027-registration-20260715@vetnextstep.com
+DTSTART;VALUE=DATE:20260715
+SUMMARY:NAVLE (North American Veterinary Licensing Examination) — Application deadline — Oct 12–Nov 14 2026 testing window
+URL:https://www.icva.net/navle/
+DESCRIPTION:Application period 1 Jun–15 Jul. No exceptions or extensions. Canadian candidates apply via the NEB\, which may have its own earlier deadline.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:virmp-2027-other-20260901@vetnextstep.com
+DTSTART;VALUE=DATE:20260901
+SUMMARY:VIRMP 2027 — Internship & Residency Match — Applicant sign-in opens for the 2027 Match
+URL:https://www.virmp.org/
+DESCRIPTION:Create/renew your account and start the application packet\; reference letters take weeks to chase.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:aaep-annual-convention-2026-hotel-20260917@vetnextstep.com
+DTSTART;VALUE=DATE:20260917
+SUMMARY:AAEP Annual Convention 2026 (Las Vegas NV) — Hotel block discount closes
+URL:https://convention.aaep.org/
+DESCRIPTION:Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:acvp-annual-meeting-2026-early-bird-20260923@vetnextstep.com
+DTSTART;VALUE=DATE:20260923
+SUMMARY:ACVP Annual Meeting 2026 (Indianapolis IN) — Early-bird rate ends
+URL:https://acvp.org/
+DESCRIPTION:Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fasawa-congress-2026-registration-20260930@vetnextstep.com
+DTSTART;VALUE=DATE:20260930
+SUMMARY:FASAWA Congress 2026 (Taipei) — Group registration deadline
+URL:https://fasawa2026.org
+DESCRIPTION:Individual registration deadline — verify on fasawa2026.org/registration/en
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:virmp-2027-other-20261015@vetnextstep.com
+DTSTART;VALUE=DATE:20261015
+SUMMARY:VIRMP 2027 — Internship & Residency Match — Program descriptions finalised
+URL:https://www.virmp.org/
+DESCRIPTION:Program listings cannot change after this date — good moment to review the full list.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:rcvs-advanced-practitioner-2026-other-20261031@vetnextstep.com
+DTSTART;VALUE=DATE:20261031
+SUMMARY:RCVS Advanced Practitioner status — 2026 application window — Application window closes (October 2026 — exact day TBC)
+URL:https://www.rcvs.org.uk/lifelong-learning/professional-accreditation/advanced-practitioner-status/
+DESCRIPTION:Window opened March 2026. VERIFY exact closing date on the RCVS page before publishing — only 'closes in October 2026' is confirmed.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:virmp-2027-registration-20270104@vetnextstep.com
+DTSTART;VALUE=DATE:20270104
+SUMMARY:VIRMP 2027 — Internship & Residency Match — Application deadline — 9:00 pm EST
+URL:https://www.virmp.org/
+DESCRIPTION:Strongly enforced. Laboratory animal medicine residencies have earlier deadlines (typically Nov–Dec) — check individual listings.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:navle-2026-2027-registration-20270107@vetnextstep.com
+DTSTART;VALUE=DATE:20270107
+SUMMARY:NAVLE (North American Veterinary Licensing Examination) — Application deadline — Mar 1–20 2027 testing window
+URL:https://www.icva.net/navle/
+DESCRIPTION:Application period opens 1 Dec 2026.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:rcvs-statutory-exam-2027-registration-20270114@vetnextstep.com
+DTSTART;VALUE=DATE:20270114
+SUMMARY:RCVS Statutory Membership Examination 2027 — Annual exam application deadline
+URL:https://www.rcvs.org.uk/registration/join-the-register-of-veterinary-surgeons/statutory-membership-exam
+DESCRIPTION:Declaration of intention to sit can be submitted any time (valid to end of September) and must be done before applying. Written exams held in March\; May re-sits\; OSCE later in the year.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:virmp-2027-other-20270301@vetnextstep.com
+DTSTART;VALUE=DATE:20270301
+SUMMARY:VIRMP 2027 — Internship & Residency Match — Match results released (8:00 am EST)
+URL:https://www.virmp.org/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:navle-2026-2027-registration-20270507@vetnextstep.com
+DTSTART;VALUE=DATE:20270507
+SUMMARY:NAVLE (North American Veterinary Licensing Examination) — Application deadline — Jul 12–Aug 7 2027 testing window
+URL:https://www.icva.net/navle/
+DESCRIPTION:Application period opens 1 Apr 2027.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

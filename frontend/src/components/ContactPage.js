@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+
+const TURNSTILE_SITE_KEY = process.env.REACT_APP_TURNSTILE_SITE_KEY;
 
 const Field = ({ label, id, error, children }) => (
   <div>
@@ -32,16 +34,42 @@ const ContactPage = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [errorMessage, setErrorMessage] = useState("");
+  const turnstileRef = useRef(null);
 
+  // Explicit Turnstile rendering. Implicit mode only scans the DOM once at
+  // script load, so a widget div that (re)mounts later — e.g. after "Send
+  // another message" — would never render and every retry would fail the bot
+  // check. Tokens are also single-use, so after a failed submit the widget
+  // must be re-rendered to issue a fresh token.
   useEffect(() => {
-    if (!process.env.REACT_APP_TURNSTILE_SITE_KEY) return;
-    if (document.querySelector('script[src*="turnstile"]')) return;
-    const s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
-  }, []);
+    if (!TURNSTILE_SITE_KEY) return;
+    if (status === "submitting" || status === "success") return;
+
+    let cancelled = false;
+    const renderWidget = () => {
+      if (cancelled) return;
+      if (window.turnstile && turnstileRef.current) {
+        turnstileRef.current.innerHTML = "";
+        window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: "light",
+        });
+      } else {
+        setTimeout(renderWidget, 200); // script still loading — retry shortly
+      }
+    };
+
+    if (!document.querySelector('script[src*="turnstile"]')) {
+      const s = document.createElement("script");
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+    renderWidget();
+
+    return () => { cancelled = true; };
+  }, [status]);
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
@@ -217,13 +245,7 @@ const ContactPage = () => {
                 />
               </Field>
 
-              {process.env.REACT_APP_TURNSTILE_SITE_KEY && (
-                <div
-                  className="cf-turnstile"
-                  data-sitekey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
-                  data-theme="light"
-                />
-              )}
+              {TURNSTILE_SITE_KEY && <div ref={turnstileRef} />}
 
               <div className="pt-1">
                 <button

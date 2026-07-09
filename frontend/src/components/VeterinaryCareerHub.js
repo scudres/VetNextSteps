@@ -5,6 +5,7 @@ import SharedHeader from "./SharedHeader";
 import AcronymTooltip from "./AcronymTooltip";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
+import DeadlinesWidget from "./DeadlinesWidget";
 
 const comparisonData = {
   UK: {
@@ -307,6 +308,11 @@ const VeterinaryCareerHub = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Closing-soon deadlines (from tools/deadline-alerts pipeline) */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+            <DeadlinesWidget />
           </div>
 
           {/* Full section index */}

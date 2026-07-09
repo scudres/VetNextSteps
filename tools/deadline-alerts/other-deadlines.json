@@ -1,0 +1,43 @@
+[
+  {
+    "id": "navle-2026-2027",
+    "name": "NAVLE (North American Veterinary Licensing Examination)",
+    "url": "https://www.icva.net/navle/",
+    "deadlines": [
+      { "type": "registration", "date": "2026-07-15", "label": "Application deadline — Oct 12–Nov 14 2026 testing window", "note": "Application period 1 Jun–15 Jul. No exceptions or extensions. Canadian candidates apply via the NEB, which may have its own earlier deadline." },
+      { "type": "registration", "date": "2027-01-07", "label": "Application deadline — Mar 1–20 2027 testing window", "note": "Application period opens 1 Dec 2026." },
+      { "type": "registration", "date": "2027-05-07", "label": "Application deadline — Jul 12–Aug 7 2027 testing window", "note": "Application period opens 1 Apr 2027." }
+    ],
+    "_source": "https://www.icva.net/navle/ — verified 8 Jul 2026"
+  },
+  {
+    "id": "rcvs-statutory-exam-2027",
+    "name": "RCVS Statutory Membership Examination 2027",
+    "url": "https://www.rcvs.org.uk/registration/join-the-register-of-veterinary-surgeons/statutory-membership-exam",
+    "deadlines": [
+      { "type": "registration", "date": "2027-01-14", "label": "Annual exam application deadline", "note": "Declaration of intention to sit can be submitted any time (valid to end of September) and must be done before applying. Written exams held in March; May re-sits; OSCE later in the year." }
+    ],
+    "_source": "https://www.rcvs.org.uk/faqs/how-can-i-apply-to-sit-the-examination/ — annual deadline is 14 January; verified 8 Jul 2026"
+  },
+  {
+    "id": "rcvs-advanced-practitioner-2026",
+    "name": "RCVS Advanced Practitioner status — 2026 application window",
+    "url": "https://www.rcvs.org.uk/lifelong-learning/professional-accreditation/advanced-practitioner-status/",
+    "deadlines": [
+      { "type": "other", "date": "2026-10-31", "label": "Application window closes (October 2026 — exact day TBC)", "note": "Window opened March 2026. VERIFY exact closing date on the RCVS page before publishing — only 'closes in October 2026' is confirmed." }
+    ],
+    "_source": "https://www.rcvs.org.uk/lifelong-learning/professional-accreditation/advanced-practitioner-status/ — verified 8 Jul 2026 (day placeholder)"
+  },
+  {
+    "id": "virmp-2027",
+    "name": "VIRMP 2027 — Internship & Residency Match",
+    "url": "https://www.virmp.org/",
+    "deadlines": [
+      { "type": "other", "date": "2026-09-01", "label": "Applicant sign-in opens for the 2027 Match", "note": "Create/renew your account and start the application packet; reference letters take weeks to chase." },
+      { "type": "other", "date": "2026-10-15", "label": "Program descriptions finalised", "note": "Program listings cannot change after this date — good moment to review the full list." },
+      { "type": "registration", "date": "2027-01-04", "label": "Application deadline — 9:00 pm EST", "note": "Strongly enforced. Laboratory animal medicine residencies have earlier deadlines (typically Nov–Dec) — check individual listings." },
+      { "type": "other", "date": "2027-03-01", "label": "Match results released (8:00 am EST)" }
+    ],
+    "_source": "https://www.virmp.org/ and /Home/Applicants — verified 8 Jul 2026. Applicant rank-order-list deadline (mid-Feb 2027) not yet confirmed — add when published."
+  }
+]

@@ -1,5 +1,16 @@
 {
+  "scripts": {
+    "alerts": "node tools/deadline-alerts/generate-alerts.mjs --file tools/deadline-alerts/conferences.json --other-file tools/deadline-alerts/other-deadlines.json --out tools/deadline-alerts/alerts && npm run alerts:publish",
+    "alerts:wide": "node tools/deadline-alerts/generate-alerts.mjs --file tools/deadline-alerts/conferences.json --other-file tools/deadline-alerts/other-deadlines.json --out tools/deadline-alerts/alerts --days 90 && npm run alerts:publish",
+    "alerts:publish": "node -e \"require('fs').copyFileSync('tools/deadline-alerts/alerts/closing-soon.json','frontend/public/closing-soon.json')\"",
+    "alerts:research": "node tools/deadline-alerts/research-updates.mjs",
+    "visa:verify": "node tools/visa-facts/verify-visa-facts.mjs",
+    "test:e2e": "playwright test"
+  },
   "dependencies": {
     "react-router-dom": "^7.6.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }
