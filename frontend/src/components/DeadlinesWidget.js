@@ -19,6 +19,10 @@ const DeadlinesWidget = ({ limit = 5 }) => {
   const [deadlines, setDeadlines] = useState(null);
 
   useEffect(() => {
+    // Skip during react-snap prerender: days-left values are computed from the
+    // visitor's clock, so baking them into static HTML would show stale
+    // urgency and cause a hydration mismatch.
+    if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap") return;
     fetch("/closing-soon.json")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
