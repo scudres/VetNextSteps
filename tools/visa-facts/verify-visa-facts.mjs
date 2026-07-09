@@ -3,7 +3,7 @@
  * VetNextStep — Visa Facts Verifier
  * ==================================
  * Re-verifies every fact in frontend/src/data/visaFacts.json against its
- * official source URL using claude-sonnet-5 with web search.
+ * official source URL using an AI web-search model.
  *
  *   confirmed    — value still matches the source → bump verified date
  *   changed      — source shows a different value → update value + note

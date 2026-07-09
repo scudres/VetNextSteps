@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '20'
 
-      # Research step: calls Claude with web search, writes updated JSON files
+      # Research step: runs AI web research, writes updated JSON files
       # and a PR body markdown file to $RUNNER_TEMP/pr-body.md.
       - name: Research and update deadline data
         env:

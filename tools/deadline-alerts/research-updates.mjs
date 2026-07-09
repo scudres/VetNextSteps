@@ -2,7 +2,7 @@
 /**
  * VetNextStep — Automated Deadline Research
  * ==========================================
- * Uses claude-sonnet-5 with web search to find and update deadline data in
+ * Uses an AI web-search model to find and update deadline data in
  * conferences.json and other-deadlines.json.  Only entries with no future
  * deadlines are researched; entries with current data are skipped.
  *
@@ -77,7 +77,7 @@ function extractJSON(text) {
 }
 
 // ── Anthropic API with web search ─────────────────────────────────────────────
-async function callClaude(entries, contextHint) {
+async function callResearchModel(entries, contextHint) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY environment variable is not set');
 
@@ -299,7 +299,7 @@ async function main() {
     for (let i = 0; i < batches.length; i++) {
       process.stdout.write(`   Batch ${i + 1}/${batches.length} (${batches[i].length} conferences)… `);
       try {
-        const updates = await callClaude(batches[i], 'These are veterinary conferences.');
+        const updates = await callResearchModel(batches[i], 'These are veterinary conferences.');
         const { data, count, changes } = applyUpdates(updatedConferences, updates);
         updatedConferences = data;
         allChanges.push(...changes);
@@ -315,7 +315,7 @@ async function main() {
   if (otherCandidates.length > 0) {
     process.stdout.write(`\n   Other items (${otherCandidates.length})… `);
     try {
-      const updates = await callClaude(
+      const updates = await callResearchModel(
         otherCandidates,
         'These are veterinary exam registration windows, professional qualification application deadlines, and postgraduate programme intakes — not conferences.',
       );
