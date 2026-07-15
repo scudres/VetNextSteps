@@ -11,10 +11,331 @@
   command = "npm start"
   port    = 3000
 
+# ─── Routing ────────────────────────────────────────────────────────────────
+#
+# react-snap prerenders every route below to its own static <path>/index.html
+# at build time. Netlify's default clean-URL resolution does not reliably
+# resolve an extension-less request like "/uk" to "/uk/index.html" ahead of
+# the SPA fallback rule further down — so without an explicit rule here,
+# every one of these URLs served the homepage shell to first-pass crawlers.
+#
+# Each rule below is an exact match listed before the wildcard fallback, so
+# redirect matching (which Netlify evaluates top-to-bottom, first match wins)
+# always serves the real prerendered page for a real route. `force = true`
+# removes any ambiguity with Netlify's own clean-URL handling.
+#
+# This list should mirror frontend/public/sitemap.xml plus the small number
+# of intentionally noindex pages (jobs, legal, search) that still need to
+# resolve for direct navigation.
+
+[[redirects]]
+  from  = "/uk"
+  to    = "/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/uk/first-role"
+  to    = "/uk/first-role/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/licensing-route"
+  to    = "/licensing-route/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/usa"
+  to    = "/usa/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/canada"
+  to    = "/canada/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/australia"
+  to    = "/australia/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/training-programs"
+  to    = "/training-programs/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/training-programs/uk"
+  to    = "/training-programs/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/training-programs/usa"
+  to    = "/training-programs/usa/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/training-programs/canada"
+  to    = "/training-programs/canada/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/training-programs/australia"
+  to    = "/training-programs/australia/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies"
+  to    = "/internships-residencies/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/uk"
+  to    = "/internships-residencies/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/uk/college"
+  to    = "/internships-residencies/uk/college/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/uk/university"
+  to    = "/internships-residencies/uk/university/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/uk/corporate"
+  to    = "/internships-residencies/uk/corporate/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/europe"
+  to    = "/internships-residencies/europe/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/europe/college"
+  to    = "/internships-residencies/europe/college/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/europe/university"
+  to    = "/internships-residencies/europe/university/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/europe/corporate"
+  to    = "/internships-residencies/europe/corporate/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/north-america"
+  to    = "/internships-residencies/north-america/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/internships-residencies/worldwide"
+  to    = "/internships-residencies/worldwide/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates"
+  to    = "/postgraduate-certificates/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates/uk"
+  to    = "/postgraduate-certificates/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates/usa"
+  to    = "/postgraduate-certificates/usa/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates/canada"
+  to    = "/postgraduate-certificates/canada/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates/australia"
+  to    = "/postgraduate-certificates/australia/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/postgraduate-certificates/new-zealand"
+  to    = "/postgraduate-certificates/new-zealand/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd"
+  to    = "/cpd/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/uk"
+  to    = "/cpd/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/europe"
+  to    = "/cpd/europe/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/usa"
+  to    = "/cpd/usa/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/australia"
+  to    = "/cpd/australia/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/new-zealand"
+  to    = "/cpd/new-zealand/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/global"
+  to    = "/cpd/global/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers"
+  to    = "/cpd/providers/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/uk"
+  to    = "/cpd/providers/uk/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/europe"
+  to    = "/cpd/providers/europe/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/usa"
+  to    = "/cpd/providers/usa/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/canada"
+  to    = "/cpd/providers/canada/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/australia"
+  to    = "/cpd/providers/australia/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/new-zealand"
+  to    = "/cpd/providers/new-zealand/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/cpd/providers/global"
+  to    = "/cpd/providers/global/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/resources"
+  to    = "/resources/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/contact"
+  to    = "/contact/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/countries"
+  to    = "/countries/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/about"
+  to    = "/about/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/jobs"
+  to    = "/jobs/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/legal"
+  to    = "/legal/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from  = "/search"
+  to    = "/search/index.html"
+  status = 200
+  force = true
+
+# Fallback for anything not covered above. Every route in the app is listed
+# explicitly and matches first, so only genuinely non-existent URLs reach
+# this rule — it now returns a real 404 status (previously 200), while still
+# loading the SPA shell so the app's own "page not found" UI can render.
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
-  status = 200
+  status = 404
 
 # Security headers applied to every response
 [[headers]]
@@ -74,3 +395,10 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Build-time snapshot of listings data (see frontend/scripts/build-data.js).
+# Short-lived cache: content changes on each deploy but has no content hash.
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"

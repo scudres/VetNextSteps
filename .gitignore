@@ -31,6 +31,10 @@ frontend/build/
 dist/
 dist
 
+# Generated at build time by frontend/scripts/build-data.js (prebuild step) —
+# a snapshot of functions/data/*.js written for react-snap/runtime to fetch.
+frontend/public/data/
+
 # Environment files (comprehensive coverage)
 .env
 .env.local

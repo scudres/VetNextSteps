@@ -2,23 +2,21 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { sectionColor } from "../data/searchIndex";
 
-// Overview is always first; everything else is sorted alphabetically.
-const OVERVIEW = { kind: "tab",  id: "overview", label: "Overview" };
+// Overview (home) is always first; everything else is sorted alphabetically.
+const OVERVIEW = { path: "/", label: "Overview" };
 const NAV_REST = [
-  { kind: "tab",  id: "countries",                                label: "Countries & Licensing"           },
-  { kind: "link", path: "/cpd",                                   label: "CPD & Conferences"               },
-  { kind: "link", path: "/training-programs",                     label: "Graduate Programmes"             },
-  { kind: "link", path: "/internships-residencies",               label: "Internships & Residencies"       },
-  { kind: "link", path: "/jobs",                                  label: "Job Opportunities"               },
-  { kind: "link", path: "/postgraduate-certificates",             label: "Postgraduate Certificates"       },
-  { kind: "link", path: "/resources",                             label: "Useful Resources"                },
+  { path: "/countries",                                label: "Countries & Licensing"           },
+  { path: "/cpd",                                       label: "CPD & Conferences"               },
+  { path: "/training-programs",                         label: "Graduate Programmes"             },
+  { path: "/internships-residencies",                   label: "Internships & Residencies"       },
+  { path: "/jobs",                                      label: "Job Opportunities"               },
+  { path: "/postgraduate-certificates",                 label: "Postgraduate Certificates"       },
+  { path: "/resources",                                 label: "Useful Resources"                },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
 const ALL_NAV = [OVERVIEW, ...NAV_REST];
 
-// activeTab / onTabChange are only passed in from VeterinaryCareerHub.
-// On all other pages they are undefined, so tab clicks navigate home.
-const SharedHeader = ({ activeTab, onTabChange }) => {
+const SharedHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm]         = useState("");
   const [showResults, setShowResults]       = useState(false);
@@ -79,15 +77,6 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
     debounceRef.current = setTimeout(() => fetchResults(val), 250);
   };
 
-  const handleTabClick = (id) => {
-    setMobileMenuOpen(false);
-    if (onTabChange) {
-      onTabChange(id);
-    } else {
-      navigate(`/?tab=${id}`);
-    }
-  };
-
   const goToSearchPage = (q) => {
     setShowResults(false);
     setSearchTerm("");
@@ -101,7 +90,6 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
     if (e.key === "Enter" && searchTerm.trim().length >= 2) goToSearchPage(searchTerm);
   };
 
-  const isActiveTab  = (id)   => !!onTabChange && activeTab === id;
   const isActiveLink = (path) => pathname === path || (path !== "/" && pathname.startsWith(path));
 
   return (
@@ -207,31 +195,18 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="hidden md:flex">
             {ALL_NAV.map((item, i) => (
-              <React.Fragment key={item.kind === "tab" ? item.id : item.path}>
+              <React.Fragment key={item.path}>
                 {i > 0 && <div className="w-px bg-gray-200 my-2" />}
-                {item.kind === "tab" ? (
-                  <button
-                    onClick={() => handleTabClick(item.id)}
-                    className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                      isActiveTab(item.id)
-                        ? "border-blue-700 text-blue-700"
-                        : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    to={item.path}
-                    className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                      isActiveLink(item.path)
-                        ? "border-blue-700 text-blue-700"
-                        : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  to={item.path}
+                  className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    isActiveLink(item.path)
+                      ? "border-blue-700 text-blue-700"
+                      : "border-transparent text-gray-600 hover:text-blue-700 hover:border-blue-300"
+                  }`}
+                >
+                  {item.label}
+                </Link>
               </React.Fragment>
             ))}
           </nav>
@@ -241,34 +216,20 @@ const SharedHeader = ({ activeTab, onTabChange }) => {
       {/* Mobile dropdown */}
       {mobileMenuOpen && (
         <nav className="md:hidden border-t border-gray-100 py-1">
-          {ALL_NAV.map((item) =>
-            item.kind === "tab" ? (
-              <button
-                key={item.id}
-                onClick={() => handleTabClick(item.id)}
-                className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors border-l-2 ${
-                  isActiveTab(item.id)
-                    ? "border-blue-700 text-blue-700 bg-blue-50"
-                    : "border-transparent text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {item.label}
-              </button>
-            ) : (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 text-sm font-medium border-l-2 transition-colors ${
-                  isActiveLink(item.path)
-                    ? "border-blue-700 text-blue-700 bg-blue-50"
-                    : "border-transparent text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          {ALL_NAV.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block px-4 py-3 text-sm font-medium border-l-2 transition-colors ${
+                isActiveLink(item.path)
+                  ? "border-blue-700 text-blue-700 bg-blue-50"
+                  : "border-transparent text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       )}
     </header>

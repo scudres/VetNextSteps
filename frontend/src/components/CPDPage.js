@@ -234,7 +234,7 @@ const CPDPage = () => {
   const [error, setError]               = useState(null);
 
   useEffect(() => {
-    fetch("/.netlify/functions/conferences")
+    fetch("/data/conferences.json")
       .then((res) => { if (!res.ok) throw new Error("Failed to load conferences"); return res.json(); })
       .then((data) => { setAllConferences(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
@@ -308,7 +308,7 @@ const CPDPage = () => {
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
-          <title>{cfg.name} Veterinary Conferences | VetNextStep</title>
+          <title>{`${cfg.name} Veterinary Conferences | VetNextStep`}</title>
           <meta name="description" content={`Veterinary conferences and CPD events in ${cfg.name}. Filter by specialty and find upcoming events.`} />
           <link rel="canonical" href={`https://vetnextstep.com/cpd/${region}`} />
           <meta property="og:title" content={`${cfg.name} Veterinary Conferences | VetNextStep`} />

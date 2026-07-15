@@ -263,7 +263,7 @@ const InternshipsResidencies = () => {
   const specialtyFilters = useMemo(() => splitParam(searchParams.get("specialty")), [searchParams]);
 
   useEffect(() => {
-    fetch("/.netlify/functions/internships")
+    fetch("/data/internships.json")
       .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
       .then((data) => { setPrograms(data); setLoading(false); })
       .catch(() => { setPrograms([]); setLoading(false); });
@@ -314,7 +314,7 @@ const InternshipsResidencies = () => {
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
-          <title>{subCatCfg.name} — {cfg.name} Internships & Residencies | VetNextStep</title>
+          <title>{`${subCatCfg.name} — ${cfg.name} Internships & Residencies | VetNextStep`}</title>
           <meta name="description" content={`Veterinary ${subCatCfg.name.toLowerCase()} internships and residencies in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}/${subCategory}`} />
           <meta property="og:title" content={`${subCatCfg.name} — ${cfg.name} Internships & Residencies | VetNextStep`} />
@@ -431,7 +431,7 @@ const InternshipsResidencies = () => {
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
-          <title>{cfg.name} Internships & Residencies | VetNextStep</title>
+          <title>{`${cfg.name} Internships & Residencies | VetNextStep`}</title>
           <meta name="description" content={`Veterinary internships and residencies in ${cfg.name} — browse by programme type.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}`} />
           <meta property="og:title" content={`${cfg.name} Internships & Residencies | VetNextStep`} />
@@ -535,7 +535,7 @@ const InternshipsResidencies = () => {
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
-          <title>{cfg.name} Internships & Residencies | VetNextStep</title>
+          <title>{`${cfg.name} Internships & Residencies | VetNextStep`}</title>
           <meta name="description" content={`Veterinary internships and residencies in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/internships-residencies/${region}`} />
           <meta property="og:title" content={`${cfg.name} Internships & Residencies | VetNextStep`} />

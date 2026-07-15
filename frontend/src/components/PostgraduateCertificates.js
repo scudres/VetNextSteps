@@ -632,7 +632,7 @@ const PostgraduateCertificates = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/.netlify/functions/certificates")
+    fetch("/data/certificates.json")
       .then((r) => { if (!r.ok) throw new Error("Failed to load certificates"); return r.json(); })
       .then((data) => { setCertData(data); setLoading(false); })
       .catch(() => setLoading(false));

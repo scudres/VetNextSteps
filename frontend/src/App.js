@@ -10,6 +10,7 @@ import PostgraduateCertificates from "./components/PostgraduateCertificates";
 import UKPage from "./components/UKPage";
 import UKFirstRoleGuide from "./components/UKFirstRoleGuide";
 import RouteFinder from "./components/RouteFinder";
+import Countries from "./components/Countries";
 import USAPage from "./components/USAPage";
 import CanadaPage from "./components/CanadaPage";
 import AustraliaPage from "./components/AustraliaPage";
@@ -20,6 +21,8 @@ import CPDProviders from "./components/CPDProviders";
 import JobsPage from "./components/JobsPage";
 import ContactPage from "./components/ContactPage";
 import UsefulResources from "./components/UsefulResources";
+import About from "./components/About";
+import NotFound from "./components/NotFound";
 
 // Disable browser scroll restoration so we control it entirely
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -68,6 +71,7 @@ function App() {
             <Route path="/uk"                                      element={<UKPage />} />
             <Route path="/uk/first-role"                           element={<UKFirstRoleGuide />} />
             <Route path="/licensing-route"                         element={<RouteFinder />} />
+            <Route path="/countries"                               element={<Countries />} />
             <Route path="/usa"                                     element={<USAPage />} />
             <Route path="/canada"                                  element={<CanadaPage />} />
             <Route path="/australia"                               element={<AustraliaPage />} />
@@ -80,6 +84,8 @@ function App() {
             <Route path="/jobs"                                    element={<JobsPage />} />
             <Route path="/contact"                                 element={<ContactPage />} />
             <Route path="/resources"                               element={<UsefulResources />} />
+            <Route path="/about"                                   element={<About />} />
+            <Route path="*"                                        element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>

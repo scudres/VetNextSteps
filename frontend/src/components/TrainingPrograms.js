@@ -79,7 +79,7 @@ const TrainingPrograms = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/.netlify/functions/training")
+    fetch("/data/training.json")
       .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
       .then((data) => {
         const grouped = {};
@@ -114,7 +114,7 @@ const TrainingPrograms = () => {
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
-          <title>{cfg.name} Graduate Development Programmes | VetNextStep</title>
+          <title>{`${cfg.name} Graduate Development Programmes | VetNextStep`}</title>
           <meta name="description" content={`Graduate development programmes for new veterinary graduates in ${cfg.name}.`} />
           <link rel="canonical" href={`https://vetnextstep.com/training-programs/${country}`} />
           <meta property="og:title" content={`${cfg.name} Graduate Development Programmes | VetNextStep`} />

@@ -18,7 +18,7 @@ const SharedFooter = () => (
           <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-gray-400">
             <li><Link to="/training-programs" className="hover:text-white transition-colors">Graduate Programmes</Link></li>
-            <li><Link to="/?tab=countries" className="hover:text-white transition-colors">Licensing Info</Link></li>
+            <li><Link to="/countries" className="hover:text-white transition-colors">Licensing Info</Link></li>
             <li><Link to="/internships-residencies" className="hover:text-white transition-colors">Internships</Link></li>
             <li><Link to="/postgraduate-certificates" className="hover:text-white transition-colors">Certificates</Link></li>
             <li><Link to="/cpd" className="hover:text-white transition-colors">CPD & Conferences</Link></li>
@@ -46,7 +46,10 @@ const SharedFooter = () => (
           </ul>
         </div>
       </div>
-      <div className="border-t border-gray-800 mt-8 pt-6 pb-2 flex justify-center">
+      <div className="border-t border-gray-800 mt-8 pt-6 pb-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
+          About VetNextStep
+        </Link>
         <Link to="/contact" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

@@ -219,7 +219,7 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>{cfg.name} Veterinary CPD Providers | VetNextStep</title>
+        <title>{`${cfg.name} Veterinary CPD Providers | VetNextStep`}</title>
         <meta name="description" content={`CPD providers, online courses and education for vets in ${cfg.name}. Filter by specialty or format.`} />
         <link rel="canonical" href={`https://vetnextstep.com/cpd/providers/${country}`} />
         <meta property="og:title" content={`${cfg.name} Veterinary CPD Providers | VetNextStep`} />
@@ -310,7 +310,7 @@ const CPDProviders = () => {
   const [error,        setError]        = useState(null);
 
   useEffect(() => {
-    fetch("/.netlify/functions/providers")
+    fetch("/data/providers.json")
       .then((res) => { if (!res.ok) throw new Error("Failed to load providers"); return res.json(); })
       .then((data) => { setAllProviders(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });

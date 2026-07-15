@@ -8,35 +8,26 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta
-            name="description"
-            content="Licensing steps, visa options, and training resources for vets working in or moving to the UK, USA, Canada, or Australia."
-        />
 
         <!-- AI scraper opt-out -->
         <meta name="robots" content="noai, noimageai" />
 
-        <!-- Open Graph -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://vetnextstep.com/" />
-        <meta property="og:title" content="Veterinary Career Progression Hub | VetNextStep" />
-        <meta
-            property="og:description"
-            content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia."
-        />
-        <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
-
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Veterinary Career Progression Hub | VetNextStep" />
-        <meta
-            name="twitter:description"
-            content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia."
-        />
-        <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
-
-        <!-- Canonical -->
-        <link rel="canonical" href="https://vetnextstep.com/" />
+        <!--
+          Title, description, canonical, and Open Graph / Twitter Card tags are
+          NOT set here — not even a fallback <title>. Every routed page sets
+          its own via react-helmet-async (see each component's <Helmet>
+          block), and react-snap bakes those per-page tags into the
+          prerendered HTML at build time. react-helmet-async creates its own
+          <title> node in the browser rather than overwriting one already in
+          the markup, so a static placeholder tag here would survive
+          alongside the real one in every snapshot — two <title> elements on
+          every page, which is exactly what this file previously had for
+          canonical and OG tags too. Leaving no title element at all means
+          Helmet's own node is the only one that ever exists. If a route is
+          ever added without its own <Helmet>, the tab is blank; that's the
+          intended, visible failure mode — better than a silently duplicated
+          fallback.
+        -->
 
         <!-- Preconnect to analytics/tag-manager so DNS+TLS resolve during parse -->
         <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
@@ -46,7 +37,6 @@
         <!-- Preload ga-init.js so the file is cached when the sync script tag executes -->
         <link rel="preload" href="/ga-init.js" as="script" />
 
-        <title>Veterinary Career Progression Hub | VetNextStep</title>
         <!-- Google tag (gtag.js) — config in ga-init.js to remove CSP unsafe-inline -->
         <script src="/ga-init.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YPE9MES8JY"></script>
