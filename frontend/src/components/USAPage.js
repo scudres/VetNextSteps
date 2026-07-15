@@ -36,16 +36,16 @@ const USAPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       <Helmet>
         <title>Working as a Vet in the USA | VetNextStep</title>
-        <meta name="description" content="Everything new vet graduates need to know about working in the USA — NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program." />
+        <meta name="description" content="Everything new vet graduates need to know about working in the USA — NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH programme." />
         <link rel="canonical" href="https://vetnextstep.com/usa" />
         <meta property="og:title" content="Working as a Vet in the USA | VetNextStep" />
-        <meta property="og:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program for vets in the USA." />
+        <meta property="og:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH programme for vets in the USA." />
         <meta property="og:url" content="https://vetnextstep.com/usa" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Working as a Vet in the USA | VetNextStep" />
-        <meta name="twitter:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH program for vets in the USA." />
+        <meta name="twitter:description" content="NAVLE, ECFVG, PAVE, state licensing, work visas, and the VIRMP MATCH programme for vets in the USA." />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -108,7 +108,7 @@ const USAPage = () => {
                   <h4 className="font-semibold text-green-900 mb-2">ECFVG Certification</h4>
                   <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA. Accepted by <strong>all U.S. state veterinary regulatory boards</strong> and the federal government. Four steps:</p>
                   <ul className="text-sm text-gray-700 space-y-1.5">
-                    <li>• <strong>Step 1:</strong> Enrollment & credential verification — graduates provide proof of degree; final-year students provide transcripts + a letter from their college confirming graduation within the year</li>
+                    <li>• <strong>Step 1:</strong> Enrolment & credential verification — graduates provide proof of degree; final-year students provide transcripts + a letter from their college confirming graduation within the year</li>
                     <li>• <strong>Step 2:</strong> English language assessment — TOEFL iBT, IELTS Academic (min. 6.5 overall), or CAEL</li>
                     <li>• <strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE) — fee $250 from Jan 2026</li>
                     <li>• <strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — hands-on practical exam at Viticus Group (Las Vegas) or Mississippi State University</li>

@@ -21,7 +21,7 @@ const CanadaPage = () => {
   const programmes = [
     {
       title: "Internships & Residencies (VIRMP)",
-      description: "The VIRMP MATCH program includes Canadian positions. Rotating internships and specialist residencies available at Canadian veterinary schools.",
+      description: "The VIRMP MATCH programme includes Canadian positions. Rotating internships and specialist residencies available at Canadian veterinary schools.",
       route: "/internships-residencies",
       tag: "Internships & Residencies",
     },

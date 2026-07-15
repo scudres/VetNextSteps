@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Link, useParams, useLocation, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
@@ -7,6 +7,7 @@ import FilterDropdown from "./FilterDropdown";
 import DeadlinesWidget from "./DeadlinesWidget";
 import { specialtyOptions, regionConfig, parseSortDate } from "../data/conferencesData";
 import { slugify } from "../utils";
+import { parseDateRange, buildICS, downloadICS } from "../ics";
 
 // Build schema.org Event objects for conferences whose dates parse to a real
 // calendar day (TBA and month-only entries are excluded). Used for JSON-LD.
@@ -55,6 +56,25 @@ const FORMAT_OPTIONS = [
   { value: "hybrid",    label: "Hybrid"    },
 ];
 
+// Download a single conference as an all-day .ics event. Only called when
+// parseDateRange succeeds — TBA and month-only entries never get the button.
+const exportConference = (conf) => {
+  const range = parseDateRange(conf.dates);
+  if (!range) return;
+  downloadICS(
+    `${slugify(conf.title)}.ics`,
+    buildICS([{
+      uid: `${slugify(conf.title)}-${range.start.join("")}`,
+      summary: conf.title,
+      start: range.start,
+      end: range.end,
+      location: conf.location,
+      url: conf.website,
+      description: conf.organiser,
+    }])
+  );
+};
+
 // ——— Conference card ———
 const ConferenceCard = ({ conf }) => (
   <div
@@ -93,7 +113,7 @@ const ConferenceCard = ({ conf }) => (
     {conf.notes && (
       <p className="text-xs text-gray-500 italic mb-4 leading-relaxed">{conf.notes}</p>
     )}
-    <div className="mt-auto">
+    <div className="mt-auto flex flex-wrap gap-2">
       <a
         href={conf.website}
         target="_blank"
@@ -105,6 +125,18 @@ const ConferenceCard = ({ conf }) => (
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
       </a>
+      {parseDateRange(conf.dates) && (
+        <button
+          onClick={() => exportConference(conf)}
+          className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+          title="Download an .ics file for your calendar"
+        >
+          <svg className="mr-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Add to calendar
+        </button>
+      )}
     </div>
   </div>
 );
@@ -118,7 +150,7 @@ const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths
   return (
     <div className="flex flex-wrap gap-2 mb-6 items-center">
       <FilterDropdown
-        label="Specialty"
+        label="Speciality"
         options={specialtyOptions.slice(1)}
         selected={filters.specialties}
         onToggle={(v) => onToggle("specialties", v)}
@@ -169,12 +201,34 @@ const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths
 
 const EMPTY_FILTERS = { specialties: [], regions: [], years: [], months: [], formats: [] };
 
+// URL query keys for each filter category — filter state lives in the URL so
+// any filtered view is a shareable link (e.g. /cpd?specialty=Cardiology&region=uk).
+const FILTER_PARAM_KEYS = { specialties: "specialty", regions: "region", years: "year", months: "month", formats: "format" };
+const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
+
 // ——— Main component ———
 const CPDPage = () => {
   const { region } = useParams();
   const location   = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [filters, setFilters]           = useState(EMPTY_FILTERS);
+  const filters = useMemo(() => ({
+    specialties: splitParam(searchParams.get("specialty")),
+    regions:     splitParam(searchParams.get("region")),
+    years:       splitParam(searchParams.get("year")),
+    months:      splitParam(searchParams.get("month")).map(Number),
+    formats:     splitParam(searchParams.get("format")),
+  }), [searchParams]);
+
+  const setFilterParams = useCallback((next) => {
+    const params = new URLSearchParams(searchParams);
+    for (const [category, key] of Object.entries(FILTER_PARAM_KEYS)) {
+      if (next[category].length > 0) params.set(key, next[category].join(","));
+      else params.delete(key);
+    }
+    setSearchParams(params, { replace: true });
+  }, [searchParams, setSearchParams]);
+
   const [allConferences, setAllConferences] = useState([]);
   const [loading, setLoading]           = useState(true);
   const [error, setError]               = useState(null);
@@ -202,14 +256,14 @@ const CPDPage = () => {
   );
 
   const toggleFilter = (category, value) =>
-    setFilters((prev) => ({
-      ...prev,
-      [category]: prev[category].includes(value)
-        ? prev[category].filter((v) => v !== value)
-        : [...prev[category], value],
-    }));
+    setFilterParams({
+      ...filters,
+      [category]: filters[category].includes(value)
+        ? filters[category].filter((v) => v !== value)
+        : [...filters[category], value],
+    });
 
-  const clearFilters = () => setFilters(EMPTY_FILTERS);
+  const clearFilters = () => setFilterParams(EMPTY_FILTERS);
 
   // checkRegions = true on the hub page (user can filter by region dropdown);
   // false on sub-pages where region is already implicit in the URL.
@@ -247,7 +301,9 @@ const CPDPage = () => {
       .filter((c) => c.regions.includes(region) && matchesFilters(c))
       .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
 
-    const eventSchema = buildEventSchema(regionConferences);
+    // Schema is built from the full region list, not the filtered view —
+    // crawlers should see every event regardless of the visitor's filters.
+    const eventSchema = buildEventSchema(allConferences.filter((c) => c.regions.includes(region)));
 
     return (
       <div className="min-h-screen bg-white">
@@ -330,6 +386,7 @@ const CPDPage = () => {
 
   // ——— HUB VIEW ———
   const totalVisible = regionConfig.reduce((acc, r) => acc + getConferencesForRegion(r.id).length, 0);
+  const hubEventSchema = buildEventSchema(allConferences);
 
   return (
     <div className="min-h-screen bg-white">
@@ -354,6 +411,9 @@ const CPDPage = () => {
             { "@type": "ListItem", "position": 2, "name": "CPD & Conferences", "item": "https://vetnextstep.com/cpd" }
           ]
         })}</script>
+        {hubEventSchema.length > 0 && (
+          <script type="application/ld+json">{JSON.stringify(hubEventSchema)}</script>
+        )}
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">

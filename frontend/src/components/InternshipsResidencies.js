@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
@@ -249,12 +249,18 @@ const Spinner = () => (
   </div>
 );
 
+const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
+
 const InternshipsResidencies = () => {
   const { region, subCategory } = useParams();
   const [programs,        setPrograms]        = useState([]);
   const [loading,         setLoading]         = useState(true);
-  const [typeFilters,      setTypeFilters]      = useState([]);
-  const [specialtyFilters, setSpecialtyFilters] = useState([]);
+
+  // Filter state lives in the URL so any filtered view is a shareable link,
+  // e.g. /internships-residencies/uk/university?specialty=Cardiology.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilters      = useMemo(() => splitParam(searchParams.get("type")),      [searchParams]);
+  const specialtyFilters = useMemo(() => splitParam(searchParams.get("specialty")), [searchParams]);
 
   useEffect(() => {
     fetch("/.netlify/functions/internships")
@@ -263,9 +269,20 @@ const InternshipsResidencies = () => {
       .catch(() => { setPrograms([]); setLoading(false); });
   }, []);
 
-  const toggleType      = (v) => setTypeFilters((p)      => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
-  const toggleSpecialty = (v) => setSpecialtyFilters((p) => p.includes(v) ? p.filter((x) => x !== v) : [...p, v]);
-  const clearFilters    = ()  => { setTypeFilters([]); setSpecialtyFilters([]); };
+  const setParam = (key, arr) => {
+    const params = new URLSearchParams(searchParams);
+    if (arr.length > 0) params.set(key, arr.join(","));
+    else params.delete(key);
+    setSearchParams(params, { replace: true });
+  };
+  const toggleType      = (v) => setParam("type",      typeFilters.includes(v)      ? typeFilters.filter((x) => x !== v)      : [...typeFilters, v]);
+  const toggleSpecialty = (v) => setParam("specialty", specialtyFilters.includes(v) ? specialtyFilters.filter((x) => x !== v) : [...specialtyFilters, v]);
+  const clearFilters    = ()  => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("type");
+    params.delete("specialty");
+    setSearchParams(params, { replace: true });
+  };
   const activeCount     = typeFilters.length + specialtyFilters.length;
 
   // ——— Sub-category programme list (e.g. /europe/colleges, /uk/university) ———
@@ -357,7 +374,7 @@ const InternshipsResidencies = () => {
                 labelKey="label"
               />
               <FilterDropdown
-                label="Specialty"
+                label="Speciality"
                 options={SPECIALTY_OPTIONS}
                 selected={specialtyFilters}
                 onToggle={toggleSpecialty}
@@ -568,7 +585,7 @@ const InternshipsResidencies = () => {
                 labelKey="label"
               />
               <FilterDropdown
-                label="Specialty"
+                label="Speciality"
                 options={SPECIALTY_OPTIONS}
                 selected={specialtyFilters}
                 onToggle={toggleSpecialty}
@@ -609,16 +626,16 @@ const InternshipsResidencies = () => {
     <div className="min-h-screen bg-white">
       <Helmet>
         <title>Veterinary Internships & Residencies | VetNextStep</title>
-        <meta name="description" content="Browse veterinary internships and residencies in the UK, Europe, and North America. Find rotating internships, specialist residencies, and VIRMP programs for new vet graduates." />
+        <meta name="description" content="Browse veterinary internships and residencies in the UK, Europe, and North America. Find rotating internships, specialist residencies, and VIRMP programmes for new vet graduates." />
         <link rel="canonical" href="https://vetnextstep.com/internships-residencies" />
         <meta property="og:title" content="Veterinary Internships & Residencies | VetNextStep" />
-        <meta property="og:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
+        <meta property="og:description" content="Find rotating internships, specialist residencies, and VIRMP programmes for veterinary graduates across the UK, Europe, and North America." />
         <meta property="og:url" content="https://vetnextstep.com/internships-residencies" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Veterinary Internships & Residencies | VetNextStep" />
-        <meta name="twitter:description" content="Find rotating internships, specialist residencies, and VIRMP programs for veterinary graduates across the UK, Europe, and North America." />
+        <meta name="twitter:description" content="Find rotating internships, specialist residencies, and VIRMP programmes for veterinary graduates across the UK, Europe, and North America." />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

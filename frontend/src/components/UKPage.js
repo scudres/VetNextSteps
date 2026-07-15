@@ -22,7 +22,7 @@ const UKPage = () => {
 
   const programmes = [
     {
-      title: "Post-graduate Training Programs",
+      title: "Post-graduate Training Programmes",
       description: "Structured graduate development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Vets4Pets, and VetPartners.",
       route: "/training-programs",
       tag: "Graduate Programmes",

@@ -51,7 +51,7 @@ const RESOURCE_SECTIONS = [
       },
       {
         name: "VIRMP — Veterinary Internship & Residency Matching Program",
-        description: "The MATCH program for veterinary internships and residencies in the USA and Canada. Apply, rank, and match into postgraduate positions.",
+        description: "The MATCH programme for veterinary internships and residencies in the USA and Canada. Apply, rank, and match into postgraduate positions.",
         url: "https://www.virmp.org/",
       },
     ],

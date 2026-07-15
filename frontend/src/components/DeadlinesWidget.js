@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { buildICS, downloadICS } from "../ics";
 
 /**
  * "Closing soon" deadlines box, fed by /closing-soon.json — a static file
@@ -13,6 +14,25 @@ const TYPE_ICONS = {
   "hotel":        "🏨",
   "scholarship":  "🎓",
   "other":        "📌",
+};
+
+// Export the live deadlines as all-day .ics events. Dates here are ISO
+// (YYYY-MM-DD) from the deadline-alerts pipeline, so no parsing ambiguity.
+const exportDeadlines = (deadlines) => {
+  downloadICS(
+    "vetnextstep-deadlines.ics",
+    buildICS(deadlines.map((d) => {
+      const [y, m, day] = d.date.split("-").map(Number);
+      return {
+        uid: `${d.id}-${d.type}-${d.date}`,
+        summary: `${d.conference} — ${d.label}`,
+        start: [y, m, day],
+        end: [y, m, day],
+        url: d.url,
+        description: d.note,
+      };
+    }))
+  );
 };
 
 const DeadlinesWidget = ({ limit = 5 }) => {
@@ -76,6 +96,16 @@ const DeadlinesWidget = ({ limit = 5 }) => {
           </li>
         ))}
       </ul>
+      <button
+        onClick={() => exportDeadlines(deadlines)}
+        className="mt-4 inline-flex items-center text-xs font-medium text-amber-800 hover:text-amber-900 underline underline-offset-2"
+        title="Download these deadlines as an .ics file for your calendar"
+      >
+        <svg className="mr-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Add these deadlines to your calendar (.ics)
+      </button>
     </section>
   );
 };

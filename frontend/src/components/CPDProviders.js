@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
@@ -160,20 +160,35 @@ const HubPage = ({ allProviders, loading, error }) => (
 );
 
 // ——— Country sub-page ———
+const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
+
 const CountrySubPage = ({ country, allProviders, loading, error }) => {
   const cfg = providerCountryConfig.find((c) => c.id === country);
-  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
-  const [selectedTypes,       setSelectedTypes]       = useState([]);
 
+  // Filter state lives in the URL so any filtered view is a shareable link,
+  // e.g. /cpd/providers/uk?specialty=Cardiology&format=Webinar.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedSpecialties = useMemo(() => splitParam(searchParams.get("specialty")), [searchParams]);
+  const selectedTypes       = useMemo(() => splitParam(searchParams.get("format")),    [searchParams]);
+
+  const setParam = (key, arr) => {
+    const params = new URLSearchParams(searchParams);
+    if (arr.length > 0) params.set(key, arr.join(","));
+    else params.delete(key);
+    setSearchParams(params, { replace: true });
+  };
   const toggleSpecialty = (s) =>
-    setSelectedSpecialties((prev) =>
-      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
-    );
+    setParam("specialty", selectedSpecialties.includes(s)
+      ? selectedSpecialties.filter((x) => x !== s) : [...selectedSpecialties, s]);
   const toggleType = (t) =>
-    setSelectedTypes((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-    );
-  const clearFilters  = () => { setSelectedSpecialties([]); setSelectedTypes([]); };
+    setParam("format", selectedTypes.includes(t)
+      ? selectedTypes.filter((x) => x !== t) : [...selectedTypes, t]);
+  const clearFilters = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("specialty");
+    params.delete("format");
+    setSearchParams(params, { replace: true });
+  };
   const activeCount   = selectedSpecialties.length + selectedTypes.length;
 
   const countryProviders = useMemo(() => {
@@ -243,7 +258,7 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
               {/* Filters */}
               <div className="flex flex-wrap gap-2 mb-4 items-center">
                 <FilterDropdown
-                  label="Specialty"
+                  label="Speciality"
                   options={providerSpecialtyOptions}
                   selected={selectedSpecialties}
                   onToggle={toggleSpecialty}

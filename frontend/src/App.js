@@ -9,6 +9,7 @@ import InternshipsResidencies from "./components/InternshipsResidencies";
 import PostgraduateCertificates from "./components/PostgraduateCertificates";
 import UKPage from "./components/UKPage";
 import UKFirstRoleGuide from "./components/UKFirstRoleGuide";
+import RouteFinder from "./components/RouteFinder";
 import USAPage from "./components/USAPage";
 import CanadaPage from "./components/CanadaPage";
 import AustraliaPage from "./components/AustraliaPage";
@@ -66,6 +67,7 @@ function App() {
             <Route path="/postgraduate-certificates/:country"      element={<PostgraduateCertificates />} />
             <Route path="/uk"                                      element={<UKPage />} />
             <Route path="/uk/first-role"                           element={<UKFirstRoleGuide />} />
+            <Route path="/licensing-route"                         element={<RouteFinder />} />
             <Route path="/usa"                                     element={<USAPage />} />
             <Route path="/canada"                                  element={<CanadaPage />} />
             <Route path="/australia"                               element={<AustraliaPage />} />

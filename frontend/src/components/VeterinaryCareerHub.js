@@ -119,12 +119,52 @@ const countries = [
   },
 ];
 
+const COUNTRY_CODES = Object.keys(comparisonData);
+const DEFAULT_COMPARE = ["UK", "Australia"];
+
 const VeterinaryCareerHub = () => {
   const [activeTab, setActiveTab] = useState("overview");
-  const [searchParams] = useSearchParams();
-  const [compareA, setCompareA] = useState("UK");
-  const [compareB, setCompareB] = useState("Australia");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [linkCopied, setLinkCopied] = useState(false);
   const navigate = useNavigate();
+
+  // The comparison selection lives in the URL (?compare=UK,Australia,USA) so a
+  // built-up comparison is a shareable link. 2–4 countries.
+  const urlCompare = [...new Set(
+    (searchParams.get("compare") || "").split(",").filter((c) => COUNTRY_CODES.includes(c))
+  )];
+  const compareList = urlCompare.length >= 2 ? urlCompare.slice(0, 4) : DEFAULT_COMPARE;
+
+  const setCompareList = (list) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("compare", list.join(","));
+    params.set("tab", "countries");
+    setSearchParams(params, { replace: true });
+  };
+
+  const changeCompareCountry = (index, code) => {
+    const next = [...compareList];
+    const existing = next.indexOf(code);
+    if (existing !== -1) next[existing] = next[index]; // swap to avoid duplicate columns
+    next[index] = code;
+    setCompareList(next);
+  };
+
+  const addCompareCountry = () => {
+    const unused = COUNTRY_CODES.find((c) => !compareList.includes(c));
+    if (unused) setCompareList([...compareList, unused]);
+  };
+
+  const removeCompareCountry = (index) =>
+    setCompareList(compareList.filter((_, i) => i !== index));
+
+  const copyCompareLink = () => {
+    const url = `${window.location.origin}/?tab=countries&compare=${compareList.join(",")}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    }).catch(() => {});
+  };
 
   useEffect(() => {
     const tab = searchParams.get("tab");
@@ -140,7 +180,7 @@ const VeterinaryCareerHub = () => {
     <div className="min-h-screen bg-white">
       <Helmet>
         <title>Veterinary Career Progression Hub | VetNextStep</title>
-        <meta name="description" content="Licensing steps, visa options, and training resources for vets working in or moving to the UK, USA, Canada, or Australia. No fluff — just what you need to know." />
+        <meta name="description" content="Licensing steps, visa options, and training resources for vets working in or moving to the UK, USA, Canada, or Australia." />
         <link rel="canonical" href="https://vetnextstep.com/" />
         <meta property="og:title" content="Veterinary Career Progression Hub | VetNextStep" />
         <meta property="og:description" content="Graduate programmes, internships, residencies, postgraduate certificates, and licensing guides for the UK, USA, Canada, and Australia." />
@@ -202,7 +242,7 @@ const VeterinaryCareerHub = () => {
                     Know your next step
                   </h1>
                   <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
-                    Newly qualified or ten years in — there's always a next move. Find licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
+                    Licensing guides for working abroad, postgraduate training and certificates, CPD providers, and upcoming conferences, all in one place.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <button
@@ -282,7 +322,7 @@ const VeterinaryCareerHub = () => {
                     </svg>
                   </div>
                   <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">Postgraduate training</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-3">Graduate development programmes, rotating internships, specialist residencies, and RCVS-accredited postgraduate certificates. Wherever you are, there's a route forward.</p>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-3">Graduate development programmes, rotating internships, specialist residencies, and RCVS-accredited postgraduate certificates.</p>
                   <div className="flex flex-wrap gap-2">
                     <Link to="/training-programs" className="text-xs font-medium text-blue-600 inline-flex items-center hover:underline">
                       Grad programmes
@@ -324,6 +364,7 @@ const VeterinaryCareerHub = () => {
                 { label: "Internships & Residencies", desc: "Rotating internships and specialist residency posts at university teaching hospitals and private referral centres.",             meta: "UK · Europe · North America",            path: "/internships-residencies" },
                 { label: "Postgraduate Certificates", desc: "RCVS CertAVP and university postgraduate certificates — flexible routes to build a clinical interest at any career stage.",    meta: "RCVS-accredited · Level 7",              path: "/postgraduate-certificates" },
                 { label: "Countries & Licensing",     desc: "Registration bodies, key exams, visa routes, and typical timelines for working in the UK, USA, Canada, and Australia.",       meta: "Visa · Registration · Licensing",        tab: "countries" },
+                { label: "Licensing Route Finder",    desc: "Pick where you qualified and where you want to work — the registration, exam, and visa steps for that route, in order.",     meta: "UK · USA · Canada · Australia",          path: "/licensing-route" },
                 { label: "Conferences & Congresses",  desc: "70+ conferences in date order, 2026–2028 — filter by specialty or jump to your region. General practice to subspecialties.",  meta: "UK · USA · Europe · Australia · Global", path: "/cpd" },
                 { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: "49 providers · 4 categories",            path: "/cpd" },
               ].map((item, i) =>
@@ -355,9 +396,18 @@ const VeterinaryCareerHub = () => {
               <div>
                 <div className="text-center mb-12">
                   <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Countries & Licensing</h2>
-                  <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-5">
                     Pick your destination. Below you'll find the registration steps, visa routes, and key exams for each country.
                   </p>
+                  <Link
+                    to="/licensing-route"
+                    className="inline-flex items-center border border-blue-600 text-blue-600 hover:bg-blue-50 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    Find your route step by step
+                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
 
                 <div className="mb-10">
@@ -399,47 +449,64 @@ const VeterinaryCareerHub = () => {
                   ))}
                 </div>
 
-                {/* Country comparison tool */}
+                {/* Country comparison builder — selection is URL-encoded so the table is shareable */}
                 <div className="mb-16 border border-gray-200 rounded-xl overflow-hidden">
-                  <div className="bg-gray-50 border-b border-gray-200 px-6 py-4 flex flex-wrap items-center gap-4">
+                  <div className="bg-gray-50 border-b border-gray-200 px-6 py-4 flex flex-wrap items-center gap-3">
                     <span className="text-sm font-semibold text-gray-700">Compare countries</span>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <select
-                        value={compareA}
-                        onChange={(e) => setCompareA(e.target.value)}
-                        className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 focus:border-blue-400 focus:outline-none"
+                    {compareList.map((code, index) => (
+                      <div key={code} className="flex items-center gap-1">
+                        <select
+                          value={code}
+                          onChange={(e) => changeCompareCountry(index, e.target.value)}
+                          className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 focus:border-blue-400 focus:outline-none"
+                        >
+                          {COUNTRY_CODES.map((k) => (
+                            <option key={k} value={k}>{comparisonData[k].label}</option>
+                          ))}
+                        </select>
+                        {compareList.length > 2 && (
+                          <button
+                            onClick={() => removeCompareCountry(index)}
+                            aria-label={`Remove ${comparisonData[code].label} from comparison`}
+                            className="text-gray-400 hover:text-gray-600 px-1 text-sm"
+                          >
+                            ✕
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    {compareList.length < 4 && (
+                      <button
+                        onClick={addCompareCountry}
+                        className="px-3 py-1.5 text-sm border border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors"
                       >
-                        {Object.keys(comparisonData).map((k) => (
-                          <option key={k} value={k}>{comparisonData[k].label}</option>
-                        ))}
-                      </select>
-                      <span className="text-gray-400 text-sm font-medium">vs</span>
-                      <select
-                        value={compareB}
-                        onChange={(e) => setCompareB(e.target.value)}
-                        className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 focus:border-blue-400 focus:outline-none"
-                      >
-                        {Object.keys(comparisonData).map((k) => (
-                          <option key={k} value={k}>{comparisonData[k].label}</option>
-                        ))}
-                      </select>
-                    </div>
+                        + Add country
+                      </button>
+                    )}
+                    <button
+                      onClick={copyCompareLink}
+                      className="ml-auto px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 hover:border-blue-400 hover:text-blue-600 transition-colors"
+                    >
+                      {linkCopied ? "Link copied" : "Copy link"}
+                    </button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-100">
                           <th className="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide w-36"></th>
-                          <th className="text-left px-6 py-3 text-sm font-semibold text-gray-900">{comparisonData[compareA].label}</th>
-                          <th className="text-left px-6 py-3 text-sm font-semibold text-gray-900">{comparisonData[compareB].label}</th>
+                          {compareList.map((code) => (
+                            <th key={code} className="text-left px-6 py-3 text-sm font-semibold text-gray-900">{comparisonData[code].label}</th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
                         {comparisonRows.map((row, i) => (
                           <tr key={row.key} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                             <td className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">{row.label}</td>
-                            <td className="px-6 py-3 text-gray-700">{comparisonData[compareA][row.key]}</td>
-                            <td className="px-6 py-3 text-gray-700">{comparisonData[compareB][row.key]}</td>
+                            {compareList.map((code) => (
+                              <td key={code} className="px-6 py-3 text-gray-700">{comparisonData[code][row.key]}</td>
+                            ))}
                           </tr>
                         ))}
                       </tbody>

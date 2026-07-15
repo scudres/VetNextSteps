@@ -11,6 +11,27 @@ import {
   TYPE_LABELS,
 } from "../data/certificatesData";
 
+// Build schema.org Course objects from certificate programme entries. Only
+// fields present in the data are emitted — nothing is inferred or invented.
+// USA-shaped entries name the qualification in `credential` and the discipline
+// scope in `title` ("GPCert" / "Multiple disciplines"), so both are needed for
+// a meaningful Course name; their descriptive text lives in `notes`.
+const buildCourseSchema = (programs) =>
+  programs
+    .filter((p) => p.title && p.organisation)
+    .map((p) => {
+      const course = {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": p.credential ? `${p.credential} — ${p.title}` : p.title,
+        "provider": { "@type": "Organization", "name": p.organisation },
+      };
+      const description = p.description || p.notes;
+      if (description) course.description = description;
+      if (p.url)       course.url = p.url;
+      return course;
+    });
+
 // ─── Shared UI primitives ─────────────────────────────────────────────────────
 
 const ExternalLinkIcon = () => (
@@ -143,6 +164,11 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
   return (
     <div className="min-h-screen bg-white">
       {helmet}
+      {programs.length > 0 && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(buildCourseSchema(programs))}</script>
+        </Helmet>
+      )}
       <SharedHeader />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -208,6 +234,9 @@ const UKSubPage = ({ programs, loading }) => (
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+      {programs.length > 0 && (
+        <script type="application/ld+json">{JSON.stringify(buildCourseSchema(programs))}</script>
+      )}
     </Helmet>
     <SharedHeader />
     <main className="py-8 md:py-16">
@@ -294,6 +323,9 @@ const USASubPage = ({ categories, loading }) => {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
+        {usaTotalCount > 0 && (
+          <script type="application/ld+json">{JSON.stringify(buildCourseSchema(categories.flatMap((c) => c.programs)))}</script>
+        )}
       </Helmet>
       <SharedHeader />
       <main className="py-8 md:py-16">

@@ -11,7 +11,7 @@ const SharedFooter = () => (
             <h3 className="text-xl font-bold">VetNextStep</h3>
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Career progression tools for vets at every stage — licensing guides, CPD, conferences, internships, residencies, and postgraduate certificates.
+            Career progression tools for vets — licensing guides, CPD, conferences, internships, residencies, and postgraduate certificates.
           </p>
         </div>
         <div>

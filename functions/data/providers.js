@@ -173,7 +173,7 @@ const cpdProviders = [
     specialties: ["Internal Medicine", "Surgery", "Emergency & Critical Care", "Farm Animal", "Equine", "Nursing & Allied"],
     location: "Fort Collins, CO + online",
     website: "https://csuvetce.com/",
-    notes: "Among the largest university-based vet CE programs. RACE/AAVSB-approved; NY-approved. Courses for vets and technicians.",
+    notes: "Among the largest university-based vet CE programmes. RACE/AAVSB-approved; NY-approved. Courses for vets and technicians.",
   },
   {
     provider: "Cornell University College of Veterinary Medicine",
@@ -213,7 +213,7 @@ const cpdProviders = [
     specialties: ["Internal Medicine", "Surgery", "Emergency & Critical Care", "Rehabilitation"],
     location: "Philadelphia, PA + online",
     website: "https://www.vet.upenn.edu/education/continuing-education",
-    notes: "Penn Annual Conference is one of the nation's largest CE programs. Working Dog Practitioner programme and Shelter Medicine Symposium. RACE-approved.",
+    notes: "Penn Annual Conference is one of the nation's largest CE programmes. Working Dog Practitioner programme and Shelter Medicine Symposium. RACE-approved.",
   },
   {
     provider: "VETgirl",
@@ -223,7 +223,7 @@ const cpdProviders = [
     specialties: ["Emergency & Critical Care", "Internal Medicine", "Surgery", "Cardiology", "Nursing & Allied"],
     location: "Online + live events",
     website: "https://vetgirlontherun.com/",
-    notes: "~USD 269/yr for 200+ hours RACE-approved CE; 13 certificate programs (12–60 hrs each). VGU live conference: Salt Lake City, 19–21 Jun 2026.",
+    notes: "~USD 269/yr for 200+ hours RACE-approved CE; 13 certificate programmes (12–60 hrs each). VGU live conference: Salt Lake City, 19–21 Jun 2026.",
   },
   {
     provider: "VIN (Veterinary Information Network)",
@@ -377,7 +377,7 @@ const cpdProviders = [
     specialties: ["Practice Management"],
     location: "Online + AU/NZ (in partnership with Southern Cross University)",
     website: "https://lincoln-institute.vet/",
-    notes: "Programs carry SCU micro-credentials. Includes Emerging Leaders and Veterinary Leadership Mastery. Non-clinical focus.",
+    notes: "Programmes carry SCU micro-credentials. Includes Emerging Leaders and Veterinary Leadership Mastery. Non-clinical focus.",
   },
   {
     provider: "Practical CPD (Australia)",
