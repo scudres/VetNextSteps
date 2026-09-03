@@ -213,7 +213,15 @@
     "url": "https://www.ecvnberlin2026.org",
     "region": "Europe",
     "startDate": "2026-09-17",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2026-09-05",
+        "label": "PowerPoint upload deadline for accepted abstracts",
+        "note": "Deadline for submission of PowerPoint presentations for accepted abstracts at the 38th ESVN-ECVN Symposium"
+      }
+    ],
+    "_source": "https://www.ecvnberlin2026.org/abstracts.html — verified 2026-09-03"
   },
   {
     "id": "acvo-annual-conference-2026",
@@ -229,7 +237,15 @@
     "url": "https://vetcancersociety.org/",
     "region": "USA",
     "startDate": "2026-09-24",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2026-09-21",
+        "label": "Oral presentation file upload deadline",
+        "note": "Presenters must upload oral presentation files by 11:59pm Central Time on this date ahead of the Minneapolis conference"
+      }
+    ],
+    "_source": "https://vetcancersociety.org/annual-conference/abstracts/ — verified 2026-09-03"
   },
   {
     "id": "ava-autumn-meeting-2026",
@@ -269,7 +285,15 @@
     "url": "https://wsava-congress.org",
     "region": "Europe/Global",
     "startDate": "2026-10-13",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "registration",
+        "date": "2026-09-22",
+        "label": "Regular registration deadline",
+        "note": "Payments received after this date will be charged the on-site rate"
+      }
+    ],
+    "_source": "https://wsava-congress.org/general-information/ — verified 2026-09-03"
   },
   {
     "id": "acvaa-annual-meeting-2026",
@@ -294,7 +318,12 @@
     "region": "Global",
     "startDate": "2026-10-31",
     "deadlines": [
-      { "type": "registration", "date": "2026-09-30", "label": "Group registration deadline", "note": "Individual registration deadline — verify on fasawa2026.org/registration/en" }
+      {
+        "type": "registration",
+        "date": "2026-09-30",
+        "label": "Group registration deadline",
+        "note": "Individual registration deadline — verify on fasawa2026.org/registration/en"
+      }
     ]
   },
   {
@@ -311,7 +340,15 @@
     "url": "https://anexa.co.nz/events/advanced-mastitis-course/",
     "region": "New Zealand",
     "startDate": "2026-11-09",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2026-10-15",
+        "label": "Course confirmation decision date",
+        "note": "Course will only run if sufficient numbers are reached; decision to be made on this date."
+      }
+    ],
+    "_source": "https://anexa.co.nz/community/events/ — verified 2026-09-03"
   },
   {
     "id": "acvp-annual-meeting-2026",
@@ -320,7 +357,12 @@
     "region": "USA",
     "startDate": "2026-11-14",
     "deadlines": [
-      { "type": "early-bird", "date": "2026-09-23", "label": "Early-bird rate ends", "note": "Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/" }
+      {
+        "type": "early-bird",
+        "date": "2026-09-23",
+        "label": "Early-bird rate ends",
+        "note": "Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/"
+      }
     ]
   },
   {
@@ -337,7 +379,15 @@
     "url": "https://london.vetshow.com",
     "region": "UK/Europe",
     "startDate": "2026-11-19",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2026-09-30",
+        "label": "Refund deadline for paid registrations",
+        "note": "Paid-for places can be refunded up until this date (25% service charge applies); no refunds after this date."
+      }
+    ],
+    "_source": "https://london.vetshow.com/pricing-registration — verified 2026-09-03"
   },
   {
     "id": "upav-conference-2026",
@@ -362,7 +412,12 @@
     "region": "USA",
     "startDate": "2026-12-07",
     "deadlines": [
-      { "type": "hotel", "date": "2026-09-17", "label": "Hotel block discount closes", "note": "Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/" }
+      {
+        "type": "hotel",
+        "date": "2026-09-17",
+        "label": "Hotel block discount closes",
+        "note": "Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/"
+      }
     ]
   },
   {
@@ -379,7 +434,26 @@
     "url": "https://www.aasv.org/",
     "region": "USA",
     "startDate": "2027-02-27",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2026-09-09",
+        "label": "Research Topics abstract submission deadline",
+        "note": "Firm deadline, 11:59pm Central Daylight Time."
+      },
+      {
+        "type": "abstract",
+        "date": "2026-09-09",
+        "label": "Student Seminar abstract submission deadline",
+        "note": "Firm deadline, 11:59pm Central Daylight Time."
+      },
+      {
+        "type": "other",
+        "date": "2026-10-01",
+        "label": "Industrial Partners submission deadline"
+      }
+    ],
+    "_source": "https://www.aasv.org/annmtg2027/ — verified 2026-09-03"
   },
   {
     "id": "wvc-annual-conference-2027",
@@ -411,7 +485,15 @@
     "url": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002113",
     "region": "Australia",
     "startDate": "2027-05-17",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "registration",
+        "date": "2027-05-20",
+        "label": "Registration closes for 2027 AVA Conference",
+        "note": "Melbourne Convention and Exhibition Centre, event runs 17-20 May 2027"
+      }
+    ],
+    "_source": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002113 — verified 2026-09-03"
   },
   {
     "id": "evecc-congress-2027",
@@ -427,7 +509,30 @@
     "url": "https://www.acvim.org",
     "region": "USA",
     "startDate": "2027-06-24",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2027-01-11",
+        "label": "Call for Research Abstracts opens",
+        "note": "2027 ACVIM Forum, Montreal"
+      },
+      {
+        "type": "abstract",
+        "date": "2027-02-02",
+        "label": "Call for Research Abstracts closes"
+      },
+      {
+        "type": "abstract",
+        "date": "2027-02-10",
+        "label": "Call for Research Exchange opens"
+      },
+      {
+        "type": "abstract",
+        "date": "2027-03-18",
+        "label": "Call for Research Exchange closes"
+      }
+    ],
+    "_source": "https://www.acvim.org/acvim-forum-2027/speaker-resources/call-sessions — verified 2026-09-03"
   },
   {
     "id": "ecvs-asm-2027",
@@ -443,7 +548,15 @@
     "url": "https://www.avma.org/events",
     "region": "USA",
     "startDate": "2027-07-16",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2026-10-02",
+        "label": "Abstract/session proposal submission deadline for AVMA Convention 2027",
+        "note": "Deadline is 11:59 p.m. Central time"
+      }
+    ],
+    "_source": "https://www.avma.org/events/avma-convention — verified 2026-09-03"
   },
   {
     "id": "ecvim-ca-congress-2027",
@@ -488,7 +601,21 @@
     "name": "SPVS-VMG Congress 2027 (Birmingham)",
     "url": "https://spvs.org.uk/",
     "region": "UK",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "early-bird",
+        "date": "2026-10-31",
+        "label": "Early Bird ticket rate ends",
+        "note": "Early bird pricing runs from 1 April to 31 October 2026 for SPVS Congress 2027 (4-5 Feb 2027, Hilton Birmingham Metropole)."
+      },
+      {
+        "type": "registration",
+        "date": "2027-02-04",
+        "label": "Standard price period ends / Congress starts",
+        "note": "Standard price tier runs 1 November 2026 to 4 February 2027, the first day of the Congress."
+      }
+    ],
+    "_source": "https://spvs.org.uk/congress-2027-tickets/ — verified 2026-09-03"
   },
   {
     "id": "wvoc-2026",
@@ -523,7 +650,15 @@
     "name": "EVDI / EAVDI-ECVDI Annual Conference 2026",
     "url": "https://www.ecvdi.org/",
     "region": "Europe",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2026-10-01",
+        "label": "ECVDI practical exam application window closes (FORM P)",
+        "note": "Per ECVDI Bylaws, application to sit the practical exam must be submitted between 1 September and 1 October of the year preceding the exam; the practical exam itself is scheduled for 26–27 January 2027 in Zurich."
+      }
+    ],
+    "_source": "https://www.ecvdi.org/bylaws — verified 2026-09-03"
   },
   {
     "id": "acvsmr-symposium-2027",
