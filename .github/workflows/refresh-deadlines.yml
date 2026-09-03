@@ -16,11 +16,11 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '22'
 
       # Research step: runs AI web research, writes updated JSON files
       # and a PR body markdown file to $RUNNER_TEMP/pr-body.md.
@@ -58,10 +58,16 @@ jobs:
       # Open (or update) a pull request on the auto/deadline-refresh branch.
       # scudres is added as both reviewer and assignee so it appears in the
       # "Review requested" queue and the Assigned tab.
+      #
+      # AUTO_PR_TOKEN is a fine-grained PAT with Contents: write and
+      # Pull requests: write on this repo. The default GITHUB_TOKEN is not
+      # used here for two reasons: the repo forbids Actions from creating
+      # pull requests, and PRs it opens do not trigger other workflows, so
+      # the CI smoke tests would never run against a data refresh.
       - name: Open pull request with changes
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTO_PR_TOKEN }}
           branch: auto/deadline-refresh
           base: main
           add-paths: |
@@ -90,6 +96,7 @@ jobs:
             echo ""
             echo "### Likely causes"
             echo "- \`ANTHROPIC_API_KEY\` secret is missing, expired, or has no API credits"
+            echo "- \`AUTO_PR_TOKEN\` secret is missing or its personal access token has expired"
             echo "- Anthropic web-search beta header or tool name has changed — check [Anthropic docs](https://docs.anthropic.com)"
             echo "- Malformed JSON in \`conferences.json\` or \`other-deadlines.json\`"
             echo ""
