@@ -1,4 +1,13 @@
 import { test, expect } from "@playwright/test";
+import { readFileSync } from "node:fs";
+
+// Figures are asserted against visaFacts.json rather than hard-coded, so a
+// verified change to a threshold does not turn the build red. The truth of a
+// figure is governed by the visa-verify workflow and human review; these tests
+// guard that the page actually renders the data it is wired to.
+const facts = JSON.parse(
+  readFileSync(new URL("../frontend/src/data/visaFacts.json", import.meta.url)),
+).facts;
 
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 
@@ -12,15 +21,19 @@ test("homepage renders hero and navigation", async ({ page }) => {
 
 test("UK page shows current Skilled Worker figures from visaFacts", async ({ page }) => {
   await page.goto("/uk");
-  await expect(page.getByText("£49,500", { exact: false })).toBeVisible();
-  await expect(page.getByText("£38,000", { exact: false })).toBeVisible();
+  await expect(page.getByText(facts.uk_going_rate.value, { exact: false })).toBeVisible();
+  await expect(page.getByText(facts.uk_new_entrant_rate.value, { exact: false })).toBeVisible();
   // The stale pre-July-2025 figure must not reappear
   await expect(page.getByText("£48,100", { exact: false })).toHaveCount(0);
 });
 
 test("Australia page shows current CSIT figure", async ({ page }) => {
   await page.goto("/australia");
-  await expect(page.getByText("AUD 79,499", { exact: false })).toBeVisible();
+  await expect(page.getByText(facts.au_csit.value, { exact: false })).toBeVisible();
+  // Superseded CSIT figures must not reappear
+  for (const stale of ["AUD 79,499", "AUD 76,515", "AUD 73,150"]) {
+    await expect(page.getByText(stale, { exact: false })).toHaveCount(0);
+  }
 });
 
 // ─── UK first-role interactive guide ─────────────────────────────────────────

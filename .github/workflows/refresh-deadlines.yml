@@ -56,8 +56,9 @@ jobs:
         run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
       # Open (or update) a pull request on the auto/deadline-refresh branch.
-      # scudres is added as both reviewer and assignee so it appears in the
-      # "Review requested" queue and the Assigned tab.
+      # scudres is the assignee, so it lands in the Assigned tab. No reviewer
+      # is set: AUTO_PR_TOKEN makes scudres the PR author, and GitHub rejects
+      # a review request from the author of the pull request.
       #
       # AUTO_PR_TOKEN is a fine-grained PAT with Contents: write and
       # Pull requests: write on this repo. The default GITHUB_TOKEN is not
@@ -79,7 +80,6 @@ jobs:
           commit-message: 'chore: automated deadline data refresh ${{ steps.date.outputs.today }}'
           title: '🔍 Deadline research — ${{ steps.date.outputs.today }} — REVIEW NEEDED'
           body-path: ${{ runner.temp }}/pr-body.md
-          reviewers: scudres
           assignees: scudres
           labels: automated,deadlines
           delete-branch: true
