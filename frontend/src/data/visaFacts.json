@@ -3,7 +3,8 @@
   "facts": {
     "uk_going_rate": {
       "value": "£49,500",
-      "detail": "Standard going rate for veterinarians (SOC 2240), 37.5-hour week, effective 22 July 2025",
+      "hourlyValue": "£25.38/hour",
+      "detail": "Standard going rate for veterinarians (SOC 2240), 37.5-hour week, effective 22 July 2025. For longer contracted hours, gross salary must scale up pro rata to clear the hourly rate.",
       "source": "https://www.gov.uk/government/publications/skilled-worker-visa-going-rates-for-eligible-occupations/skilled-worker-visa-going-rates-for-eligible-occupation-codes",
       "verified": "2026-09-03"
     },
@@ -13,6 +14,12 @@
       "source": "https://www.gov.uk/government/publications/skilled-worker-visa-going-rates-for-eligible-occupations/skilled-worker-visa-going-rates-for-eligible-occupation-codes",
       "verified": "2026-09-03"
     },
+    "uk_new_entrant_window": {
+      "value": "2 years",
+      "detail": "Under Skilled Worker Option E, an applicant still qualifies as a new entrant if their Student or Graduate visa expired less than this long before the date of application (also qualifies: under 26, or working towards professional registration/chartered status)",
+      "source": "https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-skilled-worker",
+      "verified": "2026-07-24"
+    },
     "uk_eaeve_deadline": {
       "value": "January 2029",
       "detail": "RCVS recognition of EAEVE-accredited EU degrees ends no later than this date, subject to annual review",
@@ -21,7 +28,7 @@
     },
     "au_csit": {
       "value": "AUD 79,423",
-      "detail": "Core Skills Income Threshold for Subclass 482/186, effective 1 July 2026, indexed annually to AWOTE",
+      "detail": "Core Skills Income Threshold for Subclass 482/186 nominations lodged 1 July 2026 – 30 June 2027, indexed annually to AWOTE",
       "source": "https://immi.homeaffairs.gov.au/visas/employing-and-sponsoring-someone/sponsoring-workers/nominating-a-position/salary-requirements",
       "verified": "2026-09-03"
     },

@@ -113,25 +113,25 @@ const UKPage = () => {
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                   <h4 className="font-semibold text-blue-900 mb-2">EU Citizens</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Skilled Worker Visa required (post-Brexit)</li>
-                    <li>• Job offer from a UK-licensed sponsor needed</li>
-                    <li>• Employer must hold a valid sponsor licence</li>
-                    <li>• No longer automatic right to work in UK</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required (post-Brexit)</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a UK-licensed sponsor needed</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Employer must hold a valid sponsor licence</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No longer automatic right to work in UK</span></li>
                   </ul>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <h4 className="font-semibold text-green-900 mb-2">Non-EU Citizens</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Skilled Worker Visa required</li>
-                    <li>• Job offer from licensed UK sponsor</li>
-                    <li>• English language assessment may be required</li>
-                    <li>• Immigration skills charge applies to employer</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from licensed UK sponsor</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English language assessment may be required</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Immigration skills charge applies to employer</span></li>
                   </ul>
                 </div>
               </div>
               <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
                 <p className="text-sm text-yellow-800">
-                  <strong>💷 Salary threshold:</strong> Veterinary surgeons (occupation code 2240) must be paid at least <strong>{facts.uk_going_rate.value}/year</strong> to qualify for Skilled Worker visa sponsorship (rate effective 22 July 2025). A reduced <strong>new entrant rate of {facts.uk_new_entrant_rate.value}</strong> may apply — for example if you are under 26, recently graduated, or working towards professional registration. Check the current{" "}
+                  <strong>💷 Salary threshold:</strong> Veterinary surgeons (occupation code 2240) must be paid at least <strong>{facts.uk_going_rate.value}/year</strong> to qualify for Skilled Worker visa sponsorship — a 37.5-hour week at <strong>{facts.uk_going_rate.hourlyValue}</strong>, rate effective 22 July 2025. For longer contracted hours, gross salary must scale up pro rata to clear that hourly rate. A reduced <strong>new entrant rate of {facts.uk_new_entrant_rate.value}</strong> may apply — for example if you are under 26, your Student or Graduate visa expired within the last {facts.uk_new_entrant_window.value}, or you're working towards professional registration. Check the current{" "}
                   <a href={facts.uk_going_rate.source} target="_blank" rel="noopener noreferrer" className="underline font-medium">official going-rates table</a> before relying on these figures.
                 </p>
               </div>
@@ -152,7 +152,7 @@ const UKPage = () => {
                   <h4 className="font-semibold text-gray-900 mb-3">Requirements</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Registration with RCVS is mandatory to practise</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>EAEVE-accredited EU degrees currently recognised — <strong>deadline {facts.uk_eaeve_deadline.value}</strong> (subject to annual RCVS review), after which only RCVS-accredited degrees accepted</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>EAEVE-accredited EU degrees currently recognised — <strong>deadline {facts.uk_eaeve_deadline.value}</strong> (subject to annual RCVS review), after which only RCVS-accredited degrees accepted</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Non-RCVS/non-EAEVE degrees require statutory membership exam</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>English language proficiency required unless degree was taught entirely in English</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character declarations required</li>
@@ -162,11 +162,11 @@ const UKPage = () => {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">Graduate Development (VetGDP)</h4>
                   <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><strong>VetGDP mandatory</strong> for all new UK graduates — replaces the former PDP</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>VetGDP mandatory</strong> for all new UK graduates — replaces the former PDP</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Completed over 12–18 months in your first role, earning 52.5 hours CPD</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Structured around Entrustable Professional Activities (EPAs) with a VetGDP Adviser</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Annual CPD requirements to maintain registration thereafter</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>CertAVP available after gaining clinical experience — <Link to="/postgraduate-certificates" className="text-blue-700 hover:underline font-medium">browse certificate programmes</Link></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>CertAVP available after gaining clinical experience — <Link to="/postgraduate-certificates" className="text-blue-700 hover:underline font-medium">browse certificate programmes</Link></span></li>
                   </ul>
                 </div>
               </div>

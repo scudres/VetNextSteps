@@ -63,7 +63,7 @@ const VISA_OPTIONS = [
     label: "Yes — I'll need a visa",
     steps: [
       { title: "Skilled Worker visa", body: "The standard route for vets. You need a job offer from a practice holding a valid sponsor licence — confirm sponsorship before accepting any role.", href: "https://www.gov.uk/skilled-worker-visa", external: true },
-      { title: `Salary threshold: ${facts.uk_going_rate.value}/year`, body: `The going rate for veterinary surgeons (rate effective 22 July 2025). A reduced new entrant rate of ${facts.uk_new_entrant_rate.value} may apply if you are under 26, recently graduated, or working towards professional registration. Verify against the official going-rates table — figures change most years.`, href: facts.uk_going_rate.source, external: true },
+      { title: `Salary threshold: ${facts.uk_going_rate.value}/year`, body: `The going rate for veterinary surgeons, based on a 37.5-hour week (${facts.uk_going_rate.hourlyValue}). For longer contracted hours, gross salary must scale up pro rata to clear that hourly rate. A reduced new entrant rate of ${facts.uk_new_entrant_rate.value} may apply if you are under 26, your Student or Graduate visa expired within the last ${facts.uk_new_entrant_window.value}, or you're working towards professional registration. Verify against the official going-rates table — figures change most years.`, href: facts.uk_going_rate.source, external: true },
       { title: "Order matters", body: "Secure the job offer first; your employer then assigns a Certificate of Sponsorship, and you apply for the visa. RCVS registration completes the picture — most employers expect it to be in progress." },
     ],
   },

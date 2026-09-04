@@ -108,10 +108,10 @@ const USAPage = () => {
                   <h4 className="font-semibold text-green-900 mb-2">ECFVG Certification</h4>
                   <p className="text-sm text-gray-600 mb-3">Educational Commission for Foreign Veterinary Graduates — administered by AVMA. Accepted by <strong>all U.S. state veterinary regulatory boards</strong> and the federal government. Four steps:</p>
                   <ul className="text-sm text-gray-700 space-y-1.5">
-                    <li>• <strong>Step 1:</strong> Enrolment & credential verification — graduates provide proof of degree; final-year students provide transcripts + a letter from their college confirming graduation within the year</li>
-                    <li>• <strong>Step 2:</strong> English language assessment — TOEFL iBT, IELTS Academic (min. 6.5 overall), or CAEL</li>
-                    <li>• <strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE) — fee $250 from Jan 2026</li>
-                    <li>• <strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — hands-on practical exam at Viticus Group (Las Vegas) or Mississippi State University</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 1:</strong> Enrolment & credential verification — graduates provide proof of degree; final-year students provide transcripts + a letter from their college confirming graduation within the year</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 2:</strong> English language assessment — TOEFL iBT, IELTS Academic (min. 6.5 overall), or CAEL</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 3:</strong> Basic and Clinical Sciences Examination (BCSE) — fee $250 from Jan 2026</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 4:</strong> Clinical Proficiency Examination (CPE) — hands-on practical exam at Viticus Group (Las Vegas) or Mississippi State University</span></li>
                   </ul>
                   <p className="text-xs text-gray-500 mt-3 italic">Steps 3 & 4 must be completed within 7 years of passing Step 2. ECFVG certification does not equate to state licensure — you must still pass the NAVLE and any state-specific exams.</p>
                   <a href="https://www.avma.org/education/ecfvg" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-green-700 hover:text-green-900 font-medium">Learn more →</a>
@@ -120,10 +120,10 @@ const USAPage = () => {
                   <h4 className="font-semibold text-yellow-900 mb-2">PAVE Program</h4>
                   <p className="text-sm text-gray-600 mb-3">Program for the Assessment of Veterinary Education Equivalence — administered by AAVSB. Four steps:</p>
                   <ul className="text-sm text-gray-700 space-y-1.5">
-                    <li>• <strong>Step 1:</strong> Application & English proficiency documentation</li>
-                    <li>• <strong>Step 2:</strong> Qualifying Science Examination (QSE)</li>
-                    <li>• <strong>Step 3:</strong> Evaluated Clinical Experience (ECE) — hands-on placement at an AVMA-accredited school</li>
-                    <li>• <strong>Step 4:</strong> PAVE Certificate issued</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 1:</strong> Application & English proficiency documentation</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 2:</strong> Qualifying Science Examination (QSE)</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 3:</strong> Evaluated Clinical Experience (ECE) — hands-on placement at an AVMA-accredited school</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><strong>Step 4:</strong> PAVE Certificate issued</span></li>
                   </ul>
                   <p className="text-xs text-gray-500 mt-3 italic">Not accepted in all states — verify your jurisdiction first. High demand means significant waiting periods for ECE placement; passing the QSE and paying fees does not guarantee a place.</p>
                   <a href="https://www.aavsb.org/licensure/international-pathway-for-veterinarians/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-yellow-700 hover:text-yellow-900 font-medium">Learn more →</a>
@@ -138,13 +138,13 @@ const USAPage = () => {
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-3">Step 1 — NAVLE Exam</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Required in all 50 states and Canada</li>
-                      <li>• 360 multiple-choice questions (60 unscored pre-test items)</li>
-                      <li>• Format from Oct 2026: 12 blocks of 30 questions (previously 6 blocks of 60)</li>
-                      <li>• Covers all veterinary medicine disciplines</li>
-                      <li>• Offered during specific testing windows at Prometric centres</li>
-                      <li>• Administered by ICVA</li>
-                      <li>• From March 2026: all candidates receive 5 attempts; prior attempts before Dec 2025 do not count toward this limit</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Required in all 50 states and Canada</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>360 multiple-choice questions (60 unscored pre-test items)</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Format from Oct 2026: 12 blocks of 30 questions (previously 6 blocks of 60)</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Covers all veterinary medicine disciplines</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Offered during specific testing windows at Prometric centres</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Administered by ICVA</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>From March 2026: all candidates receive 5 attempts; prior attempts before Dec 2025 do not count toward this limit</span></li>
                     </ul>
                     <a
                       href="https://www.icva.net/navle/"
@@ -158,10 +158,10 @@ const USAPage = () => {
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-3">Step 2 — State Requirements</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Each state has unique additional requirements</li>
-                      <li>• Some require a state jurisprudence exam</li>
-                      <li>• Additional fees and documentation vary</li>
-                      <li>• Contact your target state's veterinary board</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Each state has unique additional requirements</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Some require a state jurisprudence exam</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Additional fees and documentation vary</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Contact your target state's veterinary board</span></li>
                     </ul>
                   </div>
                 </div>

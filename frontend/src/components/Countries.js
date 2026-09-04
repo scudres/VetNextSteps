@@ -346,17 +346,17 @@ const Countries = () => {
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 mb-2 text-sm"><AcronymTooltip term="RCVS">RCVS</AcronymTooltip> Registration</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Mandatory before practising in the UK</li>
-                      <li>• EU qualifications may be recognised; non-EU degrees require assessment</li>
-                      <li>• English proficiency and health compliance required</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Mandatory before practising in the UK</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>EU qualifications may be recognised; non-EU degrees require assessment</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English proficiency and health compliance required</span></li>
                     </ul>
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-900 mb-2 text-sm">Post-Brexit Visa</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Skilled Worker Visa required for all non-UK nationals</li>
-                      <li>• Job offer from a licensed UK sponsor needed before applying</li>
-                      <li>• No automatic right to work for EU citizens post-Brexit</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required for all non-UK nationals</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a licensed UK sponsor needed before applying</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No automatic right to work for EU citizens post-Brexit</span></li>
                     </ul>
                   </div>
                 </div>
@@ -397,22 +397,22 @@ const Countries = () => {
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-900 mb-2 text-sm">Work Visa</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Non-U.S. citizens require an appropriate work visa (e.g. H-1B or J-1)</li>
-                      <li>• <AcronymTooltip term="AVMA">AVMA</AcronymTooltip> does not issue visas — your employer arranges this via USCIS</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Non-U.S. citizens require an appropriate work visa (e.g. H-1B or J-1)</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="AVMA">AVMA</AcronymTooltip> does not issue visas — your employer arranges this via USCIS</span></li>
                     </ul>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 mb-2 text-sm">Credential Verification (non-AVMA grads)</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• <AcronymTooltip term="ECFVG">ECFVG</AcronymTooltip> (AVMA): credential check, English test, BCSE, clinical exam</li>
-                      <li>• <AcronymTooltip term="PAVE">PAVE</AcronymTooltip> (<AcronymTooltip term="AAVSB">AAVSB</AcronymTooltip>): alternative route — check your state accepts it first</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="ECFVG">ECFVG</AcronymTooltip> (AVMA): credential check, English test, BCSE, clinical exam</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="PAVE">PAVE</AcronymTooltip> (<AcronymTooltip term="AAVSB">AAVSB</AcronymTooltip>): alternative route — check your state accepts it first</span></li>
                     </ul>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 mb-2 text-sm">State Licensing</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• <AcronymTooltip term="NAVLE">NAVLE</AcronymTooltip> required in all 50 states (360 questions)</li>
-                      <li>• Each state has additional requirements — contact your state board directly</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="NAVLE">NAVLE</AcronymTooltip> required in all 50 states (360 questions)</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Each state has additional requirements — contact your state board directly</span></li>
                     </ul>
                   </div>
                   <div className="p-3 bg-red-50 rounded-lg border border-red-200">
@@ -523,9 +523,9 @@ const Countries = () => {
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 mb-2 text-sm">Registration Requirements</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li>• Degree must be <AcronymTooltip term="AVBC">AVBC</AcronymTooltip>-recognised, or you'll need to sit the <AcronymTooltip term="AVE">AVE</AcronymTooltip> exam</li>
-                      <li>• State/territory veterinary board registration required</li>
-                      <li>• English proficiency (IELTS or OET) required</li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Degree must be <AcronymTooltip term="AVBC">AVBC</AcronymTooltip>-recognised, or you'll need to sit the <AcronymTooltip term="AVE">AVE</AcronymTooltip> exam</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>State/territory veterinary board registration required</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English proficiency (IELTS or OET) required</span></li>
                     </ul>
                   </div>
                   <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">

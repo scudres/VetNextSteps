@@ -96,10 +96,10 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-green-900 mb-2">Pathway 1 — Recognised Qualification</h4>
                   <p className="text-sm text-gray-600 mb-3">If your degree appears on the <strong>AVBC Qualifications Generally Recognised</strong> list (updated December 2025):</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Apply directly to the state/territory board where you intend to work</li>
-                    <li>• Provide proof of registration/good standing from your home country</li>
-                    <li>• English language proficiency may be required</li>
-                    <li>• No AVE exam required</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Apply directly to the state/territory board where you intend to work</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Provide proof of registration/good standing from your home country</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English language proficiency may be required</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No AVE exam required</span></li>
                   </ul>
                   <a href="https://avbc.asn.au/veterinary-education/avbc-qualifications-generally-recognised/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-green-700 hover:text-green-900 font-medium">Check the recognised list →</a>
                 </div>
@@ -107,10 +107,10 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-yellow-900 mb-2">Pathway 2 — AVE Exam Required</h4>
                   <p className="text-sm text-gray-600 mb-3">If your degree is <strong>not</strong> on the recognised list, you must sit the Australasian Veterinary Examination (AVE):</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Apply for AVE eligibility assessment via AVBC</li>
-                    <li>• Step 1: Multiple Choice Questions (MCQ) exam</li>
-                    <li>• Step 2: Clinical examination</li>
-                    <li>• On passing, apply to state/territory board for registration</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Apply for AVE eligibility assessment via AVBC</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Step 1: Multiple Choice Questions (MCQ) exam</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Step 2: Clinical examination</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>On passing, apply to state/territory board for registration</span></li>
                   </ul>
                   <a href="https://avbc.asn.au/for-veterinarians/australasian-veterinary-examination/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-yellow-700 hover:text-yellow-900 font-medium">AVE exam information →</a>
                 </div>
@@ -137,9 +137,9 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-gray-900 mb-3">English Language Standards</h4>
                   <p className="text-sm text-gray-600 mb-2">Required unless degree was taught and assessed entirely in English. Accepted tests (results within 3 years):</p>
                   <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><strong>OET:</strong> Grade B or higher in all sections</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><strong>IELTS Academic:</strong> Band 7 in each section</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><strong>TOEFL iBT:</strong> 24 listening, 24 reading, 27 writing, 23 speaking</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>OET:</strong> Grade B or higher in all sections</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>IELTS Academic:</strong> Band 7 in each section</span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>TOEFL iBT:</strong> 24 listening, 24 reading, 27 writing, 23 speaking</span></li>
                   </ul>
                 </div>
               </div>
@@ -160,7 +160,7 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-blue-900 mb-3">Key Requirements</h4>
                   <ul className="text-sm text-gray-700 space-y-2">
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Job offer from an approved Australian sponsor employer</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Minimum <strong>1 year</strong> of relevant work experience</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Minimum <strong>1 year</strong> of relevant work experience</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Full veterinary registration with an Australian state/territory board</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Competent English proficiency (IELTS, PTE, or TOEFL)</li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character checks</li>
@@ -169,10 +169,10 @@ const AustraliaPage = () => {
                 <div className="bg-green-50 p-5 rounded-lg border border-green-200">
                   <h4 className="font-semibold text-green-900 mb-3">Key Details</h4>
                   <ul className="text-sm text-gray-700 space-y-2">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Visa duration: up to <strong>4 years</strong></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Minimum salary (Core Skills Income Threshold): <strong>{facts.au_csit.value}/year</strong> since 1 July 2026 — indexed annually each July</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Visa duration: up to <strong>4 years</strong></span></li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Minimum salary (Core Skills Income Threshold): <strong>{facts.au_csit.value}/year</strong> since 1 July 2026 — indexed annually each July</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Spouse and dependent children can accompany on same visa</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Pathway to permanent residency after <strong>2 years</strong> via Subclass 186</li>
+                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Pathway to permanent residency after <strong>2 years</strong> via Subclass 186</span></li>
                     <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Employer must demonstrate they could not fill the role locally</li>
                   </ul>
                 </div>
@@ -218,30 +218,30 @@ const AustraliaPage = () => {
                   <h4 className="font-semibold text-blue-900 mb-1">Subclass 189</h4>
                   <p className="text-xs text-blue-700 font-medium mb-2">Skilled Independent</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• No employer or state sponsor needed</li>
-                    <li>• Requires invitation via SkillSelect</li>
-                    <li>• Points test: typically 85–90+ points needed</li>
-                    <li>• Grants permanent residency directly</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No employer or state sponsor needed</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Requires invitation via SkillSelect</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Points test: typically 85–90+ points needed</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Grants permanent residency directly</span></li>
                   </ul>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <h4 className="font-semibold text-green-900 mb-1">Subclass 190</h4>
                   <p className="text-xs text-green-700 font-medium mb-2">Skilled Nominated</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Nominated by a state or territory</li>
-                    <li>• +5 points for state nomination</li>
-                    <li>• Must commit to living/working in that state</li>
-                    <li>• Grants permanent residency directly</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Nominated by a state or territory</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>+5 points for state nomination</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Must commit to living/working in that state</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Grants permanent residency directly</span></li>
                   </ul>
                 </div>
                 <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                   <h4 className="font-semibold text-yellow-900 mb-1">Subclass 491</h4>
                   <p className="text-xs text-yellow-700 font-medium mb-2">Skilled Regional (Provisional)</p>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• State/territory or family nomination</li>
-                    <li>• +15 points for regional nomination</li>
-                    <li>• Must live and work in a regional area</li>
-                    <li>• After 3 years → apply for Subclass 191 (PR)</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>State/territory or family nomination</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>+15 points for regional nomination</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Must live and work in a regional area</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>After 3 years → apply for Subclass 191 (PR)</span></li>
                   </ul>
                 </div>
               </div>
@@ -259,9 +259,9 @@ const AustraliaPage = () => {
                     { factor: "Australian degree/qualification", points: "+10–20 pts" },
                     { factor: "Partner with competent English", points: "+5 pts" },
                   ].map((row, i) => (
-                    <div key={i} className="flex justify-between p-2 bg-white rounded border border-gray-200">
+                    <div key={i} className="flex justify-between gap-2 p-2 bg-white rounded border border-gray-200">
                       <span>{row.factor}</span>
-                      <span className="font-semibold text-blue-700">{row.points}</span>
+                      <span className="font-semibold text-blue-700 whitespace-nowrap">{row.points}</span>
                     </div>
                   ))}
                 </div>

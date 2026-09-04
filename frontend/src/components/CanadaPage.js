@@ -88,20 +88,20 @@ const CanadaPage = () => {
                 <div className="bg-red-50 p-5 rounded-lg border border-red-200">
                   <h4 className="font-semibold text-red-900 mb-2">Federal Skilled Worker Program</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Points-based Express Entry system</li>
-                    <li>• English or French language proficiency required</li>
-                    <li>• Educational credentials must be assessed</li>
-                    <li>• Work experience is evaluated for points</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Points-based Express Entry system</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English or French language proficiency required</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Educational credentials must be assessed</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Work experience is evaluated for points</span></li>
                   </ul>
                   <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/federal-skilled-workers.html" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-red-700 hover:text-red-900 font-medium">Learn more →</a>
                 </div>
                 <div className="bg-blue-50 p-5 rounded-lg border border-blue-200">
                   <h4 className="font-semibold text-blue-900 mb-2">Provincial Nominee Program (PNP)</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Province-specific requirements apply</li>
-                    <li>• Job offer from a provincial employer may be required</li>
-                    <li>• Can result in faster permanent residency</li>
-                    <li>• Must demonstrate intent to live in that province</li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Province-specific requirements apply</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a provincial employer may be required</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Can result in faster permanent residency</span></li>
+                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Must demonstrate intent to live in that province</span></li>
                   </ul>
                   <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-blue-700 hover:text-blue-900 font-medium">Learn more →</a>
                 </div>
