@@ -5,6 +5,7 @@ import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
 import DeadlinesWidget from "./DeadlinesWidget";
+import { loadData, getCached } from "../dataCache";
 import {
   specialtyOptions, regionConfig, parseSortDate,
   countryConfig, conferenceInRegion, browseConfig, conferenceInScope, countriesForRegions,
@@ -246,13 +247,12 @@ const CPDPage = () => {
     setSearchParams(params, { replace: true });
   }, [searchParams, setSearchParams]);
 
-  const [allConferences, setAllConferences] = useState([]);
-  const [loading, setLoading]           = useState(true);
+  const [allConferences, setAllConferences] = useState(() => getCached("conferences") || []);
+  const [loading, setLoading]           = useState(() => !getCached("conferences"));
   const [error, setError]               = useState(null);
 
   useEffect(() => {
-    fetch("/data/conferences.json")
-      .then((res) => { if (!res.ok) throw new Error("Failed to load conferences"); return res.json(); })
+    loadData("conferences")
       .then((data) => { setAllConferences(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
   }, []);

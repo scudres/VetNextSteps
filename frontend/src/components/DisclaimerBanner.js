@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import visaFacts from "../data/visaFacts.json";
+import { formatMonthYear } from "../utils";
 
 // Derive the default "last reviewed" label from the visa facts file so it can
 // never silently go stale — the automated verifier bumps lastVerified on each run.
-const defaultReviewed = new Date(visaFacts.lastVerified + "T00:00:00Z")
-  .toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+const defaultReviewed = formatMonthYear(visaFacts.lastVerified);
 
 /**
  * Visible disclaimer banner for pages containing licensing/visa/immigration information.

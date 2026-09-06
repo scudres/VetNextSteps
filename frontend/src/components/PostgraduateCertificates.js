@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
 import { slugify } from "../utils";
 import {
@@ -628,12 +629,13 @@ const HubPage = ({ certData, loading }) => {
 
 const PostgraduateCertificates = () => {
   const { country } = useParams();
-  const [certData, setCertData] = useState({ uk: [], usa: [], australia: [], newZealand: [] });
-  const [loading, setLoading] = useState(true);
+  const [certData, setCertData] = useState(
+    () => getCached("certificates") || { uk: [], usa: [], australia: [], newZealand: [] }
+  );
+  const [loading, setLoading] = useState(() => !getCached("certificates"));
 
   useEffect(() => {
-    fetch("/data/certificates.json")
-      .then((r) => { if (!r.ok) throw new Error("Failed to load certificates"); return r.json(); })
+    loadData("certificates")
       .then((data) => { setCertData(data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
+import { loadData, getCached } from "../dataCache";
 import {
   providerSpecialtyOptions, cpdTypeOptions,
   providerRegionConfig, providerInRegion, providerBrowseConfig, providerInScope,
@@ -339,13 +340,12 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
 // ——— Root component ———
 const CPDProviders = () => {
   const { country } = useParams();
-  const [allProviders, setAllProviders] = useState([]);
-  const [loading,      setLoading]      = useState(true);
+  const [allProviders, setAllProviders] = useState(() => getCached("providers") || []);
+  const [loading,      setLoading]      = useState(() => !getCached("providers"));
   const [error,        setError]        = useState(null);
 
   useEffect(() => {
-    fetch("/data/providers.json")
-      .then((res) => { if (!res.ok) throw new Error("Failed to load providers"); return res.json(); })
+    loadData("providers")
       .then((data) => { setAllProviders(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
   }, []);

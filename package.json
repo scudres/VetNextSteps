@@ -5,7 +5,8 @@
     "alerts:publish": "node -e \"require('fs').copyFileSync('tools/deadline-alerts/alerts/closing-soon.json','frontend/public/closing-soon.json')\"",
     "alerts:research": "node tools/deadline-alerts/research-updates.mjs",
     "visa:verify": "node tools/visa-facts/verify-visa-facts.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:prerender": "cd frontend && npm run build && cd .. && playwright test --config=playwright.prerender.config.mjs"
   },
   "dependencies": {
     "react-router-dom": "^7.6.3"

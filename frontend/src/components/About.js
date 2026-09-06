@@ -4,9 +4,9 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import visaFacts from "../data/visaFacts.json";
+import { formatLongDate } from "../utils";
 
-const lastVerified = new Date(visaFacts.lastVerified + "T00:00:00Z")
-  .toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+const lastVerified = formatLongDate(visaFacts.lastVerified);
 
 const About = () => (
   <div className="min-h-screen bg-white">

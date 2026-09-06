@@ -5,6 +5,7 @@ import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import DisclaimerBanner from "./DisclaimerBanner";
 import visaFacts from "../data/visaFacts.json";
+import { formatShortDate } from "../utils";
 
 // Licensing route finder: pick where you qualified and where you want to work,
 // get the registration, exam, and visa steps in order.
@@ -153,8 +154,7 @@ const DESTINATIONS = {
   },
 };
 
-const formatVerified = (iso) =>
-  new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const formatVerified = (iso) => formatShortDate(iso);
 
 // A figure from visaFacts.json: value, context, source link, verification date.
 const FactLine = ({ factKey }) => {

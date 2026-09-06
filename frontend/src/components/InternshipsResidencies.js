@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
 import { slugify } from "../utils";
 
@@ -253,8 +254,8 @@ const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
 
 const InternshipsResidencies = () => {
   const { region, subCategory } = useParams();
-  const [programs,        setPrograms]        = useState([]);
-  const [loading,         setLoading]         = useState(true);
+  const [programs,        setPrograms]        = useState(() => getCached("internships") || []);
+  const [loading,         setLoading]         = useState(() => !getCached("internships"));
 
   // Filter state lives in the URL so any filtered view is a shareable link,
   // e.g. /internships-residencies/uk/university?specialty=Cardiology.
@@ -263,8 +264,7 @@ const InternshipsResidencies = () => {
   const specialtyFilters = useMemo(() => splitParam(searchParams.get("specialty")), [searchParams]);
 
   useEffect(() => {
-    fetch("/data/internships.json")
-      .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
+    loadData("internships")
       .then((data) => { setPrograms(data); setLoading(false); })
       .catch(() => { setPrograms([]); setLoading(false); });
   }, []);

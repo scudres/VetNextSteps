@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import { loadData, getCached } from "../dataCache";
 import { slugify } from "../utils";
 import { countryConfig as allCountries } from "../data/certificatesData";
 
@@ -74,22 +75,23 @@ const Spinner = () => (
 
 const TrainingPrograms = () => {
   const { country } = useParams();
-  const [programs, setPrograms] = useState({});
-  const [loading, setLoading] = useState(true);
+  // Group once, from the cache when react-snap has already supplied it, so the
+  // first client render matches the prerendered markup.
+  const groupByCountry = (rows) => {
+    const grouped = {};
+    (rows || []).forEach((p) => {
+      if (!grouped[p.country]) grouped[p.country] = [];
+      grouped[p.country].push(p);
+    });
+    return grouped;
+  };
+  const [programs, setPrograms] = useState(() => groupByCountry(getCached("training")));
+  const [loading, setLoading] = useState(() => !getCached("training"));
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/data/training.json")
-      .then((r) => { if (!r.ok) throw new Error("Failed to load programmes"); return r.json(); })
-      .then((data) => {
-        const grouped = {};
-        data.forEach((p) => {
-          if (!grouped[p.country]) grouped[p.country] = [];
-          grouped[p.country].push(p);
-        });
-        setPrograms(grouped);
-        setLoading(false);
-      })
+    loadData("training")
+      .then((data) => { setPrograms(groupByCountry(data)); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
 
