@@ -10,6 +10,21 @@ const { makeRateLimiter } = require("./lib/rateLimit");
 
 const checkRate = makeRateLimiter(60, 60_000);
 const { slugify }              = require("./lib/slugify");
+const { resolveCountry }       = require("./lib/countries");
+
+// Country names for the search haystack. An entry's `country` is a slug, and on
+// the few conferences that move between editions it is an array of them. A
+// misspelt slug resolves to the country it meant, so a typo in the data does not
+// make the event unsearchable by its country.
+const countryNames = (country) => {
+  const slugs = Array.isArray(country) ? country : [country];
+  return slugs
+    .map((slug) => {
+      const resolved = resolveCountry(slug);
+      return resolved && !resolved.ambiguous ? resolved.name : null;
+    })
+    .filter(Boolean);
+};
 
 // ——— Derive search items from canonical data ———
 
@@ -120,7 +135,7 @@ const searchIndex = [
     section:     "Conferences",
     url:         c.website || null,
     navPath:     "/cpd#" + slugify(c.title),
-    tags:        [...c.specialties, ...c.regions, c.category || ""],
+    tags:        [...c.specialties, ...c.regions, ...countryNames(c.country), c.category || ""],
   })),
   ...cpdProviders.map((p) => ({
     title:       p.provider,
@@ -129,7 +144,7 @@ const searchIndex = [
     section:     "CPD Providers",
     url:         p.website || null,
     navPath:     "/cpd?section=providers#" + slugify(p.provider),
-    tags:        p.types,
+    tags:        [...p.types, ...countryNames(p.country)],
   })),
 ].map((item) => ({
   ...item,

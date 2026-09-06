@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import DeadlinesWidget from "./DeadlinesWidget";
+import { counts } from "../data/counts";
 
 const VeterinaryCareerHub = () => {
   const [searchParams] = useSearchParams();
@@ -148,7 +149,7 @@ const VeterinaryCareerHub = () => {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">CPD & Conferences</h3>
-              <p className="text-xs text-gray-500 leading-relaxed mb-3">70+ conferences across all specialties, 2026–2028, sortable by region. Plus 49 CPD providers — university units, commercial platforms, and industry education.</p>
+              <p className="text-xs text-gray-500 leading-relaxed mb-3">{counts.conferences} conferences across all specialities, {counts.conferenceYearFrom}–{counts.conferenceYearTo}, sortable by region. Plus {counts.providers} CPD providers — university units, commercial platforms, and industry education.</p>
               <span className="text-xs font-medium text-blue-600 inline-flex items-center">
                 Browse CPD & events
                 <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,8 +209,8 @@ const VeterinaryCareerHub = () => {
             { label: "Postgraduate Certificates", desc: "RCVS CertAVP and university postgraduate certificates — flexible routes to build a clinical interest at any career stage.",    meta: "RCVS-accredited · Level 7",              path: "/postgraduate-certificates" },
             { label: "Countries & Licensing",     desc: "Registration bodies, key exams, visa routes, and typical timelines for working in the UK, USA, Canada, and Australia.",       meta: "Visa · Registration · Licensing",        path: "/countries" },
             { label: "Licensing Route Finder",    desc: "Pick where you qualified and where you want to work — the registration, exam, and visa steps for that route, in order.",     meta: "UK · USA · Canada · Australia",          path: "/licensing-route" },
-            { label: "Conferences & Congresses",  desc: "70+ conferences in date order, 2026–2028 — filter by specialty or jump to your region. General practice to subspecialties.",  meta: "UK · USA · Europe · Australia · Global", path: "/cpd" },
-            { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: "49 providers · 4 categories",            path: "/cpd" },
+            { label: "Conferences & Congresses",  desc: `${counts.conferences} conferences in date order, ${counts.conferenceYearFrom}–${counts.conferenceYearTo} — filter by speciality or jump to your region. General practice to subspecialities.`,  meta: "UK · USA · Europe · Australia · Global", path: "/cpd" },
+            { label: "CPD Providers & Courses",   desc: "University CPD units, commercial e-learning platforms, and industry-funded education. Online, on-site, and subscription.",    meta: `${counts.providers} providers · ${counts.providerRegions} regions`,               path: "/cpd/providers" },
           ].map((item, i) => (
             <Link key={i} to={item.path} className="group block border border-gray-200 rounded-lg p-5 hover:border-blue-300 hover:bg-blue-50 transition-colors">
               <p className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 mb-2">{item.label}</p>

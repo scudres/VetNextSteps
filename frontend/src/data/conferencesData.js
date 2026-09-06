@@ -67,41 +67,49 @@ export const specialtyOptions = [
   "Microbiology",
 ];
 
-export const regionConfig = [
-  {
-    id: "australia",
-    name: "Australia",
-    flag: "\uD83C\uDDE6\uD83C\uDDFA",
-    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
-  },
-  {
-    id: "europe",
-    name: "Europe",
-    flag: "\uD83C\uDDEA\uD83C\uDDFA",
-    image: "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: "new-zealand",
-    name: "New Zealand",
-    flag: "\uD83C\uDDF3\uD83C\uDDFF",
-    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&q=80",
-  },
-  {
-    id: "uk",
-    name: "United Kingdom",
-    flag: "\uD83C\uDDEC\uD83C\uDDE7",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: "usa",
-    name: "United States",
-    flag: "\uD83C\uDDFA\uD83C\uDDF8",
-    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: "global",
-    name: "Global / International",
-    flag: "\uD83C\uDF0D",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
-  },
-];
+// ─── Region hierarchy ────────────────────────────────────────────────────────
+// regionConfig and countryConfig are GENERATED from the data by
+// scripts/build-data.js — see src/data/countries.js. Put a `country` slug on a
+// conference and its country (and, if it is the first one there, its continent)
+// appears in the filters automatically. Nothing to edit here.
+//
+// Country slugs match the ids these places used when they were top-level
+// regions (uk, usa, australia, new-zealand), so /cpd/uk and friends keep
+// working as country pages. browseConfig below resolves a /cpd/:slug either way.
+export { regionConfig, countryConfig } from "./countries";
+import { regionConfig, countryConfig } from "./countries";
+
+// Does this conference belong to a top-level region? Either it carries the tag
+// explicitly (europe, global, and the legacy uk/usa/australia/new-zealand tags)
+// or its country rolls up to that region.
+export const conferenceInRegion = (conf, regionId) => {
+  if (conf.regions && conf.regions.includes(regionId)) return true;
+  const c = countryConfig[conf.country];
+  return Boolean(c && c.region === regionId);
+};
+
+// A /cpd/:slug page is either a region or a country — resolve whichever it is,
+// so the country URLs that used to be regions keep rendering.
+export const browseConfig = (slug) => {
+  const region = regionConfig.find((r) => r.id === slug);
+  if (region) return { ...region, kind: "region" };
+  const country = countryConfig[slug];
+  if (country) return { ...country, id: slug, kind: "country" };
+  return null;
+};
+
+export const conferenceInScope = (conf, scope) =>
+  scope.kind === "region" ? conferenceInRegion(conf, scope.id) : conf.country === scope.id;
+
+// Country options for the sub-filter, derived from the conferences actually
+// present so an option never renders with nothing behind it. Sorted by name.
+export const countriesForRegions = (conferences, regionIds) => {
+  const ids = new Set();
+  for (const conf of conferences) {
+    if (!conf.country || !countryConfig[conf.country]) continue;
+    if (regionIds.length === 0 || regionIds.some((r) => conferenceInRegion(conf, r))) ids.add(conf.country);
+  }
+  return [...ids]
+    .map((id) => ({ value: id, label: `${countryConfig[id].flag} ${countryConfig[id].name}` }))
+    .sort((a, b) => countryConfig[a.value].name.localeCompare(countryConfig[b.value].name));
+};

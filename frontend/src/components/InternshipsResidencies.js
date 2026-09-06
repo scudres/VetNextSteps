@@ -387,7 +387,7 @@ const InternshipsResidencies = () => {
             </div>
             {activeCount > 0 && (
               <p className="text-xs text-gray-400 mb-6">
-                Umbrella programmes covering multiple disciplines appear for all specialty filters.
+                Umbrella programmes covering multiple disciplines appear for all speciality filters.
               </p>
             )}
 
@@ -598,7 +598,7 @@ const InternshipsResidencies = () => {
             </div>
             {activeCount > 0 && (
               <p className="text-xs text-gray-400 mb-6">
-                Umbrella programmes covering multiple disciplines appear for all specialty filters.
+                Umbrella programmes covering multiple disciplines appear for all speciality filters.
               </p>
             )}
 

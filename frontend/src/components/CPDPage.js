@@ -5,7 +5,10 @@ import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
 import DeadlinesWidget from "./DeadlinesWidget";
-import { specialtyOptions, regionConfig, parseSortDate } from "../data/conferencesData";
+import {
+  specialtyOptions, regionConfig, parseSortDate,
+  countryConfig, conferenceInRegion, browseConfig, conferenceInScope, countriesForRegions,
+} from "../data/conferencesData";
 import { slugify } from "../utils";
 import { parseDateRange, buildICS, downloadICS } from "../ics";
 
@@ -142,11 +145,14 @@ const ConferenceCard = ({ conf }) => (
 );
 
 // ——— Filter row used in both hub and sub-page views ———
-const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths, showRegions = true }) => {
+const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths, showRegions = true, countryOptions = [] }) => {
   // Region filters are hidden on sub-pages (region comes from the URL there),
   // so exclude them from the visible active count when the dropdown is hidden.
   const activeCount = Object.entries(filters).reduce(
     (n, [key, arr]) => n + (key === "regions" && !showRegions ? 0 : arr.length), 0);
+  // The country sub-filter only appears once the scope is narrow enough for it
+  // to mean something — a region is selected, or the page is already a region.
+  const showCountries = countryOptions.length > 1;
   return (
     <div className="flex flex-wrap gap-2 mb-6 items-center">
       <FilterDropdown
@@ -161,6 +167,16 @@ const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths
           options={regionConfig.map((r) => ({ value: r.id, label: `${r.flag} ${r.name}` }))}
           selected={filters.regions}
           onToggle={(v) => onToggle("regions", v)}
+          valueKey="value"
+          labelKey="label"
+        />
+      )}
+      {showCountries && (
+        <FilterDropdown
+          label="Country"
+          options={countryOptions}
+          selected={filters.countries}
+          onToggle={(v) => onToggle("countries", v)}
           valueKey="value"
           labelKey="label"
         />
@@ -199,11 +215,11 @@ const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths
   );
 };
 
-const EMPTY_FILTERS = { specialties: [], regions: [], years: [], months: [], formats: [] };
+const EMPTY_FILTERS = { specialties: [], regions: [], countries: [], years: [], months: [], formats: [] };
 
 // URL query keys for each filter category — filter state lives in the URL so
 // any filtered view is a shareable link (e.g. /cpd?specialty=Cardiology&region=uk).
-const FILTER_PARAM_KEYS = { specialties: "specialty", regions: "region", years: "year", months: "month", formats: "format" };
+const FILTER_PARAM_KEYS = { specialties: "specialty", regions: "region", countries: "country", years: "year", months: "month", formats: "format" };
 const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
 
 // ——— Main component ———
@@ -215,6 +231,7 @@ const CPDPage = () => {
   const filters = useMemo(() => ({
     specialties: splitParam(searchParams.get("specialty")),
     regions:     splitParam(searchParams.get("region")),
+    countries:   splitParam(searchParams.get("country")),
     years:       splitParam(searchParams.get("year")),
     months:      splitParam(searchParams.get("month")).map(Number),
     formats:     splitParam(searchParams.get("format")),
@@ -267,9 +284,10 @@ const CPDPage = () => {
 
   // checkRegions = true on the hub page (user can filter by region dropdown);
   // false on sub-pages where region is already implicit in the URL.
-  const matchesFilters = (conf, checkRegions = false) => {
+  const matchesFilters = (conf, checkRegions = false, checkCountries = true) => {
     if (filters.specialties.length > 0 && !conf.specialties.some((s) => filters.specialties.includes(s))) return false;
-    if (checkRegions && filters.regions.length > 0 && !conf.regions.some((r) => filters.regions.includes(r))) return false;
+    if (checkRegions && filters.regions.length > 0 && !filters.regions.some((r) => conferenceInRegion(conf, r))) return false;
+    if (checkCountries && filters.countries.length > 0 && !filters.countries.includes(conf.country)) return false;
     if (filters.years.length   > 0 && !filters.years.includes(getYear(conf.dates)))   return false;
     if (filters.months.length  > 0 && !filters.months.includes(getMonth(conf.dates))) return false;
     if (filters.formats.length > 0 && !filters.formats.includes(conf.format))         return false;
@@ -278,18 +296,24 @@ const CPDPage = () => {
 
   const getConferencesForRegion = (regionId) =>
     allConferences
-      .filter((c) => c.regions.includes(regionId) && matchesFilters(c, true))
+      .filter((c) => conferenceInRegion(c, regionId) && matchesFilters(c, true))
       .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
+
+  // Card counts deliberately ignore the region and country filters: a card
+  // reporting "0 events" only because you have already selected somewhere else
+  // reads as broken data rather than as a filter that is doing its job.
+  const countForRegionCard = (regionId) =>
+    allConferences.filter((c) => conferenceInRegion(c, regionId) && matchesFilters(c, false, false)).length;
 
   // ——— SUB-PAGE VIEW ———
   if (region) {
-    const cfg = regionConfig.find((r) => r.id === region);
+    const cfg = browseConfig(region);
     if (!cfg) {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <p className="text-gray-500">Region not found.</p>
+            <p className="text-gray-500">No conferences section for that region or country.</p>
             <Link to="/cpd" className="text-blue-600 hover:underline mt-4 inline-block">Back to CPD & Conferences</Link>
           </div>
           <SharedFooter />
@@ -298,21 +322,27 @@ const CPDPage = () => {
     }
 
     const regionConferences = allConferences
-      .filter((c) => c.regions.includes(region) && matchesFilters(c))
+      .filter((c) => conferenceInScope(c, cfg) && matchesFilters(c))
       .sort((a, b) => parseSortDate(a.dates) - parseSortDate(b.dates));
 
     // Schema is built from the full region list, not the filtered view —
     // crawlers should see every event regardless of the visitor's filters.
-    const eventSchema = buildEventSchema(allConferences.filter((c) => c.regions.includes(region)));
+    const eventSchema = buildEventSchema(allConferences.filter((c) => conferenceInScope(c, cfg)));
+
+    // On a region page the sub-filter lists that region's countries; a country
+    // page is already as narrow as it goes, so it gets none.
+    const scopeCountryOptions = cfg.kind === "region"
+      ? countriesForRegions(allConferences.filter((c) => conferenceInScope(c, cfg)), [])
+      : [];
 
     return (
       <div className="min-h-screen bg-white">
         <Helmet>
           <title>{`${cfg.name} Veterinary Conferences | VetNextStep`}</title>
-          <meta name="description" content={`Veterinary conferences and CPD events in ${cfg.name}. Filter by specialty and find upcoming events.`} />
+          <meta name="description" content={`Veterinary conferences and CPD events in ${cfg.name}. Filter by speciality and find upcoming events.`} />
           <link rel="canonical" href={`https://vetnextstep.com/cpd/${region}`} />
           <meta property="og:title" content={`${cfg.name} Veterinary Conferences | VetNextStep`} />
-          <meta property="og:description" content={`Upcoming vet conferences and CPD events in ${cfg.name} — filter by specialty, month, or format.`} />
+          <meta property="og:description" content={`Upcoming vet conferences and CPD events in ${cfg.name} — filter by speciality, month, or format.`} />
           <meta property="og:url" content={`https://vetnextstep.com/cpd/${region}`} />
           <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
           <meta property="og:type" content="website" />
@@ -341,7 +371,17 @@ const CPDPage = () => {
                 <span className="text-4xl">{cfg.flag}</span>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{cfg.name}</h1>
               </div>
-              <p className="text-gray-500 text-lg">Upcoming veterinary conferences and congresses</p>
+              <p className="text-gray-500 text-lg">
+                Upcoming veterinary conferences and congresses
+                {cfg.kind === "country" && cfg.region && (
+                  <>
+                    {" \u00b7 "}
+                    <Link to={`/cpd/${cfg.region}`} className="text-blue-600 hover:underline">
+                      All {regionConfig.find((r) => r.id === cfg.region)?.name} events
+                    </Link>
+                  </>
+                )}
+              </p>
             </div>
 
             {loading && <div className="text-center py-20 text-gray-400 text-sm">Loading conferences…</div>}
@@ -358,6 +398,7 @@ const CPDPage = () => {
                     availableYears={availableYears}
                     availableMonths={availableMonths}
                     showRegions={false}
+                    countryOptions={scopeCountryOptions}
                   />
                   <p className="text-sm text-gray-500 mb-6">
                     {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
@@ -385,23 +426,23 @@ const CPDPage = () => {
   }
 
   // ——— HUB VIEW ———
-  const totalVisible = regionConfig.reduce((acc, r) => acc + getConferencesForRegion(r.id).length, 0);
+  const totalVisible = allConferences.filter((c) => matchesFilters(c, true)).length;
   const hubEventSchema = buildEventSchema(allConferences);
 
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
         <title>Veterinary Conferences &amp; CPD Events | VetNextStep</title>
-        <meta name="description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe. Filter by specialty or browse CPD providers and online courses." />
+        <meta name="description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe. Filter by speciality or browse CPD providers and online courses." />
         <link rel="canonical" href="https://vetnextstep.com/cpd" />
         <meta property="og:title" content="Veterinary Conferences &amp; CPD Events | VetNextStep" />
-        <meta property="og:description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe — filter by specialty, month, or format." />
+        <meta property="og:description" content="Upcoming veterinary conferences in the UK, USA, Australia, New Zealand and Europe — filter by speciality, month, or format." />
         <meta property="og:url" content="https://vetnextstep.com/cpd" />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Veterinary Conferences &amp; CPD Events | VetNextStep" />
-        <meta name="twitter:description" content="Upcoming veterinary conferences — filter by specialty, month, or format." />
+        <meta name="twitter:description" content="Upcoming veterinary conferences — filter by speciality, month, or format." />
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -422,7 +463,7 @@ const CPDPage = () => {
           <div className="text-center mb-10">
             <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Conferences sorted by date — filter by specialty, region, year, month or format. CPD providers and online courses are listed under the second tab.
+              Conferences sorted by date — filter by speciality, region, year, month or format. CPD providers and online courses are listed under the second tab.
             </p>
           </div>
 
@@ -454,29 +495,35 @@ const CPDPage = () => {
                   {/* Region nav cards */}
                   <h2 className="text-lg font-semibold text-gray-700 mb-5">International Vet CE &amp; CPD — Browse by Region</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">
-                    {regionConfig.map((r) => {
-                      const count = getConferencesForRegion(r.id).length;
+                    {regionConfig.filter((r) => countForRegionCard(r.id) > 0).map((r) => {
+                      const count = countForRegionCard(r.id);
                       return (
                         <Link key={r.id} to={`/cpd/${r.id}`} className="group block">
                           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
                             <div className="h-32 relative overflow-hidden">
-                              <img
-                                src={r.image}
-                                srcSet={`${r.image.replace('w=600', 'w=400')} 400w, ${r.image} 600w, ${r.image.replace('w=600', 'w=900')} 900w`}
-                                sizes="(min-width: 1280px) 16vw, (min-width: 640px) 33vw, 100vw"
-                                alt={r.name}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                loading="lazy"
-                                width="600"
-                                height="400"
-                              />
+                              {r.image ? (
+                                <img
+                                  src={r.image}
+                                  srcSet={`${r.image.replace('w=600', 'w=400')} 400w, ${r.image} 600w, ${r.image.replace('w=600', 'w=900')} 900w`}
+                                  sizes="(min-width: 1280px) 16vw, (min-width: 640px) 33vw, 100vw"
+                                  alt={r.name}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  loading="lazy"
+                                  width="600"
+                                  height="400"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
+                                  <span className="text-4xl" aria-hidden="true">{r.flag}</span>
+                                </div>
+                              )}
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                               <div className="absolute bottom-3 left-3 text-white">
                                 <h3 className="text-sm font-bold leading-tight">{r.name}</h3>
                               </div>
                             </div>
                             <div className="px-3 py-2 flex items-center justify-between bg-white">
-                              <span className="text-xs text-gray-500">{count} event{count !== 1 ? "s" : ""}</span>
+                              <span className="text-xs text-gray-500">{count === 0 ? "No events" : `${count} event${count !== 1 ? "s" : ""}`}</span>
                               <span className="text-blue-600 text-xs font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
                                 View all
                                 <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -499,6 +546,9 @@ const CPDPage = () => {
                     availableYears={availableYears}
                     availableMonths={availableMonths}
                     showRegions={true}
+                    countryOptions={filters.regions.length > 0
+                      ? countriesForRegions(allConferences, filters.regions)
+                      : []}
                   />
                   <p className="text-sm text-gray-500 mb-8">
                     {totalVisible} conference{totalVisible !== 1 ? "s" : ""} shown

@@ -35,6 +35,11 @@ dist
 # a snapshot of functions/data/*.js written for react-snap/runtime to fetch.
 frontend/public/data/
 
+# Generated at build time by frontend/scripts/build-data.js (prebuild step) —
+# derived counts for homepage copy. Regenerated on every start/build.
+frontend/src/data/counts.js
+frontend/src/data/countries.js
+
 # Environment files (comprehensive coverage)
 .env
 .env.local

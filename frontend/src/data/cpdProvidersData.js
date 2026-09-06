@@ -43,6 +43,44 @@ export const providerCountryConfig = [
   },
 ];
 
+// ─── Region hierarchy ────────────────────────────────────────────────────────
+// Shares the generated registry with conferences (src/data/countries.js), so a
+// provider in a country the site has never covered is picked up by the filters
+// on the next build with no config change. The provider data's own "europe" and
+// "global" country values are handled there as the "region known, country not"
+// buckets.
+import { regionConfig, countryConfig } from "./countries";
+
+export const providerRegionConfig = regionConfig;
+
+export const providerCountryName = (id) => (countryConfig[id] || {}).name || id;
+
+export const providerInRegion = (provider, regionId) =>
+  Boolean(countryConfig[provider.country] && countryConfig[provider.country].region === regionId);
+
+export const providerBrowseConfig = (slug) => {
+  const region = regionConfig.find((r) => r.id === slug);
+  if (region) return { ...region, kind: "region" };
+  const country = countryConfig[slug];
+  if (country) return { ...country, id: slug, kind: "country" };
+  return null;
+};
+
+export const providerInScope = (provider, scope) =>
+  scope.kind === "region" ? providerInRegion(provider, scope.id) : provider.country === scope.id;
+
+// Country options for the sub-filter, derived from the providers actually present.
+export const providerCountriesForRegion = (providers, regionId) => {
+  const ids = new Set();
+  for (const p of providers) {
+    if (!p.country || !countryConfig[p.country]) continue;
+    if (!regionId || providerInRegion(p, regionId)) ids.add(p.country);
+  }
+  return [...ids]
+    .map((id) => ({ value: id, label: `${countryConfig[id].flag} ${countryConfig[id].name}`.trim() }))
+    .sort((a, b) => countryConfig[a.value].name.localeCompare(countryConfig[b.value].name));
+};
+
 export const providerSpecialtyOptions = [
   "Anaesthesia",
   "Behaviour",

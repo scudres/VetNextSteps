@@ -4,7 +4,11 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
-import { providerCountryConfig, providerSpecialtyOptions, cpdTypeOptions } from "../data/cpdProvidersData";
+import {
+  providerSpecialtyOptions, cpdTypeOptions,
+  providerRegionConfig, providerInRegion, providerBrowseConfig, providerInScope,
+  providerCountriesForRegion,
+} from "../data/cpdProvidersData";
 import { slugify } from "../utils";
 
 // ——— Shared primitives ———
@@ -86,16 +90,16 @@ const HubPage = ({ allProviders, loading, error }) => (
   <div className="min-h-screen bg-white">
     <Helmet>
       <title>Veterinary CPD Providers & Online Courses | VetNextStep</title>
-      <meta name="description" content="Find CPD providers, online courses, certificates and training across the UK, USA, Australia, New Zealand and more. Filter by specialty or format." />
+      <meta name="description" content="Find CPD providers, online courses, certificates and training across the UK, USA, Australia, New Zealand and more. Filter by speciality or format." />
       <link rel="canonical" href="https://vetnextstep.com/cpd/providers" />
       <meta property="og:title" content="Veterinary CPD Providers &amp; Online Courses | VetNextStep" />
-      <meta property="og:description" content="Find CPD providers, online courses and training for vets across the UK, USA, Australia, New Zealand, and more — filter by specialty or format." />
+      <meta property="og:description" content="Find CPD providers, online courses and training for vets across the UK, USA, Australia, New Zealand, and more — filter by speciality or format." />
       <meta property="og:url" content="https://vetnextstep.com/cpd/providers" />
       <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="Veterinary CPD Providers &amp; Online Courses | VetNextStep" />
-      <meta name="twitter:description" content="CPD providers, online courses and training for vets — filter by specialty or format." />
+      <meta name="twitter:description" content="CPD providers, online courses and training for vets — filter by speciality or format." />
       <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
     </Helmet>
     <SharedHeader />
@@ -113,7 +117,7 @@ const HubPage = ({ allProviders, loading, error }) => (
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD Providers & Courses</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Vet schools, commercial platforms and industry-funded education — browse by country or region.
+            Vet schools, commercial platforms and industry-funded education — browse by region, then narrow to a country.
           </p>
         </div>
 
@@ -122,17 +126,25 @@ const HubPage = ({ allProviders, loading, error }) => (
 
         {!loading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {providerCountryConfig.map((c) => {
-              const count = allProviders.filter((p) => p.country === c.id).length;
+            {providerRegionConfig
+              .filter((c) => allProviders.some((p) => providerInRegion(p, c.id)))
+              .map((c) => {
+              const count = allProviders.filter((p) => providerInRegion(p, c.id)).length;
               return (
                 <Link key={c.id} to={`/cpd/providers/${c.id}`} className="group block">
                   <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
                     <div className="h-32 relative overflow-hidden">
-                      <img
-                        src={c.image}
-                        alt={c.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      {c.image ? (
+                        <img
+                          src={c.image}
+                          alt={c.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
+                          <span className="text-4xl" aria-hidden="true">{c.flag}</span>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                       <div className="absolute bottom-3 left-3 text-white">
                         <div className="flex items-center gap-2">
@@ -163,13 +175,14 @@ const HubPage = ({ allProviders, loading, error }) => (
 const splitParam = (v) => (v ? v.split(",").filter(Boolean) : []);
 
 const CountrySubPage = ({ country, allProviders, loading, error }) => {
-  const cfg = providerCountryConfig.find((c) => c.id === country);
+  const cfg = providerBrowseConfig(country);
 
   // Filter state lives in the URL so any filtered view is a shareable link,
   // e.g. /cpd/providers/uk?specialty=Cardiology&format=Webinar.
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedSpecialties = useMemo(() => splitParam(searchParams.get("specialty")), [searchParams]);
   const selectedTypes       = useMemo(() => splitParam(searchParams.get("format")),    [searchParams]);
+  const selectedCountries   = useMemo(() => splitParam(searchParams.get("country")),   [searchParams]);
 
   const setParam = (key, arr) => {
     const params = new URLSearchParams(searchParams);
@@ -183,30 +196,41 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
   const toggleType = (t) =>
     setParam("format", selectedTypes.includes(t)
       ? selectedTypes.filter((x) => x !== t) : [...selectedTypes, t]);
+  const toggleCountry = (c) =>
+    setParam("country", selectedCountries.includes(c)
+      ? selectedCountries.filter((x) => x !== c) : [...selectedCountries, c]);
   const clearFilters = () => {
     const params = new URLSearchParams(searchParams);
     params.delete("specialty");
     params.delete("format");
+    params.delete("country");
     setSearchParams(params, { replace: true });
   };
-  const activeCount   = selectedSpecialties.length + selectedTypes.length;
+  const activeCount   = selectedSpecialties.length + selectedTypes.length + selectedCountries.length;
 
   const countryProviders = useMemo(() => {
-    if (!allProviders.length) return [];
+    if (!allProviders.length || !cfg) return [];
     return allProviders.filter((p) => {
-      if (p.country !== country) return false;
+      if (!providerInScope(p, cfg)) return false;
+      if (selectedCountries.length   > 0 && !selectedCountries.includes(p.country))                       return false;
       if (selectedSpecialties.length > 0 && !p.specialties?.some((s) => selectedSpecialties.includes(s))) return false;
       if (selectedTypes.length       > 0 && !p.types.some((t) => selectedTypes.includes(t)))             return false;
       return true;
     });
-  }, [allProviders, country, selectedSpecialties, selectedTypes]);
+  }, [allProviders, cfg, selectedCountries, selectedSpecialties, selectedTypes]);
+
+  // A region page can narrow to a country; a country page is already there.
+  const countryOptions = useMemo(
+    () => (cfg && cfg.kind === "region" ? providerCountriesForRegion(allProviders, cfg.id) : []),
+    [allProviders, cfg]
+  );
 
   if (!cfg) {
     return (
       <div className="min-h-screen bg-white">
         <SharedHeader />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <p className="text-gray-500">Country not found.</p>
+          <p className="text-gray-500">No providers section for that region or country.</p>
           <Link to="/cpd/providers" className="text-blue-600 hover:underline mt-4 inline-block">
             Back to CPD Providers
           </Link>
@@ -220,10 +244,10 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
     <div className="min-h-screen bg-white">
       <Helmet>
         <title>{`${cfg.name} Veterinary CPD Providers | VetNextStep`}</title>
-        <meta name="description" content={`CPD providers, online courses and education for vets in ${cfg.name}. Filter by specialty or format.`} />
+        <meta name="description" content={`CPD providers, online courses and education for vets in ${cfg.name}. Filter by speciality or format.`} />
         <link rel="canonical" href={`https://vetnextstep.com/cpd/providers/${country}`} />
         <meta property="og:title" content={`${cfg.name} Veterinary CPD Providers | VetNextStep`} />
-        <meta property="og:description" content={`CPD providers, online courses and education for vets in ${cfg.name} — filter by specialty or format.`} />
+        <meta property="og:description" content={`CPD providers, online courses and education for vets in ${cfg.name} — filter by speciality or format.`} />
         <meta property="og:url" content={`https://vetnextstep.com/cpd/providers/${country}`} />
         <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
         <meta property="og:type" content="website" />
@@ -263,6 +287,16 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
                   selected={selectedSpecialties}
                   onToggle={toggleSpecialty}
                 />
+                {countryOptions.length > 1 && (
+                  <FilterDropdown
+                    label="Country"
+                    options={countryOptions}
+                    selected={selectedCountries}
+                    onToggle={toggleCountry}
+                    valueKey="value"
+                    labelKey="label"
+                  />
+                )}
                 <FilterDropdown
                   label="Format"
                   options={cpdTypeOptions}
