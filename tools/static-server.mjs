@@ -56,6 +56,15 @@ createServer(async (req, res) => {
     res.end(body ?? "Not found");
     return;
   }
-  res.writeHead(200, { "content-type": TYPES[extname(file)] || "application/octet-stream" });
+  res.writeHead(200, {
+    "content-type": TYPES[extname(file)] || "application/octet-stream",
+    // Mirrors the production CSP from netlify.toml. Without it a page can pass
+    // locally and still break live: react-snap's own state hook emits an inline
+    // script, which production blocks outright and a bare static server does not.
+    "content-security-policy":
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
+      "img-src 'self' data: https://images.pexels.com https://images.unsplash.com; " +
+      "connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'",
+  });
   res.end(await readFile(file));
 }).listen(PORT, () => console.log(`static-server: serving frontend/build on :${PORT}`));

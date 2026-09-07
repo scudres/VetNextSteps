@@ -1,7 +1,16 @@
 name: CI
 
-# Smoke tests on every pull request — including the automated deadline-refresh
-# PRs, so a bad data merge can't silently break the site.
+# Runs on every pull request — including the automated deadline-refresh PRs, so
+# a bad data merge can't silently break the site.
+#
+# Two suites, in parallel:
+#   e2e        — smoke tests against the CRA dev server (fast)
+#   prerender  — hydration tests against the real react-snap build (slower,
+#                because it has to build first)
+#
+# They catch different things. The dev server renders everything client-side, so
+# the smoke suite cannot see hydration failures at all; that is how every
+# prerendered page came to be discarding its own HTML unnoticed.
 on:
   pull_request:
   workflow_dispatch:
@@ -38,6 +47,62 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-failures
+          name: playwright-failures-smoke
+          path: test-results/
+          retention-days: 7
+
+  prerender:
+    # Hydration only happens when React is handed react-snap's prerendered HTML,
+    # so this suite needs a real build rather than the dev server. It guards two
+    # things: that no page throws during hydration (React silently discarding the
+    # prerender and re-rendering client-side), and that no listing page flashes
+    # its loading state.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/package-lock.json
+
+      - name: Install root dependencies (Playwright)
+        run: npm ci
+
+      - name: Install frontend dependencies
+        run: npm ci --prefix frontend
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Build with prerendering
+        # Also regenerates public/data, src/data/counts.js and src/data/countries.js,
+        # and rewrites the CPD section of sitemap.xml — all of which are gitignored
+        # or checked below.
+        run: npm run build --prefix frontend
+
+      - name: Check the generated sitemap is committed
+        # build-data.js rewrites sitemap.xml between its CPD markers. If that
+        # leaves the working tree dirty, the committed sitemap is stale.
+        run: |
+          if ! git diff --quiet -- frontend/public/sitemap.xml; then
+            echo "::error::sitemap.xml is out of date — run 'npm run build --prefix frontend' and commit the result."
+            git diff -- frontend/public/sitemap.xml
+            exit 1
+          fi
+
+      - name: Run hydration tests
+        run: npx playwright test --config=playwright.prerender.config.mjs
+
+      - name: Upload failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-failures-prerender
           path: test-results/
           retention-days: 7

@@ -183,10 +183,18 @@ for (const region of regionConfig.map((r) => r.id)) {
     countryConfig[p.country] && countryConfig[p.country].region === region).length);
 }
 
-// URLs already published, so they can be preserved.
+// URLs already published, so they can be preserved — along with the lastmod
+// each already carries. Re-stamping every URL with today's date on every build
+// would tell crawlers the whole section changed whenever anything did, and would
+// make the generated file differ from the committed one on every run. A URL only
+// gets today's date the first time it appears.
 const existingSitemap = fs.readFileSync(SITEMAP_PATH, "utf8");
 const alreadyListed = new Set(
   [...existingSitemap.matchAll(/<loc>([^<]*\/cpd[^<]*)<\/loc>/g)].map((m) => m[1])
+);
+const existingLastmod = new Map(
+  [...existingSitemap.matchAll(/<loc>([^<]*\/cpd[^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)]
+    .map((m) => [m[1], m[2]])
 );
 
 const routes = [];
@@ -217,7 +225,7 @@ for (const [slug, n] of [...provByCountry].sort()) {
 const cpdXml = routes.map(({ loc, priority }) =>
   "  <url>\n" +
   "    <loc>" + loc + "</loc>\n" +
-  "    <lastmod>" + today + "</lastmod>\n" +
+  "    <lastmod>" + (existingLastmod.get(loc) || today) + "</lastmod>\n" +
   "    <changefreq>monthly</changefreq>\n" +
   "    <priority>" + priority + "</priority>\n" +
   "  </url>\n"

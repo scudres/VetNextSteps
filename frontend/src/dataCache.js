@@ -9,19 +9,28 @@
 // prerendered tree and re-renders from scratch, which showed as a visible flash
 // of the loading state on every listing page.
 //
-// react-snap's snapSaveState hook serialises a value into the prerendered HTML.
-// Handing it whatever was fetched during the crawl means the browser has the
-// data synchronously on the very first render, so hydration matches and the
-// loading state never appears on a prerendered page.
+// The data is therefore carried in the prerendered HTML itself. react-snap's own
+// snapSaveState hook cannot be used for this: it emits an executable inline
+// <script>, and the site's CSP allows no 'unsafe-inline', so the browser blocks
+// it and the data never arrives. Instead the crawl writes a
+// <script type="application/json"> block, which is inert data rather than code —
+// CSP's script-src does not apply to it — and the browser parses it back on load.
+
+const SCRIPT_ID = "vns-preloaded-data";
 
 let cache = null;
 
-// Read lazily rather than at module load: react-snap injects its state script
-// into the HTML, and we should not depend on it having run before this module
-// is evaluated.
+// Read lazily rather than at module load, so the element is certainly parsed.
 const getCache = () => {
   if (!cache) {
-    const preloaded = (typeof window !== "undefined" && window.__VNS_DATA__) || {};
+    let preloaded = {};
+    if (typeof document !== "undefined") {
+      const el = document.getElementById(SCRIPT_ID);
+      if (el) {
+        try { preloaded = JSON.parse(el.textContent) || {}; }
+        catch { preloaded = {}; }   // malformed: fall back to fetching
+      }
+    }
     cache = { ...preloaded };
   }
   return cache;
@@ -45,6 +54,27 @@ export const loadData = (name) => {
     });
 };
 
-if (typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap") {
-  window.snapSaveState = () => ({ __VNS_DATA__: getCache() });
+// During the crawl, keep a JSON block in <head> up to date with whatever has been
+// fetched. react-snap serialises the whole document, so the block lands in the
+// prerendered HTML. It sits outside #root so React never tries to hydrate it.
+export const publishSnapshot = () => {
+  if (typeof document === "undefined") return;
+  let el = document.getElementById(SCRIPT_ID);
+  if (!el) {
+    el = document.createElement("script");
+    el.type = "application/json";
+    el.id = SCRIPT_ID;
+    document.head.appendChild(el);
+  }
+  // Escaping "<" keeps a value containing "</script>" from ending the element.
+  el.textContent = JSON.stringify(getCache()).replace(/</g, "\\u003c");
+};
+
+const isPrerendering =
+  typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap";
+
+if (isPrerendering) {
+  // loadData resolves after this module is evaluated, so refresh on a timer for
+  // the duration of the crawl.
+  setInterval(publishSnapshot, 100);
 }
