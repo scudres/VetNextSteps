@@ -18,7 +18,7 @@ const ROUTES = [
   "/jobs", "/legal", "/training-programs", "/internships-residencies",
   "/postgraduate-certificates", "/licensing-route", "/uk/first-role",
   "/cpd", "/cpd/europe", "/cpd/uk", "/cpd/germany", "/cpd/north-america",
-  "/cpd/oceania", "/cpd/asia", "/cpd/africa", "/cpd/south-america", "/cpd/global",
+  "/cpd/oceania", "/cpd/asia", "/cpd/africa", "/cpd/global",
   "/cpd/providers", "/cpd/providers/uk", "/cpd/providers/north-america",
 ];
 

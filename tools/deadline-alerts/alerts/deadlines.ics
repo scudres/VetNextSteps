@@ -3,18 +3,6 @@ VERSION:2.0
 PRODID:-//VetNextStep//DeadlineAlerts//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:esvn-ecvn-symposium-2026-other-20260905@vetnextstep.com
-DTSTART;VALUE=DATE:20260905
-SUMMARY:ESVN-ECVN Annual Symposium 38th 2026 (Berlin) — PowerPoint upload deadline for accepted abstracts
-URL:https://www.ecvnberlin2026.org
-DESCRIPTION:Deadline for submission of PowerPoint presentations for accepted abstracts at the 38th ESVN-ECVN Symposium
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:aasv-annual-meeting-2027-abstract-20260909@vetnextstep.com
 DTSTART;VALUE=DATE:20260909
 SUMMARY:AASV Annual Meeting 2027 (Orlando FL) — Research Topics abstract submission deadline
@@ -124,7 +112,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:evdi-conference-2026-other-20261001@vetnextstep.com
 DTSTART;VALUE=DATE:20261001
-SUMMARY:EVDI / EAVDI-ECVDI Annual Conference 2026 — ECVDI practical exam application window closes (FORM P)
+SUMMARY:EVDI Annual Congress 2027 (Helsinki) — ECVDI practical exam application window closes (FORM P)
 URL:https://www.ecvdi.org/
 DESCRIPTION:Per ECVDI Bylaws\, application to sit the practical exam must be submitted between 1 September and 1 October of the year preceding the exam\; the practical exam itself is scheduled for 26–27 January 2027 in Zurich.
 BEGIN:VALARM
