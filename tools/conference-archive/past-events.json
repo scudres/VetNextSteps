@@ -1,0 +1,630 @@
+[
+  {
+    "format": "in-person",
+    "title": "46th Bain Fallon Memorial Lectures",
+    "organiser": "Equine Veterinarians Australia (EVA / AVA SIG)",
+    "location": "Pullman Melbourne Albert Park, VIC",
+    "country": "australia",
+    "website": "https://au.eventscloud.com/website/3240/",
+    "notes": "“Biggest week of equine CE in the Southern Hemisphere” — 250+ delegates, 50+ exhibitors. 2026 topics: Sports Medicine, Lameness, Endocrinology, Surgery. Core lectures 19–21 Jul; ANZCVS Equine Chapter co-located.",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "Equine",
+      "Sports Medicine",
+      "Surgery",
+      "Endocrinology"
+    ],
+    "category": "Equine",
+    "lastHeld": "19–24 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "51st ASAV Annual Conference",
+    "organiser": "Australian Small Animal Veterinarians (ASAV / AVA SIG)",
+    "location": "Novotel Sunshine Coast Resort, QLD",
+    "country": "australia",
+    "website": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002040",
+    "notes": "Theme “The Joys of General Practice”; run in collaboration with the Veterinary Business Group (VBG). Premier small-animal event on the AVA calendar.",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "General Practice",
+      "Internal Medicine",
+      "Surgery"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "17–20 Aug 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "AABP Annual Conference",
+    "organiser": "American Association of Bovine Practitioners",
+    "location": "Minneapolis Convention Center, MN",
+    "country": "usa",
+    "website": "https://www.aabp.org/meeting/",
+    "notes": "59th annual conference; pre-conference seminars 26 Aug.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Farm Animal"
+    ],
+    "category": "Farm Animal",
+    "lastHeld": "27–29 Aug 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "online",
+    "title": "ACVIM Brain Camp",
+    "organiser": "ACVIM",
+    "location": "Virtual / on-demand",
+    "country": "usa",
+    "website": "https://acvim.swoogo.com/acvimbraincamp",
+    "notes": "Resident-focused neuroscience education course.",
+    "regions": [
+      "usa",
+      "global"
+    ],
+    "specialties": [
+      "Neurology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "1–16 Aug 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ACVO Basic Science Course",
+    "organiser": "ACVO",
+    "location": "NC State University, Raleigh, NC",
+    "country": "usa",
+    "website": "https://www.acvobasicscience.org/",
+    "notes": "Resident-focused 3-week intensive course.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Ophthalmology"
+    ],
+    "category": "Ophthalmology",
+    "lastHeld": "8–26 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ANZCVS Veterinary Science Week 2026",
+    "organiser": "Australian & New Zealand College of Veterinary Scientists (ANZCVS)",
+    "location": "Gold Coast Convention & Exhibition Centre, QLD",
+    "country": "australia",
+    "website": "https://vetscienceweek.com.au/",
+    "notes": "24th annual trans-Tasman meeting. 28 discipline Chapter streams including anaesthesia, dermatology, emergency & critical care, equine, oncology, and small animal medicine & surgery. Pre-conference workshops 23 Jul. Also hosts MANZCVS exams.",
+    "regions": [
+      "australia",
+      "new-zealand"
+    ],
+    "specialties": [
+      "General Practice",
+      "Internal Medicine",
+      "Surgery",
+      "Emergency & Critical Care",
+      "Dermatology",
+      "Oncology",
+      "Equine",
+      "Anaesthesia"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "24–26 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Australasian Veterinary Poultry Association (AVPA) Scientific Conference 2026",
+    "organiser": "Australasian Veterinary Poultry Association (AVPA)",
+    "location": "Gold Coast Convention & Exhibition Centre, QLD",
+    "country": "australia",
+    "website": "https://www.avpa.asn.au/events",
+    "notes": "Poultry vets, pathologists and researchers. AVPA notes Melbourne will host the 25th WVPA Congress in 2029.",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "Exotic & Zoo",
+      "Farm Animal",
+      "Pathology"
+    ],
+    "category": "Exotic, Zoo & Wildlife",
+    "lastHeld": "11–12 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Australian Cattle Veterinarians (ACV) Conference 2026",
+    "organiser": "Australian Cattle Veterinarians (ACV / AVA SIG)",
+    "location": "Royal International Convention Centre (Ekka Showgrounds), Brisbane, QLD",
+    "country": "australia",
+    "website": "https://www.ava.com.au/cattlevetconference",
+    "notes": "Theme: bovine reproduction and herd health. Joint event with Australian Reproductive Vets (ARV) and Australian Vets in Public Health (AVPH).",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "Farm Animal",
+      "Theriogenology"
+    ],
+    "category": "Farm Animal",
+    "lastHeld": "23–25 Mar 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "AVA Annual Conference 2026",
+    "organiser": "Australian Veterinary Association (AVA)",
+    "location": "Brisbane Convention & Exhibition Centre, QLD",
+    "country": "australia",
+    "website": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV001886",
+    "notes": "Theme “Connection, Collaboration, and Knowledge”; 8 CPD-accredited streams for vets, nurses and practice managers.",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "General Practice"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "18–21 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "AVA Spring Meeting",
+    "organiser": "Association of Veterinary Anaesthetists",
+    "location": "Liverpool, UK",
+    "country": "uk",
+    "website": "https://www.ava.eu.com/",
+    "notes": "Annual spring meeting for veterinary anaesthesia professionals.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "Anaesthesia"
+    ],
+    "category": "Anaesthesia",
+    "lastHeld": "20–22 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "AVSPNI Spring Conference 2026",
+    "organiser": "Association of Veterinary Surgeons Practising in Northern Ireland",
+    "location": "Europa Hotel, Belfast, UK",
+    "country": "uk",
+    "website": "https://vetni.co.uk/events/avspni-spring-conference-2026/",
+    "notes": "For vets and veterinary nurses. 2026 topics: common surgeries, neurology, team-based veterinary care.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "General Practice",
+      "Surgery",
+      "Neurology"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "17–18 Apr 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Brachycephalic Surgery Wet-lab 2026",
+    "organiser": "Practical CPD NZ",
+    "location": "Auckland, New Zealand",
+    "country": "new-zealand",
+    "website": "https://www.practicalcpd.co.nz/product/brachycephalic-surgery-wet-lab-nz26/",
+    "notes": "Hands-on wet-lab workshop on brachycephalic obstructive airway syndrome surgery.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "Surgery"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "24 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "BVDA Congress 2026",
+    "organiser": "British Veterinary Dental Association",
+    "location": "Royal College of Physicians, London, UK",
+    "country": "uk",
+    "website": "https://congress.bvda.co.uk/",
+    "notes": "Two parallel streams: Essentials and Intermediate/Advanced. Covers extractions, endodontics, periodontics, orthodontics and oral oncology.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "Dentistry"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "27–28 Feb 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Comprehensive Feline Dentistry & Oral Surgery Wet-lab 2026",
+    "organiser": "Practical CPD NZ",
+    "location": "Auckland, New Zealand",
+    "country": "new-zealand",
+    "website": "https://www.practicalcpd.co.nz/product/comprehensive-feline-dentistry-oral-surgery-wet-lab-nz26/",
+    "notes": "Two-day hands-on wet-lab workshop.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "Dentistry",
+      "Feline",
+      "Surgery"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "18–19 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ECVO Conference",
+    "organiser": "European College of Veterinary Ophthalmologists",
+    "location": "Círculo de Bellas Artes, Madrid, Spain",
+    "country": "spain",
+    "website": "https://www.ecvoconference.org/2026/",
+    "notes": "Theme 'Innovations in Ocular Pharmacology'; capped at 500 delegates.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Ophthalmology"
+    ],
+    "category": "Ophthalmology",
+    "lastHeld": "27–29 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "hybrid",
+    "title": "ECVS Annual Scientific Meeting (35th) 2026",
+    "organiser": "European College of Veterinary Surgeons",
+    "location": "Liverpool, UK",
+    "country": "uk",
+    "website": "https://www.ecvs.org",
+    "notes": "Hybrid event. Includes a dedicated minimally invasive soft tissue stream + surgical nursing CPD day.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "Surgery"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "9–11 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ESVD-ECVD Congress (36th)",
+    "organiser": "European veterinary dermatology colleges",
+    "location": "Lille Grand Palais, France",
+    "country": "france",
+    "website": "https://www.esvd-ecvdcongress.com",
+    "notes": "2027 TBA.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Dermatology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "27–29 Aug 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "European Veterinary Dental Forum (EVDF)",
+    "organiser": "EVDF",
+    "location": "Alfandega Porto Congress Centre, Portugal",
+    "country": "portugal",
+    "website": "https://www.evdf.org",
+    "notes": "2027 TBA. US equivalent: Veterinary Dental Forum (veterinarydentalforum.org).",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Dentistry"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "7–9 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "hybrid",
+    "title": "EVECC Congress 2026",
+    "organiser": "European Veterinary Emergency & Critical Care Society",
+    "location": "Edinburgh International Conference Centre, UK",
+    "country": "uk",
+    "website": "https://www.evecc-congress.org",
+    "notes": "VECCUS ultrasound symposium 3 Jun 2026. On-demand access available.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "Emergency & Critical Care"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "4–6 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "EVPC / ECAWBM Meeting",
+    "organiser": "European veterinary behavioural medicine college",
+    "location": "TBA (Europe)",
+    "country": null,
+    "website": "https://www.ebvs.eu/events-ebvs",
+    "notes": "Confirm specifics on official college site.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Behaviour & Welfare"
+    ],
+    "category": "Behaviour",
+    "lastHeld": "19 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "EVSSAR / ISCFR Congress",
+    "organiser": "European Vet Society for Small Animal Reproduction",
+    "location": "Bangkok, Thailand",
+    "country": "thailand",
+    "website": "https://www.evssar.org/",
+    "notes": "27th EVSSAR, joint with 10th International Symposium on Canine and Feline Reproduction.",
+    "regions": [
+      "global"
+    ],
+    "specialties": [
+      "Theriogenology",
+      "Equine"
+    ],
+    "category": "Equine",
+    "lastHeld": "17–20 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Exotic365 (formerly ExoticsCon)",
+    "organiser": "AEMV, ARAV, AAV & AAFV",
+    "location": "Philadelphia Marriott Downtown, PA",
+    "country": "usa",
+    "website": "https://www.exoticscon.org/",
+    "notes": "Rebranded from ExoticsCon; now includes the American Association of Fish Veterinarians.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Exotic & Zoo"
+    ],
+    "category": "Exotic, Zoo & Wildlife",
+    "lastHeld": "30 Aug – 3 Sep 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Fundamentals of Veterinary Ophthalmology Wet-lab 2026",
+    "organiser": "Practical CPD NZ",
+    "location": "Auckland, New Zealand",
+    "country": "new-zealand",
+    "website": "https://www.practicalcpd.co.nz/product/fundamentals-of-veterinary-ophthalmology-wet-lab-nz26/",
+    "notes": "Hands-on wet-lab workshop.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "Ophthalmology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "4 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Guided TTA and Meniscus Wet-lab 2026",
+    "organiser": "Practical CPD NZ",
+    "location": "Auckland, New Zealand",
+    "country": "new-zealand",
+    "website": "https://www.practicalcpd.co.nz/product/guided-tta-and-meniscus-wet-lab-nz26/",
+    "notes": "Two-day hands-on wet-lab workshop on tibial tuberosity advancement and meniscal surgery.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "Surgery",
+      "Sports Medicine"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "27–28 Aug 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "LAVC (Latin American Veterinary Conference)",
+    "organiser": "LAVC / NAVC-affiliated",
+    "location": "Centro de Exposiciones Jockey, Lima, Peru",
+    "country": "peru",
+    "website": "https://lavc.pe",
+    "notes": "Largest veterinary CE event in Latin America; RACE-accredited. 2027 TBA.",
+    "regions": [
+      "global"
+    ],
+    "specialties": [
+      "General Practice"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "18–21 May 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Management of Ocular Emergencies Wet-lab 2026",
+    "organiser": "Practical CPD NZ",
+    "location": "Auckland, New Zealand",
+    "country": "new-zealand",
+    "website": "https://www.practicalcpd.co.nz/product/management-of-ocular-emergencies-wet-lab-nz26/",
+    "notes": "Hands-on wet-lab workshop. Runs the day after the Fundamentals of Veterinary Ophthalmology wet-lab.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "Ophthalmology",
+      "Emergency & Critical Care"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "5 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "NZVA & NZVNA Conference 2026",
+    "organiser": "New Zealand Veterinary Association (NZVA) + NZ Veterinary Nursing Association (NZVNA)",
+    "location": "New Zealand International Convention Centre (NZICC), Auckland",
+    "country": "new-zealand",
+    "website": "https://nzva.org.nz/edhub/conferences/",
+    "notes": "NZ’s premier veterinary conference bringing together members, exhibitors, sponsors, speakers and professional peers from across New Zealand for CPD and networking. Registrations opened early March 2026.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "General Practice",
+      "Farm Animal",
+      "Equine"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "23–25 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Society for Theriogenology Conference",
+    "organiser": "SFT & American College of Theriogenologists",
+    "location": "Sheraton Station Square, Pittsburgh, PA",
+    "country": "usa",
+    "website": "https://www.therio.org/",
+    "notes": "Joint meeting with the American College of Theriogenologists.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Theriogenology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "22–24 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Vets Cymru 2026",
+    "organiser": "BSAVA",
+    "location": "Aberystwyth University, Wales, UK",
+    "country": "uk",
+    "website": "https://www.vetscymru.com/",
+    "notes": "BSAVA's Welsh event. Covers livestock, equine and companion animal care.",
+    "regions": [
+      "uk",
+      "europe"
+    ],
+    "specialties": [
+      "General Practice",
+      "Farm Animal",
+      "Equine"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "2–3 Jul 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "VSS Annual Conference 2026",
+    "organiser": "Veterinary Specialist Services (VSS)",
+    "location": "Brisbane Convention & Exhibition Centre, QLD",
+    "country": "australia",
+    "website": "https://www.vssconference.com/",
+    "notes": "9th annual; 75+ talks, up to 14 CPD points. Nursing stream AVNAT-approved. RECOVER workshops 6 Mar.",
+    "regions": [
+      "australia"
+    ],
+    "specialties": [
+      "General Practice",
+      "Surgery",
+      "Emergency & Critical Care"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "7–8 Mar 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "World Feline Congress",
+    "organiser": "International Cat Care (iCatCare)",
+    "location": "ICC Wales, Newport, UK",
+    "country": "uk",
+    "website": "https://icatcare.org/events/world-feline-congress-2026",
+    "notes": "Daily themes: GI / respiratory / cardiology.",
+    "regions": [
+      "uk",
+      "europe",
+      "global"
+    ],
+    "specialties": [
+      "Feline",
+      "Internal Medicine"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "26–28 Jun 2026",
+    "archivedOn": "2026-09-07",
+    "cadence": null
+  }
+]

@@ -1,117 +1,5 @@
 [
   {
-    "id": "avma-convention-2026",
-    "name": "AVMA Convention 2026 (Anaheim CA)",
-    "url": "https://www.avma.org/events",
-    "region": "USA",
-    "startDate": "2026-07-10",
-    "deadlines": []
-  },
-  {
-    "id": "ecvs-asm-2026",
-    "name": "ECVS Annual Scientific Meeting 2026 (Liverpool)",
-    "url": "https://www.ecvs.org",
-    "region": "UK/Europe",
-    "startDate": "2026-07-09",
-    "deadlines": []
-  },
-  {
-    "id": "sft-conference-2026",
-    "name": "Society for Theriogenology Conference 2026 (Pittsburgh PA)",
-    "url": "https://www.therio.org/",
-    "region": "USA",
-    "startDate": "2026-07-22",
-    "deadlines": []
-  },
-  {
-    "id": "bain-fallon-lectures-2026",
-    "name": "46th Bain Fallon Memorial Lectures 2026 (Melbourne VIC)",
-    "url": "https://au.eventscloud.com/website/3240/",
-    "region": "Australia",
-    "startDate": "2026-07-19",
-    "deadlines": []
-  },
-  {
-    "id": "anzcvs-vet-science-week-2026",
-    "name": "ANZCVS Veterinary Science Week 2026 (Gold Coast QLD)",
-    "url": "https://vetscienceweek.com.au/",
-    "region": "Aus/NZ",
-    "startDate": "2026-07-24",
-    "deadlines": []
-  },
-  {
-    "id": "brachycephalic-surgery-wetlab-nz-2026",
-    "name": "Brachycephalic Surgery Wet-lab 2026 (Auckland)",
-    "url": "https://www.practicalcpd.co.nz/product/brachycephalic-surgery-wet-lab-nz26/",
-    "region": "New Zealand",
-    "startDate": "2026-07-24",
-    "deadlines": []
-  },
-  {
-    "id": "acvim-brain-camp-2026",
-    "name": "ACVIM Brain Camp 2026 (Virtual)",
-    "url": "https://acvim.swoogo.com/acvimbraincamp",
-    "region": "USA/Global",
-    "startDate": "2026-08-01",
-    "deadlines": []
-  },
-  {
-    "id": "weva-world-congress-2026",
-    "name": "WEVA World Congress 2026 (Panama City)",
-    "url": "https://wevaonline.org/",
-    "region": "Global",
-    "startDate": "2026-08-12",
-    "deadlines": []
-  },
-  {
-    "id": "asav-conference-2026",
-    "name": "51st ASAV Annual Conference 2026 (Sunshine Coast QLD)",
-    "url": "https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002040",
-    "region": "Australia",
-    "startDate": "2026-08-17",
-    "deadlines": []
-  },
-  {
-    "id": "esvd-ecvd-congress-2026",
-    "name": "ESVD-ECVD Congress 2026 (Lille)",
-    "url": "https://www.esvd-ecvdcongress.com",
-    "region": "Europe",
-    "startDate": "2026-08-27",
-    "deadlines": []
-  },
-  {
-    "id": "aabp-annual-conference-2026",
-    "name": "AABP Annual Conference 2026 (Minneapolis MN)",
-    "url": "https://www.aabp.org/meeting/",
-    "region": "USA",
-    "startDate": "2026-08-27",
-    "deadlines": []
-  },
-  {
-    "id": "guided-tta-wetlab-nz-2026",
-    "name": "Guided TTA and Meniscus Wet-lab 2026 (Auckland)",
-    "url": "https://www.practicalcpd.co.nz/product/guided-tta-and-meniscus-wet-lab-nz26/",
-    "region": "New Zealand",
-    "startDate": "2026-08-27",
-    "deadlines": []
-  },
-  {
-    "id": "exotic365-2026",
-    "name": "Exotic365 2026 (Philadelphia PA)",
-    "url": "https://www.exoticscon.org/",
-    "region": "USA",
-    "startDate": "2026-08-30",
-    "deadlines": []
-  },
-  {
-    "id": "world-buiatrics-congress-2026",
-    "name": "World Buiatrics Congress 2026 (Istanbul)",
-    "url": "https://buiatrics.com/",
-    "region": "Europe/Global",
-    "startDate": "2026-09-06",
-    "deadlines": []
-  },
-  {
     "id": "sheep-production-online-nz-2026",
     "name": "Sheep Production Online Course 2026 (NZVA)",
     "url": "https://www.nzvaevents.org.nz/26shpro",
@@ -640,14 +528,15 @@
   },
   {
     "id": "bvba-events-2026",
-    "name": "BVBA Events 2026",
-    "url": "https://www.bvba.org.uk/",
+    "name": "BVBA Study Day 2027 (Birmingham)",
+    "url": "https://www.bvba-org.co.uk/news-and-events",
     "region": "UK",
-    "deadlines": []
+    "deadlines": [],
+    "_source": "https://www.bvba-org.co.uk/news-and-events — verified 2026-09-07: March 2027, exact date not published"
   },
   {
     "id": "evdi-conference-2026",
-    "name": "EVDI / EAVDI-ECVDI Annual Conference 2026",
+    "name": "EVDI Annual Congress 2027 (Helsinki)",
     "url": "https://www.ecvdi.org/",
     "region": "Europe",
     "deadlines": [
@@ -658,7 +547,8 @@
         "note": "Per ECVDI Bylaws, application to sit the practical exam must be submitted between 1 September and 1 October of the year preceding the exam; the practical exam itself is scheduled for 26–27 January 2027 in Zurich."
       }
     ],
-    "_source": "https://www.ecvdi.org/bylaws — verified 2026-09-03"
+    "_source": "https://www.ecvdi.org/ — verified 2026-09-07",
+    "startDate": "2027-09-22"
   },
   {
     "id": "acvsmr-symposium-2027",
@@ -670,15 +560,18 @@
   {
     "id": "anzcvs-vet-science-week-2027",
     "name": "ANZCVS Vet Science Week 2027",
-    "url": "https://www.anzcvs.org.au/",
+    "url": "https://vetscienceweek.com.au/",
     "region": "Aus/NZ",
-    "deadlines": []
+    "deadlines": [],
+    "_source": "https://vetscienceweek.com.au/ — checked 2026-09-07: 2027 dates not yet published"
   },
   {
     "id": "nzva-nzvna-conference-2027",
-    "name": "NZVA & NZVNA Conference 2027",
+    "name": "NZVA & NZVNA Conference 2027 (Christchurch)",
     "url": "https://nzva.org.nz/edhub/conferences/",
     "region": "New Zealand",
-    "deadlines": []
+    "deadlines": [],
+    "startDate": "2027-06-15",
+    "_source": "https://nzva.org.nz/edhub/conferences/ — verified 2026-09-07"
   }
 ]
