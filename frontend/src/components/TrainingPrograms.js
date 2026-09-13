@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import { loadData, getCached } from "../dataCache";
 import { slugify } from "../utils";
@@ -104,6 +105,7 @@ const TrainingPrograms = () => {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
+          <PathwayRail current={0} />
           <main className="py-16 text-center">
             <p className="text-gray-500 mb-4">Country not found.</p>
             <Link to="/training-programs" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
@@ -137,6 +139,7 @@ const TrainingPrograms = () => {
           })}</script>
         </Helmet>
         <SharedHeader />
+        <PathwayRail current={0} />
 
         <main className="py-8 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -220,6 +223,7 @@ const TrainingPrograms = () => {
         })}</script>
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={0} />
 
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
