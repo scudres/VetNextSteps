@@ -14,7 +14,21 @@ const facts = JSON.parse(
 test("homepage renders hero and navigation", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Know your next step" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "CPD & Conferences" }).first()).toBeVisible();
+  // The section index is now the mega-menu; the homepage itself carries the
+  // career track, so assert one stage heading and one link beneath it.
+  await expect(page.getByRole("heading", { name: "In practice" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Conferences & congresses" }).first()).toBeVisible();
+});
+
+test("mega-menu opens and lists the section it names", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "CPD & Conferences" }).click();
+  await expect(page.getByRole("link", { name: "All conferences in date order" })).toBeVisible();
+});
+
+test("pathway rail marks the current stage on an inner page", async ({ page }) => {
+  await page.goto("/cpd");
+  await expect(page.locator('[aria-current="step"]')).toHaveText("In practice");
 });
 
 // ─── Visa figures come from visaFacts.json (accuracy regression guard) ────────
