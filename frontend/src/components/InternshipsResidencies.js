@@ -2,9 +2,11 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
+import FilterSidebar from "./FilterSidebar";
 import { slugify } from "../utils";
 
 const regionConfig = [
@@ -302,6 +304,7 @@ const InternshipsResidencies = () => {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
+          <PathwayRail current={3} />
           <main className="py-16 text-center">
             <p className="text-gray-500 mb-4">Page not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
@@ -326,6 +329,7 @@ const InternshipsResidencies = () => {
           <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
+        <PathwayRail current={3} />
 
         <main className="py-8 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -333,7 +337,7 @@ const InternshipsResidencies = () => {
             {/* Breadcrumb */}
             <nav className="mb-8 flex flex-wrap items-center gap-1.5 text-sm">
               <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">
-                All Internships & Residencies
+                All internships and residencies
               </Link>
               <svg className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -363,45 +367,41 @@ const InternshipsResidencies = () => {
 
             {licensingNote[region]}
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-2 mb-4 items-center">
-              <FilterDropdown
-                label="Type"
-                options={PROGRAM_TYPE_OPTIONS}
-                selected={typeFilters}
-                onToggle={toggleType}
-                valueKey="value"
-                labelKey="label"
+            <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+              <FilterSidebar
+                groups={[
+                  { key: "type", heading: "Post type", options: PROGRAM_TYPE_OPTIONS },
+                  { key: "specialty", heading: "Speciality", options: SPECIALTY_OPTIONS, limit: 6,
+                    moreLabel: `All ${SPECIALTY_OPTIONS.length} specialities` },
+                ]}
+                filters={{ type: typeFilters, specialty: specialtyFilters }}
+                onToggle={(key, v) => (key === "type" ? toggleType(v) : toggleSpecialty(v))}
+                onClear={clearFilters}
+                summary={
+                  <p className="text-sm font-semibold text-gray-900 tabular-nums">
+                    {loading ? "Loading…" : `${regionPrograms.length} post${regionPrograms.length !== 1 ? "s" : ""} shown`}
+                  </p>
+                }
               />
-              <FilterDropdown
-                label="Speciality"
-                options={SPECIALTY_OPTIONS}
-                selected={specialtyFilters}
-                onToggle={toggleSpecialty}
-              />
-              {activeCount > 0 && (
-                <button onClick={clearFilters} className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2">
-                  Clear all ({activeCount})
-                </button>
-              )}
+              <div className="lg:pl-8 pt-6">
+                {activeCount > 0 && (
+                  <p className="text-xs text-gray-500 mb-5">
+                    Umbrella programmes covering multiple disciplines appear for all speciality filters.
+                  </p>
+                )}
+                {loading ? <Spinner /> : regionPrograms.length === 0 ? (
+                  <div className="border border-gray-200 p-12 text-center text-gray-500 text-sm">
+                    No programmes match the current filters.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {regionPrograms.map((program, index) => (
+                      <ProgramCard key={index} program={program} />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-            {activeCount > 0 && (
-              <p className="text-xs text-gray-400 mb-6">
-                Umbrella programmes covering multiple disciplines appear for all speciality filters.
-              </p>
-            )}
-
-            {loading ? <Spinner /> : regionPrograms.length === 0 ? (
-              <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
-                No programmes match the current filters.
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {regionPrograms.map((program, index) => (
-                  <ProgramCard key={index} program={program} />
-                ))}
-              </div>
-            )}
 
           </div>
         </main>
@@ -419,6 +419,7 @@ const InternshipsResidencies = () => {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
+          <PathwayRail current={3} />
           <main className="py-16 text-center">
             <p className="text-gray-500 mb-4">Region not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
@@ -443,6 +444,7 @@ const InternshipsResidencies = () => {
           <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
+        <PathwayRail current={3} />
 
         <main className="py-8 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -453,7 +455,7 @@ const InternshipsResidencies = () => {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                All Internships & Residencies
+                All internships and residencies
               </Link>
             </div>
 
@@ -523,6 +525,7 @@ const InternshipsResidencies = () => {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
+          <PathwayRail current={3} />
           <main className="py-16 text-center">
             <p className="text-gray-500 mb-4">Region not found.</p>
             <Link to="/internships-residencies" className="text-blue-600 hover:text-blue-800 font-medium">← Back to all programmes</Link>
@@ -547,6 +550,7 @@ const InternshipsResidencies = () => {
           <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
         </Helmet>
         <SharedHeader />
+        <PathwayRail current={3} />
 
         <main className="py-8 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -557,7 +561,7 @@ const InternshipsResidencies = () => {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                All Internships & Residencies
+                All internships and residencies
               </Link>
             </div>
 
@@ -574,45 +578,41 @@ const InternshipsResidencies = () => {
 
             {licensingNote[region]}
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-2 mb-4 items-center">
-              <FilterDropdown
-                label="Type"
-                options={PROGRAM_TYPE_OPTIONS}
-                selected={typeFilters}
-                onToggle={toggleType}
-                valueKey="value"
-                labelKey="label"
+            <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+              <FilterSidebar
+                groups={[
+                  { key: "type", heading: "Post type", options: PROGRAM_TYPE_OPTIONS },
+                  { key: "specialty", heading: "Speciality", options: SPECIALTY_OPTIONS, limit: 6,
+                    moreLabel: `All ${SPECIALTY_OPTIONS.length} specialities` },
+                ]}
+                filters={{ type: typeFilters, specialty: specialtyFilters }}
+                onToggle={(key, v) => (key === "type" ? toggleType(v) : toggleSpecialty(v))}
+                onClear={clearFilters}
+                summary={
+                  <p className="text-sm font-semibold text-gray-900 tabular-nums">
+                    {loading ? "Loading…" : `${regionPrograms.length} post${regionPrograms.length !== 1 ? "s" : ""} shown`}
+                  </p>
+                }
               />
-              <FilterDropdown
-                label="Speciality"
-                options={SPECIALTY_OPTIONS}
-                selected={specialtyFilters}
-                onToggle={toggleSpecialty}
-              />
-              {activeCount > 0 && (
-                <button onClick={clearFilters} className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2">
-                  Clear all ({activeCount})
-                </button>
-              )}
+              <div className="lg:pl-8 pt-6">
+                {activeCount > 0 && (
+                  <p className="text-xs text-gray-500 mb-5">
+                    Umbrella programmes covering multiple disciplines appear for all speciality filters.
+                  </p>
+                )}
+                {loading ? <Spinner /> : regionPrograms.length === 0 ? (
+                  <div className="border border-gray-200 p-12 text-center text-gray-500 text-sm">
+                    No programmes match the current filters in this region.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {regionPrograms.map((program, index) => (
+                      <ProgramCard key={index} program={program} />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-            {activeCount > 0 && (
-              <p className="text-xs text-gray-400 mb-6">
-                Umbrella programmes covering multiple disciplines appear for all speciality filters.
-              </p>
-            )}
-
-            {loading ? <Spinner /> : regionPrograms.length === 0 ? (
-              <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
-                No programmes match the current filters in this region.
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {regionPrograms.map((program, index) => (
-                  <ProgramCard key={index} program={program} />
-                ))}
-              </div>
-            )}
 
           </div>
         </main>
@@ -642,17 +642,18 @@ const InternshipsResidencies = () => {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Internships & Residencies", "item": "https://vetnextstep.com/internships-residencies" }
+            { "@type": "ListItem", "position": 2, "name": "Internships and residencies", "item": "https://vetnextstep.com/internships-residencies" }
           ]
         })}</script>
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={3} />
 
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Internships & Residencies</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Internships and residencies</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Rotating internships and specialist residency positions across the UK, North America, Europe, and worldwide. Select a region to browse programmes.
             </p>

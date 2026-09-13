@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
+import FilterSidebar from "./FilterSidebar";
 import { slugify } from "../utils";
 import {
   countryConfig,
@@ -69,7 +71,7 @@ const BackLink = () => (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
       </svg>
-      All Postgraduate Certificates
+      All postgraduate certificates
     </Link>
   </div>
 );
@@ -128,23 +130,24 @@ const SimpleCard = ({ program }) => (
 
 // ─── Filter bar ───────────────────────────────────────────────────────────────
 
-const FilterBar = ({ options, selected, onToggle, onClear }) => (
-  <div className="flex flex-wrap items-center gap-2 mb-8 pb-4 border-b border-gray-100">
-    <span className="text-sm font-medium text-gray-500 mr-1">Filter:</span>
-    <FilterDropdown
-      label="Type"
-      options={options}
-      selected={selected}
-      onToggle={onToggle}
-      valueKey="value"
-      labelKey="label"
-      menuClassName="min-w-[280px]"
+// Left filter column plus the listing it filters. Children are the listing, so
+// the two stay in one grid and the column runs the height of the results.
+const FilterBar = ({ options, selected, onToggle, onClear, count, children }) => (
+  <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+    <FilterSidebar
+      groups={[{ key: "type", heading: "Qualification type", options }]}
+      filters={{ type: selected }}
+      onToggle={(key, v) => onToggle(v)}
+      onClear={onClear}
+      summary={
+        typeof count === "number" ? (
+          <p className="text-sm font-semibold text-gray-900 tabular-nums">
+            {count} programme{count !== 1 ? "s" : ""} shown
+          </p>
+        ) : null
+      }
     />
-    {selected.length > 0 && (
-      <button onClick={onClear} className="text-xs text-gray-400 hover:text-gray-600 ml-2">
-        Clear filters
-      </button>
-    )}
+    <div className="lg:pl-8 pt-6">{children}</div>
   </div>
 );
 
@@ -171,6 +174,7 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
         </Helmet>
       )}
       <SharedHeader />
+      <PathwayRail current={2} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BackLink />
@@ -196,17 +200,18 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
                 selected={selectedTypes}
                 onToggle={toggle}
                 onClear={() => setSelectedTypes([])}
-              />
-
-              {visible.length === 0 ? (
-                <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {visible.map((program) => (
-                    <SimpleCard key={program.title} program={program} />
-                  ))}
-                </div>
-              )}
+                count={visible.length}
+              >
+                {visible.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {visible.map((program) => (
+                      <SimpleCard key={program.title} program={program} />
+                    ))}
+                  </div>
+                )}
+              </FilterBar>
             </>
           )}
 
@@ -240,6 +245,7 @@ const UKSubPage = ({ programs, loading }) => (
       )}
     </Helmet>
     <SharedHeader />
+    <PathwayRail current={2} />
     <main className="py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <BackLink />
@@ -329,6 +335,7 @@ const USASubPage = ({ categories, loading }) => {
         )}
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={2} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BackLink />
@@ -360,8 +367,8 @@ const USASubPage = ({ categories, loading }) => {
                 selected={selectedTypes}
                 onToggle={toggle}
                 onClear={() => setSelectedTypes([])}
-              />
-
+                count={visibleCategories.reduce((n, c) => n + c.programs.length, 0)}
+              >
               {visibleCategories.length === 0 ? (
                 <p className="text-gray-500 text-sm">No programmes match the selected filters.</p>
               ) : (
@@ -383,6 +390,7 @@ const USASubPage = ({ categories, loading }) => {
                   </div>
                 ))
               )}
+              </FilterBar>
             </>
           )}
         </div>
@@ -405,6 +413,7 @@ const CanadaSubPage = () => (
       <meta property="og:type" content="website" />
     </Helmet>
     <SharedHeader />
+    <PathwayRail current={2} />
     <main className="py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <BackLink />
@@ -567,15 +576,16 @@ const HubPage = ({ certData, loading }) => {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vetnextstep.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Postgraduate Certificates", "item": "https://vetnextstep.com/postgraduate-certificates" }
+            { "@type": "ListItem", "position": 2, "name": "Postgraduate certificates", "item": "https://vetnextstep.com/postgraduate-certificates" }
           ]
         })}</script>
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={2} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate Certificates</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate certificates</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist
               Diplomate level, above standard CPD. UK, North America, Australia, and New Zealand covered.
@@ -650,6 +660,7 @@ const PostgraduateCertificates = () => {
     return (
       <div className="min-h-screen bg-white">
         <SharedHeader />
+        <PathwayRail current={2} />
         <main className="py-16 text-center">
           <p className="text-gray-500 mb-4">Country not found.</p>
           <Link to="/postgraduate-certificates" className="text-blue-600 hover:text-blue-800 font-medium">
