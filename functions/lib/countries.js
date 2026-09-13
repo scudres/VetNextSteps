@@ -90,7 +90,7 @@ const PREFERRED_SLUG = {
 // Not countries — the "we know the region but not the country" buckets that the
 // provider data uses. They keep working as country options.
 const PSEUDO_COUNTRIES = {
-  "europe": { name: "Europe — other",   flag: "🇪🇺", region: "europe" },
+  "europe": { name: "Europe — no fixed country", flag: "🇪🇺", region: "europe" },
   "global": { name: "Global & industry",     flag: "🌐",             region: "global" },
 };
 

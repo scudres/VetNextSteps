@@ -16,6 +16,9 @@ const { resolveCountry }       = require("./lib/countries");
 // the few conferences that move between editions it is an array of them. A
 // misspelt slug resolves to the country it meant, so a typo in the data does not
 // make the event unsearchable by its country.
+const countrySlugs = (country) =>
+  (Array.isArray(country) ? country : [country]).filter(Boolean);
+
 const countryNames = (country) => {
   const slugs = Array.isArray(country) ? country : [country];
   return slugs
@@ -135,7 +138,7 @@ const searchIndex = [
     section:     "Conferences",
     url:         c.website || null,
     navPath:     "/cpd#" + slugify(c.title),
-    tags:        [...c.specialties, ...c.regions, ...countryNames(c.country), c.category || ""],
+    tags:        [...c.specialties, ...c.regions, ...countrySlugs(c.country), ...countryNames(c.country), c.category || ""],
   })),
   ...cpdProviders.map((p) => ({
     title:       p.provider,
