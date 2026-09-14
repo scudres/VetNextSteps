@@ -12,6 +12,7 @@ import {
   countryConfig, conferenceInRegion, browseConfig, conferenceInScope, countriesForRegions,
 } from "../data/conferencesData";
 import { slugify } from "../utils";
+import { upcomingOnly } from "../data/conferenceDates";
 import { parseDateRange, buildICS, downloadICS } from "../ics";
 
 // Build schema.org Event objects for conferences whose dates parse to a real
@@ -196,7 +197,7 @@ const CPDPage = () => {
     setSearchParams(params, { replace: true });
   }, [searchParams, setSearchParams]);
 
-  const [allConferences, setAllConferences] = useState(() => getCached("conferences") || []);
+  const [loadedConferences, setAllConferences] = useState(() => getCached("conferences") || []);
   const [loading, setLoading]           = useState(() => !getCached("conferences"));
   const [error, setError]               = useState(null);
 
@@ -205,6 +206,11 @@ const CPDPage = () => {
       .then((data) => { setAllConferences(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
+
+  // Events drop off the day after they finish, judged against the visitor's own
+  // clock rather than the date of the last deploy. The archive tool keeps the
+  // source data tidy, but the page must not wait for it to be run.
+  const allConferences = useMemo(() => upcomingOnly(loadedConferences), [loadedConferences]);
 
   useEffect(() => {
     if (loading || !location.hash) return;

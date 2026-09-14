@@ -23,6 +23,7 @@
  */
 
 import { createRequire } from "node:module";
+import { segmentEnd, segmentsOf, todayKey } from "../../frontend/src/data/conferenceDates.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -40,33 +41,13 @@ if (onArg && !/^\d{4}-\d{2}-\d{2}$/.test(onArg)) {
   process.exit(1);
 }
 const today  = onArg ? new Date(onArg + "T00:00:00Z") : new Date();
-const TODAY  = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+const TODAY  = todayKey(today);
 const asDate = (k) => `${Math.floor(k / 10000)}-${String(Math.floor(k / 100) % 100).padStart(2, "0")}-${String(k % 100).padStart(2, "0")}`;
 
 // ── Date parsing ──────────────────────────────────────────────────────────────
-// An event is finished only once its LAST day has passed, so this reads the end
-// of a range ("9–11 Jul 2026" → 11 Jul), not the start. Month-only segments
-// ("September 2026") are treated as running to the 28th, and year-only segments
-// ("2027 TBA") to 31 December — both err towards keeping a listing up.
-const MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
-
-function segmentEnd(segment) {
-  const s    = segment.toLowerCase();
-  const year = s.match(/\b(20\d{2})\b/)?.[1];
-  if (!year) return null;                                    // no year at all — undated
-
-  const months = [...s.matchAll(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/g)];
-  if (!months.length) return { key: +year * 10000 + 1231, precision: "year" };
-
-  const last  = months[months.length - 1];
-  const day   = s.slice(0, last.index).match(/(\d{1,2})\D*$/)?.[1];
-  return {
-    key: +year * 10000 + MONTHS[last[1]] * 100 + (day ? +day : 28),
-    precision: day ? "day" : "month",
-  };
-}
-
-const segmentsOf = (conf) => conf.dates.split(";").map((s) => s.trim()).filter(Boolean);
+// segmentEnd and segmentsOf come from frontend/src/data/conferenceDates.js, the
+// same module the /cpd page filters with, so this report and the live listing
+// can never disagree about what counts as past.
 
 // ── Classify ──────────────────────────────────────────────────────────────────
 const finished = [], partPast = [], undated = [];

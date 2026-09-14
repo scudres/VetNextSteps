@@ -63,6 +63,21 @@ test("first-role guide reveals steps when an option is chosen", async ({ page })
 
 // ─── Conference data via live function handlers ───────────────────────────────
 
+// ─── Past events must fall off the listing on their own ──────────────────────
+
+test("cpd listing hides events that have already been held", async ({ page }) => {
+  await page.goto("/cpd");
+  // The page has to render something before absence means anything.
+  await expect(page.getByText(/conferences? shown/)).toBeVisible();
+
+  // Held 9 Sep 2026 — permanently in the past, so this must never come back.
+  await expect(page.getByText("ESVE Pre-congress Symposium")).toHaveCount(0);
+  await expect(page.getByText("ESCG Pre-congress Symposium")).toHaveCount(0);
+
+  // A series whose first edition has been held keeps its later ones.
+  await expect(page.getByText("ECVIM-CA Congress").first()).toBeVisible();
+});
+
 test("CPD region page renders conference cards and Event JSON-LD", async ({ page }) => {
   await page.goto("/cpd/uk");
   await expect(page.getByRole("heading", { name: "London Vet Show", exact: true })).toBeVisible();
