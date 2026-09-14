@@ -25,6 +25,18 @@ with three changes, so restoring one is a copy-and-paste with a new `dates` valu
 - `cadence` — when the event repeats, e.g. `"annual, mid-July"`, once that is
   confirmed from the organiser. `null` until then; do not guess it
 
+## How it runs now
+
+The `archive-past-conferences` workflow runs weekly and opens a PR with steps 1
+and 2 below already applied. `npm run cpd:archive` does the same thing locally.
+The live site does not wait for either: `/cpd` filters finished events against
+the visitor's clock, using `frontend/src/data/conferenceDates.js` — the same
+module this tooling imports, so the page and the report cannot disagree.
+
+What is still manual: **PART-PAST** entries (step 3), because trimming one
+segment means editing `dates`, `location` and `country` in step with each other,
+and `cadence`, which is researched rather than guessed.
+
 ## The update, step by step
 
 1. `npm run cpd:past` — lists finished, part-past, and undated entries.

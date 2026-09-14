@@ -476,18 +476,6 @@ const conferences = [
 
   // ——— EQUINE ———
   {
-    title: "BEVA Congress",
-    organiser: "British Equine Veterinary Association",
-    dates: "9\u201312 Sep 2026",
-    location: "ICC Birmingham, UK",
-    country: "uk",
-    website: "https://www.bevacongress.org/",
-    notes: "Theme 'Everyday Welfare'; 90+ hours of CPD.",
-    regions: ["europe"],
-    specialties: ["Equine"],
-    category: "Equine",
-  },
-  {
     title: "AAEP Annual Convention",
     organiser: "American Association of Equine Practitioners",
     dates: "7\u201311 Dec 2026",
@@ -538,18 +526,6 @@ const conferences = [
   },
 
   // ——— FARM ANIMAL ———
-  {
-    title: "World Buiatrics Congress (33rd)",
-    organiser: "World Association for Buiatrics",
-    dates: "6\u201310 Sep 2026",
-    location: "Lutfi Kirdar ICEC, Istanbul, Turkey",
-    country: "turkey",
-    website: "https://buiatrics.com/",
-    notes: "First ever WBC held in T\u00fcrkiye.",
-    regions: ["europe", "global"],
-    specialties: ["Farm Animal"],
-    category: "Farm Animal",
-  },
   {
     title: "AASV Annual Meeting",
     organiser: "American Association of Swine Veterinarians",
@@ -737,47 +713,7 @@ const conferences = [
     category: "Specialty Conferences",
   },
 
-  // ——— CARDIOLOGY ———
-  {
-    title: "ESVC Stream within ECVIM-CA",
-    organiser: "European Society of Veterinary Cardiology",
-    dates: "10\u201312 Sep 2026",
-    location: "Estrel Berlin, Germany",
-    country: "germany",
-    website: "https://www.esvcardio.org/",
-    notes: "No standalone European cardiology congress \u2014 streams within ECVIM-CA.",
-    regions: ["europe"],
-    specialties: ["Cardiology"],
-    category: "Specialty Conferences",
-  },
-
-  // ——— ENDOCRINOLOGY ———
-  {
-    title: "ESVE Pre-congress Symposium",
-    organiser: "European Society of Veterinary Endocrinology",
-    dates: "9 Sep 2026",
-    location: "Estrel Berlin, Room XV",
-    country: "germany",
-    website: "https://www.esve.org/",
-    notes: "Satellite of ECVIM-CA 2026; max 120 places \u2014 check availability.",
-    regions: ["europe"],
-    specialties: ["Endocrinology"],
-    category: "Specialty Conferences",
-  },
-
   // ——— NEPHROLOGY ———
-  {
-    title: "ESVNU Pre-congress Symposium",
-    organiser: "European Society of Veterinary Nephrology & Urology",
-    dates: "9 Sep 2026 (13:30\u201317:30)",
-    location: "Estrel Berlin, Room IX",
-    country: "germany",
-    website: "https://www.ecvimcongress.org/programme/esvnu_precongress",
-    notes: "Satellite of ECVIM-CA 2026.",
-    regions: ["europe"],
-    specialties: ["Internal Medicine"],
-    category: "Specialty Conferences",
-  },
   {
     title: "Renal Week (IRIS-ACVNU)",
     organiser: "IRIS & ACVNU",
@@ -831,18 +767,6 @@ const conferences = [
     category: "Major Congresses",
   },
   {
-    title: "The VET Expo 2026",
-    organiser: "Terrapinn",
-    dates: "9\u201310 Sep 2026",
-    location: "ICC Sydney, NSW",
-    country: "australia",
-    website: "https://www.terrapinn.com/exhibition/vet-expo/index.stm",
-    notes: "8 CPD-accredited tracks, 140+ speakers, 160+ exhibitors. Free expo pass. Whole-of-profession audience.",
-    regions: ["australia"],
-    specialties: ["General Practice"],
-    category: "Major Congresses",
-  },
-  {
     title: "AAVAC Annual Conference 2026",
     organiser: "Association of Avian Veterinarians Australasian Committee (AAVAC)",
     dates: "26\u201328 Nov 2026",
@@ -856,19 +780,6 @@ const conferences = [
   },
 
   // ——— NEW ZEALAND ———
-  {
-    title: "Sheep Production Online Course 2026",
-    organiser: "NZVA / VetLearn",
-    dates: "7 Sep 2026",
-    location: "Online",
-    country: "new-zealand",
-    website: "https://www.nzvaevents.org.nz/26shpro",
-    notes: "Comprehensive online course covering the drivers of sheep production systems in New Zealand.",
-    regions: ["new-zealand"],
-    specialties: ["Farm Animal"],
-    format: "online",
-    category: "Farm Animal",
-  },
   {
     title: "Beyond the Scrubs: Veterinary Women\u2019s Wellness Conference 2026",
     organiser: "Beyond the Scrubs",
@@ -956,18 +867,6 @@ const conferences = [
   },
 
   // ——— GASTROENTEROLOGY ———
-  {
-    title: "ESCG Pre-congress Symposium",
-    organiser: "European Society of Comparative Gastroenterology",
-    dates: "9 Sep 2026",
-    location: "Estrel Berlin, Germany",
-    country: "germany",
-    website: "https://www.ecvimcongress.org/",
-    notes: "Resident pre-symposium; satellite of ECVIM-CA 2026.",
-    regions: ["europe"],
-    specialties: ["Gastroenterology", "Internal Medicine"],
-    category: "Specialty Conferences",
-  },
 ];
 
 module.exports = {
