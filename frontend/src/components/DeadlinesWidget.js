@@ -66,7 +66,7 @@ const DeadlinesWidget = ({ limit = 5 }) => {
         {deadlines.slice(0, limit).map((d) => (
           <li
             key={`${d.id}-${d.type}-${d.date}`}
-            className="flex items-baseline justify-between gap-3 py-1.5 text-sm border-b border-dotted border-[#ded3b4] last:border-b-0"
+            className="flex items-start justify-between gap-3 py-2 text-sm border-b border-dotted border-[#ded3b4] last:border-b-0"
           >
             <span className="min-w-0 text-gray-700">
               {d.url ? (
@@ -76,7 +76,9 @@ const DeadlinesWidget = ({ limit = 5 }) => {
               ) : (
                 <span className="font-semibold text-gray-900">{d.conference}</span>
               )}
-              {" — "}{d.label}
+              {/* The deadline type sits on its own line — the two read as event
+                  then deadline, rather than one run-on string. */}
+              <span className="block text-xs text-gray-600 leading-snug">{d.label}</span>
             </span>
             <span
               className={`flex-shrink-0 text-xs tabular-nums ${
