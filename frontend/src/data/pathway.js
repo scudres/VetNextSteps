@@ -11,7 +11,7 @@ export const PATHWAY = [
     id: "new-graduate",
     label: "New graduate",
     colour: "#1e40af",
-    blurb: "Structured support, mentorship, and a supervised first year.",
+    blurb: "If you've just qualified, or are about to, then you may want to explore New Graduate Development Programmes.",
     links: [
       { label: "Graduate development programmes", to: "/training-programs", count: counts.training },
       { label: "RCVS VetGDP", href: "https://www.rcvs.org.uk/lifelong-learning/veterinary-graduate-development-programme-vetgdp/" },
@@ -21,7 +21,7 @@ export const PATHWAY = [
     id: "in-practice",
     label: "In practice",
     colour: "#2f56c4",
-    blurb: "Keeping hours up, and choosing where to spend them.",
+    blurb: "Plan your upcoming CPD activities.",
     links: [
       { label: "CPD providers & courses", to: "/cpd/providers", count: counts.providers },
       { label: "Conferences & congresses", to: "/cpd", count: counts.conferences },
@@ -31,7 +31,7 @@ export const PATHWAY = [
     id: "postgraduate-certificate",
     label: "Postgraduate certificate",
     colour: "#4a72d8",
-    blurb: "Formal qualifications taken without leaving the job.",
+    blurb: "Formal qualifications you can undertake whilst working in your current workplace.",
     links: [
       { label: "All certificates", to: "/postgraduate-certificates", count: counts.certificates },
       { label: "RCVS CertAVP", href: "https://www.rcvs.org.uk/lifelong-learning/postgraduate-qualifications/certificate-in-advanced-veterinary-practice-certavp/" },
@@ -46,13 +46,6 @@ export const PATHWAY = [
       { label: "All posts", to: "/internships-residencies", count: counts.internships },
       { label: "VIRMP — the MATCH", href: "https://www.virmp.org/" },
     ],
-  },
-  {
-    id: "board-certification",
-    label: "Board certification",
-    colour: "#c3ccdb",
-    blurb: "Awarded by the colleges, not covered here. Residency listings note which college a post prepares you for.",
-    links: [],
   },
 ];
 

@@ -39,9 +39,15 @@ const StopLinks = ({ links }) => (
 export const PathwayFull = () => (
   <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-2 overflow-x-auto">
     <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-5 gap-0 min-w-[860px]">
+      <div
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `repeat(${PATHWAY.length}, minmax(0, 1fr))`,
+          minWidth: `${PATHWAY.length * 172}px`,
+        }}
+      >
         {PATHWAY.map((stop) => (
-          <div key={stop.id} className="pr-5">
+          <div key={stop.id} className="pr-5 last:pr-0">
             <span className="block h-2" style={{ backgroundColor: stop.colour }} />
             <h2 className="pt-3 text-base font-bold tracking-tight text-gray-900">{stop.label}</h2>
             <p className="mt-1.5 mb-2.5 text-sm text-gray-600 max-w-[30ch]">{stop.blurb}</p>
@@ -56,11 +62,17 @@ export const PathwayFull = () => (
 export const PathwayRail = ({ current }) => (
   <div className="bg-slate-50 border-b border-gray-200">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 overflow-x-auto">
-      <div className="grid grid-cols-5 gap-0 min-w-[620px]">
+      <div
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `repeat(${PATHWAY.length}, minmax(0, 1fr))`,
+          minWidth: `${PATHWAY.length * 124}px`,
+        }}
+      >
         {PATHWAY.map((stop, i) => {
           const here = i === current;
           return (
-            <div key={stop.id} className="pr-1">
+            <div key={stop.id} className="pr-1 last:pr-0">
               <span
                 className="block h-1.5"
                 style={{ backgroundColor: stop.colour, opacity: here ? 1 : 0.3 }}

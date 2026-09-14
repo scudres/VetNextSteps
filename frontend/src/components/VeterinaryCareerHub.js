@@ -74,9 +74,6 @@ const VeterinaryCareerHub = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7">
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Know your next step</h1>
-        <p className="mt-2 text-lg text-gray-700 max-w-2xl">
-          Find where you are on the track, then open what sits under it.
-        </p>
       </div>
 
       {/* The career track. Registration is not on it — see the axis below. */}
