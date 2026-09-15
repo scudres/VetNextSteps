@@ -77,7 +77,7 @@ const BackLink = () => (
 );
 
 const InfoBox = ({ children }) => (
-  <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8">
+  <div className="bg-blue-50 border border-blue-200 p-5 mb-8">
     {children}
   </div>
 );
@@ -92,7 +92,7 @@ const Spinner = () => (
 
 /** USA-style card — shows credential badge, country, format and notes. */
 const ProgramCard = ({ id, credential, title, organisation, country, format, notes, url }) => (
-  <div id={id} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28">
+  <div id={id} className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col scroll-mt-28">
     <div className="mb-3">
       <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold tracking-wide">
         {credential}
@@ -111,7 +111,7 @@ const ProgramCard = ({ id, credential, title, organisation, country, format, not
 
 /** UK/AU/NZ-style card — simple layout with type badge. */
 const SimpleCard = ({ program }) => (
-  <div className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+  <div className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col">
     {program.type && (
       <div className="mb-3">
         <span className="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium">
@@ -282,7 +282,7 @@ const UKSubPage = ({ programs, loading }) => (
               <div
                 key={program.title}
                 id={slugify(program.title)}
-                className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
+                className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col scroll-mt-28"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
                 <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
@@ -584,11 +584,15 @@ const HubPage = ({ certData, loading }) => {
       <PathwayRail current={2} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Postgraduate certificates</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Certificate-tier qualifications for vets looking to develop a clinical interest — below specialist
-              Diplomate level, above standard CPD. UK, North America, Australia, and New Zealand covered.
+          <div className="mb-8 pb-5 border-b border-gray-200">
+            <nav aria-label="Breadcrumb" className="mb-3 text-xs text-gray-500">
+              <Link to="/" className="text-blue-800 underline underline-offset-2">Home</Link>
+              <span className="px-1.5 text-gray-400" aria-hidden="true">›</span>
+              <span aria-current="page">Postgraduate certificates</span>
+            </nav>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Postgraduate certificates</h1>
+            <p className="mt-2.5 font-serif text-[17px] leading-relaxed text-gray-700 max-w-[58ch]">
+              Certificate-tier qualifications that sit below specialist Diplomate level and above standard CPD. UK, North America, Australia, and New Zealand covered.
             </p>
           </div>
 
@@ -597,7 +601,7 @@ const HubPage = ({ certData, loading }) => {
               const count = loading ? null : getCount(c.id);
               return (
                 <Link key={c.id} to={`/postgraduate-certificates/${c.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
                     <div className="h-48 relative overflow-hidden">
                       <img
                         src={c.image}

@@ -37,7 +37,7 @@ const ExternalLinkIcon = () => (
 const ProviderCard = ({ p }) => (
   <div
     id={slugify(p.provider)}
-    className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
+    className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col scroll-mt-28"
   >
     {/* Type badges */}
     <div className="flex flex-wrap gap-1.5 mb-3">
@@ -118,12 +118,17 @@ const HubPage = ({ allProviders, loading, error }) => (
         </div>
 
         {/* Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD Providers & Courses</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Vet schools, commercial platforms and industry-funded education — browse by region, then narrow to a country.
-          </p>
-        </div>
+          <div className="mb-8 pb-5 border-b border-gray-200">
+            <nav aria-label="Breadcrumb" className="mb-3 text-xs text-gray-500">
+              <Link to="/" className="text-blue-800 underline underline-offset-2">Home</Link>
+              <span className="px-1.5 text-gray-400" aria-hidden="true">›</span>
+              <span aria-current="page">CPD providers</span>
+            </nav>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">CPD Providers & Courses</h2>
+            <p className="mt-2.5 font-serif text-[17px] leading-relaxed text-gray-700 max-w-[58ch]">
+              Vet schools, commercial platforms and industry-funded education — browse by region, then narrow to a country.
+            </p>
+          </div>
 
         {loading && <div className="text-center py-20 text-gray-400 text-sm">Loading providers…</div>}
         {error   && <div className="text-center py-20 text-red-500 text-sm">Could not load provider data. Please refresh the page.</div>}
@@ -136,7 +141,7 @@ const HubPage = ({ allProviders, loading, error }) => (
               const count = allProviders.filter((p) => providerInRegion(p, c.id)).length;
               return (
                 <Link key={c.id} to={`/cpd/providers/${c.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
                     <div className="h-32 relative overflow-hidden">
                       {c.image ? (
                         <img

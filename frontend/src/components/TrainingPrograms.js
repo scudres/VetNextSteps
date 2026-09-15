@@ -15,7 +15,7 @@ const licensingNote = {
   uk: (
     <>
       {/* VetGDP banner */}
-      <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-6">
+      <div className="bg-green-50 border border-green-200 p-5 mb-6">
         <div className="flex items-start gap-3">
           <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -170,7 +170,7 @@ const TrainingPrograms = () => {
             {loading ? <Spinner /> : !error && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {countryPrograms.map((program, index) => (
-                  <div key={index} id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
+                  <div key={index} id={slugify(program.title)} className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors scroll-mt-28">
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
                     <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
                     <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
@@ -228,9 +228,14 @@ const TrainingPrograms = () => {
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Graduate Development Programmes</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="mb-8 pb-5 border-b border-gray-200">
+            <nav aria-label="Breadcrumb" className="mb-3 text-xs text-gray-500">
+              <Link to="/" className="text-blue-800 underline underline-offset-2">Home</Link>
+              <span className="px-1.5 text-gray-400" aria-hidden="true">›</span>
+              <span aria-current="page">Graduate programmes</span>
+            </nav>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Graduate Development Programmes</h1>
+            <p className="mt-2.5 font-serif text-[17px] leading-relaxed text-gray-700 max-w-[58ch]">
               Graduate development programmes with structured mentorship and clinical support — from the major corporate groups in the UK to hospital-based programmes in North America and Australia.
             </p>
           </div>
@@ -240,7 +245,7 @@ const TrainingPrograms = () => {
               const count = programs[c.id]?.length ?? 0;
               return (
                 <Link key={c.id} to={`/training-programs/${c.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
                     <div className="h-48 relative overflow-hidden">
                       <img
                         src={c.image}

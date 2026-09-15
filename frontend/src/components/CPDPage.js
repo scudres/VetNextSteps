@@ -5,6 +5,7 @@ import SharedHeader from "./SharedHeader";
 import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import FilterSidebar from "./FilterSidebar";
+import PageHead from "./PageHead";
 import DeadlinesWidget from "./DeadlinesWidget";
 import { loadData, getCached } from "../dataCache";
 import {
@@ -83,66 +84,60 @@ const exportConference = (conf) => {
 
 // ——— Conference card ———
 const ConferenceCard = ({ conf }) => (
+  // A row rather than a rounded card: the date is the column vets scan, so it
+  // gets its own track on the left instead of sitting inside a box with an icon.
   <div
     id={slugify(conf.title)}
-    className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col scroll-mt-28"
+    className="grid grid-cols-1 sm:grid-cols-[132px_minmax(0,1fr)] gap-x-5 gap-y-1 py-4 border-b border-gray-200 scroll-mt-28"
   >
-    <div className="flex flex-wrap gap-1.5 mb-3">
-      {conf.specialties.map((s) => (
-        <span key={s} className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">{s}</span>
-      ))}
-      {conf.format && conf.format !== "in-person" && (
-        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-          conf.format === "online" ? "bg-green-100 text-green-700" : "bg-purple-100 text-purple-700"
-        }`}>
-          {conf.format === "online" ? "Online" : "Hybrid"}
-        </span>
-      )}
-    </div>
-    <h4 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{conf.title}</h4>
-    <p className="text-sm text-blue-600 font-medium mb-3">{conf.organiser}</p>
-    <div className="space-y-1.5 mb-4">
-      <div className="flex items-start gap-2 text-sm text-gray-600">
-        <svg className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        <span>{conf.dates}</span>
-      </div>
-      <div className="flex items-start gap-2 text-sm text-gray-600">
-        <svg className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-        <span>{conf.location}</span>
-      </div>
-    </div>
-    {conf.notes && (
-      <p className="text-xs text-gray-500 italic mb-4 leading-relaxed">{conf.notes}</p>
-    )}
-    <div className="mt-auto flex flex-wrap gap-2">
-      <a
-        href={conf.website}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-      >
-        Visit Website
-        <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-      </a>
-      {parseDateRange(conf.dates) && (
-        <button
-          onClick={() => exportConference(conf)}
-          className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-          title="Download an .ics file for your calendar"
+    <div className="text-sm text-gray-700 tabular-nums">{conf.dates}</div>
+
+    <div>
+      <h4 className="text-[15px] font-semibold leading-snug">
+        <a
+          href={conf.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-800 underline underline-offset-2 decoration-blue-200 hover:decoration-blue-800"
         >
-          <svg className="mr-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          Add to calendar
-        </button>
+          {conf.title}
+        </a>
+      </h4>
+      <p className="text-sm text-gray-600">{conf.organiser}</p>
+      <p className="text-sm text-gray-600">{conf.location}</p>
+
+      {conf.notes && (
+        <p className="mt-1.5 font-serif italic text-sm leading-relaxed text-gray-600 max-w-[62ch]">{conf.notes}</p>
       )}
+
+      <div className="mt-2 flex flex-wrap items-center gap-1.5">
+        {conf.specialties.map((sp) => (
+          <span key={sp} className="px-2 py-0.5 text-xs text-gray-700 bg-blue-50 border border-gray-200">{sp}</span>
+        ))}
+        {conf.format && conf.format !== "in-person" && (
+          <span className="px-2 py-0.5 text-xs text-gray-700 bg-white border border-gray-400">
+            {conf.format === "online" ? "Online" : "Hybrid"}
+          </span>
+        )}
+        {parseDateRange(conf.dates) && (
+          <button
+            onClick={() => downloadICS(
+              `${slugify(conf.title)}.ics`,
+              buildICS([{
+                uid:      slugify(conf.title),
+                summary:  conf.title,
+                start:    parseDateRange(conf.dates).start,
+                end:      parseDateRange(conf.dates).end,
+                url:      conf.website,
+                location: conf.location,
+              }]),
+            )}
+            className="ml-auto text-xs text-blue-800 underline underline-offset-2 hover:text-blue-900"
+          >
+            Add to calendar
+          </button>
+        )}
+      </div>
     </div>
   </div>
 );
@@ -326,7 +321,7 @@ const CPDPage = () => {
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-4xl">{cfg.flag}</span>
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{cfg.name}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">{cfg.name}</h1>
               </div>
               <p className="text-gray-500 text-lg">
                 Upcoming veterinary conferences and congresses
@@ -369,7 +364,7 @@ const CPDPage = () => {
                         No conferences match the current filters for this region.
                       </div>
                     ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="border-t border-gray-200">
                         {regionConferences.map((conf, i) => (
                           <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
                         ))}
@@ -419,28 +414,26 @@ const CPDPage = () => {
       </Helmet>
       <SharedHeader />
       <PathwayRail current={1} />
-      <main className="py-8 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Page title */}
-          <div className="text-center mb-10">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">CPD & Conferences</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Conferences sorted by date — filter by speciality, region, year, month or format. CPD providers and online courses are listed under the second tab.
-            </p>
-          </div>
+      <PageHead
+        trail={[{ label: "Home", to: "/" }, { label: "CPD & Conferences" }]}
+        title="CPD & Conferences"
+        lede="Conferences in date order, filterable by speciality, region, year, month or format. Events drop off the listing once they have been held."
+      >
+        <div className="flex gap-1 mt-5 -mb-5">
+          <span className="px-4 py-2.5 text-sm font-semibold text-gray-900 border-b-[3px] border-blue-800">
+            Conferences &amp; congresses
+          </span>
+          <Link
+            to="/cpd/providers"
+            className="px-4 py-2.5 text-sm text-gray-600 border-b-[3px] border-transparent hover:text-gray-900 hover:border-gray-300"
+          >
+            CPD providers &amp; courses
+          </Link>
+        </div>
+      </PageHead>
 
-          {/* Section tabs */}
-          <div className="flex border-b border-gray-200 mb-10 -mt-2">
-            <button className="px-5 py-3 text-sm font-medium border-b-2 border-blue-600 text-blue-600 -mb-px transition-colors">
-              Conferences &amp; Congresses
-            </button>
-            <Link
-              to="/cpd/providers"
-              className="px-5 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 -mb-px transition-colors"
-            >
-              CPD Providers &amp; Courses
-            </Link>
-          </div>
+      <main className="py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ——— CONFERENCES SECTION ——— */}
           <div>
@@ -461,7 +454,7 @@ const CPDPage = () => {
                       const count = countForRegionCard(r.id);
                       return (
                         <Link key={r.id} to={`/cpd/${r.id}`} className="group block">
-                          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                          <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-800 transition-colors">
                             <div className="h-32 relative overflow-hidden">
                               {r.image ? (
                                 <img
@@ -525,10 +518,9 @@ const CPDPage = () => {
                   {regionConfig.map((r) => {
                     const conferences = getConferencesForRegion(r.id);
                     return (
-                      <section key={r.id} id={`conf-${r.id}`} className="mb-16 scroll-mt-28">
-                        <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-200">
-                          <span className="text-3xl">{r.flag}</span>
-                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{r.name}</h3>
+                      <section key={r.id} id={`conf-${r.id}`} className="mb-10 scroll-mt-28">
+                        <div className="flex items-baseline gap-3 mb-1 pb-2 border-b-2 border-navy">
+                          <h3 className="text-lg font-bold tracking-tight text-gray-900">{r.name}</h3>
                           <Link to={`/cpd/${r.id}`} className="ml-auto text-sm text-blue-600 hover:text-blue-800 font-medium inline-flex items-center gap-1">
                             View region page
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -537,11 +529,11 @@ const CPDPage = () => {
                           </Link>
                         </div>
                         {conferences.length === 0 ? (
-                          <div className="bg-white rounded-xl border border-gray-100 p-8 text-center text-gray-400 text-sm">
+                          <div className="border border-gray-200 p-8 text-center text-gray-600 text-sm">
                             No conferences match the current filters in this region.
                           </div>
                         ) : (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="border-t border-gray-200">
                             {conferences.map((conf, i) => (
                               <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
                             ))}
