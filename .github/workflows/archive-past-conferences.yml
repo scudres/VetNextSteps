@@ -1,0 +1,58 @@
+name: Archive past conferences
+
+# Weekly, or manually from the Actions tab.
+#
+# The live listing does not depend on this job: /cpd filters finished events
+# against the visitor's own clock, so the page is correct whether or not this
+# has run. This keeps the source data from accumulating events nobody can see.
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # 06:00 UTC every Monday
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Moves finished entries from functions/data/conferences.js into
+      # past-events.json and writes the PR body to $RUNNER_TEMP/pr-body.md.
+      # Exits cleanly with nothing to do, in which case no PR is opened.
+      - name: Archive conferences that have been held
+        env:
+          RUNNER_TEMP: ${{ runner.temp }}
+        run: npm run cpd:archive
+
+      - name: Get today's date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      # AUTO_PR_TOKEN rather than GITHUB_TOKEN for the same two reasons as the
+      # deadline refresh: the repo forbids Actions from opening pull requests,
+      # and PRs opened by GITHUB_TOKEN do not trigger the CI smoke tests.
+      - name: Open pull request with changes
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.AUTO_PR_TOKEN }}
+          branch: auto/archive-past-conferences
+          base: main
+          add-paths: |
+            functions/data/conferences.js
+            tools/conference-archive/past-events.json
+          commit-message: 'chore: archive conferences held before ${{ steps.date.outputs.today }}'
+          title: '🗂️ Archive past conferences — ${{ steps.date.outputs.today }}'
+          body-path: ${{ runner.temp }}/pr-body.md
+          assignees: scudres
+          labels: automated,conferences
+          delete-branch: true

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
 import visaFacts from "../data/visaFacts.json";
@@ -24,13 +25,13 @@ const AustraliaPage = () => {
 
   const programmes = [
     {
-      title: "Internships & Residencies",
+      title: "Internships and residencies",
       description: "University-based rotating internships and specialist residencies are available at Australian veterinary schools including Melbourne, Sydney, Queensland, and Murdoch.",
       route: "/internships-residencies",
-      tag: "Internships & Residencies",
+      tag: "Internships and residencies",
     },
     {
-      title: "Postgraduate Certificates",
+      title: "Postgraduate certificates",
       description: "Advanced specialist qualifications available after obtaining state registration and gaining clinical experience in Australia.",
       route: "/postgraduate-certificates",
       tag: "Certificates",
@@ -63,6 +64,7 @@ const AustraliaPage = () => {
       </Helmet>
 
       <SharedHeader />
+      <CountryAxis here="/australia" />
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">

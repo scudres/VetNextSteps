@@ -2,8 +2,9 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Link, useParams, useLocation, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
-import FilterDropdown from "./FilterDropdown";
+import FilterSidebar from "./FilterSidebar";
 import DeadlinesWidget from "./DeadlinesWidget";
 import { loadData, getCached } from "../dataCache";
 import {
@@ -11,6 +12,7 @@ import {
   countryConfig, conferenceInRegion, browseConfig, conferenceInScope, countriesForRegions,
 } from "../data/conferencesData";
 import { slugify } from "../utils";
+import { upcomingOnly } from "../data/conferenceDates";
 import { parseDateRange, buildICS, downloadICS } from "../ics";
 
 // Build schema.org Event objects for conferences whose dates parse to a real
@@ -145,76 +147,24 @@ const ConferenceCard = ({ conf }) => (
   </div>
 );
 
-// ——— Filter row used in both hub and sub-page views ———
-const FilterRow = ({ filters, onToggle, onClear, availableYears, availableMonths, showRegions = true, countryOptions = [] }) => {
-  // Region filters are hidden on sub-pages (region comes from the URL there),
-  // so exclude them from the visible active count when the dropdown is hidden.
-  const activeCount = Object.entries(filters).reduce(
-    (n, [key, arr]) => n + (key === "regions" && !showRegions ? 0 : arr.length), 0);
-  // The country sub-filter only appears once the scope is narrow enough for it
-  // to mean something — a region is selected, or the page is already a region.
-  const showCountries = countryOptions.length > 1;
-  return (
-    <div className="flex flex-wrap gap-2 mb-6 items-center">
-      <FilterDropdown
-        label="Speciality"
-        options={specialtyOptions.slice(1)}
-        selected={filters.specialties}
-        onToggle={(v) => onToggle("specialties", v)}
-      />
-      {showRegions && (
-        <FilterDropdown
-          label="Region"
-          options={regionConfig.map((r) => ({ value: r.id, label: `${r.flag} ${r.name}` }))}
-          selected={filters.regions}
-          onToggle={(v) => onToggle("regions", v)}
-          valueKey="value"
-          labelKey="label"
-        />
-      )}
-      {showCountries && (
-        <FilterDropdown
-          label="Country"
-          options={countryOptions}
-          selected={filters.countries}
-          onToggle={(v) => onToggle("countries", v)}
-          valueKey="value"
-          labelKey="label"
-        />
-      )}
-      <FilterDropdown
-        label="Year"
-        options={availableYears}
-        selected={filters.years}
-        onToggle={(v) => onToggle("years", v)}
-      />
-      <FilterDropdown
-        label="Month"
-        options={availableMonths.map((m) => ({ value: m, label: MONTH_ABBR[m - 1] }))}
-        selected={filters.months}
-        onToggle={(v) => onToggle("months", v)}
-        valueKey="value"
-        labelKey="label"
-      />
-      <FilterDropdown
-        label="Format"
-        options={FORMAT_OPTIONS}
-        selected={filters.formats}
-        onToggle={(v) => onToggle("formats", v)}
-        valueKey="value"
-        labelKey="label"
-      />
-      {activeCount > 0 && (
-        <button
-          onClick={onClear}
-          className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2"
-        >
-          Clear all ({activeCount})
-        </button>
-      )}
-    </div>
-  );
-};
+// Group config for the left-hand FilterSidebar. Categories and option lists
+// match the filter state the page already keeps in the URL.
+const sidebarGroups = ({ availableYears, availableMonths, showRegions, countryOptions }) => [
+  { key: "specialties", heading: "Speciality", options: specialtyOptions.slice(1), limit: 6,
+    moreLabel: `All ${specialtyOptions.length - 1} specialities` },
+  ...(showRegions
+    ? [{ key: "regions", heading: "Region",
+         options: regionConfig.map((r) => ({ value: r.id, label: r.name })) }]
+    : []),
+  ...(countryOptions.length > 1
+    // No cap: the point of this group is to show the individual countries,
+    // and every country is listed on the same footing.
+    ? [{ key: "countries", heading: "Country", options: countryOptions }]
+    : []),
+  { key: "years",   heading: "Year",   options: availableYears },
+  { key: "months",  heading: "Month",  options: availableMonths.map((m) => ({ value: m, label: MONTH_ABBR[m - 1] })), limit: 6 },
+  { key: "formats", heading: "Format", options: FORMAT_OPTIONS },
+];
 
 const EMPTY_FILTERS = { specialties: [], regions: [], countries: [], years: [], months: [], formats: [] };
 
@@ -247,7 +197,7 @@ const CPDPage = () => {
     setSearchParams(params, { replace: true });
   }, [searchParams, setSearchParams]);
 
-  const [allConferences, setAllConferences] = useState(() => getCached("conferences") || []);
+  const [loadedConferences, setAllConferences] = useState(() => getCached("conferences") || []);
   const [loading, setLoading]           = useState(() => !getCached("conferences"));
   const [error, setError]               = useState(null);
 
@@ -256,6 +206,11 @@ const CPDPage = () => {
       .then((data) => { setAllConferences(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
+
+  // Events drop off the day after they finish, judged against the visitor's own
+  // clock rather than the date of the last deploy. The archive tool keeps the
+  // source data tidy, but the page must not wait for it to be run.
+  const allConferences = useMemo(() => upcomingOnly(loadedConferences), [loadedConferences]);
 
   useEffect(() => {
     if (loading || !location.hash) return;
@@ -312,6 +267,7 @@ const CPDPage = () => {
       return (
         <div className="min-h-screen bg-white">
           <SharedHeader />
+          <PathwayRail current={1} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
             <p className="text-gray-500">No conferences section for that region or country.</p>
             <Link to="/cpd" className="text-blue-600 hover:underline mt-4 inline-block">Back to CPD & Conferences</Link>
@@ -353,6 +309,7 @@ const CPDPage = () => {
           )}
         </Helmet>
         <SharedHeader />
+        <PathwayRail current={1} />
         <main className="py-8 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
@@ -389,33 +346,37 @@ const CPDPage = () => {
 
             {!loading && !error && (
               <>
-                {/* Filters */}
-                <div className="mb-2">
-                  <FilterRow
+                <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+                  <FilterSidebar
+                    groups={sidebarGroups({
+                      availableYears,
+                      availableMonths,
+                      showRegions: false,
+                      countryOptions: scopeCountryOptions,
+                    })}
                     filters={filters}
                     onToggle={toggleFilter}
                     onClear={clearFilters}
-                    availableYears={availableYears}
-                    availableMonths={availableMonths}
-                    showRegions={false}
-                    countryOptions={scopeCountryOptions}
+                    summary={
+                      <p className="text-sm font-semibold text-gray-900 tabular-nums">
+                        {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
+                      </p>
+                    }
                   />
-                  <p className="text-sm text-gray-500 mb-6">
-                    {regionConferences.length} event{regionConferences.length !== 1 ? "s" : ""} shown
-                  </p>
+                  <div className="lg:pl-8 pt-6">
+                    {regionConferences.length === 0 ? (
+                      <div className="border border-gray-200 p-12 text-center text-gray-500 text-sm">
+                        No conferences match the current filters for this region.
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {regionConferences.map((conf, i) => (
+                          <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-
-                {regionConferences.length === 0 ? (
-                  <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
-                    No conferences match the current filters for this region.
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {regionConferences.map((conf, i) => (
-                      <ConferenceCard key={`${conf.title}|${conf.dates}`} conf={conf} />
-                    ))}
-                  </div>
-                )}
               </>
             )}
           </div>
@@ -457,6 +418,7 @@ const CPDPage = () => {
         )}
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={1} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page title */}
@@ -538,21 +500,27 @@ const CPDPage = () => {
                   </div>
 
                   {/* Filters + listing */}
-                  <h2 className="text-lg font-semibold text-gray-700 mb-5">Clinical &amp; Professional Development Conferences</h2>
-                  <FilterRow
-                    filters={filters}
-                    onToggle={toggleFilter}
-                    onClear={clearFilters}
-                    availableYears={availableYears}
-                    availableMonths={availableMonths}
-                    showRegions={true}
-                    countryOptions={filters.regions.length > 0
-                      ? countriesForRegions(allConferences, filters.regions)
-                      : []}
-                  />
-                  <p className="text-sm text-gray-500 mb-8">
-                    {totalVisible} conference{totalVisible !== 1 ? "s" : ""} shown
-                  </p>
+                  <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+                    <FilterSidebar
+                      groups={sidebarGroups({
+                        availableYears,
+                        availableMonths,
+                        showRegions: true,
+                        countryOptions: filters.regions.length > 0
+                          ? countriesForRegions(allConferences, filters.regions)
+                          : [],
+                      })}
+                      filters={filters}
+                      onToggle={toggleFilter}
+                      onClear={clearFilters}
+                      summary={
+                        <p className="text-sm font-semibold text-gray-900 tabular-nums">
+                          {totalVisible} conference{totalVisible !== 1 ? "s" : ""} shown
+                        </p>
+                      }
+                    />
+                    <div className="lg:pl-8 pt-6">
+                    <h2 className="text-lg font-semibold text-gray-700 mb-5">Clinical &amp; Professional Development Conferences</h2>
 
                   {regionConfig.map((r) => {
                     const conferences = getConferencesForRegion(r.id);
@@ -582,6 +550,8 @@ const CPDPage = () => {
                       </section>
                     );
                   })}
+                    </div>
+                  </div>
                 </>
               )}
           </div>

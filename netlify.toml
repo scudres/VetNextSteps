@@ -4,6 +4,19 @@
   publish   = "build"
   functions = "../functions"
 
+  # With a base directory set, Netlify skips the build when nothing inside it
+  # changed — and the listing data does not live inside it. conferences.js,
+  # providers.js and the rest sit in ../functions/data/ and are compiled into
+  # the site by frontend/scripts/build-data.js at build time, so a data-only
+  # commit would merge and never reach the site.
+  #
+  # The ignore command runs from the base directory. Exit 0 skips the build,
+  # non-zero runs it, so `git diff --quiet` has exactly the right semantics:
+  # no changes in these paths, no build. An empty CACHED_COMMIT_REF on a first
+  # build makes git error, which is also non-zero — it builds rather than
+  # silently skipping.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../functions ../netlify.toml ../package.json"
+
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 

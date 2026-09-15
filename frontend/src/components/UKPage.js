@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
 import visaFacts from "../data/visaFacts.json";
@@ -28,13 +29,13 @@ const UKPage = () => {
       tag: "Graduate Programmes",
     },
     {
-      title: "Internships & Residencies",
+      title: "Internships and residencies",
       description: "UK university rotating internships, BEVA equine internships, and European College residency programmes.",
       route: "/internships-residencies",
       tag: "Internships",
     },
     {
-      title: "Postgraduate Certificates (CertAVP)",
+      title: "Postgraduate certificates (CertAVP)",
       description: "RCVS-accredited CertAVP programmes from RVC, Edinburgh, Liverpool, Nottingham, and Surrey.",
       route: "/postgraduate-certificates",
       tag: "Certificates",
@@ -67,6 +68,7 @@ const UKPage = () => {
       </Helmet>
 
       <SharedHeader />
+      <CountryAxis here="/uk" />
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">

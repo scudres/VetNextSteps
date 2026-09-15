@@ -2,8 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import FilterDropdown from "./FilterDropdown";
+import FilterSidebar from "./FilterSidebar";
 import { loadData, getCached } from "../dataCache";
 import {
   providerSpecialtyOptions, cpdTypeOptions,
@@ -104,6 +106,7 @@ const HubPage = ({ allProviders, loading, error }) => (
       <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
     </Helmet>
     <SharedHeader />
+    <PathwayRail current={1} />
     <main className="py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
@@ -230,6 +233,7 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
     return (
       <div className="min-h-screen bg-white">
         <SharedHeader />
+        <PathwayRail current={1} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <p className="text-gray-500">No providers section for that region or country.</p>
           <Link to="/cpd/providers" className="text-blue-600 hover:underline mt-4 inline-block">
@@ -256,6 +260,7 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
       <SharedHeader />
+      <PathwayRail current={1} />
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -280,54 +285,47 @@ const CountrySubPage = ({ country, allProviders, loading, error }) => {
 
           {!loading && !error && (
             <>
-              {/* Filters */}
-              <div className="flex flex-wrap gap-2 mb-4 items-center">
-                <FilterDropdown
-                  label="Speciality"
-                  options={providerSpecialtyOptions}
-                  selected={selectedSpecialties}
-                  onToggle={toggleSpecialty}
+              <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
+                <FilterSidebar
+                  groups={[
+                    { key: "specialty", heading: "Speciality", options: providerSpecialtyOptions, limit: 6,
+                      moreLabel: `All ${providerSpecialtyOptions.length} specialities` },
+                    ...(countryOptions.length > 1
+                      ? [{ key: "country", heading: "Country", options: countryOptions, limit: 8 }]
+                      : []),
+                    { key: "format", heading: "Format", options: cpdTypeOptions },
+                  ]}
+                  filters={{
+                    specialty: selectedSpecialties,
+                    country:   selectedCountries,
+                    format:    selectedTypes,
+                  }}
+                  onToggle={(key, v) => {
+                    if (key === "specialty") toggleSpecialty(v);
+                    else if (key === "country") toggleCountry(v);
+                    else toggleType(v);
+                  }}
+                  onClear={clearFilters}
+                  summary={
+                    <p className="text-sm font-semibold text-gray-900 tabular-nums">
+                      {countryProviders.length} provider{countryProviders.length !== 1 ? "s" : ""} shown
+                    </p>
+                  }
                 />
-                {countryOptions.length > 1 && (
-                  <FilterDropdown
-                    label="Country"
-                    options={countryOptions}
-                    selected={selectedCountries}
-                    onToggle={toggleCountry}
-                    valueKey="value"
-                    labelKey="label"
-                  />
-                )}
-                <FilterDropdown
-                  label="Format"
-                  options={cpdTypeOptions}
-                  selected={selectedTypes}
-                  onToggle={toggleType}
-                />
-                {activeCount > 0 && (
-                  <button
-                    onClick={clearFilters}
-                    className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2"
-                  >
-                    Clear all ({activeCount})
-                  </button>
-                )}
+                <div className="lg:pl-8 pt-6">
+                  {countryProviders.length === 0 ? (
+                    <div className="border border-gray-200 p-12 text-center text-gray-500 text-sm">
+                      No providers match the current filters.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {countryProviders.map((p) => (
+                        <ProviderCard key={p.provider} p={p} />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mb-8">
-                {countryProviders.length} provider{countryProviders.length !== 1 ? "s" : ""} shown
-              </p>
-
-              {countryProviders.length === 0 ? (
-                <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400 text-sm">
-                  No providers match the current filters.
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {countryProviders.map((p) => (
-                    <ProviderCard key={p.provider} p={p} />
-                  ))}
-                </div>
-              )}
             </>
           )}
         </div>

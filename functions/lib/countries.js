@@ -90,7 +90,7 @@ const PREFERRED_SLUG = {
 // Not countries — the "we know the region but not the country" buckets that the
 // provider data uses. They keep working as country options.
 const PSEUDO_COUNTRIES = {
-  "europe": { name: "Europe — other",   flag: "🇪🇺", region: "europe" },
+  "europe": { name: "Europe — no fixed country", flag: "🇪🇺", region: "europe" },
   "global": { name: "Global & industry",     flag: "🌐",             region: "global" },
 };
 
@@ -242,6 +242,8 @@ const REGION_IMAGES = {
   "europe":        "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600",
   "north-america": "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
   "oceania":       "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
+  "asia":          "https://images.pexels.com/photos/16642634/pexels-photo-16642634.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "africa":        "https://images.pexels.com/photos/31832589/pexels-photo-31832589.jpeg?auto=compress&cs=tinysrgb&w=600",
   "global":        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
 };
 

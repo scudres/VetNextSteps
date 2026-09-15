@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { CountryAxis } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import DisclaimerBanner from "./DisclaimerBanner";
 import visaFacts from "../data/visaFacts.json";
@@ -206,6 +207,7 @@ const RouteFinder = () => {
         <meta name="twitter:image" content="https://vetnextstep.com/og-image.png" />
       </Helmet>
       <SharedHeader />
+      <CountryAxis />
       <main className="py-8 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3">Licensing route finder</h1>

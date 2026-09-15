@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
 
@@ -19,13 +20,13 @@ const USAPage = () => {
 
   const programmes = [
     {
-      title: "Internships & Residencies (VIRMP)",
+      title: "Internships and residencies (VIRMP)",
       description: "The Veterinary Internship and Residency Matching Program (VIRMP/MATCH) places graduates into internships and residencies across the USA.",
       route: "/internships-residencies",
-      tag: "Internships & Residencies",
+      tag: "Internships and residencies",
     },
     {
-      title: "Postgraduate Certificates",
+      title: "Postgraduate certificates",
       description: "Advanced certificates and specialist qualifications available after gaining US licensure and clinical experience.",
       route: "/postgraduate-certificates",
       tag: "Certificates",
@@ -58,6 +59,7 @@ const USAPage = () => {
       </Helmet>
 
       <SharedHeader />
+      <CountryAxis here="/usa" />
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">
