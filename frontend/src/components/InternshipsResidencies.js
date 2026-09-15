@@ -211,7 +211,7 @@ const programMatchesFilters = (p, typeFilters, specialtyFilters) => {
 };
 
 const ProgramCard = ({ program }) => (
-  <div id={slugify(program.title)} className="bg-white rounded-xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-sm transition-colors scroll-mt-28">
+  <div id={slugify(program.title)} className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors scroll-mt-28">
     <div className="flex flex-wrap gap-2 mb-3">
       <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">
         {program.type === "internship" && program.internshipType === "rotating"
@@ -475,7 +475,7 @@ const InternshipsResidencies = () => {
                 ).length;
                 return (
                   <Link key={sub.id} to={`/internships-residencies/${region}/${sub.id}`} className="group block">
-                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                    <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
                       <div className="h-48 relative overflow-hidden">
                         <img
                           src={sub.image}
@@ -652,9 +652,14 @@ const InternshipsResidencies = () => {
       <main className="py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Internships and residencies</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="mb-8 pb-5 border-b border-gray-200">
+            <nav aria-label="Breadcrumb" className="mb-3 text-xs text-gray-500">
+              <Link to="/" className="text-blue-800 underline underline-offset-2">Home</Link>
+              <span className="px-1.5 text-gray-400" aria-hidden="true">›</span>
+              <span aria-current="page">Internships and residencies</span>
+            </nav>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Internships and residencies</h1>
+            <p className="mt-2.5 font-serif text-[17px] leading-relaxed text-gray-700 max-w-[58ch]">
               Rotating internships and specialist residency positions across the UK, North America, Europe, and worldwide. Select a region to browse programmes.
             </p>
           </div>
@@ -664,7 +669,7 @@ const InternshipsResidencies = () => {
               const count = programs.filter((p) => p.region === r.id).length;
               return (
                 <Link key={r.id} to={`/internships-residencies/${r.id}`} className="group block">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
                     <div className="h-48 relative overflow-hidden">
                       <img
                         src={r.image}
