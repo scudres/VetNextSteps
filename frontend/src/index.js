@@ -2,6 +2,12 @@ import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
+// Self-hosted: served from our own origin, so font-src 'self' in the CSP
+// covers it and no third-party request is made for a page render.
+import "@fontsource-variable/source-serif-4";
+// Real italics for the note lines; without this the browser slants the
+// upright face, which on a serif looks obviously synthetic.
+import "@fontsource-variable/source-serif-4/wght-italic.css";
 
 const rootElement = document.getElementById("root");
 

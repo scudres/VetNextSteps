@@ -6,6 +6,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // The lede face on listing and guide pages. Georgia is the fallback and
+        // is metrically close enough that the swap is not jarring.
+        serif: ['"Source Serif 4 Variable"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+      },
       colors: {
         // Institutional navy for the utility bar, footer, and axis rules.
         // The blues elsewhere come from the brand icon and are Tailwind's own:
