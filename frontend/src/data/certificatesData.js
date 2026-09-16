@@ -50,3 +50,9 @@ export const TYPE_LABELS = {
   "university-masters":              "University Masters",
   "structured-cpd":                  "Structured CPD",
 };
+
+// Type options for a country page, derived from the programmes actually listed
+// so an option never renders with nothing behind it. The vocabulary is shared:
+// OCEANIA_TYPE_OPTIONS is its full list, not an Oceania-only one.
+export const certTypeOptionsFor = (programs = []) =>
+  OCEANIA_TYPE_OPTIONS.filter((o) => programs.some((p) => p.type === o.value));
