@@ -11,6 +11,7 @@ import { slugify } from "../utils";
 import {
   countryConfig,
   OCEANIA_TYPE_OPTIONS,
+  certTypeOptionsFor,
   TYPE_LABELS,
 } from "../data/certificatesData";
 
@@ -227,7 +228,17 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
 
 // ─── Country sub-pages ────────────────────────────────────────────────────────
 
-const UKSubPage = ({ programs, loading }) => (
+const UKSubPage = ({ programs, loading }) => {
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const toggle = (t) =>
+    setSelectedTypes((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+  // Only offer types the listing actually holds, so no option selects nothing.
+  const options = certTypeOptionsFor(programs);
+  const visible = selectedTypes.length
+    ? programs.filter((p) => selectedTypes.includes(p.type))
+    : programs;
+
+  return (
   <div className="min-h-screen bg-white">
     <Helmet>
       <title>UK Postgraduate Certificates for Vets | VetNextStep</title>
@@ -277,8 +288,15 @@ const UKSubPage = ({ programs, loading }) => (
         </InfoBox>
 
         {loading ? <Spinner /> : (
+          <FilterBar
+            options={options}
+            selected={selectedTypes}
+            onToggle={toggle}
+            onClear={() => setSelectedTypes([])}
+            count={visible.length}
+          >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {programs.map((program) => (
+            {visible.map((program) => (
               <div
                 key={program.title}
                 id={slugify(program.title)}
@@ -293,12 +311,14 @@ const UKSubPage = ({ programs, loading }) => (
               </div>
             ))}
           </div>
+          </FilterBar>
         )}
       </div>
     </main>
     <SharedFooter />
   </div>
-);
+  );
+};
 
 const USASubPage = ({ categories, loading }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
