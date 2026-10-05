@@ -780,5 +780,215 @@
     "lastHeld": "9 Sep 2026",
     "archivedOn": "2026-09-14",
     "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "BSAVA Alba",
+    "organiser": "BSAVA",
+    "location": "Glasgow, UK",
+    "country": "uk",
+    "website": "https://www.bsava.com",
+    "notes": "Successor to BSAVA Congress, which was permanently retired after March 2025.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "General Practice"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "September 2026 — check site",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "CSAVA Annual Congress 2026 (4th)",
+    "organiser": "Chennai Small Animal Veterinary Association",
+    "location": "Radisson Blu, Chennai, India",
+    "country": "india",
+    "website": "https://csava.org/",
+    "notes": "Four co-located events: scientific sessions and clinical lectures (24–26 Sep), canine orthopaedics surgical training and certification (24–26 Sep), the National Clinical Case Contest (25 Sep), and a canine tracheal stenting workshop (26–27 Sep). The two surgical events also use Madras Veterinary College as a second venue.",
+    "regions": [],
+    "specialties": [
+      "General Practice",
+      "Surgery"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "24–27 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ESVN-ECVN Annual Symposium (38th)",
+    "organiser": "European neurology colleges",
+    "location": "Berlin, Germany",
+    "country": "germany",
+    "website": "https://www.ecvnberlin2026.org",
+    "notes": "2026 theme: 'Veterinary encephalitis — bridging animal and human neuroinflammation'.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Neurology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "17–19 Sep 2026 (Residents Day 17th)",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "World Veterinary Orthopaedic Congress (WVOC)",
+    "organiser": "ESVOT + VOS",
+    "location": "Rome, Italy",
+    "country": "italy",
+    "website": "https://www.wvoc2026.org",
+    "notes": "Largest small animal orthopaedic conference in the world; 70+ speakers, 250+ presentations.",
+    "regions": [
+      "europe",
+      "global"
+    ],
+    "specialties": [
+      "Surgery"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "September 2026 — check site",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "IVECCS (32nd)",
+    "organiser": "VECCS",
+    "location": "Savannah Convention Center, GA",
+    "country": "usa",
+    "website": "https://www.veccs.org",
+    "notes": "Leading global emergency and critical care meeting. 2027 TBA.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Emergency & Critical Care"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "14–17 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ACVO Annual Conference",
+    "organiser": "American College of Veterinary Ophthalmologists",
+    "location": "Hyatt Regency Orlando, FL",
+    "country": "usa",
+    "website": "https://www.acvoconference.org/",
+    "notes": "57th annual conference.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Ophthalmology"
+    ],
+    "category": "Ophthalmology",
+    "lastHeld": "23–26 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "AVA Autumn Meeting",
+    "organiser": "Association of Veterinary Anaesthetists",
+    "location": "Thessaloniki, Greece",
+    "country": "greece",
+    "website": "https://www.ava.eu.com/",
+    "notes": "Annual autumn meeting for veterinary anaesthesia professionals.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Anaesthesia"
+    ],
+    "category": "Anaesthesia",
+    "lastHeld": "30 Sep – 2 Oct 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ESVP/ECVP/ESVCP/ECVCP Joint Congress",
+    "organiser": "European pathology & clinical pathology colleges",
+    "location": "Nantes, France",
+    "country": "france",
+    "website": "https://www.ebvs.eu/events-ebvs",
+    "notes": "Joint pathology and clinical pathology congress.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Pathology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "16–19 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ESVCN Congress",
+    "organiser": "European Society of Veterinary & Comparative Nutrition",
+    "location": "Naples, Italy",
+    "country": "italy",
+    "website": "https://esvcn.org/",
+    "notes": "Verify exact dates on official site.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Nutrition"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "16–18 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ECVM International Conference (8th)",
+    "organiser": "European College of Veterinary Microbiology",
+    "location": "Guildford, Surrey, UK",
+    "country": "uk",
+    "website": "https://www.ebvs.eu/events-ebvs",
+    "notes": "",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Microbiology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "16 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "Beyond the Scrubs: Veterinary Women’s Wellness Conference 2026",
+    "organiser": "Beyond the Scrubs",
+    "location": "New Zealand",
+    "country": "new-zealand",
+    "website": "https://beyondthescrubs.co.nz",
+    "notes": "Wellness and professional development conference for women in veterinary practice.",
+    "regions": [
+      "new-zealand"
+    ],
+    "specialties": [
+      "General Practice",
+      "Behaviour & Welfare"
+    ],
+    "category": "Major Congresses",
+    "lastHeld": "15–18 Sep 2026",
+    "archivedOn": "2026-10-05",
+    "cadence": null
   }
 ]
