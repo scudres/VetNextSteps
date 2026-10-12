@@ -16,18 +16,6 @@ const conferences = [
     category: "Major Congresses",
   },
   {
-    title: "BSAVA Alba",
-    organiser: "BSAVA",
-    dates: "September 2026 \u2014 check site",
-    location: "Glasgow, UK",
-    country: "uk",
-    website: "https://www.bsava.com",
-    notes: "Successor to BSAVA Congress, which was permanently retired after March 2025.",
-    regions: ["europe"],
-    specialties: ["General Practice"],
-    category: "Major Congresses",
-  },
-  {
     title: "BVA Live",
     organiser: "BVA / CloserStill Media",
     dates: "2026 \u2014 check official site",
@@ -47,18 +35,6 @@ const conferences = [
     country: "uk",
     website: "https://spvs.org.uk/",
     notes: "Practice business & management focus. Previous edition: 26\u201327 Feb 2026.",
-    regions: ["europe"],
-    specialties: ["General Practice"],
-    category: "Major Congresses",
-  },
-  {
-    title: "BVNA Congress 2026",
-    organiser: "British Veterinary Nursing Association",
-    dates: "9\u201311 Oct 2026",
-    location: "Telford International Centre, UK",
-    country: "uk",
-    website: "https://bvna.org.uk/congress-2/",
-    notes: "Three-day congress dedicated to the veterinary nursing profession. 2026 theme: \u2018Compassion and Empathy\u2019.",
     regions: ["europe"],
     specialties: ["General Practice"],
     category: "Major Congresses",
@@ -180,18 +156,6 @@ const conferences = [
     country: "italy",
     website: "https://www.scivac.it/en",
     notes: "Italy's principal small-animal congress. Dates confirmed through 2029.",
-    regions: ["europe"],
-    specialties: ["General Practice"],
-    category: "Major Congresses",
-  },
-  {
-    title: "Congresso Internacional Veterin\u00e1rio Montenegro (XXII)",
-    organiser: "Hospital Veterin\u00e1rio Montenegro",
-    dates: "9\u201310 Oct 2026",
-    location: "Europarque, Santa Maria da Feira, Portugal",
-    country: "portugal",
-    website: "https://congressohvm.com/",
-    notes: "Portugal's largest companion-animal congress. Delivered in Portuguese; some sessions streamed online carry English subtitles.",
     regions: ["europe"],
     specialties: ["General Practice"],
     category: "Major Congresses",
@@ -331,19 +295,6 @@ const conferences = [
     category: "Major Congresses",
   },
 
-  {
-    title: "CSAVA Annual Congress 2026 (4th)",
-    organiser: "Chennai Small Animal Veterinary Association",
-    dates: "24\u201327 Sep 2026",
-    location: "Radisson Blu, Chennai, India",
-    country: "india",
-    website: "https://csava.org/",
-    notes: "Four co-located events: scientific sessions and clinical lectures (24\u201326 Sep), canine orthopaedics surgical training and certification (24\u201326 Sep), the National Clinical Case Contest (25 Sep), and a canine tracheal stenting workshop (26\u201327 Sep). The two surgical events also use Madras Veterinary College as a second venue.",
-    regions: [],
-    specialties: ["General Practice", "Surgery"],
-    category: "Major Congresses",
-  },
-
   // ——— SPECIALTY — INTERNAL MEDICINE ———
   {
     title: "ECVIM-CA Congress",
@@ -355,20 +306,6 @@ const conferences = [
     notes: "Leading European specialty congress; includes satellite days for endocrinology, nephrology, cardiology, gastroenterology, hepatology, and oncology.",
     regions: ["europe"],
     specialties: ["Internal Medicine", "Cardiology", "Oncology", "Endocrinology", "Gastroenterology"],
-    category: "Specialty Conferences",
-  },
-
-  // ——— SPECIALTY — NEUROLOGY ———
-  {
-    title: "ESVN-ECVN Annual Symposium (38th)",
-    organiser: "European neurology colleges",
-    dates: "17\u201319 Sep 2026 (Residents Day 17th)",
-    location: "Berlin, Germany",
-    country: "germany",
-    website: "https://www.ecvnberlin2026.org",
-    notes: "2026 theme: 'Veterinary encephalitis \u2014 bridging animal and human neuroinflammation'.",
-    regions: ["europe"],
-    specialties: ["Neurology"],
     category: "Specialty Conferences",
   },
 
@@ -397,31 +334,6 @@ const conferences = [
     specialties: ["Surgery"],
     category: "Specialty Conferences",
   },
-  {
-    title: "ACVS Surgery Summit",
-    organiser: "American College of Veterinary Surgeons",
-    dates: "7 Oct 2026 (labs); 8\u201310 Oct 2026 (seminars)",
-    location: "Charlotte Convention Center, NC",
-    country: "usa",
-    website: "https://www.acvs.org/surgery-summit",
-    notes: "2027 lab proposals open Aug 2026.",
-    regions: ["usa"],
-    specialties: ["Surgery"],
-    category: "Specialty Conferences",
-  },
-  {
-    title: "World Veterinary Orthopaedic Congress (WVOC)",
-    organiser: "ESVOT + VOS",
-    dates: "September 2026 \u2014 check site",
-    location: "Rome, Italy",
-    country: "italy",
-    website: "https://www.wvoc2026.org",
-    notes: "Largest small animal orthopaedic conference in the world; 70+ speakers, 250+ presentations.",
-    regions: ["europe", "global"],
-    specialties: ["Surgery"],
-    category: "Specialty Conferences",
-  },
-
   // ——— SPECIALTY — DERMATOLOGY ———
   {
     title: "NAVDF (North American Veterinary Dermatology Forum)",
@@ -461,19 +373,6 @@ const conferences = [
     specialties: ["Emergency & Critical Care"],
     category: "Specialty Conferences",
   },
-  {
-    title: "IVECCS (32nd)",
-    organiser: "VECCS",
-    dates: "14\u201317 Sep 2026",
-    location: "Savannah Convention Center, GA",
-    country: "usa",
-    website: "https://www.veccs.org",
-    notes: "Leading global emergency and critical care meeting. 2027 TBA.",
-    regions: ["usa"],
-    specialties: ["Emergency & Critical Care"],
-    category: "Specialty Conferences",
-  },
-
   // ——— EQUINE ———
   {
     title: "AAEP Annual Convention",
@@ -539,20 +438,6 @@ const conferences = [
     category: "Farm Animal",
   },
 
-  // ——— OPHTHALMOLOGY ———
-  {
-    title: "ACVO Annual Conference",
-    organiser: "American College of Veterinary Ophthalmologists",
-    dates: "23\u201326 Sep 2026",
-    location: "Hyatt Regency Orlando, FL",
-    country: "usa",
-    website: "https://www.acvoconference.org/",
-    notes: "57th annual conference.",
-    regions: ["usa"],
-    specialties: ["Ophthalmology"],
-    category: "Ophthalmology",
-  },
-
   // ——— BEHAVIOUR & WELFARE ———
   {
     title: "BVBA Study Day 2027",
@@ -582,18 +467,6 @@ const conferences = [
   },
 
   // ——— ANAESTHESIA ———
-  {
-    title: "AVA Autumn Meeting",
-    organiser: "Association of Veterinary Anaesthetists",
-    dates: "30 Sep \u2013 2 Oct 2026",
-    location: "Thessaloniki, Greece",
-    country: "greece",
-    website: "https://www.ava.eu.com/",
-    notes: "Annual autumn meeting for veterinary anaesthesia professionals.",
-    regions: ["europe"],
-    specialties: ["Anaesthesia"],
-    category: "Anaesthesia",
-  },
   {
     title: "ACVAA Annual Meeting",
     organiser: "American College of Veterinary Anesthesia & Analgesia",
@@ -646,33 +519,6 @@ const conferences = [
     specialties: ["Pathology"],
     category: "Specialty Conferences",
   },
-  {
-    title: "ESVP/ECVP/ESVCP/ECVCP Joint Congress",
-    organiser: "European pathology & clinical pathology colleges",
-    dates: "16\u201319 Sep 2026",
-    location: "Nantes, France",
-    country: "france",
-    website: "https://www.ebvs.eu/events-ebvs",
-    notes: "Joint pathology and clinical pathology congress.",
-    regions: ["europe"],
-    specialties: ["Pathology"],
-    category: "Specialty Conferences",
-  },
-
-  // ——— NUTRITION ———
-  {
-    title: "ESVCN Congress",
-    organiser: "European Society of Veterinary & Comparative Nutrition",
-    dates: "16\u201318 Sep 2026",
-    location: "Naples, Italy",
-    country: "italy",
-    website: "https://esvcn.org/",
-    notes: "Verify exact dates on official site.",
-    regions: ["europe"],
-    specialties: ["Nutrition"],
-    category: "Specialty Conferences",
-  },
-
   // ——— IMAGING ———
   {
     title: "EVDI Annual Congress 2027",
@@ -700,19 +546,6 @@ const conferences = [
     specialties: ["Sports Medicine"],
     category: "Specialty Conferences",
   },
-  {
-    title: "ECVSMR Scientific Meeting",
-    organiser: "European College of Vet Sports Medicine & Rehab",
-    dates: "8 Oct 2026",
-    location: "'s-Hertogenbosch, Netherlands",
-    country: "netherlands",
-    website: "https://www.ebvs.eu/events-ebvs",
-    notes: "7th ECVSMR scientific meeting.",
-    regions: ["europe"],
-    specialties: ["Sports Medicine"],
-    category: "Specialty Conferences",
-  },
-
   // ——— NEPHROLOGY ———
   {
     title: "Renal Week (IRIS-ACVNU)",
@@ -724,20 +557,6 @@ const conferences = [
     notes: "Biennial; no 2026 edition.",
     regions: ["usa"],
     specialties: ["Internal Medicine"],
-    category: "Specialty Conferences",
-  },
-
-  // ——— MICROBIOLOGY ———
-  {
-    title: "ECVM International Conference (8th)",
-    organiser: "European College of Veterinary Microbiology",
-    dates: "16 Sep 2026",
-    location: "Guildford, Surrey, UK",
-    country: "uk",
-    website: "https://www.ebvs.eu/events-ebvs",
-    notes: "",
-    regions: ["europe"],
-    specialties: ["Microbiology"],
     category: "Specialty Conferences",
   },
 
@@ -780,31 +599,6 @@ const conferences = [
   },
 
   // ——— NEW ZEALAND ———
-  {
-    title: "Beyond the Scrubs: Veterinary Women\u2019s Wellness Conference 2026",
-    organiser: "Beyond the Scrubs",
-    dates: "15\u201318 Sep 2026",
-    location: "New Zealand",
-    country: "new-zealand",
-    website: "https://beyondthescrubs.co.nz",
-    notes: "Wellness and professional development conference for women in veterinary practice.",
-    regions: ["new-zealand"],
-    specialties: ["General Practice", "Behaviour & Welfare"],
-    category: "Major Congresses",
-  },
-  {
-    title: "Eliminating Facial Eczema Impacts Online Course 2026",
-    organiser: "NZVA / VetLearn",
-    dates: "5 Oct 2026",
-    location: "Online",
-    country: "new-zealand",
-    website: "https://www.nzvaevents.org.nz/26shpfe",
-    notes: "Online course: tools to recognise, diagnose, prevent and respond to facial eczema in livestock.",
-    regions: ["new-zealand"],
-    specialties: ["Farm Animal"],
-    format: "online",
-    category: "Farm Animal",
-  },
   {
     title: "CAV Roadshow 2026 \u2014 Normalising the Abnormal",
     organiser: "Companion Animal Veterinarians (CAV) Branch, NZVA",
