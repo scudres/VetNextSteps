@@ -10,14 +10,25 @@
  * date segments, for conferences that move between countries — ECVIM-CA runs Berlin,
  * Rimini, Lisbon; ACVIM Forum runs Seattle then Montreal. An array shorter than the
  * segment list falls back to its first entry rather than yielding undefined.
+ *
+ * `location` may likewise be an array aligned to the date segments, so each edition
+ * keeps its venue and country. Without one, a trailing "(City)" on a segment replaces
+ * the location with just that city.
  */
 function expandMultiYearConferences(arr) {
   const expanded = [];
   for (const conf of arr) {
     const segments = conf.dates.split(";").map((s) => s.trim()).filter(Boolean);
     const countries = Array.isArray(conf.country) ? conf.country : null;
+    const locations = Array.isArray(conf.location) ? conf.location : null;
+    // A single edition cannot use the per-edition arrays, so collapse them to the first.
+    const firstOnly = () => ({
+      ...conf,
+      ...(countries ? { country: countries[0] } : {}),
+      ...(locations ? { location: locations[0] } : {}),
+    });
     if (segments.length <= 1) {
-      expanded.push(countries ? { ...conf, country: countries[0] } : conf);
+      expanded.push(countries || locations ? firstOnly() : conf);
       continue;
     }
     const years = segments.map((s) => {
@@ -27,7 +38,7 @@ function expandMultiYearConferences(arr) {
     const uniqueYears = [...new Set(years.filter(Boolean))];
     if (uniqueYears.length <= 1) {
       // All segments fall within the same year — keep as one entry.
-      expanded.push(countries ? { ...conf, country: countries[0] } : conf);
+      expanded.push(countries || locations ? firstOnly() : conf);
       continue;
     }
     for (const [i, segment] of segments.entries()) {
@@ -36,7 +47,7 @@ function expandMultiYearConferences(arr) {
       expanded.push({
         ...conf,
         dates: segment,
-        location: locMatch ? locMatch[1] : conf.location,
+        location: locations ? locations[i] || locations[0] : locMatch ? locMatch[1] : conf.location,
         ...(countries ? { country: countries[i] || countries[0] } : {}),
       });
     }

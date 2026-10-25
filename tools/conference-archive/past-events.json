@@ -780,5 +780,47 @@
     "lastHeld": "9 Sep 2026",
     "archivedOn": "2026-09-14",
     "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "ECVIM-CA Congress",
+    "organiser": "ECVIM-CA",
+    "location": "Estrel Berlin, Germany",
+    "country": "germany",
+    "website": "https://www.ecvimcongress.org",
+    "notes": "Leading European specialty congress; includes satellite days for endocrinology, nephrology, cardiology, gastroenterology, hepatology, and oncology.",
+    "regions": [
+      "europe"
+    ],
+    "specialties": [
+      "Internal Medicine",
+      "Cardiology",
+      "Oncology",
+      "Endocrinology",
+      "Gastroenterology"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "10–12 Sep 2026",
+    "archivedOn": "2026-10-24",
+    "cadence": null
+  },
+  {
+    "format": "in-person",
+    "title": "IVECCS (32nd)",
+    "organiser": "VECCS",
+    "location": "Savannah Convention Center, GA",
+    "country": "usa",
+    "website": "https://www.veccs.org",
+    "notes": "Leading global emergency and critical care meeting.",
+    "regions": [
+      "usa"
+    ],
+    "specialties": [
+      "Emergency & Critical Care"
+    ],
+    "category": "Specialty Conferences",
+    "lastHeld": "14–17 Sep 2026",
+    "archivedOn": "2026-10-24",
+    "cadence": null
   }
 ]

@@ -595,6 +595,16 @@ const cpdProviders = [
     website: "https://www.milainternational.com/education-center/",
     notes: "Free live RACE-approved CE webinars and clinical / demo videos from this critical-care device manufacturer. Recorded lectures generally not CE-eligible.",
   },
+  {
+    provider: "DVMCE",
+    programme: "Online Veterinary Radiology CE",
+    country: "global",
+    types: ["Online / E-learning"],
+    specialties: ["Diagnostic Imaging"],
+    location: "Online (global)",
+    website: "https://dvmce.com/",
+    notes: "RACE-approved online radiology CE from a board-certified veterinary radiologist. Includes a practical GI radiology course for general practitioners.",
+  },
 ];
 
 module.exports = { cpdProviders };
