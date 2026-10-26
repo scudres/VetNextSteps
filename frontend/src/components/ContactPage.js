@@ -17,7 +17,7 @@ const Field = ({ label, id, error, children }) => (
 );
 
 const inputClass = (hasError) =>
-  `w-full px-4 py-2.5 text-sm text-gray-900 rounded-lg border transition-colors focus:outline-none focus:ring-1 ${
+  `w-full px-4 py-2.5 text-sm text-gray-900 border transition-colors focus:outline-none focus:ring-1 ${
     hasError
       ? "border-red-400 focus:border-red-400 focus:ring-red-400"
       : "border-gray-200 focus:border-blue-400 focus:ring-blue-400"
@@ -154,12 +154,7 @@ const ContactPage = () => {
 
           {/* Success state */}
           {status === "success" && (
-            <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center mb-8">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
+            <div className="bg-green-50 border border-green-200 p-6 mb-8">
               <h2 className="text-base font-semibold text-green-900 mb-1">Message sent</h2>
               <p className="text-sm text-green-800">Thanks for getting in touch — we'll get back to you as soon as we can.</p>
               <button
@@ -180,7 +175,7 @@ const ContactPage = () => {
 
               {/* Error banner */}
               {status === "error" && (
-                <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800">
+                <div className="bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-800">
                   {errorMessage}
                 </div>
               )}
@@ -251,7 +246,7 @@ const ContactPage = () => {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full sm:w-auto inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-3 rounded-lg text-sm font-medium transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center bg-navy hover:bg-[#0f3a63] disabled:bg-gray-400 text-white px-8 py-3 text-sm font-medium transition-colors"
                 >
                   {status === "submitting" ? (
                     <>

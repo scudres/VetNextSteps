@@ -5,9 +5,7 @@ import SharedHeader from "./SharedHeader";
 import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
-import visaFacts from "../data/visaFacts.json";
-
-const { facts } = visaFacts;
+import { GuideLayout, GuideSection, P, H3, Bullets, Callout, FactSheet, Route, NextList, SourceList, ExtLink, fact, linkClass } from "./Guide";
 
 const UKPage = () => {
   const organisations = [
@@ -23,27 +21,24 @@ const UKPage = () => {
 
   const programmes = [
     {
-      title: "Post-graduate Training Programmes",
+      title: "Post-graduate training programmes",
       description: "Structured graduate development programmes with CVS, IVC Evidensia, Linnaeus, Medivet, Vets4Pets, and VetPartners.",
-      route: "/training-programs",
-      tag: "Graduate Programmes",
+      to: "/training-programs",
     },
     {
       title: "Internships and residencies",
       description: "UK university rotating internships, BEVA equine internships, and European College residency programmes.",
-      route: "/internships-residencies",
-      tag: "Internships",
+      to: "/internships-residencies",
     },
     {
       title: "Postgraduate certificates (CertAVP)",
       description: "RCVS-accredited CertAVP programmes from RVC, Edinburgh, Liverpool, Nottingham, and Surrey.",
-      route: "/postgraduate-certificates",
-      tag: "Certificates",
+      to: "/postgraduate-certificates",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-white">
       <Helmet>
         <title>Working as a Vet in the UK | VetNextStep</title>
         <meta name="description" content="Everything new vet graduates need to know about working in the UK — RCVS registration, Skilled Worker Visa, graduate programmes, internships, and CertAVP certificates." />
@@ -70,173 +65,112 @@ const UKPage = () => {
       <SharedHeader />
       <CountryAxis here="/uk" />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-5xl mb-4">🇬🇧</div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Working as a Vet in the UK</h2>
-          <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
-            RCVS registration, visa requirements, graduate programmes, and career development opportunities in the United Kingdom.
-          </p>
-        </div>
-      </section>
+      <GuideLayout
+        crumbs={[{ label: "Home", to: "/" }, { label: "Countries & licensing", to: "/countries" }, { label: "United Kingdom" }]}
+        title="Working as a vet in the UK"
+        lede="Which RCVS registration route applies to your degree, which visa you need and what a sponsor must pay a vet, and how the VetGDP framework works in your first role."
+        toc={[
+          { id: "facts", label: "Key facts" },
+          { id: "registration", label: "RCVS registration" },
+          { id: "visa", label: "Visa and salary threshold" },
+          { id: "first-role", label: "Your first role: VetGDP" },
+          { id: "next", label: "Training and development" },
+          { id: "links", label: "Official links" },
+        ]}
+      >
+        <DisclaimerBanner
+          officialBody={{ name: "RCVS and UK Visas & Immigration (UKVI)", url: "https://www.rcvs.org.uk/registration/" }}
+        />
 
-      <main className="py-8 md:py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <Callout title="Not sure which route applies to you?">
+          <Link to="/uk/first-role" className={linkClass}>Answer three questions</Link> about your degree, visa status and first-job priorities and get only the registration, visa and first-role steps that fit.
+        </Callout>
 
-          <DisclaimerBanner
-            officialBody={{ name: "RCVS and UK Visas & Immigration (UKVI)", url: "https://www.rcvs.org.uk/registration/" }}
+        <GuideSection id="facts" title="Key facts">
+          <FactSheet
+            rows={[
+              {
+                label: "Regulator",
+                value: <>Royal College of Veterinary Surgeons (<ExtLink href="https://www.rcvs.org.uk/registration/">RCVS</ExtLink>). Registration is mandatory before you can practise.</>,
+              },
+              {
+                label: "Degrees accepted",
+                value: <>RCVS-accredited degrees, including those accredited by the AVMA and AVBC, and EAEVE-accredited EU degrees until {fact("uk_eaeve_deadline").value} at the latest. Any other degree needs the RCVS statutory membership exam.</>,
+                facts: ["uk_eaeve_deadline"],
+              },
+              {
+                label: "English",
+                value: "IELTS 7.0 overall (6.5 in one component) or OET Grade B (C+ in one), unless your degree was taught and assessed entirely in English.",
+              },
+              {
+                label: "Visa",
+                value: "Skilled Worker visa, which needs a job offer from a licensed sponsor. Irish citizens need no visa. Citizens of eligible countries, including Australia, Canada and New Zealand, can use the Youth Mobility Scheme.",
+              },
+              {
+                label: "Salary threshold",
+                value: <>{fact("uk_going_rate").value} a year for the standard rate ({fact("uk_going_rate").hourlyValue}, 37.5-hour week) or {fact("uk_new_entrant_rate").value} for new entrants.</>,
+                facts: ["uk_going_rate", "uk_new_entrant_rate"],
+              },
+            ]}
           />
+        </GuideSection>
 
-          {/* Interactive guide CTA */}
-          <Link
-            to="/uk/first-role"
-            className="block bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-xl p-5 md:p-6 shadow-lg transition-colors"
-          >
-            <div className="flex items-center gap-4">
-              <span className="text-3xl flex-shrink-0">🧭</span>
-              <div className="min-w-0">
-                <p className="font-bold text-base md:text-lg mb-0.5">New: interactive first-role guide</p>
-                <p className="text-sm text-blue-100">Answer three questions and get the registration, visa, and first-job steps that apply to your situation.</p>
-              </div>
-              <svg className="ml-auto w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </Link>
+        <GuideSection id="registration" title="Registering with the RCVS">
+          <P>
+            Graduates of RCVS-accredited schools register directly. EAEVE-accredited EU degrees are recognised for now, and the RCVS reviews that arrangement every year. Every other degree needs the statutory membership exam first.
+          </P>
+          <Callout tone="notice" title={`EAEVE recognition ends no later than ${fact("uk_eaeve_deadline").value}`}>
+            After that date only RCVS-accredited degrees are accepted, so an EU graduate registering later would need the statutory exam.
+          </Callout>
+          <P>Whichever route applies, the RCVS also asks for:</P>
+          <Bullets>
+            <li>proof of English language proficiency, unless your degree was taught entirely in English</li>
+            <li>health and character declarations</li>
+            <li>a letter of good standing from your current licensing authority</li>
+          </Bullets>
+          <P>
+            <ExtLink href="https://www.rcvs.org.uk/registration/">RCVS registration information</ExtLink>
+          </P>
+        </GuideSection>
 
-          {/* Visa & Licensing */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Visa & Licensing Requirements</h2>
+        <GuideSection id="visa" title="Visa and salary threshold">
+          <P>
+            EU citizens no longer have an automatic right to work in the UK, so EU and non-EU graduates alike generally need a Skilled Worker visa. That needs a job offer from an employer holding a sponsor licence, and the employer pays the immigration skills charge. An English language assessment may be required.
+          </P>
+          <P>
+            Veterinary surgeons (occupation code 2240) must be paid at least <strong>{fact("uk_going_rate").value} a year</strong> to qualify for sponsorship: a 37.5-hour week at {fact("uk_going_rate").hourlyValue}, effective 22 July 2025. For longer contracted hours, gross salary scales up pro rata to clear that hourly rate. A reduced new entrant rate of <strong>{fact("uk_new_entrant_rate").value}</strong> may apply, for example if you are under 26, your Student or Graduate visa expired within the last {fact("uk_new_entrant_window").value}, or you are working towards professional registration. Check the current{" "}
+            <ExtLink href={fact("uk_going_rate").source}>official going-rates table</ExtLink> before relying on these figures.
+          </P>
+          <H3>The order of events</H3>
+          <Route
+            steps={[
+              { title: "Secure a job offer" },
+              { title: "Employer applies for sponsorship" },
+              { title: "You apply for the visa" },
+              { title: "Complete RCVS registration" },
+              { title: "Health checks", detail: "If required." },
+            ]}
+          />
+        </GuideSection>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-5">Post-Brexit Visa Requirements</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <h4 className="font-semibold text-blue-900 mb-2">EU Citizens</h4>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required (post-Brexit)</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a UK-licensed sponsor needed</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Employer must hold a valid sponsor licence</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No longer automatic right to work in UK</span></li>
-                  </ul>
-                </div>
-                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                  <h4 className="font-semibold text-green-900 mb-2">Non-EU Citizens</h4>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from licensed UK sponsor</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English language assessment may be required</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Immigration skills charge applies to employer</span></li>
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                <p className="text-sm text-yellow-800">
-                  <strong>💷 Salary threshold:</strong> Veterinary surgeons (occupation code 2240) must be paid at least <strong>{facts.uk_going_rate.value}/year</strong> to qualify for Skilled Worker visa sponsorship — a 37.5-hour week at <strong>{facts.uk_going_rate.hourlyValue}</strong>, rate effective 22 July 2025. For longer contracted hours, gross salary must scale up pro rata to clear that hourly rate. A reduced <strong>new entrant rate of {facts.uk_new_entrant_rate.value}</strong> may apply — for example if you are under 26, your Student or Graduate visa expired within the last {facts.uk_new_entrant_window.value}, or you're working towards professional registration. Check the current{" "}
-                  <a href={facts.uk_going_rate.source} target="_blank" rel="noopener noreferrer" className="underline font-medium">official going-rates table</a> before relying on these figures.
-                </p>
-              </div>
-              <div className="mt-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm text-blue-800">
-                  <strong>✅ Process:</strong> Secure job offer → Employer applies for visa sponsorship → You apply for Skilled Worker Visa → Complete RCVS registration → Undergo health checks if required
-                </p>
-              </div>
-            </div>
+        <GuideSection id="first-role" title="Your first role: VetGDP">
+          <P>
+            The Veterinary Graduate Development Programme is mandatory for all new UK graduates and replaces the former Professional Development Phase. You complete it over 12–18 months in your first role, with a VetGDP Adviser, working through Entrustable Professional Activities and earning 52.5 hours of CPD. Annual CPD requirements continue after that to maintain registration.
+          </P>
+          <P>
+            The CertAVP is open once you have clinical experience: <Link to="/postgraduate-certificates" className={linkClass}>browse certificate programmes</Link>.
+          </P>
+        </GuideSection>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <h3 className="text-xl font-bold text-blue-700 mb-5">RCVS Registration</h3>
-              <p className="text-gray-600 mb-5">
-                Registration with the Royal College of Veterinary Surgeons (RCVS) is mandatory before you can practise as a veterinary surgeon in the UK.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Requirements</h4>
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Registration with RCVS is mandatory to practise</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>EAEVE-accredited EU degrees currently recognised — <strong>deadline {facts.uk_eaeve_deadline.value}</strong> (subject to annual RCVS review), after which only RCVS-accredited degrees accepted</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Non-RCVS/non-EAEVE degrees require statutory membership exam</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>English language proficiency required unless degree was taught entirely in English</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character declarations required</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Letter of good standing from current licensing authority</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Graduate Development (VetGDP)</h4>
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>VetGDP mandatory</strong> for all new UK graduates — replaces the former PDP</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Completed over 12–18 months in your first role, earning 52.5 hours CPD</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Structured around Entrustable Professional Activities (EPAs) with a VetGDP Adviser</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Annual CPD requirements to maintain registration thereafter</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>CertAVP available after gaining clinical experience — <Link to="/postgraduate-certificates" className="text-blue-700 hover:underline font-medium">browse certificate programmes</Link></span></li>
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-5">
-                <a
-                  href="https://www.rcvs.org.uk/registration/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm"
-                >
-                  RCVS Registration Information
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </section>
+        <GuideSection id="next" title="Training and development in the UK">
+          <NextList items={programmes} />
+        </GuideSection>
 
-          {/* Programmes */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">UK Programmes & Opportunities</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {programmes.map((prog, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium mb-4">{prog.tag}</span>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{prog.title}</h3>
-                  <p className="text-gray-600 text-sm mb-5">{prog.description}</p>
-                  <Link
-                    to={prog.route}
-                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
-                  >
-                    View all
-                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </section>
+        <GuideSection id="links" title="Official links">
+          <SourceList items={organisations} />
+        </GuideSection>
+      </GuideLayout>
 
-          {/* Key Organisations */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Key Organisations & Links</h2>
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {organisations.map((org, i) => (
-                  <a
-                    key={i}
-                    href={org.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
-                  >
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    <span className="text-sm text-gray-700 group-hover:text-blue-700">{org.name}</span>
-                    <svg className="ml-auto w-4 h-4 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
-
-        </div>
-      </main>
       <SharedFooter />
     </div>
   );

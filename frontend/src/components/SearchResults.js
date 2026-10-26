@@ -62,7 +62,7 @@ const SearchResults = () => {
           {!loading && results.length > 0 && (
             <div className="space-y-3">
               {results.map((result, i) => (
-                <div key={result.navPath ?? result.url ?? i} className="bg-white rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:shadow-sm transition-colors flex flex-col">
+                <div key={result.navPath ?? result.url ?? i} className="bg-white border border-gray-100 p-5 hover:border-blue-200 transition-colors flex flex-col">
                   {/* Section badge */}
                   <span className={`inline-block self-start px-2 py-0.5 rounded text-xs font-medium mb-2 ${sectionColor[result.section] || "bg-gray-100 text-gray-600"}`}>
                     {result.section}
@@ -84,7 +84,7 @@ const SearchResults = () => {
                         href={result.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        className="inline-flex items-center bg-navy hover:bg-[#0f3a63] text-white px-4 py-2 text-sm font-medium transition-colors"
                       >
                         Visit website
                         <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ const SearchResults = () => {
                     ) : (
                       <Link
                         to={result.navPath}
-                        className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        className="inline-flex items-center bg-navy hover:bg-[#0f3a63] text-white px-4 py-2 text-sm font-medium transition-colors"
                       >
                         View on VetNextStep
                         <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

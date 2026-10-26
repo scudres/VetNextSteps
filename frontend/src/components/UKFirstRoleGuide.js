@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
+import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
+import { GuideLayout, ExtLink, linkClass } from "./Guide";
 import visaFacts from "../data/visaFacts.json";
 
 const { facts } = visaFacts;
@@ -77,41 +79,37 @@ const ROLE_STEPS = [
 ];
 
 const StepCard = ({ step, index }) => (
-  <li className="flex items-start gap-3">
-    <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">
-      {index + 1}
-    </span>
+  <li className="flex items-start gap-3 py-3 border-b border-gray-200 last:border-b-0">
+    <span className="tabular-nums text-sm font-bold text-gray-500 w-4 flex-shrink-0 pt-px">{index + 1}</span>
     <div>
-      <p className="text-sm font-semibold text-gray-900 mb-0.5">{step.title}</p>
-      <p className="text-sm text-gray-600 leading-relaxed">{step.body}</p>
+      <p className="text-sm font-bold text-gray-900 mb-0.5">{step.title}</p>
+      <p className="text-sm text-gray-700 leading-relaxed max-w-[68ch]">{step.body}</p>
       {step.href && (
-        <a href={step.href} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline">
-          Official information →
-        </a>
+        <p className="mt-1 text-sm"><ExtLink href={step.href}>Official information</ExtLink></p>
       )}
       {step.to && (
-        <Link to={step.to} className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline">
-          View on VetNextStep →
-        </Link>
+        <p className="mt-1 text-sm"><Link to={step.to} className={linkClass}>View on VetNextStep</Link></p>
       )}
     </div>
   </li>
 );
 
 const QuestionBlock = ({ number, title, options, selected, onSelect }) => (
-  <section className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-    <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-5">
-      <span className="text-blue-600 mr-2">{number}.</span>{title}
+  <section className="mt-10 first:mt-0 pt-8 border-t border-gray-200 first:pt-0 first:border-t-0">
+    <h2 className="text-xl font-bold tracking-tight text-gray-900 mb-4">
+      <span className="tabular-nums text-gray-500 mr-2">{number}</span>{title}
     </h2>
-    <div className="flex flex-wrap gap-2 mb-5">
+    <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label={title}>
       {options.map((opt) => (
         <button
           key={opt.id}
+          type="button"
+          aria-pressed={selected === opt.id}
           onClick={() => onSelect(opt.id)}
-          className={`px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
+          className={`px-3.5 py-2 border text-sm text-left transition-colors ${
             selected === opt.id
-              ? "bg-blue-600 text-white border-blue-600"
-              : "bg-white text-gray-700 border-gray-300 hover:border-blue-400 hover:text-blue-700"
+              ? "bg-[#0c2b4b] text-white border-[#0c2b4b]"
+              : "bg-white text-gray-900 border-gray-300 hover:border-blue-800"
           }`}
         >
           {opt.label}
@@ -119,7 +117,7 @@ const QuestionBlock = ({ number, title, options, selected, onSelect }) => (
       ))}
     </div>
     {selected && (
-      <ol className="space-y-4 bg-blue-50 border border-blue-100 rounded-lg p-5">
+      <ol className="border-t border-gray-300">
         {options.find((o) => o.id === selected).steps.map((step, i) => (
           <StepCard key={i} step={step} index={i} />
         ))}
@@ -133,7 +131,7 @@ const UKFirstRoleGuide = () => {
   const [visa, setVisa] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-white">
       <Helmet>
         <title>Getting Your First Vet Job in the UK — Step-by-Step Guide | VetNextStep</title>
         <meta name="description" content="Interactive step-by-step guide to your first veterinary role in the UK: RCVS registration routes by degree, Skilled Worker visa requirements, and VetGDP — tailored to your situation." />
@@ -159,27 +157,26 @@ const UKFirstRoleGuide = () => {
       </Helmet>
 
       <SharedHeader />
+      <CountryAxis here="/uk" />
 
-      <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-5xl mb-4">🧭</div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Your First UK Role, Step by Step</h1>
-          <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
-            Answer three questions and get the registration, visa, and first-job steps that apply to you.
-          </p>
-        </div>
-      </section>
-
-      <main className="py-8 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-
+      <GuideLayout
+        crumbs={[
+          { label: "Home", to: "/" },
+          { label: "Countries & licensing", to: "/countries" },
+          { label: "United Kingdom", to: "/uk" },
+          { label: "Your first UK role" },
+        ]}
+        title="Your first UK role, step by step"
+        lede="Three questions about your degree, your visa status and what you want from a first job. Each answer shows the registration, visa or job-search steps that apply."
+      >
+        <div className="max-w-3xl">
           <DisclaimerBanner
             officialBody={{ name: "RCVS and UK Visas & Immigration (UKVI)", url: "https://www.rcvs.org.uk/registration/" }}
           />
 
           <QuestionBlock
             number={1}
-            title="Where did you qualify (or where will you)?"
+            title="Where did you qualify, or where will you?"
             options={QUALIFICATION_OPTIONS}
             selected={qualification}
             onSelect={setQualification}
@@ -193,25 +190,22 @@ const UKFirstRoleGuide = () => {
             onSelect={setVisa}
           />
 
-          <section className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-            <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-5">
-              <span className="text-blue-600 mr-2">3.</span>Finding the right first role
+          <section className="mt-10 pt-8 border-t border-gray-200">
+            <h2 className="text-xl font-bold tracking-tight text-gray-900 mb-4">
+              <span className="tabular-nums text-gray-500 mr-2">3</span>Finding the right first role
             </h2>
-            <ol className="space-y-4 bg-green-50 border border-green-100 rounded-lg p-5">
+            <ol className="border-t border-gray-300">
               {ROLE_STEPS.map((step, i) => (
                 <StepCard key={i} step={step} index={i} />
               ))}
             </ol>
           </section>
 
-          <div className="text-center pt-2">
-            <Link to="/uk" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
-              ← Full UK licensing &amp; visa guide
-            </Link>
-          </div>
-
+          <p className="mt-10 text-sm">
+            <Link to="/uk" className={linkClass}>Read the full UK licensing and visa guide</Link>
+          </p>
         </div>
-      </main>
+      </GuideLayout>
 
       <SharedFooter />
     </div>

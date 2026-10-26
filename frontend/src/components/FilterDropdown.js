@@ -40,15 +40,15 @@ const FilterDropdown = ({
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((o) => !o)}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm font-medium transition-colors ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 border text-sm font-medium transition-colors ${
           count > 0
-            ? "bg-blue-600 text-white border-blue-600"
+            ? "bg-navy text-white border-navy"
             : "bg-white text-gray-700 border-gray-300 hover:border-gray-500"
         }`}
       >
         {label}
         {count > 0 && (
-          <span className="bg-white/25 text-xs rounded-full px-1.5 min-w-[18px] text-center leading-5">
+          <span className="bg-white/25 text-xs px-1.5 min-w-[18px] text-center leading-5">
             {count}
           </span>
         )}
@@ -64,7 +64,7 @@ const FilterDropdown = ({
 
       {open && (
         <div
-          className={`absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl shadow-lg z-50 py-2 min-w-[200px] max-h-72 overflow-y-auto ${menuClassName}`}
+          className={`absolute top-full mt-2 left-0 bg-white border border-gray-200 shadow-lg z-50 py-2 min-w-[200px] max-h-72 overflow-y-auto ${menuClassName}`}
         >
           {options.map((opt) => {
             const val = getValue(opt);

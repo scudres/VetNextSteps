@@ -165,7 +165,7 @@ const UsefulResources = () => (
             href="https://vetlit.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-md transition-all flex flex-col gap-2"
+            className="group bg-white border border-gray-200 p-5 hover:border-blue-300 flex flex-col gap-2"
           >
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">
@@ -192,7 +192,7 @@ const UsefulResources = () => (
                   href={resource.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-md transition-all flex flex-col gap-2"
+                  className="group bg-white border border-gray-200 p-5 hover:border-blue-300 flex flex-col gap-2"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">

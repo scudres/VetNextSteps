@@ -235,7 +235,7 @@ const SharedHeader = () => {
             </span>
           </Link>
 
-          <div className="flex-1 max-w-md ml-auto relative" ref={searchRef}>
+          <div className="flex-1 min-w-0 max-w-md ml-auto relative" ref={searchRef}>
             <div className="flex border-[1.5px] border-navy">
               <input
                 type="text"
@@ -250,7 +250,7 @@ const SharedHeader = () => {
               <button
                 type="button"
                 onClick={() => searchTerm.trim().length >= 2 && goToSearchPage(searchTerm)}
-                className="bg-navy text-white px-4 text-sm font-medium hover:bg-[#0f3a63]"
+                className="flex-shrink-0 bg-navy text-white px-3 sm:px-4 text-sm font-medium hover:bg-[#0f3a63]"
               >
                 Search
               </button>

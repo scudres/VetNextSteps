@@ -26,19 +26,19 @@ const NotFound = () => (
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center bg-navy hover:bg-[#0f3a63] text-white px-5 py-2.5 text-sm font-medium transition-colors"
           >
             Go to homepage
           </Link>
           <Link
             to="/licensing-route"
-            className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center border border-gray-300 hover:border-navy hover:text-navy text-gray-700 px-5 py-2.5 text-sm font-medium transition-colors"
           >
             Licensing route finder
           </Link>
           <Link
             to="/cpd"
-            className="inline-flex items-center border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center border border-gray-300 hover:border-navy hover:text-navy text-gray-700 px-5 py-2.5 text-sm font-medium transition-colors"
           >
             CPD & Conferences
           </Link>

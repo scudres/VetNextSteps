@@ -3,9 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import { CountryAxis } from "./PathwayRail";
-import AcronymTooltip from "./AcronymTooltip";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
+import { GuideLayout, GuideSection, P, Bullets, Callout, Route, linkClass } from "./Guide";
 
 // Promoted from the old homepage "?tab=countries" query-param view to its own
 // indexable URL — the comparison table and per-country summaries had no URL
@@ -13,7 +13,7 @@ import SharedFooter from "./SharedFooter";
 
 const comparisonData = {
   UK: {
-    label: "United Kingdom 🇬🇧",
+    label: "United Kingdom",
     body: "RCVS (Royal College of Veterinary Surgeons)",
     exam: "None for RCVS-recognised degrees, including AVMA, AVBC and (until Jan 2029) EAEVE schools; RCVS Statutory Exam for all others",
     mainVisa: "Skilled Worker Visa; Youth Mobility if from Australia, Canada or New Zealand",
@@ -23,7 +23,7 @@ const comparisonData = {
     demand: "High — small animal GP especially",
   },
   USA: {
-    label: "United States 🇺🇸",
+    label: "United States",
     body: "State veterinary board (each state has its own)",
     exam: "NAVLE (all grads) + ECFVG or PAVE (non-AVMA grads only)",
     mainVisa: "H-1B, TN (Canadian and Mexican citizens), E-3 (Australian citizens) or J-1 (employer arranges)",
@@ -33,7 +33,7 @@ const comparisonData = {
     demand: "High nationally",
   },
   Canada: {
-    label: "Canada 🇨🇦",
+    label: "Canada",
     body: "Provincial regulatory body (varies by province)",
     exam: "NAVLE only for AVMA/CVMA-accredited degrees; otherwise an NEB Certificate of Qualification (BCSE, NAVLE, CPE) or the NEB + PAVE route",
     mainVisa: "Express Entry or Provincial Nominee Program (PNP)",
@@ -43,7 +43,7 @@ const comparisonData = {
     demand: "High — especially rural and northern regions",
   },
   Australia: {
-    label: "Australia 🇦🇺",
+    label: "Australia",
     body: "State/territory board (AVBC sets national standards)",
     exam: "None for AVBC-recognised degrees (including UK schools via the RCVS agreement); AVE for all others",
     mainVisa: "482 Skills in Demand (employer sponsor), 189/190/491 skilled migration, or 417/462 Working Holiday",
@@ -64,27 +64,12 @@ const comparisonRows = [
   { key: "demand",   label: "Demand level"       },
 ];
 
-const StepBar = ({ steps }) => (
-  <div className="flex items-start mb-4">
-    {steps.map((s, i) => (
-      <div key={i} className="flex-1 flex flex-col items-center relative">
-        {i < steps.length - 1 && (
-          <div className="absolute top-3 left-1/2 w-full h-0.5 bg-blue-100"></div>
-        )}
-        <div className="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center z-10 flex-shrink-0">
-          {i + 1}
-        </div>
-        <p className="text-xs text-center text-gray-500 mt-1.5 leading-tight px-0.5">{s}</p>
-      </div>
-    ))}
-  </div>
-);
-
 const countries = [
   {
     name: "Australia",
     code: "Australia",
-    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
+    path: "/australia",
+    steps: ["AVBC recognition", "State board", "Visa application", "Start work"],
     highlights: [
       "Your degree needs to be AVBC-recognised — if not, you'll sit the AVE exam",
       "Skills in Demand visa (482) with employer sponsorship is the most common route",
@@ -94,7 +79,8 @@ const countries = [
   {
     name: "Canada",
     code: "Canada",
-    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600",
+    path: "/canada",
+    steps: ["Credential assessment", "BCSE exam", "NAVLE exam", "Provincial licence", "Immigration"],
     highlights: [
       "Licence through your province's own regulatory body",
       "CVMA manages credential assessment for overseas graduates",
@@ -104,7 +90,8 @@ const countries = [
   {
     name: "United Kingdom",
     code: "UK",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600",
+    path: "/uk",
+    steps: ["Secure job offer", "Skilled Worker visa", "RCVS registration", "Health checks"],
     highlights: [
       "Register with RCVS before you start practising",
       "CertAVP is the main postgrad certificate route — multiple universities offer it",
@@ -114,7 +101,8 @@ const countries = [
   {
     name: "United States",
     code: "USA",
-    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
+    path: "/usa",
+    steps: ["Work visa", "ECFVG or PAVE", "NAVLE exam", "State licence"],
     highlights: [
       "Sit the NAVLE in your target state — required in all 50",
       "Apply through VIRMP if you want a rotating internship before specialist training",
@@ -123,6 +111,8 @@ const countries = [
   },
 ];
 
+// Same order as the registration strip under the menu.
+const GUIDE_ORDER = ["UK", "USA", "Canada", "Australia"];
 const COUNTRY_CODES = Object.keys(comparisonData);
 const DEFAULT_COMPARE = ["UK", "Australia"];
 
@@ -193,352 +183,97 @@ const Countries = () => {
       </Helmet>
       <SharedHeader />
       <CountryAxis />
-      <main className="py-8 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Countries & Licensing</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-5">
-              Pick your destination. Below you'll find the registration steps, visa routes, and key exams for each country.
-            </p>
-            <Link
-              to="/licensing-route"
-              className="inline-flex items-center border border-blue-600 text-blue-600 hover:bg-blue-50 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-            >
-              Find your route step by step
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+      <GuideLayout
+        crumbs={[{ label: "Home", to: "/" }, { label: "Countries & licensing" }]}
+        title="Countries & Licensing"
+        lede="Registration body, exams, visa route and typical timeline for the UK, USA, Canada and Australia, side by side, with the steps for each country in order."
+      >
+        <DisclaimerBanner officialBody={null} />
 
-          <div className="mb-10">
-            <DisclaimerBanner officialBody={null} />
-          </div>
+        <Callout title="Know where you qualified and where you want to work?">
+          The <Link to="/licensing-route" className={linkClass}>licensing route finder</Link> lists the registration, exam and visa steps for that route, in order.
+        </Callout>
 
-          {/* Country nav cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
-            {countries.map((country) => (
-              <a key={country.code} href={`#country-${country.code.toLowerCase()}`} className="group block">
-                <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-colors">
-                  <div className="h-40 relative overflow-hidden">
-                    <img
-                      src={country.image}
-                      srcSet={`${country.image.replace('w=600', 'w=400')} 400w, ${country.image} 600w, ${country.image.replace('w=600', 'w=900')} 900w`}
-                      sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      alt={country.name}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      width="600"
-                      height="400"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div className="absolute bottom-3 left-4 text-white">
-                      <h3 className="text-lg font-bold">{country.name}</h3>
-                    </div>
-                  </div>
-                  <div className="px-4 py-3 flex items-center justify-between">
-                    <span className="text-sm text-gray-500">Visa & licensing</span>
-                    <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                      View
-                      <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* Country comparison builder — selection is URL-encoded so the table is shareable */}
-          <div className="mb-16 border border-gray-200 rounded-xl overflow-hidden">
-            <div className="bg-gray-50 border-b border-gray-200 px-6 py-4 flex flex-wrap items-center gap-3">
-              <span className="text-sm font-semibold text-gray-700">Compare countries</span>
-              {compareList.map((code, index) => (
-                <div key={code} className="flex items-center gap-1">
-                  <select
-                    value={code}
-                    onChange={(e) => changeCompareCountry(index, e.target.value)}
-                    className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 focus:border-blue-400 focus:outline-none"
-                  >
-                    {COUNTRY_CODES.map((k) => (
-                      <option key={k} value={k}>{comparisonData[k].label}</option>
-                    ))}
-                  </select>
-                  {compareList.length > 2 && (
-                    <button
-                      onClick={() => removeCompareCountry(index)}
-                      aria-label={`Remove ${comparisonData[code].label} from comparison`}
-                      className="text-gray-400 hover:text-gray-600 px-1 text-sm"
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
-              ))}
-              {compareList.length < 4 && (
-                <button
-                  onClick={addCompareCountry}
-                  className="px-3 py-1.5 text-sm border border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors"
+        <GuideSection id="compare" title="Compare countries side by side">
+          {/* The selection is URL-encoded so the table is shareable */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            {compareList.map((code, index) => (
+              <div key={code} className="flex items-center gap-1">
+                <select
+                  value={code}
+                  onChange={(e) => changeCompareCountry(index, e.target.value)}
+                  aria-label={`Country ${index + 1}`}
+                  className="px-2.5 py-1.5 text-sm border border-gray-300 bg-white text-gray-900 focus:border-blue-800 focus:outline-none"
                 >
-                  + Add country
-                </button>
-              )}
+                  {COUNTRY_CODES.map((k) => (
+                    <option key={k} value={k}>{comparisonData[k].label}</option>
+                  ))}
+                </select>
+                {compareList.length > 2 && (
+                  <button
+                    onClick={() => removeCompareCountry(index)}
+                    aria-label={`Remove ${comparisonData[code].label} from comparison`}
+                    className="text-gray-500 hover:text-gray-900 px-1.5 text-sm"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            ))}
+            {compareList.length < 4 && (
               <button
-                onClick={copyCompareLink}
-                className="ml-auto px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 hover:border-blue-400 hover:text-blue-600 transition-colors"
+                onClick={addCompareCountry}
+                className="px-2.5 py-1.5 text-sm border border-gray-300 bg-white text-blue-800 hover:border-blue-800"
               >
-                {linkCopied ? "Link copied" : "Copy link"}
+                Add a country
               </button>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="text-left px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide w-36"></th>
+            )}
+            <button
+              onClick={copyCompareLink}
+              className="sm:ml-auto px-2.5 py-1.5 text-sm border border-gray-300 bg-white text-blue-800 hover:border-blue-800"
+            >
+              {linkCopied ? "Link copied" : "Copy link to this comparison"}
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[40rem] text-sm border-t border-gray-300">
+              <caption className="sr-only">Registration, exams, visas and timelines for the selected countries</caption>
+              <thead>
+                <tr>
+                  <td className="border-b border-gray-300 w-36" />
+                  {compareList.map((code) => (
+                    <th key={code} scope="col" className="text-left align-bottom font-bold text-gray-900 py-2 pr-5 border-b border-gray-300">
+                      {comparisonData[code].label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row) => (
+                  <tr key={row.key}>
+                    <th scope="row" className="text-left align-top font-semibold text-gray-900 py-2.5 pr-5 border-b border-gray-200">{row.label}</th>
                     {compareList.map((code) => (
-                      <th key={code} className="text-left px-6 py-3 text-sm font-semibold text-gray-900">{comparisonData[code].label}</th>
+                      <td key={code} className="align-top leading-relaxed text-gray-700 py-2.5 pr-5 border-b border-gray-200">{comparisonData[code][row.key]}</td>
                     ))}
                   </tr>
-                </thead>
-                <tbody>
-                  {comparisonRows.map((row, i) => (
-                    <tr key={row.key} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                      <td className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">{row.label}</td>
-                      {compareList.map((code) => (
-                        <td key={code} className="px-6 py-3 text-gray-700">{comparisonData[code][row.key]}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
+        </GuideSection>
 
-          {/* UK */}
-          <section id="country-uk" className="mb-16 scroll-mt-28">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇬🇧</span>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">United Kingdom</h2>
-              </div>
-              <Link to="/uk" className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                Full guide
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">What you need to know</h3>
-                <ul className="space-y-2.5">
-                  {countries.find(c => c.code === "UK").highlights.map((h, i) => (
-                    <li key={i} className="flex items-start text-gray-700 text-sm">
-                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 mt-1.5 flex-shrink-0"></span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-5">Visa & Licensing</h3>
-                <StepBar steps={["Secure job offer", "Skilled Worker Visa", "RCVS registration", "Health checks"]} />
-                <div className="space-y-3 mt-2">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm"><AcronymTooltip term="RCVS">RCVS</AcronymTooltip> Registration</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Mandatory before practising in the UK</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>EU qualifications may be recognised; non-EU degrees require assessment</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English proficiency and health compliance required</span></li>
-                    </ul>
-                  </div>
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <h4 className="font-semibold text-blue-900 mb-2 text-sm">Post-Brexit Visa</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required for most non-UK nationals (Irish citizens need none; Youth Mobility for Australia, Canada and New Zealand)</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a licensed UK sponsor needed before applying</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No automatic right to work for EU citizens post-Brexit</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* USA */}
-          <section id="country-usa" className="mb-16 scroll-mt-28">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇺🇸</span>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h2>
-              </div>
-              <Link to="/usa" className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                Full guide
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">What you need to know</h3>
-                <ul className="space-y-2.5">
-                  {countries.find(c => c.code === "USA").highlights.map((h, i) => (
-                    <li key={i} className="flex items-start text-gray-700 text-sm">
-                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 mt-1.5 flex-shrink-0"></span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-5">Visa & Licensing</h3>
-                <StepBar steps={["Work visa", "ECFVG / PAVE", "NAVLE exam", "State licence"]} />
-                <div className="space-y-3 mt-2">
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <h4 className="font-semibold text-blue-900 mb-2 text-sm">Work Visa</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Non-U.S. citizens require an appropriate work visa (e.g. H-1B or J-1)</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="AVMA">AVMA</AcronymTooltip> does not issue visas — your employer arranges this via USCIS</span></li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm">Credential Verification (non-AVMA grads)</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="ECFVG">ECFVG</AcronymTooltip> (AVMA): credential check, English test, BCSE, clinical exam</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="PAVE">PAVE</AcronymTooltip> (<AcronymTooltip term="AAVSB">AAVSB</AcronymTooltip>): alternative route — check your state accepts it first</span></li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm">State Licensing</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span><AcronymTooltip term="NAVLE">NAVLE</AcronymTooltip> required in all 50 states (360 questions)</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Each state has additional requirements — contact your state board directly</span></li>
-                    </ul>
-                  </div>
-                  <div className="p-3 bg-red-50 rounded-lg border border-red-200">
-                    <p className="text-xs text-red-800"><strong>Important:</strong> State requirements vary significantly — always verify with the specific state board before you start.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Canada */}
-          <section id="country-canada" className="mb-16 scroll-mt-28">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇨🇦</span>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Canada</h2>
-              </div>
-              <Link to="/canada" className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                Full guide
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">What you need to know</h3>
-                <ul className="space-y-2.5">
-                  {countries.find(c => c.code === "Canada").highlights.map((h, i) => (
-                    <li key={i} className="flex items-start text-gray-700 text-sm">
-                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 mt-1.5 flex-shrink-0"></span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-5">Visa & Licensing</h3>
-                <StepBar steps={["ECA assessment", "BCSE exam", "NAVLE exam", "Provincial licence", "Immigration"]} />
-                <div className="space-y-3 mt-2">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-red-50 p-3 rounded-lg border border-red-200">
-                      <h4 className="font-semibold text-red-900 mb-1 text-xs">Federal Skilled Worker</h4>
-                      <p className="text-xs text-gray-700">Points-based Express Entry system with language and credential requirements</p>
-                    </div>
-                    <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                      <h4 className="font-semibold text-blue-900 mb-1 text-xs">Provincial Nominee (<AcronymTooltip term="PNP">PNP</AcronymTooltip>)</h4>
-                      <p className="text-xs text-gray-700">Province-specific; job offer may be required; faster PR possible</p>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm">Licensing Steps</h4>
-                    <ol className="text-sm text-gray-700 space-y-1">
-                      <li><span className="font-semibold text-blue-700">1.</span> <AcronymTooltip term="ECA">ECA</AcronymTooltip> — credential assessment via <AcronymTooltip term="CVMA">CVMA</AcronymTooltip></li>
-                      <li><span className="font-semibold text-blue-700">2.</span> <AcronymTooltip term="NEB">NEB</AcronymTooltip> exams — <AcronymTooltip term="BCSE">BCSE</AcronymTooltip> then <AcronymTooltip term="NAVLE">NAVLE</AcronymTooltip></li>
-                      <li><span className="font-semibold text-blue-700">3.</span> Provincial licence — requirements vary by province</li>
-                      <li><span className="font-semibold text-blue-700">4.</span> Immigration — work permit or PR pathway</li>
-                    </ol>
-                  </div>
-                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-xs text-green-800"><strong>Tip:</strong> Contact both CVMA and your target province's regulatory body — requirements differ significantly between provinces.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Australia */}
-          <section id="country-australia" className="mb-16 scroll-mt-28">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇦🇺</span>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Australia</h2>
-              </div>
-              <Link to="/australia" className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                Full guide
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">What you need to know</h3>
-                <ul className="space-y-2.5">
-                  {countries.find(c => c.code === "Australia").highlights.map((h, i) => (
-                    <li key={i} className="flex items-start text-gray-700 text-sm">
-                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 mt-1.5 flex-shrink-0"></span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-100 p-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-5">Visa & Licensing</h3>
-                <StepBar steps={["AVBC recognition", "State board", "Visa application", "Start work"]} />
-                <div className="space-y-3 mt-2">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-                      <h4 className="font-semibold text-yellow-900 mb-1 text-xs">Skills in Demand (482)</h4>
-                      <p className="text-xs text-gray-700">Employer-sponsored temporary visa — most common route for overseas vets</p>
-                    </div>
-                    <div className="bg-green-50 p-3 rounded-lg border border-green-200">
-                      <h4 className="font-semibold text-green-900 mb-1 text-xs">Skilled Migration (189/190/491)</h4>
-                      <p className="text-xs text-gray-700">Points-based permanent residency — vets are on the skilled occupation list</p>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm">Registration Requirements</h4>
-                    <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Degree must be <AcronymTooltip term="AVBC">AVBC</AcronymTooltip>-recognised, or you'll need to sit the <AcronymTooltip term="AVE">AVE</AcronymTooltip> exam</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>State/territory veterinary board registration required</span></li>
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English proficiency (IELTS or OET) required</span></li>
-                    </ul>
-                  </div>
-                  <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                    <p className="text-xs text-yellow-800"><strong>Note:</strong> Vets are in demand across regional and rural Australia, which strengthens PR visa applications.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
+        {GUIDE_ORDER.map((code) => countries.find((c) => c.code === code)).map((country) => (
+          <GuideSection key={country.code} id={`country-${country.code.toLowerCase()}`} title={`${country.name}: the route in order`}>
+            <Route steps={country.steps.map((title) => ({ title }))} />
+            <Bullets>
+              {country.highlights.map((h) => <li key={h}>{h}</li>)}
+            </Bullets>
+            <P>
+              <Link to={country.path} className={linkClass}>Read the full {country.name} guide</Link>
+            </P>
+          </GuideSection>
+        ))}
+      </GuideLayout>
       <SharedFooter />
     </div>
   );

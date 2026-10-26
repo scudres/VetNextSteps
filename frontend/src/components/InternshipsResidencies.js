@@ -7,63 +7,52 @@ import SharedFooter from "./SharedFooter";
 import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
 import FilterSidebar from "./FilterSidebar";
+import IndexList from "./IndexList";
 import { slugify } from "../utils";
 
 const regionConfig = [
   {
     id: "europe",
     name: "Europe",
-    flag: "🇪🇺",
-    image: "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "north-america",
     name: "North America",
-    flag: "🌎",
-    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "uk",
     name: "United Kingdom",
-    flag: "🇬🇧",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: "worldwide",
     name: "Worldwide",
-    flag: "🌍",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80"
   },
 ];
 
-// Intermediate three-tile configuration for regions that split into sub-categories.
-// All images from Pexels — free for commercial use, no attribution required.
-// Selected to reflect the diversity of the veterinary profession (majority female; varied backgrounds).
+// One line on what sits behind each region, where the site already says so.
+const REGION_NOTES = {
+  europe: "EBVS colleges, university teaching hospitals and corporate groups",
+  uk: "EBVS colleges, university teaching hospitals and corporate groups",
+  "north-america": "VIRMP positions, which need the NAVLE and state or provincial licensure",
+};
+
+// Sub-categories for the regions that split into them.
 const subCategoryConfig = {
   europe: [
     {
       id: "college",
       name: "EBVS Specialist Colleges",
       description: "Residency programmes administered by European Board of Veterinary Specialisation (EBVS) member colleges — the recognised route to European diplomate status.",
-      emoji: "🎓",
-      // Pexels #33674900 — professional portrait of Black woman in scrubs (Enson)
-      image: "https://images.pexels.com/photos/33674900/pexels-photo-33674900.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "university",
       name: "University Teaching Hospitals",
       description: "Rotating internships and residency positions at European veterinary faculties and their accredited teaching hospitals.",
-      emoji: "🏫",
-      // Pexels #7469274 — diverse clinical team (two women + vet) caring for a dog (Mikhail Nilov)
-      image: "https://images.pexels.com/photos/7469274/pexels-photo-7469274.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "corporate",
       name: "Corporate Groups & Employers",
       description: "Internships, residencies, and graduate programmes at pan-European corporate veterinary groups and specialist employers.",
-      emoji: "🏥",
-      // Pexels #6234610 — Black female clinical assistant + vet performing ultrasound on dog (Tima Miroshnichenko)
-      image: "https://images.pexels.com/photos/6234610/pexels-photo-6234610.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
   ],
   uk: [
@@ -71,25 +60,16 @@ const subCategoryConfig = {
       id: "college",
       name: "EBVS Specialist Colleges",
       description: "Residency programmes at UK training centres affiliated with European Board of Veterinary Specialisation (EBVS) colleges — the recognised route to European diplomate status.",
-      emoji: "🎓",
-      // Pexels #33674900 — professional portrait of Black woman in scrubs (Enson)
-      image: "https://images.pexels.com/photos/33674900/pexels-photo-33674900.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "university",
       name: "University Teaching Hospitals",
       description: "Rotating internships and specialist residency programmes at UK veterinary schools and their accredited teaching hospitals.",
-      emoji: "🏫",
-      // Pexels #7469274 — diverse clinical team (two women + vet) caring for a dog (Mikhail Nilov)
-      image: "https://images.pexels.com/photos/7469274/pexels-photo-7469274.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "corporate",
       name: "Corporate Groups & Referral Centres",
       description: "Internships and residency programmes at the UK's leading corporate veterinary groups and private specialist referral hospitals.",
-      emoji: "🏥",
-      // Pexels #6234610 — Black female clinical assistant + vet performing ultrasound on dog (Tima Miroshnichenko)
-      image: "https://images.pexels.com/photos/6234610/pexels-photo-6234610.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
   ],
 };
@@ -212,8 +192,8 @@ const programMatchesFilters = (p, typeFilters, specialtyFilters) => {
 
 const ProgramCard = ({ program }) => (
   <div id={slugify(program.title)} className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors scroll-mt-28">
-    <div className="flex flex-wrap gap-2 mb-3">
-      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium capitalize">
+    <p className="text-xs text-gray-600 mb-3">
+      <span className="font-bold text-navy capitalize">
         {program.type === "internship" && program.internshipType === "rotating"
           ? "Rotating Internship"
           : program.type === "internship" && program.internshipType === "discipline-specific"
@@ -224,11 +204,9 @@ const ProgramCard = ({ program }) => (
           ? "Internship & Residency"
           : program.type}
       </span>
-      <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs capitalize">{program.species}</span>
-      {program.specialties && program.specialties.length > 0 && program.specialties.map((s) => (
-        <span key={s} className="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full text-xs">{s}</span>
-      ))}
-    </div>
+      <span className="capitalize">, {program.species}</span>
+      {program.specialties && program.specialties.length > 0 && <span>, {program.specialties.join(", ")}</span>}
+    </p>
     <h3 className="text-lg font-semibold text-gray-900 mb-1">{program.title}</h3>
     <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
     <p className="text-gray-600 text-sm leading-relaxed mb-5">{program.description}</p>
@@ -236,7 +214,7 @@ const ProgramCard = ({ program }) => (
       href={program.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+      className="inline-flex items-center border border-navy text-navy hover:bg-navy hover:text-white px-3.5 py-1.5 text-sm font-medium"
     >
       Visit Programme
       <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -353,10 +331,9 @@ const InternshipsResidencies = () => {
 
             {/* Section header */}
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">{subCatCfg.emoji}</span>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{subCatCfg.name}</h1>
-                <p className="text-sm text-gray-500 mt-0.5">{cfg.flag} {cfg.name}</p>
+                <p className="text-sm text-gray-500 mt-0.5">{cfg.name}</p>
               </div>
               {!loading && (
                 <span className="ml-auto text-sm text-gray-400">
@@ -460,53 +437,26 @@ const InternshipsResidencies = () => {
             </div>
 
             {/* Region header */}
-            <div className="flex items-center gap-3 mb-10">
-              <span className="text-4xl">{cfg.flag}</span>
+            <div className="mb-8">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
             </div>
 
-            {/* Sub-category tiles */}
-            <div className={`grid grid-cols-1 gap-6 ${subCats.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
-              {subCats.map((sub) => {
+            {/* Sub-categories */}
+            <IndexList
+              items={subCats.map((sub) => {
                 // EBVS colleges are pan-European — count from europe list for uk/college tile
                 const countRegion = (region === "uk" && sub.id === "college") ? "europe" : region;
                 const count = programs.filter(
                   (p) => p.region === countRegion && getSubCategory(p) === sub.id
                 ).length;
-                return (
-                  <Link key={sub.id} to={`/internships-residencies/${region}/${sub.id}`} className="group block">
-                    <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
-                      <div className="h-48 relative overflow-hidden">
-                        <img
-                          src={sub.image}
-                          alt={sub.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-3 left-4 text-white">
-                          <div className="text-2xl mb-1">{sub.emoji}</div>
-                          <h2 className="text-lg font-bold leading-tight">{sub.name}</h2>
-                        </div>
-                      </div>
-                      <div className="px-4 py-4 bg-white">
-                        <p className="text-sm text-gray-600 leading-relaxed mb-3">{sub.description}</p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-400">
-                            {loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`}
-                          </span>
-                          <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                            Browse
-                            <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                );
+                return {
+                  to: `/internships-residencies/${region}/${sub.id}`,
+                  name: sub.name,
+                  note: sub.description,
+                  count: loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`,
+                };
               })}
-            </div>
+            />
 
           </div>
         </main>
@@ -567,7 +517,6 @@ const InternshipsResidencies = () => {
 
             {/* Section header */}
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-              <span className="text-3xl">{cfg.flag}</span>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{cfg.name}</h1>
               {!loading && (
                 <span className="ml-auto text-sm text-gray-400">
@@ -664,45 +613,17 @@ const InternshipsResidencies = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {regionConfig.map((r) => {
+          <IndexList
+            items={regionConfig.map((r) => {
               const count = programs.filter((p) => p.region === r.id).length;
-              return (
-                <Link key={r.id} to={`/internships-residencies/${r.id}`} className="group block">
-                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
-                    <div className="h-48 relative overflow-hidden">
-                      <img
-                        src={r.image}
-                        srcSet={`${r.image.replace('w=600', 'w=400')} 400w, ${r.image} 600w, ${r.image.replace('w=600', 'w=900')} 900w`}
-                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        alt={r.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-                      <div className="absolute bottom-3 left-4 text-white">
-                        <div className="text-2xl mb-1">{r.flag}</div>
-                        <h2 className="text-lg font-bold leading-tight">{r.name}</h2>
-                      </div>
-                    </div>
-                    <div className="px-4 py-3 flex items-center justify-between bg-white">
-                      <span className="text-sm text-gray-500">
-                        {loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`}
-                      </span>
-                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View all
-                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
+              return {
+                to: `/internships-residencies/${r.id}`,
+                name: r.name,
+                note: REGION_NOTES[r.id],
+                count: loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`,
+              };
             })}
-          </div>
+          />
 
         </div>
       </main>

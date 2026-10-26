@@ -45,7 +45,7 @@ const AcronymTooltip = ({ term, children }) => {
         <div
           id={`tooltip-${term}`}
           role="tooltip"
-          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-60 bg-gray-900 text-white text-xs rounded-lg p-3 shadow-xl pointer-events-none"
+          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-60 bg-gray-900 text-white text-xs p-3 pointer-events-none"
         >
           <p className="font-semibold text-blue-300 mb-1">{entry.full}</p>
           <p className="text-gray-300 leading-snug">{entry.note}</p>

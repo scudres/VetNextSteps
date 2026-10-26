@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
+import IndexList from "./IndexList";
 import { loadData, getCached } from "../dataCache";
 import { slugify } from "../utils";
 import { countryConfig as allCountries } from "../data/certificatesData";
@@ -178,7 +179,7 @@ const TrainingPrograms = () => {
                       href={program.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                      className="inline-flex items-center border border-navy text-navy hover:bg-navy hover:text-white px-3.5 py-1.5 text-sm font-medium"
                     >
                       Visit Programme
                       <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -240,45 +241,16 @@ const TrainingPrograms = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {countryConfig.map((c) => {
+          <IndexList
+            items={countryConfig.map((c) => {
               const count = programs[c.id]?.length ?? 0;
-              return (
-                <Link key={c.id} to={`/training-programs/${c.id}`} className="group block">
-                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
-                    <div className="h-48 relative overflow-hidden">
-                      <img
-                        src={c.image}
-                        srcSet={`${c.image.replace('w=600', 'w=400')} 400w, ${c.image} 600w, ${c.image.replace('w=600', 'w=900')} 900w`}
-                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        alt={c.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-                      <div className="absolute bottom-3 left-4 text-white">
-                        <div className="text-2xl mb-1">{c.flag}</div>
-                        <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
-                      </div>
-                    </div>
-                    <div className="px-4 py-3 flex items-center justify-between bg-white">
-                      <span className="text-sm text-gray-500">
-                        {loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`}
-                      </span>
-                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View all
-                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
+              return {
+                to: `/training-programs/${c.id}`,
+                name: c.name,
+                count: loading ? "Loading…" : `${count} programme${count !== 1 ? "s" : ""}`,
+              };
             })}
-          </div>
+          />
 
         </div>
       </main>

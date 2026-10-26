@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
+import IndexList from "./IndexList";
 import { loadData, getCached } from "../dataCache";
 import FilterDropdown from "./FilterDropdown";
 import FilterSidebar from "./FilterSidebar";
@@ -56,7 +57,7 @@ const VisitButton = ({ url }) => (
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+    className="inline-flex items-center border border-navy text-navy hover:bg-navy hover:text-white px-3.5 py-1.5 text-sm font-medium"
   >
     Visit Programme
     <ExternalLinkIcon />
@@ -94,11 +95,7 @@ const Spinner = () => (
 /** USA-style card — shows credential badge, country, format and notes. */
 const ProgramCard = ({ id, credential, title, organisation, country, format, notes, url }) => (
   <div id={id} className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col scroll-mt-28">
-    <div className="mb-3">
-      <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold tracking-wide">
-        {credential}
-      </span>
-    </div>
+    <p className="mb-3 text-xs font-bold text-navy">{credential}</p>
     <h3 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
     <p className="text-sm text-blue-600 font-medium mb-1">{organisation}</p>
     <p className="text-xs text-gray-400 mb-3">{country}</p>
@@ -114,11 +111,7 @@ const ProgramCard = ({ id, credential, title, organisation, country, format, not
 const SimpleCard = ({ program }) => (
   <div className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col">
     {program.type && (
-      <div className="mb-3">
-        <span className="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium">
-          {TYPE_LABELS[program.type] || program.type}
-        </span>
-      </div>
+      <p className="mb-3 text-xs font-bold text-navy">{TYPE_LABELS[program.type] || program.type}</p>
     )}
     <h3 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{program.title}</h3>
     <p className="text-sm text-blue-600 font-medium mb-3">{program.organisation}</p>
@@ -154,7 +147,7 @@ const FilterBar = ({ options, selected, onToggle, onClear, count, children }) =>
 
 // ─── Shared layout for Oceania (AU / NZ) pages ───────────────────────────────
 
-const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoBox, careerGuideLink }) => {
+const OceaniaPageLayout = ({ programs, loading, helmet, countryName, infoBox, careerGuideLink }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
 
   const toggle = (val) =>
@@ -181,7 +174,6 @@ const OceaniaPageLayout = ({ programs, loading, helmet, flag, countryName, infoB
           <BackLink />
 
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-            <span className="text-3xl">{flag}</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{countryName}</h1>
             {!loading && (
               <span className="ml-auto text-sm text-gray-400">
@@ -262,7 +254,6 @@ const UKSubPage = ({ programs, loading }) => {
         <BackLink />
 
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-          <span className="text-3xl">🇬🇧</span>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United Kingdom</h1>
           {!loading && <span className="ml-auto text-sm text-gray-400">{programs.length} programmes</span>}
         </div>
@@ -361,7 +352,6 @@ const USASubPage = ({ categories, loading }) => {
           <BackLink />
 
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-            <span className="text-3xl">🇺🇸</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">United States</h1>
             {!loading && (
               <span className="ml-auto text-sm text-gray-400">
@@ -439,7 +429,6 @@ const CanadaSubPage = () => (
         <BackLink />
 
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-          <span className="text-3xl">🇨🇦</span>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Canada</h1>
         </div>
 
@@ -459,14 +448,14 @@ const CanadaSubPage = () => (
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/postgraduate-certificates/usa"
-            className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center justify-center bg-navy hover:bg-[#0f3a63] text-white px-5 py-2.5 text-sm font-medium"
           >
             View USA programmes
             <ChevronRight />
           </Link>
           <Link
             to="/canada"
-            className="inline-flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-50 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center justify-center border border-navy text-navy hover:bg-slate-50 px-5 py-2.5 text-sm font-medium"
           >
             View Canada career guide
             <ChevronRight />
@@ -482,7 +471,6 @@ const AustraliaSubPage = ({ programs, loading }) => (
   <OceaniaPageLayout
     programs={programs}
     loading={loading}
-    flag="🇦🇺"
     countryName="Australia"
     helmet={
       <Helmet>
@@ -525,7 +513,6 @@ const NewZealandSubPage = ({ programs, loading }) => (
   <OceaniaPageLayout
     programs={programs}
     loading={loading}
-    flag="🇳🇿"
     countryName="New Zealand"
     helmet={
       <Helmet>
@@ -616,42 +603,16 @@ const HubPage = ({ certData, loading }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {countryConfig.map((c) => {
+          <IndexList
+            items={countryConfig.map((c) => {
               const count = loading ? null : getCount(c.id);
-              return (
-                <Link key={c.id} to={`/postgraduate-certificates/${c.id}`} className="group block">
-                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
-                    <div className="h-48 relative overflow-hidden">
-                      <img
-                        src={c.image}
-                        alt={c.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                      <div className="absolute bottom-3 left-4 text-white">
-                        <div className="text-2xl mb-1">{c.flag}</div>
-                        <h2 className="text-lg font-bold leading-tight">{c.name}</h2>
-                      </div>
-                    </div>
-                    <div className="px-4 py-3 flex items-center justify-between bg-white">
-                      <span className="text-sm text-gray-500">
-                        {loading
-                          ? "Loading…"
-                          : count !== null
-                          ? `${count} programme${count !== 1 ? "s" : ""}`
-                          : "Coming soon"}
-                      </span>
-                      <span className="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View all
-                        <ChevronRight />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
+              return {
+                to: `/postgraduate-certificates/${c.id}`,
+                name: c.name,
+                count: loading ? "Loading…" : count !== null ? `${count} programme${count !== 1 ? "s" : ""}` : "Coming soon",
+              };
             })}
-          </div>
+          />
         </div>
       </main>
       <SharedFooter />

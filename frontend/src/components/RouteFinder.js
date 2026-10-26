@@ -5,6 +5,7 @@ import SharedHeader from "./SharedHeader";
 import { CountryAxis } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
 import DisclaimerBanner from "./DisclaimerBanner";
+import { GuideLayout, Callout, ExtLink, linkClass } from "./Guide";
 import visaFacts from "../data/visaFacts.json";
 import { formatShortDate } from "../utils";
 
@@ -162,11 +163,11 @@ const FactLine = ({ factKey }) => {
   const f = visaFacts.facts[factKey];
   if (!f) return null;
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 mt-2 text-xs text-gray-600 leading-relaxed">
-      <span className="font-semibold text-gray-900">{f.value}</span> — {f.detail}.{" "}
-      <a href={f.source} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Source</a>
-      {" · "}verified {formatVerified(f.verified)}
-    </div>
+    <p className="border-l-2 border-gray-300 pl-3 mt-2 text-xs text-gray-600 leading-relaxed max-w-[68ch]">
+      <span className="font-bold text-gray-900">{f.value}</span>: {f.detail}.{" "}
+      <a href={f.source} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline underline-offset-2">Source</a>
+      {", "}verified {formatVerified(f.verified)}
+    </p>
   );
 };
 
@@ -208,21 +209,20 @@ const RouteFinder = () => {
       </Helmet>
       <SharedHeader />
       <CountryAxis />
-      <main className="py-8 md:py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3">Licensing route finder</h1>
-          <p className="text-gray-600 mb-8">
-            Pick where you qualified and where you want to work — the registration, exam, and visa steps for that route, in order.
-          </p>
-
-          {/* Route selection — encoded in the URL so a chosen route is a shareable link */}
-          <div className="flex flex-wrap items-end gap-4 mb-8 p-5 bg-gray-50 border border-gray-200 rounded-xl">
+      <GuideLayout
+        crumbs={[{ label: "Home", to: "/" }, { label: "Countries & licensing", to: "/countries" }, { label: "Licensing route finder" }]}
+        title="Licensing route finder"
+        lede="Choose where you qualified and where you want to work. The registration, exam and visa steps for that route follow, in order."
+      >
+        <div className="max-w-3xl">
+          {/* Route selection is encoded in the URL so a chosen route is a shareable link */}
+          <div className="flex flex-wrap items-end gap-4 mb-8 px-4 py-4 bg-slate-50 border-l-4" style={{ borderLeftColor: "#0c2b4b" }}>
             <label className="block">
-              <span className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">I qualified in</span>
+              <span className="block text-[13px] font-bold text-gray-600 mb-1.5">I qualified in</span>
               <select
                 value={from}
                 onChange={(e) => setRoute("from", e.target.value)}
-                className="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white text-gray-900 focus:border-blue-400 focus:outline-none"
+                className="px-2.5 py-2 text-sm border border-gray-300 bg-white text-gray-900 focus:border-blue-800 focus:outline-none"
               >
                 {ORIGINS.map((o) => (
                   <option key={o.id} value={o.id}>{o.label}</option>
@@ -230,11 +230,11 @@ const RouteFinder = () => {
               </select>
             </label>
             <label className="block">
-              <span className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">I want to work in</span>
+              <span className="block text-[13px] font-bold text-gray-600 mb-1.5">I want to work in</span>
               <select
                 value={to}
                 onChange={(e) => setRoute("to", e.target.value)}
-                className="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white text-gray-900 focus:border-blue-400 focus:outline-none"
+                className="px-2.5 py-2 text-sm border border-gray-300 bg-white text-gray-900 focus:border-blue-800 focus:outline-none"
               >
                 {Object.entries(DESTINATIONS).map(([id, d]) => (
                   <option key={id} value={id}>{d.name}</option>
@@ -243,65 +243,51 @@ const RouteFinder = () => {
             </label>
           </div>
 
-          {/* Route summary */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 text-sm text-gray-600">
-            <span className="text-2xl">{dest.flag}</span>
-            <span><span className="font-semibold text-gray-900">Registration body:</span> {dest.body}</span>
-            <span><span className="font-semibold text-gray-900">Typical timeline:</span> {dest.timeline}</span>
-          </div>
+          <dl className="border-t border-gray-300 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-[11rem_minmax(0,1fr)] gap-x-6 py-3 border-b border-gray-200">
+              <dt className="text-sm font-bold text-gray-900">Registration body</dt>
+              <dd className="text-[15px] text-gray-700">{dest.body}</dd>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-[11rem_minmax(0,1fr)] gap-x-6 py-3 border-b border-gray-200">
+              <dt className="text-sm font-bold text-gray-900">Typical timeline</dt>
+              <dd className="text-[15px] text-gray-700">{dest.timeline}</dd>
+            </div>
+          </dl>
 
           {sameCountry && (
-            <p className="text-sm text-gray-500 mb-8 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
-              The steps below are for internationally qualified vets. If you qualified in {dest.name}, most won't apply —{" "}
-              <Link to={dest.guidePath} className="text-blue-600 hover:underline font-medium">see the full {dest.name} guide</Link>{" "}
+            <Callout>
+              These steps are for internationally qualified vets. If you qualified in {dest.name}, most will not apply.{" "}
+              <Link to={dest.guidePath} className={linkClass}>Read the full {dest.name} guide</Link>{" "}
               for career development options instead.
-            </p>
+            </Callout>
           )}
 
-          {/* Steps — sequential, so numbered */}
-          <ol className="space-y-6 mb-10">
+          {/* Steps are sequential, so numbered */}
+          <ol className="border-t border-gray-300 mb-8">
             {dest.steps.map((step, i) => (
-              <li key={step.title} className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center mt-0.5">
-                  {i + 1}
-                </div>
+              <li key={step.title} className="flex gap-4 py-4 border-b border-gray-200">
+                <span className="tabular-nums text-sm font-bold text-gray-500 w-4 flex-shrink-0 pt-0.5">{i + 1}</span>
                 <div className="min-w-0">
-                  <h2 className="text-base font-semibold text-gray-900 mb-1">{step.title}</h2>
-                  <p className="text-sm text-gray-600 leading-relaxed">{step.body(from)}</p>
+                  <h2 className="text-base font-bold text-gray-900 mb-1">{step.title}</h2>
+                  <p className="text-[15px] text-gray-700 leading-relaxed max-w-[68ch]">{step.body(from)}</p>
                   {step.facts && step.facts.map((k) => <FactLine key={k} factKey={k} />)}
                   {step.link && (
-                    <a
-                      href={step.link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center mt-2 text-sm font-medium text-blue-600 hover:text-blue-800"
-                    >
-                      {step.link.label}
-                      <svg className="ml-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
+                    <p className="mt-2 text-sm">
+                      <ExtLink href={step.link.url}>{step.link.label}</ExtLink>
+                    </p>
                   )}
                 </div>
               </li>
             ))}
           </ol>
 
-          <div className="mb-10">
-            <Link
-              to={dest.guidePath}
-              className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-            >
-              Full {dest.name} guide
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+          <p className="mb-8 text-sm">
+            <Link to={dest.guidePath} className={`${linkClass} font-bold`}>Read the full {dest.name} guide</Link>
+          </p>
 
           <DisclaimerBanner officialBody={dest.officialBody} />
         </div>
-      </main>
+      </GuideLayout>
       <SharedFooter />
     </div>
   );

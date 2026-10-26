@@ -13,6 +13,7 @@ import {
   countryConfig, conferenceInRegion, browseConfig, conferenceInScope, countriesForRegions,
 } from "../data/conferencesData";
 import { slugify } from "../utils";
+import IndexList from "./IndexList";
 import { upcomingOnly } from "../data/conferenceDates";
 import { parseDateRange, buildICS, downloadICS } from "../ics";
 
@@ -319,10 +320,7 @@ const CPDPage = () => {
 
             {/* Region header */}
             <div className="mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-4xl">{cfg.flag}</span>
-                <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">{cfg.name}</h1>
-              </div>
+              <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-2">{cfg.name}</h1>
               <p className="text-gray-500 text-lg">
                 Upcoming veterinary conferences and congresses
                 {cfg.kind === "country" && cfg.region && (
@@ -448,48 +446,14 @@ const CPDPage = () => {
                   </div>
 
                   {/* Region nav cards */}
-                  <h2 className="text-lg font-semibold text-gray-700 mb-5">International Vet CE &amp; CPD — Browse by Region</h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">
-                    {regionConfig.filter((r) => countForRegionCard(r.id) > 0).map((r) => {
-                      const count = countForRegionCard(r.id);
-                      return (
-                        <Link key={r.id} to={`/cpd/${r.id}`} className="group block">
-                          <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-800 transition-colors">
-                            <div className="h-32 relative overflow-hidden">
-                              {r.image ? (
-                                <img
-                                  src={r.image}
-                                  srcSet={`${r.image.replace('w=600', 'w=400')} 400w, ${r.image} 600w, ${r.image.replace('w=600', 'w=900')} 900w`}
-                                  sizes="(min-width: 1280px) 16vw, (min-width: 640px) 33vw, 100vw"
-                                  alt={r.name}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                  loading="lazy"
-                                  width="600"
-                                  height="400"
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
-                                  <span className="text-4xl" aria-hidden="true">{r.flag}</span>
-                                </div>
-                              )}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                              <div className="absolute bottom-3 left-3 text-white">
-                                <h3 className="text-sm font-bold leading-tight">{r.name}</h3>
-                              </div>
-                            </div>
-                            <div className="px-3 py-2 flex items-center justify-between bg-white">
-                              <span className="text-xs text-gray-500">{count === 0 ? "No events" : `${count} event${count !== 1 ? "s" : ""}`}</span>
-                              <span className="text-blue-600 text-xs font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                                View all
-                                <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                              </span>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                  <h2 className="text-lg font-semibold text-gray-700 mb-3">International Vet CE &amp; CPD: browse by region</h2>
+                  <div className="mb-10">
+                    <IndexList
+                      items={regionConfig.filter((r) => countForRegionCard(r.id) > 0).map((r) => {
+                        const count = countForRegionCard(r.id);
+                        return { to: `/cpd/${r.id}`, name: r.name, count: `${count} event${count !== 1 ? "s" : ""}` };
+                      })}
+                    />
                   </div>
 
                   {/* Filters + listing */}

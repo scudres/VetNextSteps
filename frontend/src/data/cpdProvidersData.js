@@ -3,43 +3,36 @@ export const providerCountryConfig = [
     id: "australia",
     name: "Australia",
     flag: "\uD83C\uDDE6\uD83C\uDDFA",
-    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=80",
   },
   {
     id: "canada",
     name: "Canada",
     flag: "\uD83C\uDDE8\uD83C\uDDE6",
-    image: "https://images.pexels.com/photos/11862814/pexels-photo-11862814.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "europe",
     name: "Europe",
     flag: "\uD83C\uDDEA\uD83C\uDDFA",
-    image: "https://images.pexels.com/photos/9494908/pexels-photo-9494908.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "new-zealand",
     name: "New Zealand",
     flag: "\uD83C\uDDF3\uD83C\uDDFF",
-    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&q=80",
   },
   {
     id: "uk",
     name: "United Kingdom",
     flag: "\uD83C\uDDEC\uD83C\uDDE7",
-    image: "https://images.pexels.com/photos/30721230/pexels-photo-30721230.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "usa",
     name: "United States",
     flag: "\uD83C\uDDFA\uD83C\uDDF8",
-    image: "https://images.pexels.com/photos/16156721/pexels-photo-16156721.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "global",
     name: "Global & Industry",
     flag: "\uD83C\uDF10",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
   },
 ];
 

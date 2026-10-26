@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import { PathwayRail } from "./PathwayRail";
 import SharedFooter from "./SharedFooter";
+import IndexList from "./IndexList";
 import FilterDropdown from "./FilterDropdown";
 import FilterSidebar from "./FilterSidebar";
 import { loadData, getCached } from "../dataCache";
@@ -21,12 +22,6 @@ const BackChevron = () => (
   </svg>
 );
 
-const ForwardChevron = () => (
-  <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-  </svg>
-);
-
 const ExternalLinkIcon = () => (
   <svg className="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -39,12 +34,7 @@ const ProviderCard = ({ p }) => (
     id={slugify(p.provider)}
     className="bg-white border border-gray-100 p-6 hover:border-blue-200 transition-colors flex flex-col scroll-mt-28"
   >
-    {/* Type badges */}
-    <div className="flex flex-wrap gap-1.5 mb-3">
-      {p.types.map((t) => (
-        <span key={t} className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">{t}</span>
-      ))}
-    </div>
+    <p className="mb-3 text-xs font-bold text-navy">{p.types.join(", ")}</p>
 
     {/* Provider & programme */}
     <h4 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{p.provider}</h4>
@@ -79,7 +69,7 @@ const ProviderCard = ({ p }) => (
         href={p.website}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        className="inline-flex items-center border border-navy text-navy hover:bg-navy hover:text-white px-3.5 py-1.5 text-sm font-medium"
       >
         Visit Website
         <ExternalLinkIcon />
@@ -134,45 +124,14 @@ const HubPage = ({ allProviders, loading, error }) => (
         {error   && <div className="text-center py-20 text-red-500 text-sm">Could not load provider data. Please refresh the page.</div>}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {providerRegionConfig
+          <IndexList
+            items={providerRegionConfig
               .filter((c) => allProviders.some((p) => providerInRegion(p, c.id)))
               .map((c) => {
-              const count = allProviders.filter((p) => providerInRegion(p, c.id)).length;
-              return (
-                <Link key={c.id} to={`/cpd/providers/${c.id}`} className="group block">
-                  <div className="bg-white border border-gray-200 overflow-hidden hover:border-blue-300 transition-all">
-                    <div className="h-32 relative overflow-hidden">
-                      {c.image ? (
-                        <img
-                          src={c.image}
-                          alt={c.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
-                          <span className="text-4xl" aria-hidden="true">{c.flag}</span>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                      <div className="absolute bottom-3 left-3 text-white">
-                        <div className="flex items-center gap-2">
-                          <span className="text-xl">{c.flag}</span>
-                          <h3 className="text-sm font-bold leading-tight">{c.name}</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-3 py-2 flex items-center justify-between bg-white">
-                      <span className="text-xs text-gray-500">{count} provider{count !== 1 ? "s" : ""}</span>
-                      <span className="text-blue-600 text-xs font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                        View all <ForwardChevron />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                const count = allProviders.filter((p) => providerInRegion(p, c.id)).length;
+                return { to: `/cpd/providers/${c.id}`, name: c.name, count: `${count} provider${count !== 1 ? "s" : ""}` };
+              })}
+          />
         )}
       </div>
     </main>

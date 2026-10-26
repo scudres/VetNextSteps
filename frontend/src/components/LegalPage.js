@@ -93,7 +93,7 @@ const LegalPage = () => {
               </Section>
 
               <Section id="terms-immigration" title="3. Immigration Information — Important Notice">
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div className="bg-amber-50 border border-amber-200 p-4">
                   <p className="font-semibold text-amber-900 mb-2">This Site does not provide regulated immigration advice.</p>
                   <p className="text-amber-800">
                     In the United Kingdom, providing immigration advice is a regulated activity under the{" "}
@@ -210,7 +210,7 @@ const LegalPage = () => {
           {/* ——— PRIVACY POLICY ——— */}
           {active === "privacy" && (
             <div>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+              <div className="bg-blue-50 border border-blue-200 p-4 mb-8">
                 <p className="text-sm text-blue-900">
                   This Privacy Policy is provided in compliance with the <strong>UK General Data Protection
                   Regulation (UK GDPR)</strong> and the <strong>Data Protection Act 2018</strong>. It explains
@@ -236,7 +236,7 @@ const LegalPage = () => {
                   However, data is collected automatically when you visit the Site:
                 </p>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+                  <table className="w-full text-sm border border-gray-200 overflow-hidden">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="text-left px-4 py-2 font-semibold text-gray-700 border-b border-gray-200">Data type</th>
@@ -272,7 +272,7 @@ const LegalPage = () => {
 
               <Section id="privacy-lawful" title="3. Lawful Basis for Processing">
                 <div className="space-y-3">
-                  <div className="border border-gray-100 rounded-lg p-3">
+                  <div className="border border-gray-100 p-3">
                     <p className="font-semibold text-gray-800 text-xs mb-1">Analytics data (Google Analytics)</p>
                     <p className="text-xs text-gray-600">
                       Processed under the <strong>statistical purposes exception</strong> in Section 112 of the
@@ -281,7 +281,7 @@ const LegalPage = () => {
                       understanding Site usage. See the Cookies tab for full configuration details.
                     </p>
                   </div>
-                  <div className="border border-gray-100 rounded-lg p-3">
+                  <div className="border border-gray-100 p-3">
                     <p className="font-semibold text-gray-800 text-xs mb-1">Contact form data</p>
                     <p className="text-xs text-gray-600">
                       Processed on the basis of <strong>Legitimate Interests</strong> (Article 6(1)(f) UK GDPR)
@@ -365,7 +365,7 @@ const LegalPage = () => {
                     ["Right to restriction (Article 18)", "You may request that processing is restricted in certain circumstances, for example while an objection is being considered."],
                     ["Right to opt out of analytics (DUAA 2025)", "You may opt out of analytics data collection at any time — see the Cookies tab for how to do this. No opt-in is required; analytics operates on an opt-out basis under the statistical purposes exception."],
                   ].map(([right, desc], i) => (
-                    <div key={i} className="border border-gray-100 rounded-lg p-3">
+                    <div key={i} className="border border-gray-100 p-3">
                       <p className="font-semibold text-gray-800 text-xs mb-1">{right}</p>
                       <p className="text-xs text-gray-600">{desc}</p>
                     </div>
@@ -400,7 +400,7 @@ const LegalPage = () => {
                   <strong>Information Commissioner's Office (ICO)</strong> — the UK supervisory authority
                   for data protection:
                 </p>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
+                <div className="bg-gray-50 border border-gray-200 p-4 text-sm">
                   <p className="font-semibold text-gray-800 mb-1">Information Commissioner's Office</p>
                   <p>Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF</p>
                   <p>Helpline: 0303 123 1113</p>
@@ -433,7 +433,7 @@ const LegalPage = () => {
           {/* ——— COOKIES ——— */}
           {active === "cookies" && (
             <div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+              <div className="bg-amber-50 border border-amber-200 p-4 mb-8">
                 <p className="text-sm text-amber-900">
                   This Cookie Policy is provided in compliance with the{" "}
                   <strong>Privacy and Electronic Communications Regulations 2003 (PECR)</strong> as amended,
@@ -456,7 +456,7 @@ const LegalPage = () => {
                   cookies are used.
                 </p>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+                  <table className="w-full text-sm border border-gray-200 overflow-hidden">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="text-left px-4 py-2 font-semibold text-gray-700 border-b border-gray-200">Cookie name</th>
@@ -509,7 +509,7 @@ const LegalPage = () => {
                 <p>
                   Even under the DUAA exception, you have the right to opt out at any time. See Section 4 below for how to do this.
                 </p>
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-900">
+                <div className="bg-blue-50 border border-blue-200 p-4 text-xs text-blue-900">
                   <strong>Note:</strong> The DUAA 2025 does not permit analytics cookies to be used for advertising measurement, user profiling, or any purpose beyond understanding aggregate site usage. We do not use analytics data for any of these purposes.
                 </div>
               </Section>
@@ -517,7 +517,7 @@ const LegalPage = () => {
               <Section id="cookies-control" title="4. How to Control Cookies">
                 <p>You can manage or disable cookies in several ways:</p>
                 <div className="space-y-3">
-                  <div className="border border-gray-100 rounded-lg p-4">
+                  <div className="border border-gray-100 p-4">
                     <p className="font-semibold text-gray-800 text-sm mb-1">Google Analytics opt-out</p>
                     <p>
                       Install the{" "}
@@ -532,7 +532,7 @@ const LegalPage = () => {
                       to prevent your data from being used by Google Analytics across all websites.
                     </p>
                   </div>
-                  <div className="border border-gray-100 rounded-lg p-4">
+                  <div className="border border-gray-100 p-4">
                     <p className="font-semibold text-gray-800 text-sm mb-1">Browser settings</p>
                     <p>
                       Most browsers allow you to block or delete cookies via their settings. Instructions
@@ -550,7 +550,7 @@ const LegalPage = () => {
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1 text-xs border border-gray-200 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors"
+                          className="px-3 py-1 text-xs border border-gray-200 text-blue-600 hover:bg-blue-50 transition-colors"
                         >
                           {name}
                         </a>
@@ -569,7 +569,7 @@ const LegalPage = () => {
           {/* ——— COPYRIGHT ——— */}
           {active === "ip" && (
             <div>
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-8">
+              <div className="bg-gray-50 border border-gray-200 p-4 mb-8">
                 <p className="text-sm text-gray-800">
                   The content on this Site is protected under the{" "}
                   <strong>Copyright, Designs and Patents Act 1988</strong> and applicable international

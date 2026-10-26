@@ -1,13 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import { CountryAxis } from "./PathwayRail";
 import DisclaimerBanner from "./DisclaimerBanner";
 import SharedFooter from "./SharedFooter";
-import visaFacts from "../data/visaFacts.json";
-
-const { facts } = visaFacts;
+import { GuideLayout, GuideSection, P, H3, Bullets, Callout, FactSheet, Route, CompareTable, NextList, SourceList, ExtLink, fact } from "./Guide";
 
 const AustraliaPage = () => {
   const organisations = [
@@ -27,19 +24,17 @@ const AustraliaPage = () => {
     {
       title: "Internships and residencies",
       description: "University-based rotating internships and specialist residencies are available at Australian veterinary schools including Melbourne, Sydney, Queensland, and Murdoch.",
-      route: "/internships-residencies",
-      tag: "Internships and residencies",
+      to: "/internships-residencies",
     },
     {
       title: "Postgraduate certificates",
       description: "Advanced specialist qualifications available after obtaining state registration and gaining clinical experience in Australia.",
-      route: "/postgraduate-certificates",
-      tag: "Certificates",
+      to: "/postgraduate-certificates",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-white">
       <Helmet>
         <title>Working as a Vet in Australia | VetNextStep</title>
         <meta name="description" content="Complete guide for veterinarians wanting to work in Australia — AVBC registration, AVE exam, Skills in Demand visa (482), and permanent residency pathways (189, 190, 491, 186)." />
@@ -66,284 +61,201 @@ const AustraliaPage = () => {
       <SharedHeader />
       <CountryAxis here="/australia" />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 md:py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-5xl mb-4">🇦🇺</div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Working as a Vet in Australia</h2>
-          <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
-            AVBC registration, AVE exam, temporary work visas, and permanent residency pathways for veterinarians in Australia.
-          </p>
-        </div>
-      </section>
+      <GuideLayout
+        crumbs={[{ label: "Home", to: "/" }, { label: "Countries & licensing", to: "/countries" }, { label: "Australia" }]}
+        title="Working as a vet in Australia"
+        lede="How AVBC recognition and the AVE exam lead to state registration, what the Skills in Demand (482) visa requires, and the permanent residence routes through subclasses 186, 189, 190 and 491."
+        toc={[
+          { id: "facts", label: "Key facts" },
+          { id: "registration", label: "Registration" },
+          { id: "ave", label: "AVE eligibility" },
+          { id: "visa-482", label: "Skills in Demand visa (482)" },
+          { id: "residence", label: "Permanent residence" },
+          { id: "next", label: "Training and development" },
+          { id: "links", label: "Official links" },
+        ]}
+      >
+        <DisclaimerBanner
+          officialBody={{ name: "AVBC and the Australian Department of Home Affairs", url: "https://avbc.asn.au/for-veterinarians/" }}
+        />
 
-      <main className="py-8 md:py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <GuideSection id="facts" title="Key facts">
+          <FactSheet
+            rows={[
+              {
+                label: "Regulator",
+                value: "Each state and territory board registers vets. The AVBC sets the national framework for recognising overseas qualifications.",
+              },
+              {
+                label: "Exam",
+                value: "None for degrees on the AVBC Qualifications Generally Recognised list. The Australasian Veterinary Examination (AVE) for all others.",
+              },
+              {
+                label: "Visa",
+                value: <>Skills in Demand (482) with an employer sponsor, minimum salary {fact("au_csit").value} a year. Points-based skilled migration (189, 190, 491) and the Working Holiday visas (417, 462) are the alternatives.</>,
+                facts: ["au_csit"],
+              },
+              {
+                label: "English",
+                value: "OET, IELTS Academic or TOEFL iBT, unless your degree was taught and assessed entirely in English.",
+              },
+            ]}
+          />
+        </GuideSection>
 
-          <DisclaimerBanner
-            officialBody={{ name: "AVBC and the Australian Department of Home Affairs", url: "https://avbc.asn.au/for-veterinarians/" }}
+        <GuideSection id="registration" title="Registration through the AVBC">
+          <P>
+            The Australasian Veterinary Boards Council manages recognition of overseas veterinary qualifications across all Australian states and territories. Each state or territory board handles registration itself, but all use the AVBC framework.
+          </P>
+          <CompareTable
+            caption="Recognised qualification compared with the AVE route"
+            columns={["Your degree is on the recognised list", "Your degree is not on the recognised list"]}
+            rows={[
+              [
+                "What applies",
+                <>Your degree appears on the AVBC Qualifications Generally Recognised list (updated December 2025). No AVE exam is required.</>,
+                "You must sit the Australasian Veterinary Examination (AVE).",
+              ],
+              [
+                "Steps",
+                <ol className="list-decimal pl-4 space-y-1.5">
+                  <li>Apply directly to the state or territory board where you intend to work.</li>
+                  <li>Provide proof of registration or good standing from your home country.</li>
+                  <li>Show English language proficiency, where required.</li>
+                </ol>,
+                <ol className="list-decimal pl-4 space-y-1.5">
+                  <li>Apply to the AVBC for an AVE eligibility assessment.</li>
+                  <li>Pass the multiple choice questions (MCQ) exam.</li>
+                  <li>Pass the clinical examination.</li>
+                  <li>Apply to the state or territory board for registration.</li>
+                </ol>,
+              ],
+              [
+                "Official information",
+                <ExtLink href="https://avbc.asn.au/veterinary-education/avbc-qualifications-generally-recognised/">Check the recognised list</ExtLink>,
+                <ExtLink href="https://avbc.asn.au/for-veterinarians/australasian-veterinary-examination/">AVE exam information</ExtLink>,
+              ],
+            ]}
+          />
+          <Callout tone="notice" title="AVE places for 2026 are fully allocated">
+            Eligibility applications for the 2026 MCQ examination are closed. Monitor the AVBC website for future application windows.
+          </Callout>
+        </GuideSection>
+
+        <GuideSection id="ave" title="AVE eligibility requirements">
+          <H3>Academic</H3>
+          <Bullets>
+            <li>A primary veterinary qualification of at least 4 years</li>
+            <li>A veterinary school listed on the AVMA ECFVG-listed Colleges of the World or the World List of Universities</li>
+            <li>Registration, or eligibility to be recognised, as a vet of good professional standing in your home country</li>
+          </Bullets>
+          <H3>English language</H3>
+          <P>Required unless your degree was taught and assessed entirely in English. Results must be within 3 years.</P>
+          <FactSheet
+            rows={[
+              { label: "OET", value: "Grade B or higher in all sections" },
+              { label: "IELTS Academic", value: "Band 7 in each section" },
+              { label: "TOEFL iBT", value: "24 listening, 24 reading, 27 writing, 23 speaking" },
+            ]}
+          />
+        </GuideSection>
+
+        <GuideSection id="visa-482" title="Skills in Demand visa (subclass 482)">
+          <P>
+            The Skills in Demand visa replaced the Temporary Skill Shortage visa in December 2024. Veterinarians (ANZSCO 234711) are on the Core Skills Occupation List, so employer-sponsored temporary work is open to you.
+          </P>
+          <FactSheet
+            rows={[
+              {
+                label: "Requirements",
+                value: "A job offer from an approved Australian sponsor; at least 1 year of relevant work experience; full registration with a state or territory board; competent English (IELTS, PTE or TOEFL); health and character checks.",
+              },
+              {
+                label: "Duration",
+                value: "Up to 4 years. Your spouse and dependent children can accompany you on the same visa.",
+              },
+              {
+                label: "Minimum salary",
+                value: <>{fact("au_csit").value} a year (Core Skills Income Threshold) for nominations lodged from 1 July 2026, indexed each July.</>,
+                facts: ["au_csit"],
+              },
+              {
+                label: "Permanent residence",
+                value: "Available after 2 years through subclass 186. The employer must show it could not fill the role locally.",
+              },
+            ]}
+          />
+          <P className="mt-4">
+            Australia has a significant shortage of veterinarians, particularly in rural and regional areas, and many practices support visa sponsorship. Ask prospective employers directly.
+          </P>
+        </GuideSection>
+
+        <GuideSection id="residence" title="Routes to permanent residence">
+          <H3>Through your employer: 482 to 186</H3>
+          <P>Suits those already working in Australia on a 482 visa.</P>
+          <Route
+            steps={[
+              { title: "Obtain the 482 visa", detail: "Secure employer sponsorship and arrive on the Skills in Demand visa." },
+              { title: "Work for 2 years", detail: "Complete at least 2 years with an approved sponsor. Time across multiple sponsors counts." },
+              { title: "Apply for subclass 186", detail: "Your employer nominates you under the Temporary Residence Transition stream of the Employer Nomination Scheme." },
+              { title: "Permanent residence granted", detail: "Subclass 186 is a permanent visa." },
+            ]}
           />
 
-          {/* Registration */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Veterinary Registration</h2>
+          <H3>Through points-based skilled migration: 189, 190 and 491</H3>
+          <P>
+            Suits those who want permanent residence without relying on a single employer. Veterinarian (ANZSCO 234711) is on the Medium and Long-term Strategic Skills List.
+          </P>
+          <CompareTable
+            caption="Subclasses 189, 190 and 491 compared"
+            columns={["189 Skilled Independent", "190 Skilled Nominated", "491 Skilled Regional (Provisional)"]}
+            rows={[
+              ["Sponsor", "No employer or state sponsor needed", "Nominated by a state or territory", "State or territory, or family, nomination"],
+              ["Entry", "Invitation through SkillSelect", "Commit to living and working in that state", "Must live and work in a regional area"],
+              ["Points", "Typically 85–90+ needed", "+5 points for state nomination", "+15 points for regional nomination"],
+              ["Outcome", "Permanent residence directly", "Permanent residence directly", "After 3 years, apply for subclass 191 (permanent)"],
+            ]}
+          />
 
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-4">AVBC — The Gateway to Registration</h3>
-              <p className="text-gray-600 text-sm mb-5">
-                The Australasian Veterinary Boards Council (AVBC) manages the recognition of overseas veterinary qualifications across all Australian states and territories. Registration is administered by each state/territory board, but they all use the AVBC framework.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="bg-green-50 p-5 rounded-lg border border-green-200">
-                  <h4 className="font-semibold text-green-900 mb-2">Pathway 1 — Recognised Qualification</h4>
-                  <p className="text-sm text-gray-600 mb-3">If your degree appears on the <strong>AVBC Qualifications Generally Recognised</strong> list (updated December 2025):</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Apply directly to the state/territory board where you intend to work</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Provide proof of registration/good standing from your home country</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>English language proficiency may be required</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No AVE exam required</span></li>
-                  </ul>
-                  <a href="https://avbc.asn.au/veterinary-education/avbc-qualifications-generally-recognised/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-green-700 hover:text-green-900 font-medium">Check the recognised list →</a>
-                </div>
-                <div className="bg-yellow-50 p-5 rounded-lg border border-yellow-200">
-                  <h4 className="font-semibold text-yellow-900 mb-2">Pathway 2 — AVE Exam Required</h4>
-                  <p className="text-sm text-gray-600 mb-3">If your degree is <strong>not</strong> on the recognised list, you must sit the Australasian Veterinary Examination (AVE):</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Apply for AVE eligibility assessment via AVBC</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Step 1: Multiple Choice Questions (MCQ) exam</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Step 2: Clinical examination</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>On passing, apply to state/territory board for registration</span></li>
-                  </ul>
-                  <a href="https://avbc.asn.au/for-veterinarians/australasian-veterinary-examination/" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-yellow-700 hover:text-yellow-900 font-medium">AVE exam information →</a>
-                </div>
-              </div>
-              <div className="mt-4 p-4 bg-red-50 rounded-lg border border-red-200">
-                <p className="text-sm text-red-800">
-                  <strong>AVE places 2026:</strong> Eligibility applications for the 2026 MCQ examination are currently fully allocated. Monitor the AVBC website for future application windows.
-                </p>
-              </div>
-            </div>
+          <H3>How the points test works</H3>
+          <FactSheet
+            rows={[
+              { label: "Age 25–32", value: "30 points" },
+              { label: "Age 33–39", value: "25 points" },
+              { label: "Superior English", value: "+20 points (IELTS 8+ in each)" },
+              { label: "Proficient English", value: "+10 points (IELTS 7 in each)" },
+              { label: "Overseas work experience", value: "+15 points (8–10 years)" },
+              { label: "Australian work experience", value: "+20 points (8–10 years)" },
+              { label: "Australian qualification", value: "+10–20 points" },
+              { label: "Partner with competent English", value: "+5 points" },
+            ]}
+          />
+          <P className="mt-3">The figures are illustrative. Verify current scores with the Department of Home Affairs; most 189 invitations in 2026 require 85–90+ points.</P>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <h3 className="text-xl font-bold text-blue-700 mb-4">AVE Eligibility Requirements</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Academic Requirements</h4>
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Minimum 4-year primary veterinary qualification</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Veterinary school must appear on the AVMA ECFVG-listed Colleges of the World or the World List of Universities</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Registered or eligible to be recognised as a vet of good professional standing in your home country</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">English Language Standards</h4>
-                  <p className="text-sm text-gray-600 mb-2">Required unless degree was taught and assessed entirely in English. Accepted tests (results within 3 years):</p>
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>OET:</strong> Grade B or higher in all sections</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>IELTS Academic:</strong> Band 7 in each section</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span><strong>TOEFL iBT:</strong> 24 listening, 24 reading, 27 writing, 23 speaking</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
+          <H3>Skills assessment for the points-based visas</H3>
+          <P>
+            A positive skills assessment from the AVBC is required before you can submit an Expression of Interest for a 189, 190 or 491 visa, and you need full registration with an Australian state or territory board before you apply for it.
+          </P>
+          <Route
+            steps={[
+              { title: "Get registered", detail: "Full registration with a state or territory board, through an AVBC-recognised qualification or the AVE." },
+              { title: "Skills assessment", detail: "Apply to the AVBC for a positive skills assessment for migration." },
+              { title: "Submit an EOI", detail: "Lodge an Expression of Interest through SkillSelect with your points score." },
+              { title: "Receive an invitation", detail: "The Department of Home Affairs invites the highest-scoring candidates in each round." },
+              { title: "Apply for the visa", detail: "Submit your 189, 190 or 491 application within 60 days of the invitation." },
+            ]}
+          />
+        </GuideSection>
 
-          {/* Temporary Visa */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Temporary Work Visa — Subclass 482</h2>
+        <GuideSection id="next" title="Training and development in Australia">
+          <NextList items={programmes} />
+        </GuideSection>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <h3 className="text-xl font-bold text-blue-700 mb-4">Skills in Demand Visa (Subclass 482)</h3>
-              <p className="text-gray-600 text-sm mb-5">
-                The Subclass 482 Skills in Demand (SID) visa replaced the former Temporary Skill Shortage (TSS) visa in December 2024. Veterinarians (ANZSCO 234711) are listed on the Core Skills Occupation List, making them eligible for employer-sponsored temporary work in Australia.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                <div className="bg-blue-50 p-5 rounded-lg border border-blue-200">
-                  <h4 className="font-semibold text-blue-900 mb-3">Key Requirements</h4>
-                  <ul className="text-sm text-gray-700 space-y-2">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Job offer from an approved Australian sponsor employer</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Minimum <strong>1 year</strong> of relevant work experience</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Full veterinary registration with an Australian state/territory board</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Competent English proficiency (IELTS, PTE, or TOEFL)</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Health and character checks</li>
-                  </ul>
-                </div>
-                <div className="bg-green-50 p-5 rounded-lg border border-green-200">
-                  <h4 className="font-semibold text-green-900 mb-3">Key Details</h4>
-                  <ul className="text-sm text-gray-700 space-y-2">
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Visa duration: up to <strong>4 years</strong></span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Minimum salary (Core Skills Income Threshold): <strong>{facts.au_csit.value}/year</strong> since 1 July 2026 — indexed annually each July</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Spouse and dependent children can accompany on same visa</li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span><span>Pathway to permanent residency after <strong>2 years</strong> via Subclass 186</span></li>
-                    <li className="flex items-start"><span className="w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></span>Employer must demonstrate they could not fill the role locally</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm text-blue-800">
-                  <strong>Tip:</strong> Australia has a significant shortage of veterinarians, particularly in rural and regional areas. Many practices actively support visa sponsorship — ask prospective employers directly.
-                </p>
-              </div>
-            </div>
-          </section>
+        <GuideSection id="links" title="Official links">
+          <SourceList items={organisations} />
+        </GuideSection>
+      </GuideLayout>
 
-          {/* Permanent Residency */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Permanent Residency Pathways</h2>
-
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-2">Pathway A — Via Employer Sponsorship (482 → 186)</h3>
-              <p className="text-sm text-gray-500 mb-5">Best for those already working in Australia on a 482 visa</p>
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <ol className="space-y-3 text-gray-700 text-sm">
-                  {[
-                    { n: 1, title: "Obtain 482 visa", detail: "Secure employer sponsorship and arrive in Australia on the Skills in Demand (Subclass 482) visa" },
-                    { n: 2, title: "Work for 2 years", detail: "Complete at least 2 years with an approved sponsor. Time across multiple sponsors counts — it's now portable" },
-                    { n: 3, title: "Apply for Subclass 186", detail: "Your employer nominates you under the Temporary Residence Transition stream of the Employer Nomination Scheme (ENS)" },
-                    { n: 4, title: "Permanent residency granted", detail: "Subclass 186 is a permanent visa — you can live and work in Australia indefinitely" },
-                  ].map(step => (
-                    <li key={step.n} className="flex items-start">
-                      <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">{step.n}</span>
-                      <span><strong>{step.title}:</strong> {step.detail}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-2">Pathway B — Points-Based Skilled Migration (189 / 190 / 491)</h3>
-              <p className="text-sm text-gray-500 mb-5">Best for those wanting PR without relying on a single employer — veterinarian (ANZSCO 234711) is on the Medium and Long-term Strategic Skills List (MLTSSL)</p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <h4 className="font-semibold text-blue-900 mb-1">Subclass 189</h4>
-                  <p className="text-xs text-blue-700 font-medium mb-2">Skilled Independent</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No employer or state sponsor needed</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Requires invitation via SkillSelect</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Points test: typically 85–90+ points needed</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Grants permanent residency directly</span></li>
-                  </ul>
-                </div>
-                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                  <h4 className="font-semibold text-green-900 mb-1">Subclass 190</h4>
-                  <p className="text-xs text-green-700 font-medium mb-2">Skilled Nominated</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Nominated by a state or territory</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>+5 points for state nomination</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Must commit to living/working in that state</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Grants permanent residency directly</span></li>
-                  </ul>
-                </div>
-                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                  <h4 className="font-semibold text-yellow-900 mb-1">Subclass 491</h4>
-                  <p className="text-xs text-yellow-700 font-medium mb-2">Skilled Regional (Provisional)</p>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>State/territory or family nomination</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>+15 points for regional nomination</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Must live and work in a regional area</span></li>
-                    <li className="flex items-start"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>After 3 years → apply for Subclass 191 (PR)</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-3">How the Points Test Works</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
-                  {[
-                    { factor: "Age 25–32", points: "30 pts" },
-                    { factor: "Age 33–39", points: "25 pts" },
-                    { factor: "Superior English (IELTS 8+ each)", points: "+20 pts" },
-                    { factor: "Proficient English (IELTS 7 each)", points: "+10 pts" },
-                    { factor: "Overseas work experience (8–10 yrs)", points: "+15 pts" },
-                    { factor: "Australian work experience (8–10 yrs)", points: "+20 pts" },
-                    { factor: "Australian degree/qualification", points: "+10–20 pts" },
-                    { factor: "Partner with competent English", points: "+5 pts" },
-                  ].map((row, i) => (
-                    <div key={i} className="flex justify-between gap-2 p-2 bg-white rounded border border-gray-200">
-                      <span>{row.factor}</span>
-                      <span className="font-semibold text-blue-700 whitespace-nowrap">{row.points}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mt-3">Points test is illustrative — always verify current scores with the Department of Home Affairs. Most 189 invitations in 2026 require 85–90+ points.</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <h3 className="text-xl font-bold text-blue-700 mb-5">Skills Assessment for Points-Based Visas</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                A positive skills assessment from AVBC is required before you can submit an Expression of Interest (EOI) for a 189, 190, or 491 visa. You must hold full registration with an Australian state/territory veterinary board before applying for this assessment.
-              </p>
-              <div className="bg-green-50 p-5 rounded-lg border border-green-200">
-                <ol className="space-y-3 text-gray-700 text-sm">
-                  {[
-                    { n: 1, title: "Get registered", detail: "Obtain full registration with a state/territory veterinary board (via AVBC recognised qualification or AVE exam)" },
-                    { n: 2, title: "Skills assessment", detail: "Apply to AVBC for a positive skills assessment for migration purposes" },
-                    { n: 3, title: "Submit EOI", detail: "Lodge an Expression of Interest via SkillSelect with your points score" },
-                    { n: 4, title: "Receive invitation", detail: "Department of Home Affairs issues invitations to highest-scoring candidates in each round" },
-                    { n: 5, title: "Apply for visa", detail: "Submit your 189/190/491 visa application within 60 days of invitation" },
-                  ].map(step => (
-                    <li key={step.n} className="flex items-start">
-                      <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">{step.n}</span>
-                      <span><strong>{step.title}:</strong> {step.detail}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-          </section>
-
-          {/* Programmes */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Australia Programmes & Opportunities</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {programmes.map((prog, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium mb-4">{prog.tag}</span>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{prog.title}</h3>
-                  <p className="text-gray-600 text-sm mb-5">{prog.description}</p>
-                  <Link
-                    to={prog.route}
-                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
-                  >
-                    View all
-                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Key Organisations */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Key Organisations & Links</h2>
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {organisations.map((org, i) => (
-                  <a
-                    key={i}
-                    href={org.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
-                  >
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    <span className="text-sm text-gray-700 group-hover:text-blue-700">{org.name}</span>
-                    <svg className="ml-auto w-4 h-4 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
-
-        </div>
-      </main>
       <SharedFooter />
     </div>
   );

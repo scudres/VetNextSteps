@@ -63,7 +63,7 @@ createServer(async (req, res) => {
     // script, which production blocks outright and a bare static server does not.
     "content-security-policy":
       "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
-      "img-src 'self' data: https://images.pexels.com https://images.unsplash.com; " +
+      "img-src 'self' data:; " +
       "connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'",
   });
   res.end(await readFile(file));
