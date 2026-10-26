@@ -15,10 +15,10 @@ const comparisonData = {
   UK: {
     label: "United Kingdom 🇬🇧",
     body: "RCVS (Royal College of Veterinary Surgeons)",
-    exam: "None for RCVS-recognised degrees; assessment for all others",
-    mainVisa: "Skilled Worker Visa",
-    sponsor: "Yes — from a licensed UK sponsor",
-    english: "Possible requirement",
+    exam: "None for RCVS-recognised degrees, including AVMA, AVBC and (until Jan 2029) EAEVE schools; RCVS Statutory Exam for all others",
+    mainVisa: "Skilled Worker Visa; Youth Mobility if from Australia, Canada or New Zealand",
+    sponsor: "Yes for Skilled Worker (licensed UK sponsor); no for Youth Mobility; Irish citizens need no visa",
+    english: "IELTS 7.0 overall (6.5 in one component) or OET Grade B (C+ in one); not required if degree taught and assessed entirely in English",
     timeline: "3–6 months",
     demand: "High — small animal GP especially",
   },
@@ -26,7 +26,7 @@ const comparisonData = {
     label: "United States 🇺🇸",
     body: "State veterinary board (each state has its own)",
     exam: "NAVLE (all grads) + ECFVG or PAVE (non-AVMA grads only)",
-    mainVisa: "H-1B or J-1 (employer arranges)",
+    mainVisa: "H-1B, TN (Canadian and Mexican citizens), E-3 (Australian citizens) or J-1 (employer arranges)",
     sponsor: "Yes — employer must arrange",
     english: "Yes",
     timeline: "6–18 months",
@@ -35,7 +35,7 @@ const comparisonData = {
   Canada: {
     label: "Canada 🇨🇦",
     body: "Provincial regulatory body (varies by province)",
-    exam: "ECA credential assessment, then BCSE, then NAVLE (via NEB)",
+    exam: "NAVLE only for AVMA/CVMA-accredited degrees; otherwise an NEB Certificate of Qualification (BCSE, NAVLE, CPE) or the NEB + PAVE route",
     mainVisa: "Express Entry or Provincial Nominee Program (PNP)",
     sponsor: "Not always required",
     english: "English or French",
@@ -45,10 +45,10 @@ const comparisonData = {
   Australia: {
     label: "Australia 🇦🇺",
     body: "State/territory board (AVBC sets national standards)",
-    exam: "AVE exam if degree is not AVBC-recognised",
-    mainVisa: "482 Skills in Demand (employer sponsor) or 189/190/491 skilled migration",
-    sponsor: "Yes for 482 visa; no for skilled migration",
-    english: "IELTS or OET required",
+    exam: "None for AVBC-recognised degrees (including UK schools via the RCVS agreement); AVE for all others",
+    mainVisa: "482 Skills in Demand (employer sponsor), 189/190/491 skilled migration, or 417/462 Working Holiday",
+    sponsor: "Yes for 482 visa; no for skilled migration or Working Holiday",
+    english: "IELTS or OET required unless degree taught and assessed entirely in English",
     timeline: "6–18 months",
     demand: "High — especially regional and rural",
   },
@@ -356,7 +356,7 @@ const Countries = () => {
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-900 mb-2 text-sm">Post-Brexit Visa</h4>
                     <ul className="text-sm text-gray-700 space-y-1">
-                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required for all non-UK nationals</span></li>
+                      <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Skilled Worker Visa required for most non-UK nationals (Irish citizens need none; Youth Mobility for Australia, Canada and New Zealand)</span></li>
                       <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>Job offer from a licensed UK sponsor needed before applying</span></li>
                       <li className="flex items-start"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span><span>No automatic right to work for EU citizens post-Brexit</span></li>
                     </ul>
