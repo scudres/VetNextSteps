@@ -13,6 +13,7 @@ const CanadaPage = () => {
     { name: "ICVA — NAVLE Examination", url: "https://www.icva.net/navle/" },
     { name: "AAVSB — NEB Examinations & PAVE Program", url: "https://www.aavsb.org/" },
     { name: "Ontario Veterinary College (OVC)", url: "https://www.ovc.uoguelph.ca/" },
+    { name: "CVBC — College of Veterinarians of British Columbia (registration requirements)", url: "https://cvbc.ca/for-veterinarians/registration-requirements/" },
     { name: "BCVMA — British Columbia Veterinary Medical Association", url: "https://www.bcvma.org/" },
     { name: "IRCC — Federal Skilled Worker Program", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/federal-skilled-workers.html" },
     { name: "IRCC — Provincial Nominee Program", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html" },

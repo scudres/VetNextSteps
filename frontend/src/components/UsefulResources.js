@@ -2,11 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
+import { GuideLayout, GuideSection, ExtLink, linkClass } from "./Guide";
 
 const RESOURCE_SECTIONS = [
   {
     country: "United Kingdom",
-    flag: "🇬🇧",
     resources: [
       {
         name: "RCVS — Royal College of Veterinary Surgeons",
@@ -32,7 +32,6 @@ const RESOURCE_SECTIONS = [
   },
   {
     country: "United States",
-    flag: "🇺🇸",
     resources: [
       {
         name: "AVMA — American Veterinary Medical Association",
@@ -58,7 +57,6 @@ const RESOURCE_SECTIONS = [
   },
   {
     country: "Canada",
-    flag: "🇨🇦",
     resources: [
       {
         name: "CVBC — Canadian Veterinary Medical Association (CVMA)",
@@ -79,7 +77,6 @@ const RESOURCE_SECTIONS = [
   },
   {
     country: "Australia",
-    flag: "🇦🇺",
     resources: [
       {
         name: "AVBC — Australasian Veterinary Boards Council",
@@ -100,7 +97,6 @@ const RESOURCE_SECTIONS = [
   },
   {
     country: "International & General",
-    flag: "🌍",
     resources: [
       {
         name: "WSAVA — World Small Animal Veterinary Association",
@@ -121,14 +117,8 @@ const RESOURCE_SECTIONS = [
   },
 ];
 
-const ExternalLinkIcon = () => (
-  <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-  </svg>
-);
-
 const UsefulResources = () => (
-  <div className="min-h-screen bg-gray-50">
+  <div className="min-h-screen bg-white">
     <Helmet>
       <title>Useful Resources | VetNextStep</title>
       <meta name="description" content="Curated veterinary resources by country — regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia." />
@@ -145,70 +135,33 @@ const UsefulResources = () => (
     </Helmet>
     <SharedHeader />
 
-    <main>
-      {/* Hero */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-          <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3">Useful Resources</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Veterinary Resources by Country</h1>
-          <p className="text-lg text-gray-500 max-w-2xl leading-relaxed">
-            Curated links to regulatory bodies, licensing authorities, professional associations, and career tools — organised by country.
+    <GuideLayout
+      crumbs={[{ label: "Home", to: "/" }, { label: "Useful resources" }]}
+      title="Veterinary resources by country"
+      lede="Links to regulatory bodies, licensing authorities, professional associations and career tools, grouped by country."
+    >
+      <ul className="border-t border-gray-300 mb-10">
+        <li className="py-3 border-b border-gray-200">
+          <ExtLink href="https://vetlit.org" className={`${linkClass} font-bold`}>VetLit</ExtLink>
+          <p className="mt-0.5 text-sm text-gray-600 max-w-[68ch]">
+            A free, searchable veterinary literature database. Find clinical research, case reports, and review articles across all species and disciplines.
           </p>
-        </div>
-      </div>
+        </li>
+      </ul>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-12">
-        {/* VetLit — pinned above country sections */}
-        <section>
-          <a
-            href="https://vetlit.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-white border border-gray-200 p-5 hover:border-blue-300 flex flex-col gap-2"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">
-                VetLit
-              </h3>
-              <ExternalLinkIcon />
-            </div>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              A free, searchable veterinary literature database. Find clinical research, case reports, and review articles across all species and disciplines.
-            </p>
-          </a>
-        </section>
-
-        {RESOURCE_SECTIONS.map((section) => (
-          <section key={section.country}>
-            <h2 className="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
-              <span>{section.flag}</span>
-              <span>{section.country}</span>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {section.resources.map((resource) => (
-                <a
-                  key={resource.name}
-                  href={resource.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-white border border-gray-200 p-5 hover:border-blue-300 flex flex-col gap-2"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">
-                      {resource.name}
-                    </h3>
-                    <ExternalLinkIcon />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed">{resource.description}</p>
-                </a>
-              ))}
-            </div>
-          </section>
-        ))}
-
-      </div>
-    </main>
+      {RESOURCE_SECTIONS.map((section) => (
+        <GuideSection key={section.country} id={section.country.toLowerCase().replace(/\s+/g, "-")} title={section.country}>
+          <ul className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 border-t border-gray-300">
+            {section.resources.map((resource) => (
+              <li key={resource.name} className="py-3 border-b border-gray-200">
+                <ExtLink href={resource.url} className={`${linkClass} font-bold`}>{resource.name}</ExtLink>
+                <p className="mt-0.5 text-sm text-gray-600">{resource.description}</p>
+              </li>
+            ))}
+          </ul>
+        </GuideSection>
+      ))}
+    </GuideLayout>
 
     <SharedFooter />
   </div>

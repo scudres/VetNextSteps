@@ -140,7 +140,6 @@ const ContactPage = () => {
 
           {/* Header */}
           <div className="mb-10">
-            <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3">Get in touch</p>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact VetNextStep</h1>
             <p className="text-gray-500 text-base leading-relaxed">
               Have a question, spotted something that needs updating, or want to advertise a job or service?
