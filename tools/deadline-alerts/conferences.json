@@ -250,8 +250,15 @@
         "date": "2026-09-23",
         "label": "Early-bird rate ends",
         "note": "Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/"
+      },
+      {
+        "type": "registration",
+        "date": "2026-11-12",
+        "label": "Regular registration pricing ends",
+        "note": "A $75 late/onsite fee is added to registrations received on 11/13/26 or later."
       }
-    ]
+    ],
+    "_source": "https://acvp.org/annual-meeting/registration/ — verified 2026-11-01"
   },
   {
     "id": "nzva-business-wellbeing-2026",
@@ -305,8 +312,15 @@
         "date": "2026-09-17",
         "label": "Hotel block discount closes",
         "note": "Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/"
+      },
+      {
+        "type": "registration",
+        "date": "2026-11-09",
+        "label": "Last day to register by mail or fax",
+        "note": "After Nov. 9, attendees must register online or on-site at the convention."
       }
-    ]
+    ],
+    "_source": "https://convention.aaep.org/wp-content/uploads/2026/08/2026_AAEP_RegKit_e2.pdf — verified 2026-11-01"
   },
   {
     "id": "vmx-2027",
@@ -314,7 +328,27 @@
     "url": "https://navc.com/vmx",
     "region": "USA",
     "startDate": "2027-01-16",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "hotel",
+        "date": "2026-12-15",
+        "label": "Disney Hotels room block closes",
+        "note": "Official VMX hotel block deadline"
+      },
+      {
+        "type": "hotel",
+        "date": "2026-12-22",
+        "label": "Hilton Orlando & Hyatt Regency Orlando room blocks close",
+        "note": "Official VMX host hotel block deadline"
+      },
+      {
+        "type": "hotel",
+        "date": "2027-01-04",
+        "label": "VMX housing website and remaining hotel blocks close",
+        "note": "All other hotels and the housing website run through this date"
+      }
+    ],
+    "_source": "https://navc.com/vmx-event/live/hotels/ — verified 2026-11-01"
   },
   {
     "id": "aasv-annual-meeting-2027",
@@ -349,7 +383,15 @@
     "url": "https://www.viticusgroup.org/wvc-conference",
     "region": "USA",
     "startDate": "2027-02-28",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "registration",
+        "date": "2027-02-26",
+        "label": "Exhibitor online registration ends at 5:00 PM",
+        "note": "Personnel not registered by this date must register onsite at Exhibitor Registration"
+      }
+    ],
+    "_source": "https://www.viticusgroup.org/wvc-exhibitor-info — verified 2026-11-01"
   },
   {
     "id": "navdf-2027",
@@ -357,7 +399,15 @@
     "url": "https://navdf.org/",
     "region": "USA",
     "startDate": "2027-03-22",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "early-bird",
+        "date": "2027-01-30",
+        "label": "Early registration fee payment deadline",
+        "note": "If not paid by this date, fees transfer to the regular registration rate"
+      }
+    ],
+    "_source": "https://navdf2027.com/registration/ — verified 2026-11-01"
   },
   {
     "id": "renal-week-2027",
@@ -365,7 +415,21 @@
     "url": "https://acvnu.org/",
     "region": "USA",
     "startDate": "2027-04-12",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2026-11-30",
+        "label": "Abstract submission window closes",
+        "note": "Submission window opened September 1, 2026"
+      },
+      {
+        "type": "other",
+        "date": "2027-04-14",
+        "label": "Poster drop-off deadline",
+        "note": "Posters must be delivered to the Renal Week Registration Desk no later than 8:00 a.m. on this date"
+      }
+    ],
+    "_source": "https://acvnurenalweek.org/Abstracts — verified 2026-11-01"
   },
   {
     "id": "ava-annual-conference-2027",
@@ -389,7 +453,21 @@
     "url": "https://www.evecc-congress.org",
     "region": "Europe",
     "startDate": "2027-06-02",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2027-01-31",
+        "label": "Abstract submission deadline",
+        "note": "23:59 hrs GMT+1; submissions open December 1, 2026"
+      },
+      {
+        "type": "early-bird",
+        "date": "2027-04-15",
+        "label": "Early-bird registration deadline for presenting authors",
+        "note": "Accepted abstract authors must register by this date"
+      }
+    ],
+    "_source": "https://www.evecc-congress.org/abstracts/congress_abstracts/abstract_submission — verified 2026-11-01"
   },
   {
     "id": "acvim-forum-2027",
@@ -428,7 +506,21 @@
     "url": "https://www.ecvs.org",
     "region": "Europe",
     "startDate": "2027-07-08",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "registration",
+        "date": "2027-05-20",
+        "label": "Registration deadline for presenting authors of accepted abstracts",
+        "note": "Required for oral or poster presenters"
+      },
+      {
+        "type": "other",
+        "date": "2027-06-21",
+        "label": "Deadline for upload of ePosters",
+        "note": "All posters are expected as ePosters"
+      }
+    ],
+    "_source": "https://www.ecvs.org/annual-scientific-meeting/ — verified 2026-11-01"
   },
   {
     "id": "avma-convention-2027",
@@ -452,7 +544,21 @@
     "url": "https://www.ecvimcongress.org",
     "region": "Europe",
     "startDate": "2027-09-23",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2027-01-15",
+        "label": "Research report submission opens",
+        "note": "For the 37th ECVIM-CA Congress (Rimini 2027)."
+      },
+      {
+        "type": "abstract",
+        "date": "2027-03-31",
+        "label": "Research report submission deadline",
+        "note": "Deadline 23:59 GMT 31 March 2027; online submission site deactivated 00:00 GMT 1 April 2027."
+      }
+    ],
+    "_source": "https://www.ecvimcongress.org/research_reports/submission — verified 2026-11-01"
   },
   {
     "id": "vcs-annual-conference-2027",
@@ -460,7 +566,15 @@
     "url": "https://vetcancersociety.org/",
     "region": "USA",
     "startDate": "2027-09-23",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "scholarship",
+        "date": "2027-03-31",
+        "label": "VTS (Oncology) Specialty License Scholarship application deadline",
+        "note": "For VCS member technicians approved by AIMVT to take the exam in June 2027; scholarship includes complimentary registration to the VCS Annual Conference."
+      }
+    ],
+    "_source": "https://vetcancersociety.org/membership/technicians/vts-scholarship/ — verified 2026-11-01"
   },
   {
     "id": "wsava-congress-2027",
@@ -482,7 +596,15 @@
     "name": "BVA Live 2026 (Birmingham)",
     "url": "https://bvalive.vetshow.com/",
     "region": "UK",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "other",
+        "date": "2027-02-01",
+        "label": "Deadline to cancel paid/education bursary registration for a refund",
+        "note": "Official site now lists the next edition of BVA Live as 11–12 March 2027 at NEC Birmingham; paid passes can be refunded (25% service charge) until this date, after which no refunds are available."
+      }
+    ],
+    "_source": "https://bvalive.vetshow.com/frequently-asked-questions — verified 2026-11-01"
   },
   {
     "id": "spvs-vmg-congress-2027",
@@ -524,7 +646,31 @@
     "name": "ESVONC Annual Congress 2027",
     "url": "https://www.esvonc.com/",
     "region": "Europe",
-    "deadlines": []
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2026-12-01",
+        "label": "Abstract submission opens",
+        "note": "For the 2027 ESVONC Congress (Edinburgh, Scotland, 20-22 May 2027)."
+      },
+      {
+        "type": "abstract",
+        "date": "2027-01-31",
+        "label": "Abstract submission closing deadline",
+        "note": "Deadline 23:59:59 CET."
+      },
+      {
+        "type": "other",
+        "date": "2027-03-19",
+        "label": "Abstract notification date"
+      },
+      {
+        "type": "other",
+        "date": "2027-03-31",
+        "label": "Final abstract review results communicated (at the latest)"
+      }
+    ],
+    "_source": "https://www.esvonc.com/congress/abstract_submission — verified 2026-11-01"
   },
   {
     "id": "bvba-events-2026",
@@ -570,8 +716,15 @@
     "name": "NZVA & NZVNA Conference 2027 (Christchurch)",
     "url": "https://nzva.org.nz/edhub/conferences/",
     "region": "New Zealand",
-    "deadlines": [],
+    "deadlines": [
+      {
+        "type": "registration",
+        "date": "2027-03-01",
+        "label": "Registration opens for 2027 NZVA & NZVNA Conference",
+        "note": "Conference held 15-17 June 2027 at Te Pae Convention Centre, Christchurch"
+      }
+    ],
     "startDate": "2027-06-15",
-    "_source": "https://nzva.org.nz/edhub/conferences/ — verified 2026-09-07"
+    "_source": "https://nzva.org.nz/edhub/conferences — verified 2026-11-01"
   }
 ]

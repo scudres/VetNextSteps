@@ -3,35 +3,11 @@ VERSION:2.0
 PRODID:-//VetNextStep//DeadlineAlerts//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:aasv-annual-meeting-2027-abstract-20260909@vetnextstep.com
-DTSTART;VALUE=DATE:20260909
-SUMMARY:AASV Annual Meeting 2027 (Orlando FL) — Research Topics abstract submission deadline
-URL:https://www.aasv.org/
-DESCRIPTION:Firm deadline\, 11:59pm Central Daylight Time.
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:aasv-annual-meeting-2027-abstract-20260909@vetnextstep.com
-DTSTART;VALUE=DATE:20260909
-SUMMARY:AASV Annual Meeting 2027 (Orlando FL) — Student Seminar abstract submission deadline
-URL:https://www.aasv.org/
-DESCRIPTION:Firm deadline\, 11:59pm Central Daylight Time.
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:aaep-annual-convention-2026-hotel-20260917@vetnextstep.com
-DTSTART;VALUE=DATE:20260917
-SUMMARY:AAEP Annual Convention 2026 (Las Vegas NV) — Hotel block discount closes
+UID:aaep-annual-convention-2026-registration-20261109@vetnextstep.com
+DTSTART;VALUE=DATE:20261109
+SUMMARY:AAEP Annual Convention 2026 (Las Vegas NV) — Last day to register by mail or fax
 URL:https://convention.aaep.org/
-DESCRIPTION:Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/
+DESCRIPTION:After Nov. 9\, attendees must register online or on-site at the convention.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -39,35 +15,11 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:vcs-annual-conference-2026-other-20260921@vetnextstep.com
-DTSTART;VALUE=DATE:20260921
-SUMMARY:VCS Annual Conference 2026 (Minneapolis MN) — Oral presentation file upload deadline
-URL:https://vetcancersociety.org/
-DESCRIPTION:Presenters must upload oral presentation files by 11:59pm Central Time on this date ahead of the Minneapolis conference
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:wsava-congress-2026-registration-20260922@vetnextstep.com
-DTSTART;VALUE=DATE:20260922
-SUMMARY:WSAVA World Congress 2026 (Warsaw) — Regular registration deadline
-URL:https://wsava-congress.org
-DESCRIPTION:Payments received after this date will be charged the on-site rate
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:acvp-annual-meeting-2026-early-bird-20260923@vetnextstep.com
-DTSTART;VALUE=DATE:20260923
-SUMMARY:ACVP Annual Meeting 2026 (Indianapolis IN) — Early-bird rate ends
+UID:acvp-annual-meeting-2026-registration-20261112@vetnextstep.com
+DTSTART;VALUE=DATE:20261112
+SUMMARY:ACVP Annual Meeting 2026 (Indianapolis IN) — Regular registration pricing ends
 URL:https://acvp.org/
-DESCRIPTION:Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/
+DESCRIPTION:A $75 late/onsite fee is added to registrations received on 11/13/26 or later.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -75,11 +27,11 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:fasawa-congress-2026-registration-20260930@vetnextstep.com
-DTSTART;VALUE=DATE:20260930
-SUMMARY:FASAWA Congress 2026 (Taipei) — Group registration deadline
-URL:https://fasawa2026.org
-DESCRIPTION:Individual registration deadline — verify on fasawa2026.org/registration/en
+UID:renal-week-2027-abstract-20261130@vetnextstep.com
+DTSTART;VALUE=DATE:20261130
+SUMMARY:Renal Week 2027 — IRIS-ACVNU (Washington DC) — Abstract submission window closes
+URL:https://acvnu.org/
+DESCRIPTION:Submission window opened September 1\, 2026
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -87,11 +39,11 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:london-vet-show-2026-other-20260930@vetnextstep.com
-DTSTART;VALUE=DATE:20260930
-SUMMARY:London Vet Show 2026 — Refund deadline for paid registrations
-URL:https://london.vetshow.com
-DESCRIPTION:Paid-for places can be refunded up until this date (25% service charge applies)\; no refunds after this date.
+UID:esvonc-annual-congress-2027-abstract-20261201@vetnextstep.com
+DTSTART;VALUE=DATE:20261201
+SUMMARY:ESVONC Annual Congress 2027 — Abstract submission opens
+URL:https://www.esvonc.com/
+DESCRIPTION:For the 2027 ESVONC Congress (Edinburgh\, Scotland\, 20-22 May 2027).
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -99,10 +51,11 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:aasv-annual-meeting-2027-other-20261001@vetnextstep.com
-DTSTART;VALUE=DATE:20261001
-SUMMARY:AASV Annual Meeting 2027 (Orlando FL) — Industrial Partners submission deadline
-URL:https://www.aasv.org/
+UID:vmx-2027-hotel-20261215@vetnextstep.com
+DTSTART;VALUE=DATE:20261215
+SUMMARY:VMX 2027 (Orlando FL) — Disney Hotels room block closes
+URL:https://navc.com/vmx
+DESCRIPTION:Official VMX hotel block deadline
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -110,71 +63,11 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:evdi-conference-2026-other-20261001@vetnextstep.com
-DTSTART;VALUE=DATE:20261001
-SUMMARY:EVDI Annual Congress 2027 (Helsinki) — ECVDI practical exam application window closes (FORM P)
-URL:https://www.ecvdi.org/
-DESCRIPTION:Per ECVDI Bylaws\, application to sit the practical exam must be submitted between 1 September and 1 October of the year preceding the exam\; the practical exam itself is scheduled for 26–27 January 2027 in Zurich.
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:avma-convention-2027-abstract-20261002@vetnextstep.com
-DTSTART;VALUE=DATE:20261002
-SUMMARY:AVMA Convention 2027 (Minneapolis MN) — Abstract/session proposal submission deadline for AVMA Convention 2027
-URL:https://www.avma.org/events
-DESCRIPTION:Deadline is 11:59 p.m. Central time
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:advanced-mastitis-nz-2026-other-20261015@vetnextstep.com
-DTSTART;VALUE=DATE:20261015
-SUMMARY:Advanced Mastitis Course 2026 (NZ) — Course confirmation decision date
-URL:https://anexa.co.nz/events/advanced-mastitis-course/
-DESCRIPTION:Course will only run if sufficient numbers are reached\; decision to be made on this date.
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:virmp-2027-other-20261015@vetnextstep.com
-DTSTART;VALUE=DATE:20261015
-SUMMARY:VIRMP 2027 — Internship & Residency Match — Program descriptions finalised
-URL:https://www.virmp.org/
-DESCRIPTION:Program listings cannot change after this date — good moment to review the full list.
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:spvs-vmg-congress-2027-early-bird-20261031@vetnextstep.com
-DTSTART;VALUE=DATE:20261031
-SUMMARY:SPVS-VMG Congress 2027 (Birmingham) — Early Bird ticket rate ends
-URL:https://spvs.org.uk/
-DESCRIPTION:Early bird pricing runs from 1 April to 31 October 2026 for SPVS Congress 2027 (4-5 Feb 2027\, Hilton Birmingham Metropole).
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Deadline in 1 week — feature in newsletter
-TRIGGER:-P7D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:rcvs-advanced-practitioner-2026-other-20261031@vetnextstep.com
-DTSTART;VALUE=DATE:20261031
-SUMMARY:RCVS Advanced Practitioner status — 2026 application window — Application window closes (October 2026 — exact day TBC)
-URL:https://www.rcvs.org.uk/lifelong-learning/professional-accreditation/advanced-practitioner-status/
-DESCRIPTION:Window opened March 2026. VERIFY exact closing date on the RCVS page before publishing — only 'closes in October 2026' is confirmed.
+UID:vmx-2027-hotel-20261222@vetnextstep.com
+DTSTART;VALUE=DATE:20261222
+SUMMARY:VMX 2027 (Orlando FL) — Hilton Orlando & Hyatt Regency Orlando room blocks close
+URL:https://navc.com/vmx
+DESCRIPTION:Official VMX host hotel block deadline
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -187,6 +80,18 @@ DTSTART;VALUE=DATE:20270104
 SUMMARY:VIRMP 2027 — Internship & Residency Match — Application deadline — 9:00 pm EST
 URL:https://www.virmp.org/
 DESCRIPTION:Strongly enforced. Laboratory animal medicine residencies have earlier deadlines (typically Nov–Dec) — check individual listings.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vmx-2027-hotel-20270104@vetnextstep.com
+DTSTART;VALUE=DATE:20270104
+SUMMARY:VMX 2027 (Orlando FL) — VMX housing website and remaining hotel blocks close
+URL:https://navc.com/vmx
+DESCRIPTION:All other hotels and the housing website run through this date
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -230,6 +135,66 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:ecvim-ca-congress-2027-abstract-20270115@vetnextstep.com
+DTSTART;VALUE=DATE:20270115
+SUMMARY:ECVIM-CA Congress 2027 (Rimini) — Research report submission opens
+URL:https://www.ecvimcongress.org
+DESCRIPTION:For the 37th ECVIM-CA Congress (Rimini 2027).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:navdf-2027-early-bird-20270130@vetnextstep.com
+DTSTART;VALUE=DATE:20270130
+SUMMARY:NAVDF 2027 (Anaheim CA) — Early registration fee payment deadline
+URL:https://navdf.org/
+DESCRIPTION:If not paid by this date\, fees transfer to the regular registration rate
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:evecc-congress-2027-abstract-20270131@vetnextstep.com
+DTSTART;VALUE=DATE:20270131
+SUMMARY:EVECC Congress 2027 (Kraków\, Poland) — Abstract submission deadline
+URL:https://www.evecc-congress.org
+DESCRIPTION:23:59 hrs GMT+1\; submissions open December 1\, 2026
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esvonc-annual-congress-2027-abstract-20270131@vetnextstep.com
+DTSTART;VALUE=DATE:20270131
+SUMMARY:ESVONC Annual Congress 2027 — Abstract submission closing deadline
+URL:https://www.esvonc.com/
+DESCRIPTION:Deadline 23:59:59 CET.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bva-live-2026-other-20270201@vetnextstep.com
+DTSTART;VALUE=DATE:20270201
+SUMMARY:BVA Live 2026 (Birmingham) — Deadline to cancel paid/education bursary registration for a refund
+URL:https://bvalive.vetshow.com/
+DESCRIPTION:Official site now lists the next edition of BVA Live as 11–12 March 2027 at NEC Birmingham\; paid passes can be refunded (25% service charge) until this date\, after which no refunds are available.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:acvim-forum-2027-abstract-20270202@vetnextstep.com
 DTSTART;VALUE=DATE:20270202
 SUMMARY:ACVIM Forum 2027 (Montreal) — Call for Research Abstracts closes
@@ -264,6 +229,30 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:wvc-annual-conference-2027-registration-20270226@vetnextstep.com
+DTSTART;VALUE=DATE:20270226
+SUMMARY:WVC Annual Conference 2027 (Las Vegas NV) — Exhibitor online registration ends at 5:00 PM
+URL:https://www.viticusgroup.org/wvc-conference
+DESCRIPTION:Personnel not registered by this date must register onsite at Exhibitor Registration
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:nzva-nzvna-conference-2027-registration-20270301@vetnextstep.com
+DTSTART;VALUE=DATE:20270301
+SUMMARY:NZVA & NZVNA Conference 2027 (Christchurch) — Registration opens for 2027 NZVA & NZVNA Conference
+URL:https://nzva.org.nz/edhub/conferences/
+DESCRIPTION:Conference held 15-17 June 2027 at Te Pae Convention Centre\, Christchurch
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:virmp-2027-other-20270301@vetnextstep.com
 DTSTART;VALUE=DATE:20270301
 SUMMARY:VIRMP 2027 — Internship & Residency Match — Match results released (8:00 am EST)
@@ -279,6 +268,76 @@ UID:acvim-forum-2027-abstract-20270318@vetnextstep.com
 DTSTART;VALUE=DATE:20270318
 SUMMARY:ACVIM Forum 2027 (Montreal) — Call for Research Exchange closes
 URL:https://www.acvim.org
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esvonc-annual-congress-2027-other-20270319@vetnextstep.com
+DTSTART;VALUE=DATE:20270319
+SUMMARY:ESVONC Annual Congress 2027 — Abstract notification date
+URL:https://www.esvonc.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ecvim-ca-congress-2027-abstract-20270331@vetnextstep.com
+DTSTART;VALUE=DATE:20270331
+SUMMARY:ECVIM-CA Congress 2027 (Rimini) — Research report submission deadline
+URL:https://www.ecvimcongress.org
+DESCRIPTION:Deadline 23:59 GMT 31 March 2027\; online submission site deactivated 00:00 GMT 1 April 2027.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vcs-annual-conference-2027-scholarship-20270331@vetnextstep.com
+DTSTART;VALUE=DATE:20270331
+SUMMARY:VCS Annual Conference 2027 (St Louis MO) — VTS (Oncology) Specialty License Scholarship application deadline
+URL:https://vetcancersociety.org/
+DESCRIPTION:For VCS member technicians approved by AIMVT to take the exam in June 2027\; scholarship includes complimentary registration to the VCS Annual Conference.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esvonc-annual-congress-2027-other-20270331@vetnextstep.com
+DTSTART;VALUE=DATE:20270331
+SUMMARY:ESVONC Annual Congress 2027 — Final abstract review results communicated (at the latest)
+URL:https://www.esvonc.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:renal-week-2027-other-20270414@vetnextstep.com
+DTSTART;VALUE=DATE:20270414
+SUMMARY:Renal Week 2027 — IRIS-ACVNU (Washington DC) — Poster drop-off deadline
+URL:https://acvnu.org/
+DESCRIPTION:Posters must be delivered to the Renal Week Registration Desk no later than 8:00 a.m. on this date
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:evecc-congress-2027-early-bird-20270415@vetnextstep.com
+DTSTART;VALUE=DATE:20270415
+SUMMARY:EVECC Congress 2027 (Kraków\, Poland) — Early-bird registration deadline for presenting authors
+URL:https://www.evecc-congress.org
+DESCRIPTION:Accepted abstract authors must register by this date
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter
@@ -303,6 +362,30 @@ DTSTART;VALUE=DATE:20270520
 SUMMARY:AVA Annual Conference 2027 (Melbourne VIC) — Registration closes for 2027 AVA Conference
 URL:https://www.ava.com.au/education-events/education-and-events-search/event-detail/?eid=EV002113
 DESCRIPTION:Melbourne Convention and Exhibition Centre\, event runs 17-20 May 2027
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ecvs-asm-2027-registration-20270520@vetnextstep.com
+DTSTART;VALUE=DATE:20270520
+SUMMARY:ECVS Annual Scientific Meeting 2027 (Florence) — Registration deadline for presenting authors of accepted abstracts
+URL:https://www.ecvs.org
+DESCRIPTION:Required for oral or poster presenters
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Deadline in 1 week — feature in newsletter
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ecvs-asm-2027-other-20270621@vetnextstep.com
+DTSTART;VALUE=DATE:20270621
+SUMMARY:ECVS Annual Scientific Meeting 2027 (Florence) — Deadline for upload of ePosters
+URL:https://www.ecvs.org
+DESCRIPTION:All posters are expected as ePosters
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Deadline in 1 week — feature in newsletter

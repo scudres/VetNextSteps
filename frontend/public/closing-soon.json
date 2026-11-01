@@ -1,127 +1,149 @@
 {
-  "generated": "2026-09-07",
-  "windowDays": 30,
+  "generated": "2026-11-01",
+  "windowDays": 90,
   "deadlines": [
-    {
-      "conference": "AASV Annual Meeting 2027 (Orlando FL)",
-      "id": "aasv-annual-meeting-2027",
-      "url": "https://www.aasv.org/",
-      "region": "USA",
-      "type": "abstract",
-      "label": "Research Topics abstract submission deadline",
-      "note": "Firm deadline, 11:59pm Central Daylight Time.",
-      "date": "2026-09-09",
-      "daysLeft": 2
-    },
-    {
-      "conference": "AASV Annual Meeting 2027 (Orlando FL)",
-      "id": "aasv-annual-meeting-2027",
-      "url": "https://www.aasv.org/",
-      "region": "USA",
-      "type": "abstract",
-      "label": "Student Seminar abstract submission deadline",
-      "note": "Firm deadline, 11:59pm Central Daylight Time.",
-      "date": "2026-09-09",
-      "daysLeft": 2
-    },
     {
       "conference": "AAEP Annual Convention 2026 (Las Vegas NV)",
       "id": "aaep-annual-convention-2026",
       "url": "https://convention.aaep.org/",
       "region": "USA",
-      "type": "hotel",
-      "label": "Hotel block discount closes",
-      "note": "Book by 17 Sep to save $50/night — convention.aaep.org/registration-hotels/",
-      "date": "2026-09-17",
-      "daysLeft": 10
-    },
-    {
-      "conference": "VCS Annual Conference 2026 (Minneapolis MN)",
-      "id": "vcs-annual-conference-2026",
-      "url": "https://vetcancersociety.org/",
-      "region": "USA",
-      "type": "other",
-      "label": "Oral presentation file upload deadline",
-      "note": "Presenters must upload oral presentation files by 11:59pm Central Time on this date ahead of the Minneapolis conference",
-      "date": "2026-09-21",
-      "daysLeft": 14
-    },
-    {
-      "conference": "WSAVA World Congress 2026 (Warsaw)",
-      "id": "wsava-congress-2026",
-      "url": "https://wsava-congress.org",
-      "region": "Europe/Global",
       "type": "registration",
-      "label": "Regular registration deadline",
-      "note": "Payments received after this date will be charged the on-site rate",
-      "date": "2026-09-22",
-      "daysLeft": 15
+      "label": "Last day to register by mail or fax",
+      "note": "After Nov. 9, attendees must register online or on-site at the convention.",
+      "date": "2026-11-09",
+      "daysLeft": 8
     },
     {
       "conference": "ACVP Annual Meeting 2026 (Indianapolis IN)",
       "id": "acvp-annual-meeting-2026",
       "url": "https://acvp.org/",
       "region": "USA",
-      "type": "early-bird",
-      "label": "Early-bird rate ends",
-      "note": "Registration opened 1 July 2026 — source: acvp.org/annual-meeting/registration/",
-      "date": "2026-09-23",
-      "daysLeft": 16
-    },
-    {
-      "conference": "FASAWA Congress 2026 (Taipei)",
-      "id": "fasawa-congress-2026",
-      "url": "https://fasawa2026.org",
-      "region": "Global",
       "type": "registration",
-      "label": "Group registration deadline",
-      "note": "Individual registration deadline — verify on fasawa2026.org/registration/en",
-      "date": "2026-09-30",
-      "daysLeft": 23
+      "label": "Regular registration pricing ends",
+      "note": "A $75 late/onsite fee is added to registrations received on 11/13/26 or later.",
+      "date": "2026-11-12",
+      "daysLeft": 11
     },
     {
-      "conference": "London Vet Show 2026",
-      "id": "london-vet-show-2026",
-      "url": "https://london.vetshow.com",
-      "region": "UK/Europe",
-      "type": "other",
-      "label": "Refund deadline for paid registrations",
-      "note": "Paid-for places can be refunded up until this date (25% service charge applies); no refunds after this date.",
-      "date": "2026-09-30",
-      "daysLeft": 23
-    },
-    {
-      "conference": "AASV Annual Meeting 2027 (Orlando FL)",
-      "id": "aasv-annual-meeting-2027",
-      "url": "https://www.aasv.org/",
-      "region": "USA",
-      "type": "other",
-      "label": "Industrial Partners submission deadline",
-      "note": "",
-      "date": "2026-10-01",
-      "daysLeft": 24
-    },
-    {
-      "conference": "EVDI Annual Congress 2027 (Helsinki)",
-      "id": "evdi-conference-2026",
-      "url": "https://www.ecvdi.org/",
-      "region": "Europe",
-      "type": "other",
-      "label": "ECVDI practical exam application window closes (FORM P)",
-      "note": "Per ECVDI Bylaws, application to sit the practical exam must be submitted between 1 September and 1 October of the year preceding the exam; the practical exam itself is scheduled for 26–27 January 2027 in Zurich.",
-      "date": "2026-10-01",
-      "daysLeft": 24
-    },
-    {
-      "conference": "AVMA Convention 2027 (Minneapolis MN)",
-      "id": "avma-convention-2027",
-      "url": "https://www.avma.org/events",
+      "conference": "Renal Week 2027 — IRIS-ACVNU (Washington DC)",
+      "id": "renal-week-2027",
+      "url": "https://acvnu.org/",
       "region": "USA",
       "type": "abstract",
-      "label": "Abstract/session proposal submission deadline for AVMA Convention 2027",
-      "note": "Deadline is 11:59 p.m. Central time",
-      "date": "2026-10-02",
-      "daysLeft": 25
+      "label": "Abstract submission window closes",
+      "note": "Submission window opened September 1, 2026",
+      "date": "2026-11-30",
+      "daysLeft": 29
+    },
+    {
+      "conference": "ESVONC Annual Congress 2027",
+      "id": "esvonc-annual-congress-2027",
+      "url": "https://www.esvonc.com/",
+      "region": "Europe",
+      "type": "abstract",
+      "label": "Abstract submission opens",
+      "note": "For the 2027 ESVONC Congress (Edinburgh, Scotland, 20-22 May 2027).",
+      "date": "2026-12-01",
+      "daysLeft": 30
+    },
+    {
+      "conference": "VMX 2027 (Orlando FL)",
+      "id": "vmx-2027",
+      "url": "https://navc.com/vmx",
+      "region": "USA",
+      "type": "hotel",
+      "label": "Disney Hotels room block closes",
+      "note": "Official VMX hotel block deadline",
+      "date": "2026-12-15",
+      "daysLeft": 44
+    },
+    {
+      "conference": "VMX 2027 (Orlando FL)",
+      "id": "vmx-2027",
+      "url": "https://navc.com/vmx",
+      "region": "USA",
+      "type": "hotel",
+      "label": "Hilton Orlando & Hyatt Regency Orlando room blocks close",
+      "note": "Official VMX host hotel block deadline",
+      "date": "2026-12-22",
+      "daysLeft": 51
+    },
+    {
+      "conference": "VIRMP 2027 — Internship & Residency Match",
+      "id": "virmp-2027",
+      "url": "https://www.virmp.org/",
+      "region": "",
+      "type": "registration",
+      "label": "Application deadline — 9:00 pm EST",
+      "note": "Strongly enforced. Laboratory animal medicine residencies have earlier deadlines (typically Nov–Dec) — check individual listings.",
+      "date": "2027-01-04",
+      "daysLeft": 64
+    },
+    {
+      "conference": "VMX 2027 (Orlando FL)",
+      "id": "vmx-2027",
+      "url": "https://navc.com/vmx",
+      "region": "USA",
+      "type": "hotel",
+      "label": "VMX housing website and remaining hotel blocks close",
+      "note": "All other hotels and the housing website run through this date",
+      "date": "2027-01-04",
+      "daysLeft": 64
+    },
+    {
+      "conference": "NAVLE (North American Veterinary Licensing Examination)",
+      "id": "navle-2026-2027",
+      "url": "https://www.icva.net/navle/",
+      "region": "",
+      "type": "registration",
+      "label": "Application deadline — Mar 1–20 2027 testing window",
+      "note": "Application period opens 1 Dec 2026.",
+      "date": "2027-01-07",
+      "daysLeft": 67
+    },
+    {
+      "conference": "ACVIM Forum 2027 (Montreal)",
+      "id": "acvim-forum-2027",
+      "url": "https://www.acvim.org",
+      "region": "USA",
+      "type": "abstract",
+      "label": "Call for Research Abstracts opens",
+      "note": "2027 ACVIM Forum, Montreal",
+      "date": "2027-01-11",
+      "daysLeft": 71
+    },
+    {
+      "conference": "RCVS Statutory Membership Examination 2027",
+      "id": "rcvs-statutory-exam-2027",
+      "url": "https://www.rcvs.org.uk/registration/join-the-register-of-veterinary-surgeons/statutory-membership-exam",
+      "region": "",
+      "type": "registration",
+      "label": "Annual exam application deadline",
+      "note": "Declaration of intention to sit can be submitted any time (valid to end of September) and must be done before applying. Written exams held in March; May re-sits; OSCE later in the year.",
+      "date": "2027-01-14",
+      "daysLeft": 74
+    },
+    {
+      "conference": "ECVIM-CA Congress 2027 (Rimini)",
+      "id": "ecvim-ca-congress-2027",
+      "url": "https://www.ecvimcongress.org",
+      "region": "Europe",
+      "type": "abstract",
+      "label": "Research report submission opens",
+      "note": "For the 37th ECVIM-CA Congress (Rimini 2027).",
+      "date": "2027-01-15",
+      "daysLeft": 75
+    },
+    {
+      "conference": "NAVDF 2027 (Anaheim CA)",
+      "id": "navdf-2027",
+      "url": "https://navdf.org/",
+      "region": "USA",
+      "type": "early-bird",
+      "label": "Early registration fee payment deadline",
+      "note": "If not paid by this date, fees transfer to the regular registration rate",
+      "date": "2027-01-30",
+      "daysLeft": 90
     }
   ]
 }
