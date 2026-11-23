@@ -59,7 +59,7 @@ const RESOURCE_SECTIONS = [
     country: "Canada",
     resources: [
       {
-        name: "CVBC — Canadian Veterinary Medical Association (CVMA)",
+        name: "CVMA — Canadian Veterinary Medical Association",
         description: "The national voice for the veterinary profession in Canada. Offers career guidance, advocacy, and professional development resources.",
         url: "https://www.canadianveterinarians.net/",
       },
