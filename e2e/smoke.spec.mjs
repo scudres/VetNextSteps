@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+import { upcomingOnly } from "../frontend/src/data/conferenceDates.js";
+
+const { conferences } = createRequire(import.meta.url)("../functions/data/conferences.js");
 
 // Figures are asserted against visaFacts.json rather than hard-coded, so a
 // verified change to a threshold does not turn the build red. The truth of a
@@ -35,15 +39,18 @@ test("pathway rail marks the current stage on an inner page", async ({ page }) =
 
 test("UK page shows current Skilled Worker figures from visaFacts", async ({ page }) => {
   await page.goto("/uk");
-  await expect(page.getByText(facts.uk_going_rate.value, { exact: false })).toBeVisible();
-  await expect(page.getByText(facts.uk_new_entrant_rate.value, { exact: false })).toBeVisible();
+  // Each figure appears in the summary table and again in the body, so assert
+  // the first rendering rather than a single one.
+  await expect(page.getByText(facts.uk_going_rate.value, { exact: false }).first()).toBeVisible();
+  await expect(page.getByText(facts.uk_new_entrant_rate.value, { exact: false }).first()).toBeVisible();
   // The stale pre-July-2025 figure must not reappear
   await expect(page.getByText("£48,100", { exact: false })).toHaveCount(0);
 });
 
 test("Australia page shows current CSIT figure", async ({ page }) => {
   await page.goto("/australia");
-  await expect(page.getByText(facts.au_csit.value, { exact: false })).toBeVisible();
+  // The figure appears in both the summary table and the visa section.
+  await expect(page.getByText(facts.au_csit.value, { exact: false }).first()).toBeVisible();
   // Superseded CSIT figures must not reappear
   for (const stale of ["AUD 79,499", "AUD 76,515", "AUD 73,150"]) {
     await expect(page.getByText(stale, { exact: false })).toHaveCount(0);
@@ -79,8 +86,12 @@ test("cpd listing hides events that have already been held", async ({ page }) =>
 });
 
 test("CPD region page renders conference cards and Event JSON-LD", async ({ page }) => {
+  // Pick a UK event that has not yet been held, using the same rule as the page,
+  // so the test does not go red the day a named event finishes.
+  const next = upcomingOnly(conferences).find((c) => c.country === "uk");
+  expect(next, "no upcoming UK conference in the data").toBeTruthy();
   await page.goto("/cpd/uk");
-  await expect(page.getByRole("heading", { name: "London Vet Show", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: next.title, exact: true }).first()).toBeVisible();
   const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
   const hasEvent = jsonLd.some((s) => s.includes('"@type":"Event"') || s.includes('"@type": "Event"'));
   expect(hasEvent).toBe(true);
