@@ -235,14 +235,36 @@ const CPDPage = () => {
 
   // checkRegions = true on the hub page (user can filter by region dropdown);
   // false on sub-pages where region is already implicit in the URL.
-  const matchesFilters = (conf, checkRegions = false, checkCountries = true) => {
-    if (filters.specialties.length > 0 && !conf.specialties.some((s) => filters.specialties.includes(s))) return false;
-    if (checkRegions && filters.regions.length > 0 && !filters.regions.some((r) => conferenceInRegion(conf, r))) return false;
-    if (checkCountries && filters.countries.length > 0 && !filters.countries.includes(conf.country)) return false;
-    if (filters.years.length   > 0 && !filters.years.includes(getYear(conf.dates)))   return false;
-    if (filters.months.length  > 0 && !filters.months.includes(getMonth(conf.dates))) return false;
-    if (filters.formats.length > 0 && !filters.formats.includes(conf.format))         return false;
+  const matchesFilters = (conf, checkRegions = false, checkCountries = true, f = filters) => {
+    if (f.specialties.length > 0 && !conf.specialties.some((s) => f.specialties.includes(s))) return false;
+    if (checkRegions && f.regions.length > 0 && !f.regions.some((r) => conferenceInRegion(conf, r))) return false;
+    if (checkCountries && f.countries.length > 0 && !f.countries.includes(conf.country)) return false;
+    if (f.years.length   > 0 && !f.years.includes(getYear(conf.dates)))   return false;
+    if (f.months.length  > 0 && !f.months.includes(getMonth(conf.dates))) return false;
+    if (f.formats.length > 0 && !f.formats.includes(conf.format))         return false;
     return true;
+  };
+
+  // One-tap presets over the same filter state the sidebar edits, so a preset
+  // is just a shortcut into /cpd?... and the sidebar shows what it ticked.
+  // A preset with no events is left out rather than shown as "0".
+  const now = new Date();
+  const presets = [
+    { label: "This month", values: { years: [String(now.getFullYear())], months: [now.getMonth() + 1] } },
+    { label: "UK",         values: { regions: ["europe"], countries: ["uk"] } },
+    { label: "North America", values: { regions: ["north-america"] } },
+    { label: "General practice", values: { specialties: ["General Practice"] } },
+  ].map((p) => ({
+    ...p,
+    count: allConferences.filter((c) => matchesFilters(c, true, true, { ...EMPTY_FILTERS, ...p.values })).length,
+    active: Object.entries(p.values).every(([k, v]) =>
+      filters[k].length === v.length && v.every((x) => filters[k].includes(x))),
+  })).filter((p) => p.count > 0);
+
+  const togglePreset = (p) => {
+    const next = { ...filters };
+    for (const [k, v] of Object.entries(p.values)) next[k] = p.active ? [] : v;
+    setFilterParams(next);
   };
 
   const getConferencesForRegion = (regionId) =>
@@ -455,6 +477,27 @@ const CPDPage = () => {
                       })}
                     />
                   </div>
+
+                  {/* One-tap presets over the filters below */}
+                  {presets.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 mb-5" role="group" aria-label="Quick filters">
+                      {presets.map((p) => (
+                        <button
+                          key={p.label}
+                          type="button"
+                          aria-pressed={p.active}
+                          onClick={() => togglePreset(p)}
+                          className={`px-3 py-1.5 text-sm border focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-1 ${
+                            p.active
+                              ? "bg-navy text-white border-navy"
+                              : "bg-white text-gray-800 border-gray-300 hover:border-navy"
+                          }`}
+                        >
+                          {p.label} <span className={`tabular-nums ${p.active ? "text-blue-100" : "text-gray-500"}`}>{p.count}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Filters + listing */}
                   <div className="grid grid-cols-1 lg:grid-cols-[236px_minmax(0,1fr)] gap-0 border-t border-gray-200">
