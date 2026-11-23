@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SharedHeader from "./SharedHeader";
 import SharedFooter from "./SharedFooter";
 import DeadlinesWidget from "./DeadlinesWidget";
 import RoutePicker from "./RoutePicker";
-import { PathwayFull, CountryAxis } from "./PathwayRail";
+import { PathwayFull, RegistrationByCountry } from "./PathwayRail";
+import visaFacts from "../data/visaFacts.json";
+import { formatLongDate } from "../utils";
+
+const lastVerified = formatLongDate(visaFacts.lastVerified);
 
 const VeterinaryCareerHub = () => {
   const [searchParams] = useSearchParams();
@@ -72,26 +76,53 @@ const VeterinaryCareerHub = () => {
       </Helmet>
       <SharedHeader />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Know your next step</h1>
+      {/* Heading and lede on the left; the route finder, the page's one tool, in a
+          card on the right. The deadlines box sits under it and collapses when
+          nothing is close. */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] gap-8 items-start">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Know your next step</h1>
+          <p className="mt-2 max-w-2xl text-base text-gray-700">
+            Training programmes, internships and residencies, postgraduate certificates, CPD and
+            conferences, and licensing and visa guides for the UK, USA, Canada and Australia.
+          </p>
+          <p className="mt-1 text-xs text-gray-500">Licensing and visa figures last verified {lastVerified}.</p>
+        </div>
+        <div className="min-w-0 space-y-4">
+          <div className="bg-blue-50 border border-blue-200 p-5">
+            <RoutePicker />
+          </div>
+          <div className="empty:hidden">
+            <DeadlinesWidget />
+          </div>
+        </div>
       </div>
 
-      {/* The career track. Registration is not on it — see the axis below. */}
-      <PathwayFull />
-
-      <div className="mt-4">
-        <CountryAxis note="Start it alongside training, not after." />
-      </div>
-
-      {/* The widget renders nothing when no deadline is close, and its wrapper then
-          collapses so the route finder takes the full width. */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col lg:flex-row items-start gap-6 lg:gap-0">
-        <div className="w-full min-w-0 lg:flex-1">
-          <RoutePicker />
+      {/* Options, not a sequence: a vet can take any of them at any stage, so
+          they sit side by side with no line joining them. */}
+      <section className="pt-10" aria-labelledby="planning-heading">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="planning-heading" className="text-lg font-bold tracking-tight text-gray-900">Career planning</h2>
         </div>
-        <div className="w-full lg:w-80 lg:ml-6 lg:flex-shrink-0 empty:hidden">
-          <DeadlinesWidget />
+        <PathwayFull />
+      </section>
+
+      {/* Registration is not a career stage, so it sits apart from the options above. */}
+      <section className="mt-10 bg-slate-50 border-y border-gray-200 py-8" aria-labelledby="registration-heading">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] gap-6 lg:gap-10 items-start">
+          <div>
+            <h2 id="registration-heading" className="text-lg font-bold tracking-tight text-gray-900">Registration by country</h2>
+            <p className="mt-1 text-sm text-gray-600 max-w-[48ch]">Registration runs on its own timetable, separate from career planning. Start it alongside training, not after.</p>
+          </div>
+          <RegistrationByCountry />
         </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <p className="text-sm text-gray-700">
+          Regulators, exam bodies and country guides are listed on the{" "}
+          <Link to="/resources" className="text-blue-800 underline underline-offset-2 decoration-blue-200 hover:decoration-blue-800">Resources page</Link>.
+        </p>
       </div>
 
       <SharedFooter />

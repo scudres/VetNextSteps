@@ -8,6 +8,7 @@ import { PATHWAY, COUNTRY_AXIS } from "../data/pathway";
  *   <PathwayFull />            the homepage graphic
  *   <PathwayRail current={1}/> the slim rail under the menu on inner pages
  *   <CountryAxis here="/uk" /> the second axis, for licensing pages
+ *   <RegistrationByCountry /> the same four countries as a homepage section
  *
  * All three read from data/pathway.js, so a stage renamed there is renamed
  * everywhere. Stage segment colours are data rather than Tailwind classes:
@@ -46,7 +47,7 @@ export const PathwayFull = () => (
         {PATHWAY.map((stop) => (
           <div key={stop.id} className="sm:pr-5 sm:last:pr-0">
             <span className="block h-2" style={{ backgroundColor: stop.colour }} />
-            <h2 className="pt-3 text-base font-bold tracking-tight text-gray-900">{stop.label}</h2>
+            <h3 className="pt-3 text-base font-bold tracking-tight text-gray-900">{stop.label}</h3>
             <p className="mt-1.5 mb-2.5 text-sm text-gray-600 max-w-[30ch]">{stop.blurb}</p>
             <StopLinks links={stop.links} />
           </div>
@@ -105,6 +106,25 @@ export const CountryAxis = ({ here, note }) => (
       <span className="text-xs text-gray-500 sm:ml-auto">{note || "Separate from the career track."}</span>
     </div>
   </div>
+);
+
+// The homepage's version of the second axis: country tiles inside a section of
+// their own rather than a banded strip. Reads COUNTRY_AXIS, so the strip on the
+// licensing pages and these tiles never disagree about a country or its summary.
+export const RegistrationByCountry = () => (
+  <ul className="grid grid-cols-2 gap-3">
+    {COUNTRY_AXIS.map((c) => (
+      <li key={c.to}>
+        <Link
+          to={c.to}
+          className="block h-full bg-white border border-gray-200 px-4 py-3 hover:border-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-1"
+        >
+          <span className="block text-base font-bold tracking-tight text-blue-800">{c.label}</span>
+          <span className="block text-sm text-gray-600">{c.body}</span>
+        </Link>
+      </li>
+    ))}
+  </ul>
 );
 
 export default PathwayRail;

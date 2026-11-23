@@ -56,12 +56,10 @@ const RoutePicker = ({ heading = "Licensing route finder", blurb = "Your registr
   const go = () => navigate(`/licensing-route?from=${from}&to=${to}`);
 
   return (
-    // No box: a bordered, padded panel indented its contents 17px past the
-    // stage text above it. A rule on top with the content flush left matches
-    // how the pathway stages are set, so both columns share one left edge.
-    <div className="border-t-[3px] border-t-blue-800 pt-3">
-      <h2 className="text-sm font-bold text-gray-900">{heading}</h2>
-      <p className="text-xs text-gray-600 mb-3">{blurb}</p>
+    // No box and no rule: the section is set off by space and its heading.
+    <div>
+      <h2 className="text-lg font-bold tracking-tight text-gray-900">{heading}</h2>
+      <p className="text-sm text-gray-600 mb-4">{blurb}</p>
       <div className="space-y-4 max-w-3xl">
         <Choice name="route-from" legend="I qualified in" options={ORIGINS} value={from} onChange={setFrom} />
         <Choice name="route-to" legend="I want to work in" options={DESTINATIONS} value={to} onChange={setTo} />
