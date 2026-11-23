@@ -19,14 +19,41 @@ const DESTINATIONS = [
   { id: "australia", label: "Australia" },
 ];
 
+// Native radios, so arrow keys and screen readers work as they would on a
+// <select>; the visible button is the label, styled from the input's state.
+const Choice = ({ name, legend, options, value, onChange }) => (
+  <fieldset className="border-0 p-0 m-0">
+    <legend className="text-xs text-gray-600 mb-1.5">{legend}</legend>
+    <div className="flex flex-wrap gap-2">
+      {options.map((o) => (
+        <div key={o.id}>
+          <input
+            type="radio"
+            id={`${name}-${o.id}`}
+            name={name}
+            value={o.id}
+            checked={value === o.id}
+            onChange={() => onChange(o.id)}
+            className="sr-only peer"
+          />
+          <label
+            htmlFor={`${name}-${o.id}`}
+            className="block px-3 py-1.5 text-sm text-gray-800 bg-white border border-gray-300 cursor-pointer hover:border-navy peer-checked:bg-navy peer-checked:text-white peer-checked:border-navy peer-focus-visible:ring-2 peer-focus-visible:ring-blue-800 peer-focus-visible:ring-offset-1"
+          >
+            {o.label}
+          </label>
+        </div>
+      ))}
+    </div>
+  </fieldset>
+);
+
 const RoutePicker = ({ heading = "Licensing route finder", blurb = "Your registration, exam, and visa steps in order." }) => {
   const [from, setFrom] = useState("uk");
   const [to, setTo]     = useState("usa");
   const navigate        = useNavigate();
 
   const go = () => navigate(`/licensing-route?from=${from}&to=${to}`);
-
-  const select = "w-full px-2.5 py-2 border border-gray-400 bg-white text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-800 focus:border-blue-800";
 
   return (
     // No box: a bordered, padded panel indented its contents 17px past the
@@ -35,19 +62,9 @@ const RoutePicker = ({ heading = "Licensing route finder", blurb = "Your registr
     <div className="border-t-[3px] border-t-blue-800 pt-3">
       <h2 className="text-sm font-bold text-gray-900">{heading}</h2>
       <p className="text-xs text-gray-600 mb-3">{blurb}</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
-        <div>
-          <label htmlFor="route-from" className="block text-xs text-gray-600 mb-1">I qualified in</label>
-          <select id="route-from" value={from} onChange={(e) => setFrom(e.target.value)} className={select}>
-            {ORIGINS.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="route-to" className="block text-xs text-gray-600 mb-1">I want to work in</label>
-          <select id="route-to" value={to} onChange={(e) => setTo(e.target.value)} className={select}>
-            {DESTINATIONS.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
-          </select>
-        </div>
+      <div className="space-y-4 max-w-3xl">
+        <Choice name="route-from" legend="I qualified in" options={ORIGINS} value={from} onChange={setFrom} />
+        <Choice name="route-to" legend="I want to work in" options={DESTINATIONS} value={to} onChange={setTo} />
       </div>
       <button
         type="button"

@@ -83,9 +83,15 @@ const VeterinaryCareerHub = () => {
         <CountryAxis note="Start it alongside training, not after." />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start">
-        <RoutePicker />
-        <DeadlinesWidget />
+      {/* The widget renders nothing when no deadline is close, and its wrapper then
+          collapses so the route finder takes the full width. */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col lg:flex-row items-start gap-6 lg:gap-0">
+        <div className="w-full min-w-0 lg:flex-1">
+          <RoutePicker />
+        </div>
+        <div className="w-full lg:w-80 lg:ml-6 lg:flex-shrink-0 empty:hidden">
+          <DeadlinesWidget />
+        </div>
       </div>
 
       <SharedFooter />
