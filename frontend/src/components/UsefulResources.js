@@ -96,6 +96,16 @@ const RESOURCE_SECTIONS = [
     ],
   },
   {
+    country: "Asia",
+    resources: [
+      {
+        name: "JAHA — Japanese Animal Hospital Association",
+        description: "A public interest incorporated association for animal hospitals, veterinarians and veterinary nurses in Japan. Runs seminars for veterinarians and veterinary nurses and certifies animal hospitals and veterinarians. The English section is short; the seminar calendar and member area are in Japanese.",
+        url: "https://www.jaha.or.jp/english/",
+      },
+    ],
+  },
+  {
     country: "International & General",
     resources: [
       {
@@ -121,10 +131,10 @@ const UsefulResources = () => (
   <div className="min-h-screen bg-white">
     <Helmet>
       <title>Useful Resources | VetNextStep</title>
-      <meta name="description" content="Curated veterinary resources by country — regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia." />
+      <meta name="description" content="Curated veterinary resources by country — regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, Australia, and Asia." />
       <link rel="canonical" href="https://vetnextstep.com/resources" />
       <meta property="og:title" content="Useful Veterinary Resources | VetNextStep" />
-      <meta property="og:description" content="Regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, and Australia." />
+      <meta property="og:description" content="Regulatory bodies, licensing authorities, professional associations, and career tools for vets in the UK, USA, Canada, Australia, and Asia." />
       <meta property="og:url" content="https://vetnextstep.com/resources" />
       <meta property="og:image" content="https://vetnextstep.com/og-image.png" />
       <meta property="og:type" content="website" />
@@ -138,7 +148,7 @@ const UsefulResources = () => (
     <GuideLayout
       crumbs={[{ label: "Home", to: "/" }, { label: "Useful resources" }]}
       title="Veterinary resources by country"
-      lede="Links to regulatory bodies, licensing authorities, professional associations and career tools, grouped by country."
+      lede="Links to regulatory bodies, licensing authorities, professional associations and career tools, grouped by country and region."
     >
       <ul className="border-t border-gray-300 mb-10">
         <li className="py-3 border-b border-gray-200">
