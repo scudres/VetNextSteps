@@ -319,7 +319,7 @@ const conferences = [
   },
   {
     title: "JAHA Annual Conference 2026",
-    organiser: "Japan Animal Hospital Association",
+    organiser: "Japanese Animal Hospital Association",
     dates: "25\u201326 Nov 2026",
     location: "AP Tokyo Yaesu, Chuo-ku, Tokyo, Japan",
     country: "japan",
